@@ -1,7 +1,12 @@
 #include <GLFW/glfw3.h>
 
+#include "Logger.h"
+
+
 int main(void)
 {
+	LOG(Log, "Test %s %i", "test", 45);
+
 	GLFWwindow* window;
 
 	/* Initialize the library */
