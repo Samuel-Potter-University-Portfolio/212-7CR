@@ -1,13 +1,13 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-#include <vec2.hpp>
+#include <thread>
 
-class Window
+
+class GameLogic
 {
 private:
-	GLFWwindow* window;
-	glm::ivec2 desired_resolution;
+	std::thread* thread;
+	const int tick_rate;
 
 	//Variables to keep track of current tick rate (debug logging)
 	float second_counter = 0;
@@ -15,17 +15,15 @@ private:
 	int ticks_last_second = 0;
 
 public:
-	Window(const glm::ivec2 desired_resolution);
-	~Window();
+	GameLogic();
+	~GameLogic();
 
 	void Launch();
-	void SetVSync(const bool on);
 
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 
 private:
 	void LaunchMainLoop();
 	void Tick(float delta_time);
-
 };
 

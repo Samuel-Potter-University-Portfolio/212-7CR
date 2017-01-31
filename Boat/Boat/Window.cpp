@@ -41,16 +41,21 @@ void Window::Launch()
 		return;
 	}
 
-	glfwSwapInterval(0); //Vsync
+	SetVSync(false);
 	glfwMakeContextCurrent(window);
+	g_game->SetWindowReady();
 	LaunchMainLoop();
 }
 
-float GetTime() 
+void Window::SetVSync(const bool on) 
+{
+	glfwSwapInterval(on);
+}
+
+inline float GetTime()
 {
 	return System::GetSysTimeSeconds() + System::GetSysTimeMilli() / 1000.0f;
 }
-
 
 void Window::LaunchMainLoop()
 {
@@ -59,11 +64,15 @@ void Window::LaunchMainLoop()
 
 	while (!glfwWindowShouldClose(window))
 	{
-		Tick(delta_time);
+		//Tick logic
+		if(g_game->IsReady())
+			Tick(delta_time);
+
+		//Swap buffers i.e. Draw
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		//Time ticks
+		//Calculate corrected delta time
 		float current_time = GetTime();
 
 		delta_time = current_time - last_tick_time;
@@ -71,12 +80,30 @@ void Window::LaunchMainLoop()
 			delta_time += 60.0f;
 
 		last_tick_time = current_time;
+
+
+		//Close window, if requested internally by game
+		if (g_game->IsClosedRequested())
+			glfwSetWindowShouldClose(window, true);
 	}
+
+	//Ensure game has internally registered close request
+	g_game->Close();
 
 	LOG(Log, "Terminating GLFW");
 	glfwTerminate();
 }
 
-void Window::Tick(const float delta_time) 
+void Window::Tick(float delta_time)
 {
+	//Track ticks this second, for debug
+	second_counter += delta_time;
+	ticks_this_second++;
+
+	if (second_counter > 1.0f)
+	{
+		second_counter -= 1.0f;
+		ticks_last_second = ticks_this_second;
+		ticks_this_second = 0;
+	}
 }
