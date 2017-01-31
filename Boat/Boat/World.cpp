@@ -44,8 +44,10 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	//Wait until both threads have been loaded
 	if (!HasLoaded())
 		return;
-	
-	//TODO - Tick Entities and other res'
+
+	//Tick entities
+	for (Entity* entity : entities)
+		entity->HandleLogicTick(delta_time);
 }
 
 void World::WindowTick(Window* window, float delta_time)
@@ -72,7 +74,9 @@ void World::WindowTick(Window* window, float delta_time)
 	if (!HasLoaded())
 		return;
 	
-	//TODO - Tick Entities and other res'
+	//Tick entities
+	for (Entity* entity : entities)
+		entity->HandleWindowTick(delta_time);
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -99,4 +103,8 @@ void World::UnloadWindowResources(Window* window)
 	}
 
 	window_destroyed = true;
+}
+
+void World::AddEntity(Entity* entity) 
+{
 }

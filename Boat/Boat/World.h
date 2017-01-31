@@ -1,10 +1,14 @@
 #pragma once
+#include <vector>
+
 #include "Renderer.h"
+#include "Entity.h"
 
 class World
 {
 private:
 	Renderer* renderer;
+	std::vector<Entity*> entities;
 
 	bool logic_begun = false;
 	bool window_begun = false;
@@ -28,5 +32,8 @@ public:
 	virtual void LoadWindowResources(class Window* window);
 	virtual void UnloadLogicResources(class GameLogic* game_logic);
 	virtual void UnloadWindowResources(class Window* window);
+
+	//Memory management control should be passed onto World
+	void AddEntity(Entity* entity);
 };
 

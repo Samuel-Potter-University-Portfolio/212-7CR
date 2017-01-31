@@ -14,3 +14,7 @@ Renderer::~Renderer()
 void Renderer::CleanUp() 
 {
 }
+
+void Renderer::Render() 
+{
+}

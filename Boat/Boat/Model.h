@@ -13,5 +13,8 @@ public:
 
 	inline const GLuint GetVAO() { return vao; }
 	inline const int GetIndexCount() { return index_count; }
+
+	inline bool operator==(const Model& other) const { return vao == other.vao; }
+	inline bool operator!=(const Model& other) const { return vao != other.vao; }
 };
 

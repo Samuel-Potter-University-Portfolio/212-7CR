@@ -135,6 +135,12 @@ void Window::Tick(float delta_time)
 		ticks_this_second = 0;
 	}
 
+	//Correct aspect ratio
+	glfwGetFramebufferSize(window, &width, &height);
+	aspect_ratio = (float)(width) / (float)(height);
+	glViewport(0, 0, width, height);
+
+	//Tick world
 	World* world = g_game->GetWorld();
 	if (world)
 		world->WindowTick(this, delta_time);

@@ -121,7 +121,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoatWorld.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -132,12 +134,15 @@
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoatWorld.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Logger.h" />
@@ -147,6 +152,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Tickable.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
