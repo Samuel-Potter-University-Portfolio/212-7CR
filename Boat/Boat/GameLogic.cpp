@@ -77,6 +77,11 @@ void GameLogic::LaunchMainLoop()
 	g_game->Close();
 
 	LOG(Log, "Terminating GameLogic");
+
+	//Clean up current world
+	World* world = g_game->GetWorld();
+	if (world)
+		world->UnloadLogicResources(this);
 }
 
 void GameLogic::Tick(float delta_time)
@@ -91,4 +96,8 @@ void GameLogic::Tick(float delta_time)
 		ticks_last_second = ticks_this_second;
 		ticks_this_second = 0;
 	}
+
+	World* world = g_game->GetWorld();
+	if (world)
+		world->LogicTick(this, delta_time);
 }

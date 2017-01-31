@@ -3,6 +3,7 @@
 #include <ctime>
 #include <time.h>
 #include <iostream>
+#include <sstream>
 
 
 std::string TimeStamp()
@@ -13,26 +14,31 @@ std::string TimeStamp()
 	gmtime_s(&date, &time_stamp);
 
 	char time_str[80];
-	strftime(time_str, 80, "[%d:%m:%Y][%H:%M:%S]", &date);
+	strftime(time_str, 80, "[%d-%m-%Y][%H:%M:%S]", &date);
 
 	return time_str;
 }
 
 void Logger::LogMessage(const Verbosity verbosity, const std::string message)
 {
+	std::stringstream stream;
 	std::string time_stamp = TimeStamp();
 
 	if (verbosity == Warning)
-		std::cout << time_stamp << ":Warning:" << message << '\n';
+		stream << time_stamp << "[__WARNING__]:" << message << '\n';
 
-	if (verbosity == Error)
-		std::cout << time_stamp << ":Error:" << message << '\n';
+	else if (verbosity == Error)
+		stream << time_stamp << "[__ERROR__]" << message << '\n';
 
-	if (verbosity == Fatal)
+	else if (verbosity == Fatal)
 	{
-		std::cout << time_stamp <<":Fatal:" << message << '\n';
+		stream << time_stamp <<"[__FATAL__]" << message << '\n';
+		std::cout << stream.str();
 		exit(0);
 	}
 	else
-		std::cout << time_stamp << ':' << message << '\n';
+		stream << time_stamp << ':' << message << '\n';
+
+	//Store to temp stream stream to prevent cout for mixing thread messages together
+	std::cout << stream.str();
 }

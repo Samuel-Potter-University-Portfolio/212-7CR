@@ -6,16 +6,18 @@
 class Game* g_game = nullptr;
 
 
-Game::Game(const std::string game_name, const glm::ivec2 desired_resolution)
-	: game_name(game_name)
+Game::Game(const std::string game_name, const glm::ivec2 desired_resolution, World* world)
+	: game_name(game_name), world(world)
 {
 	if (!g_game)
 		g_game = this;
-
 	else
-	{
 		LOG(Fatal, "Cannot setup two Game instances at a time");
-	}
+
+
+	if (!world)
+		LOG(Warning, "Initializing game with null world");
+
 
 	LOG(Log, "Setting up game '%s'", game_name.c_str());
 	game_logic = new GameLogic;
@@ -62,4 +64,15 @@ void Game::CleanUp()
 		delete window;
 		window = nullptr;
 	}
+	if (world)
+	{
+		if (world->IsDestroyed())
+			LOG(Log, "World destroyed")
+		else
+			LOG(Error, "World was not destroyed correctly");
+
+		delete world;
+		world = nullptr;
+	}
 }
+

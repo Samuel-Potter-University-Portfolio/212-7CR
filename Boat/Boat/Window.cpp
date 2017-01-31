@@ -16,11 +16,28 @@ void Window::Launch()
 {
 	LOG(Log, "Launching GLFW Window");
 
+	//Required for VAOs
+	glewExperimental = GL_TRUE;
+
+	glfwSetErrorCallback(
+		[](int error, const char* desc)
+		{
+			//TODO - Create actual method/handle
+			LOG(Error, "GLFW(%i): '%s'", error, desc);
+		}
+	);
+
 	if (!glfwInit())
 	{
 		LOG(Fatal, "Failed to init GLFW");
 		return;
 	}
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 
 	window = glfwCreateWindow(
 		desired_resolution.x, desired_resolution.y,
@@ -34,15 +51,32 @@ void Window::Launch()
 		LOG(Fatal, "Failed to create GLFW Window");
 		return;
 	}
+	else
+		glfwMakeContextCurrent(window);
 
+	//Check for errors
+	GLenum error_type = glewInit();
+
+	if (error_type != GLEW_OK)
+		LOG(Error, "GLEW(%i)", error_type);
+
+	//Log vendor info
+	LOG(Log, "GL Vendor:");
+	LOG(Log, "\t-GL_RENDERER: \t%s", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	LOG(Log, "\t-GL_VERSION: \t%s", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	LOG(Log, "\t-GL_VENDOR: \t%s", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	SetVSync(false);
-	glfwMakeContextCurrent(window);
+
 	g_game->SetWindowReady();
 	LaunchMainLoop();
 }
 
 void Window::SetVSync(const bool on) 
 {
+	LOG(Log, "Vsync: %s", on ? "on" : "off");
 	glfwSwapInterval(on);
 }
 
@@ -100,11 +134,20 @@ void Window::Tick(float delta_time)
 		ticks_last_second = ticks_this_second;
 		ticks_this_second = 0;
 	}
+
+	World* world = g_game->GetWorld();
+	if (world)
+		world->WindowTick(this, delta_time);
 }
 
 void Window::CleanUp() 
 {
 	model_loader.CleanUp();
+
+	//Clean up current world
+	World* world = g_game->GetWorld();
+	if (world)
+		world->UnloadWindowResources(this);
 
 	LOG(Log, "Terminating GLFW");
 	glfwTerminate();
