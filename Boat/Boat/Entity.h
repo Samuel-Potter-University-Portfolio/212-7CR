@@ -7,7 +7,7 @@ class Entity : public Tickable
 {
 private:
 	std::vector<Component*> components;
-	bool is_visable = false;
+	bool is_visable = true;
 
 protected:
 	virtual void LogicBegin() override;
@@ -18,6 +18,9 @@ protected:
 
 public:
 	~Entity();
+
+	virtual void LogicDestroy();
+	virtual void WindowDestroy();
 
 	inline const bool IsVisable() { return is_visable; }
 	inline void SetVisable(const bool visable) { is_visable = visable; }

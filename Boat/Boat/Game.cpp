@@ -66,13 +66,12 @@ void Game::CleanUp()
 	}
 	if (world)
 	{
-		if (world->IsDestroyed())
-			LOG(Log, "World destroyed")
-		else
+		if (!world->IsDestroyed())
 			LOG(Error, "World was not destroyed correctly");
 
 		delete world;
 		world = nullptr;
+		LOG(Log, "World cleaned up")
 	}
 }
 

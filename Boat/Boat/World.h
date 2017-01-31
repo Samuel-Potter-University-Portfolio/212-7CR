@@ -18,6 +18,8 @@ private:
 	bool window_destroyed = false;
 
 public:
+	~World();
+
 	void LogicBegin(class GameLogic* game_logic);
 	void WindowBegin(class Window* window);
 

@@ -1,14 +1,15 @@
 #include "BoatWorld.h"
+#include "TestEnt.h"
 #include "Logger.h"
 
 BoatWorld::BoatWorld()
 {
-
 }
 
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
+	AddEntity(new TestEnt());
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

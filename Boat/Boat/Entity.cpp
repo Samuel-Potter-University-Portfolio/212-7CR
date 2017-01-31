@@ -7,16 +7,28 @@ Entity::~Entity()
 		delete component;
 }
 
+void Entity::LogicDestroy() 
+{
+	for (Component* component : components)
+		component->LogicDestroy();
+}
+
+void Entity::WindowDestroy() 
+{
+	for (Component* component : components)
+		component->WindowDestroy();
+}
+
 void Entity::AddComponent(Component* component) 
 {
 	//Only allow to add components, if entity has yet to begin
-	if (!HasPartiallyBegun())
+	if (!HasBegun())
 	{
 		components.push_back(component);
 		component->SetParent(this);
 	}
 	else
-		LOG(Error, "Cannot add component, outside of constructor");
+		LOG(Error, "Cannot add component as entity is already ready");
 }
 
 void Entity::LogicBegin() 

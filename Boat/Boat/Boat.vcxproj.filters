@@ -99,6 +99,12 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="ModelComponent.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TestEnt.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -148,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelComponentBase.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TestEnt.h">
+      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

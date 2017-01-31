@@ -4,16 +4,20 @@
 void Shader::Start() 
 {
 	glUseProgram(program_id);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 }
 
 void Shader::Stop() 
 {
+	glDisable(GL_CULL_FACE);
 	glUseProgram(0);
 }
 
 void Shader::CleanUp() 
 {
 	glDeleteProgram(program_id);
+	LOG(Log, "Cleaned up shader '%s'", debug_name.c_str());
 }
 
 bool Shader::Load()
@@ -34,7 +38,8 @@ bool Shader::Load()
 		glGetProgramInfoLog(program_id, log_length, nullptr, log);
 
 
-		LOG(Error, "Error when linking shader:\n\t-shader_type: %s\n\t-error_no: %i\n==Log==\n%s",
+		LOG(Error, "Error when linking shader '%s':\n\t-shader_type: %s\n\t-error_no: %i\n==Log==\n%s",
+			debug_name.c_str(),
 			"SHADER_PROGRAM",
 			link_result,
 			log
@@ -44,6 +49,7 @@ bool Shader::Load()
 		return false;
 	}
 
+	LOG(Log, "Loaded shader '%s'", debug_name.c_str());
 	return true;
 }
 

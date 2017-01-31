@@ -5,8 +5,9 @@
 
 int main(int arg_c, char** arg_v)
 {
-	Game game("Boat Game", glm::ivec2(640, 480), new BoatWorld());
-	game.Launch();
+	Game* game = new Game("Boat Game", glm::ivec2(640, 480), new BoatWorld());
+	game->Launch();
+	delete game;
 
 	LOG(Log, "Exiting(0)");
 

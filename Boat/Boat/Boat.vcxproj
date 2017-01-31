@@ -131,9 +131,11 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="TestEnt.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
@@ -149,9 +151,12 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="ModelComponentBase.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="TestEnt.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />

@@ -68,7 +68,7 @@ void Window::Launch()
 
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	SetVSync(false);
+	SetVSync(true);
 
 	g_game->SetWindowReady();
 	LaunchMainLoop();

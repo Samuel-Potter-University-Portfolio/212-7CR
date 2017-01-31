@@ -2,6 +2,12 @@
 #include "Game.h"
 #include "Logger.h"
 
+World::~World() 
+{
+	LOG(Log, "PENKANWEHAWE");
+	for (Entity* entity : entities)
+		delete entity;
+}
 
 void World::LogicBegin(GameLogic* game_logic) 
 {
@@ -77,6 +83,9 @@ void World::WindowTick(Window* window, float delta_time)
 	//Tick entities
 	for (Entity* entity : entities)
 		entity->HandleWindowTick(delta_time);
+
+	if (renderer)
+		renderer->Render();
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -86,15 +95,25 @@ void World::LoadLogicResources(GameLogic* game_logic)
 void World::LoadWindowResources(Window* window)
 {
 	renderer = new Renderer;
+
+	//Added already existing entities
+	for(Entity* entity : entities)
+		renderer->AddEntityToQueue(entity);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)
 {
+	for (Entity* entity : entities)
+		entity->LogicDestroy();
+
 	logic_destroyed = true;
 }
 
 void World::UnloadWindowResources(Window* window) 
 {
+	for (Entity* entity : entities)
+		entity->WindowDestroy();
+
 	if (renderer)
 	{
 		renderer->CleanUp();
@@ -107,4 +126,11 @@ void World::UnloadWindowResources(Window* window)
 
 void World::AddEntity(Entity* entity) 
 {
+	if (!entity)
+		return;
+
+	entities.push_back(entity);
+
+	if(renderer)
+		renderer->AddEntityToQueue(entity);
 }
