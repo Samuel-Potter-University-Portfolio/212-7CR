@@ -31,6 +31,15 @@
     <Filter Include="Header Files\Core\Maths">
       <UniqueIdentifier>{6737e24e-66d3-4aff-be92-109d1a2d6ec6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Boat Game">
+      <UniqueIdentifier>{e70cf894-95dc-4b6b-a6f6-e6029a248f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Boat Game">
+      <UniqueIdentifier>{ea6e399f-d10a-4745-b780-d3e0501596e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Boat Game\Shaders">
+      <UniqueIdentifier>{759989df-56f7-4bf9-ba41-03e299aa4a88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +72,18 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="BoatWorld.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShader.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -92,5 +113,25 @@
     <ClInclude Include="World.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="BoatWorld.h">
+      <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShader.h">
+      <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Default.vert.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Default.frag.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

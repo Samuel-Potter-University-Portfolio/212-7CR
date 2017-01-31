@@ -81,6 +81,7 @@ void World::LoadLogicResources(GameLogic* game_logic)
 
 void World::LoadWindowResources(Window* window)
 {
+	renderer = new Renderer;
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)
@@ -90,5 +91,12 @@ void World::UnloadLogicResources(GameLogic* game_logic)
 
 void World::UnloadWindowResources(Window* window) 
 {
+	if (renderer)
+	{
+		renderer->CleanUp();
+		delete renderer;
+		renderer = nullptr;
+	}
+
 	window_destroyed = true;
 }

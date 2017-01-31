@@ -1,9 +1,11 @@
 #pragma once
-
+#include "Renderer.h"
 
 class World
 {
 private:
+	Renderer* renderer;
+
 	bool logic_begun = false;
 	bool window_begun = false;
 
@@ -22,9 +24,9 @@ public:
 	inline void Destroy() { is_being_destroyed = true; }
 	inline bool IsDestroyed() { return logic_destroyed && window_destroyed; }
 
-	void LoadLogicResources(class GameLogic* game_logic);
-	void LoadWindowResources(class Window* window);
-	void UnloadLogicResources(class GameLogic* game_logic);
-	void UnloadWindowResources(class Window* window);
+	virtual void LoadLogicResources(class GameLogic* game_logic);
+	virtual void LoadWindowResources(class Window* window);
+	virtual void UnloadLogicResources(class GameLogic* game_logic);
+	virtual void UnloadWindowResources(class Window* window);
 };
 
