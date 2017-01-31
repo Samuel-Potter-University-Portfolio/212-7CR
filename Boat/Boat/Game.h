@@ -35,6 +35,9 @@ public:
 	inline bool IsClosedRequested() { return closed_requested; }
 	inline std::string GetName() { return game_name; }
 
+	inline Window* GetWindow() { return window; }
+	inline GameLogic* GetGameLogic() { return game_logic; }
+
 private:
 	void CleanUp();
 };

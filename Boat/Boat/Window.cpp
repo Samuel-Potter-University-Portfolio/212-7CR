@@ -12,12 +12,6 @@ Window::Window(const glm::ivec2 desired_resolution)
 	LOG(Log, "\t-Desired Resolution:\t(%i,%i)", desired_resolution.x, desired_resolution.y);
 }
 
-
-Window::~Window()
-{
-}
-
-
 void Window::Launch() 
 {
 	LOG(Log, "Launching GLFW Window");
@@ -90,8 +84,8 @@ void Window::LaunchMainLoop()
 	//Ensure game has internally registered close request
 	g_game->Close();
 
-	LOG(Log, "Terminating GLFW");
-	glfwTerminate();
+	LOG(Log, "Terminating Window");
+	CleanUp();
 }
 
 void Window::Tick(float delta_time)
@@ -106,4 +100,12 @@ void Window::Tick(float delta_time)
 		ticks_last_second = ticks_this_second;
 		ticks_this_second = 0;
 	}
+}
+
+void Window::CleanUp() 
+{
+	model_loader.CleanUp();
+
+	LOG(Log, "Terminating GLFW");
+	glfwTerminate();
 }

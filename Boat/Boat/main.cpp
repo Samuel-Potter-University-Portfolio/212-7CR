@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Logger.h"
 
+
 int main(int arg_c, char** arg_v)
 {
 	Game game("Boat Game", glm::ivec2(640, 480));

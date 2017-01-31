@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Visual">
       <UniqueIdentifier>{0c6b804e-af03-4da7-83e2-5bf1c3807b8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Maths">
+      <UniqueIdentifier>{f963cd7c-c0b3-4506-bc57-3654eb924d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Maths">
+      <UniqueIdentifier>{6737e24e-66d3-4aff-be92-109d1a2d6ec6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,11 +45,20 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="Misc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Visual</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,11 +71,20 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="Misc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameLogic.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Visual</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
