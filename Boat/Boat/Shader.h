@@ -18,6 +18,7 @@ public:
 	Shader(const std::string debug_name) : debug_name(debug_name) {};
 
 	virtual void Start();
+	virtual void Render(class ModelComponentBase* component, float frame_time);
 	virtual void Stop();
 
 	virtual bool Load();

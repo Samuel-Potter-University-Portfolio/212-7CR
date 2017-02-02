@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
+#include "Transform.h"
 #include "Component.h"
 #include "Tickable.h"
+
 
 class Entity : public Tickable
 {
@@ -17,7 +19,7 @@ protected:
 	virtual void WindowTick(float delta_time) override;
 
 public:
-	~Entity();
+	virtual ~Entity();
 
 	virtual void LogicDestroy();
 	virtual void WindowDestroy();
@@ -25,6 +27,8 @@ public:
 	inline const bool IsVisable() { return is_visable; }
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
+
+	/* Components */
 protected:
 	void AddComponent(Component* component);
 

@@ -84,8 +84,7 @@ void Renderer::Render()
 				continue;
 
 			shader->Start();
-			glBindVertexArray(model->GetVAO());
-			glDrawElements(GL_TRIANGLES, model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
+			shader->Render(comp, 0.0f);
 			shader->Stop();
 		}
 

@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include "Logger.h"
+#include "ModelComponentBase.h"
 
 void Shader::Start() 
 {
@@ -12,6 +13,12 @@ void Shader::Stop()
 {
 	glDisable(GL_CULL_FACE);
 	glUseProgram(0);
+}
+
+void Shader::Render(ModelComponentBase* component, float frame_time)
+{
+	//Assume model has already been bound
+	glDrawElements(GL_TRIANGLES, component->GetModel()->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 }
 
 void Shader::CleanUp() 

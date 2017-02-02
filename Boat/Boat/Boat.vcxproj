@@ -137,6 +137,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TestEnt.cpp" />
     <ClCompile Include="Tickable.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="TestEnt.h" />
     <ClInclude Include="Tickable.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

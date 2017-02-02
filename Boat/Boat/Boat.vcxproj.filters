@@ -105,6 +105,9 @@
     <ClCompile Include="TestEnt.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="TestEnt.h">
       <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Core\Maths</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

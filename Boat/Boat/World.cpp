@@ -4,7 +4,6 @@
 
 World::~World() 
 {
-	LOG(Log, "PENKANWEHAWE");
 	for (Entity* entity : entities)
 		delete entity;
 }
