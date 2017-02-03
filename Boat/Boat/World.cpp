@@ -1,5 +1,6 @@
 #include "World.h"
 #include "Game.h"
+#include "DefaultShader.h"
 #include "Logger.h"
 
 World::~World() 
@@ -98,6 +99,54 @@ void World::LoadWindowResources(Window* window)
 	//Added already existing entities
 	for(Entity* entity : entities)
 		renderer->AddEntityToQueue(entity);
+
+
+	//Load default models
+	//Quad
+	{
+		Mesh mesh(
+		{
+			0.0, 0.0, 0.0,	0.0, 1.0, 0.0,
+			1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
+		},
+		{
+			2,1,0, 3,2,0,
+		}
+		);
+		window->GetModelLoader().RegisterModel("quad", mesh);
+	}
+
+	//Cube
+	{
+		std::vector<float> verts{
+			0.0, 0.0, 0.0,	0.0, 1.0, 0.0,
+			1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
+
+			0.0, 0.0, 1.0,	0.0, 1.0, 1.0,
+			1.0, 1.0, 1.0,	1.0, 0.0, 1.0,
+		};
+
+		for (float& f : verts)
+			f -= 0.5f;
+
+		Mesh mesh(
+			verts,
+			{
+				2,1,0, 3,2,0,
+				4,5,6, 4,6,7,
+
+			1,6,5, 1,2,6,
+			0,4,7, 7,3,0,
+
+			3,6,2, 3,7,6,
+			0,1,5, 0,5,4
+			}
+		);
+		window->GetModelLoader().RegisterModel("cube", mesh);
+	}
+
+	//Load default shaders
+	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)

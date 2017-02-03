@@ -5,6 +5,7 @@
 #include <vec2.hpp>
 
 #include "ModelLoader.h"
+#include "ShaderLoader.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -12,11 +13,12 @@ class Window
 {
 private:
 	GLFWwindow* window;
+
 	ModelLoader model_loader;
+	ShaderLoader shader_loader;
+
 	Keyboard keyboard;
 	Mouse mouse;
-
-	glm::ivec2 desired_resolution;
 
 	//Variables to keep track of current tick rate (debug logging)
 	float second_counter = 0;
@@ -24,6 +26,7 @@ private:
 	int ticks_last_second = 0;
 
 	//Window settings
+	glm::ivec2 desired_resolution;
 	int width = 0;
 	int height = 0;
 	float aspect_ratio = 1.0f;
@@ -35,14 +38,17 @@ public:
 	void SetVSync(const bool on);
 
 	inline int GetCurrentTickRate() { return ticks_last_second; }
+
 	inline ModelLoader& GetModelLoader() { return model_loader; }
+	inline ShaderLoader& GetShaderLoader() { return shader_loader; }
+
 	inline Keyboard& GetKeyboard() { return keyboard; }
 	inline Mouse& GetMouse() { return mouse; }
 
+	inline GLFWwindow* GetGLFWwindow() { return window; }
 	inline int GetWidth() { return width; }
 	inline int GetHeight() { return height; }
 	inline float GetAspectRatio() { return aspect_ratio; }
-	inline GLFWwindow* GetGLFWwindow() { return window; }
 
 private:
 	void LaunchMainLoop();

@@ -1,17 +1,50 @@
 #include "ModelLoader.h"
 #include "Logger.h"
+#include <algorithm>
 
+
+void ModelLoader::RegisterModel(const std::string name, const Mesh& mesh) 
+{
+	//Ensure key is stored in lower case to prevent duplicates
+	std::string key = name;
+	std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+
+	if (model_pool.find(key) != model_pool.end())
+	{
+		LOG(Warning, "Failed attempt to re-register model '%s'", key.c_str());
+		return;
+	}
+
+	Model* model = CreateModel(mesh);
+	ModelData meta_data;
+
+	meta_data.model = model;
+	meta_data.imported = false;
+
+	model_pool[key] = meta_data;
+	LOG(Log, "Registered model '%s'", key.c_str());
+}
+
+Model* ModelLoader::operator[](const std::string key)
+{
+	if (model_pool.find(key) == model_pool.end())
+		return nullptr;
+	return model_pool[key].model;
+}
 
 void ModelLoader::CleanUp() 
 {
 	LOG(Log, "Cleaning up models");
 
 	GLuint current_vao;
-	for (Model* model : models)
+	for (auto it = model_pool.begin(); it != model_pool.end(); ++it)
 	{
+		Model* model = it->second.model;
 		current_vao = model->GetVAO();
 		glDeleteVertexArrays(1, &current_vao);
 		delete model;
+
+		LOG(Log, "Unloaded model '%s'", it->first.c_str());
 	}
 }
 
@@ -26,7 +59,6 @@ Model* ModelLoader::CreateModel(const Mesh& mesh)
 	glBindVertexArray(0);
 
 	Model* model = new Model(vao, mesh.GetRawIndices().size());
-	models.push_back(model);
 	return model;
 }
 

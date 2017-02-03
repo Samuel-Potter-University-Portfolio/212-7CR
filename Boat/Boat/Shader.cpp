@@ -26,7 +26,6 @@ void Shader::Render(CameraComponent* camera, ModelComponentBase* component, floa
 void Shader::CleanUp() 
 {
 	glDeleteProgram(program_id);
-	LOG(Log, "Cleaned up shader '%s'", debug_name.c_str());
 }
 
 bool Shader::Load()
@@ -47,8 +46,7 @@ bool Shader::Load()
 		glGetProgramInfoLog(program_id, log_length, nullptr, log);
 
 
-		LOG(Error, "Error when linking shader '%s':\n\t-shader_type: %s\n\t-error_no: %i\n==Log==\n%s",
-			debug_name.c_str(),
+		LOG(Error, "Error when linking shader:\n\t-shader_type: %s\n\t-error_no: %i\n==Log==\n%s",
 			"SHADER_PROGRAM",
 			link_result,
 			log
@@ -58,7 +56,6 @@ bool Shader::Load()
 		return false;
 	}
 
-	LOG(Log, "Loaded shader '%s'", debug_name.c_str());
 	return true;
 }
 

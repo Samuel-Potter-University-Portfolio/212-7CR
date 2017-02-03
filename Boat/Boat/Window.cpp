@@ -153,6 +153,7 @@ void Window::Tick(float delta_time)
 void Window::CleanUp() 
 {
 	model_loader.CleanUp();
+	shader_loader.CleanUp();
 
 	//Clean up current world
 	World* world = g_game->GetWorld();

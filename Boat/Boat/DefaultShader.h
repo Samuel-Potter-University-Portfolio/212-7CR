@@ -10,9 +10,6 @@ private:
 	GLuint uniform_view_matrix;
 	GLuint uniform_projection_matrix;
 
-public:
-	DefaultShader() : Shader("DefaultShader") {}
-
 protected:
 	virtual void Start() override;
 	virtual bool Load() override;

@@ -2,7 +2,6 @@
 #include "TestEnt.h"
 #include "Logger.h"
 
-#include "DefaultShader.h"
 
 TestEnt::TestEnt()
 {
@@ -21,38 +20,8 @@ TestEnt::~TestEnt()
 void TestEnt::WindowBegin() 
 {
 	__super::WindowBegin();
-	shader = new DefaultShader();
-	shader->Load();
-
-	std::vector<float> verts{
-		0.0, 0.0, 0.0,	0.0, 1.0, 0.0,
-		1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
-
-		0.0, 0.0, 1.0,	0.0, 1.0, 1.0,
-		1.0, 1.0, 1.0,	1.0, 0.0, 1.0,
-	};
-
-	for (float& f : verts)
-		f -= 0.5f;
-
-	Mesh mesh(
-		verts,
-	{
-		2,1,0, 3,2,0,
-		4,5,6, 4,6,7,
-
-		1,6,5, 1,2,6,
-		0,4,7, 7,3,0,
-
-		3,6,2, 3,7,6,
-		0,1,5, 0,5,4
-	}
-	);
-
-	model = g_game->GetWindow()->GetModelLoader().CreateModel(mesh);
-
-	model_comp->model = model;
-	model_comp->shader = shader;
+	model_comp->model = g_game->GetWindow()->GetModelLoader()["cube"];
+	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 }
 
 void TestEnt::WindowDestroy() 

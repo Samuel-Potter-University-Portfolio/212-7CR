@@ -10,6 +10,10 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 {
 	World::LoadLogicResources(game_logic);
 	AddEntity(new TestEnt());
+
+	TestEnt* e = new TestEnt();
+	e->transform.location = glm::vec3(0, 3, 0);
+	AddEntity(e);
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

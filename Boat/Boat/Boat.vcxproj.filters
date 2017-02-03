@@ -37,14 +37,17 @@
     <Filter Include="Header Files\Boat Game">
       <UniqueIdentifier>{ea6e399f-d10a-4745-b780-d3e0501596e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Boat Game\Shaders">
-      <UniqueIdentifier>{759989df-56f7-4bf9-ba41-03e299aa4a88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Components">
       <UniqueIdentifier>{cb5b34f7-6b25-449b-8fb2-a9c2d782e223}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Core\Components">
       <UniqueIdentifier>{22bd9b9f-003e-482e-9e0f-1d38a126dcc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual\Shaders">
+      <UniqueIdentifier>{759989df-56f7-4bf9-ba41-03e299aa4a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Shaders">
+      <UniqueIdentifier>{e09ce440-c22f-461b-8c7e-893b1c15b0e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +99,6 @@
     <ClCompile Include="Tickable.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
     <ClCompile Include="ModelComponent.cpp">
       <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
@@ -116,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +158,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultShader.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -188,13 +191,19 @@
     <ClInclude Include="Mouse.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
+      <Filter>Header Files\Visual\Shaders</Filter>
     </None>
     <None Include="Shaders\Default.frag.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
+      <Filter>Header Files\Visual\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
