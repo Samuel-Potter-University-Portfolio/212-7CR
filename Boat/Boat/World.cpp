@@ -104,13 +104,15 @@ void World::LoadWindowResources(Window* window)
 	//Load default models
 	//Quad
 	{
-		Mesh mesh(
+		ModelMesh mesh(
 		{
 			0.0, 0.0, 0.0,	0.0, 1.0, 0.0,
 			1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
 		},
+		{}, //TODO - UVs
+		{}, //TODO - Normals
 		{
-			2,1,0, 3,2,0,
+			0,1,2, 0,2,3,
 		}
 		);
 		window->GetModelLoader().RegisterModel("quad", mesh);
@@ -129,17 +131,19 @@ void World::LoadWindowResources(Window* window)
 		for (float& f : verts)
 			f -= 0.5f;
 
-		Mesh mesh(
+		ModelMesh mesh(
 			verts,
+			{}, //TODO - UVs
+			{}, //TODO - Normals
 			{
-				2,1,0, 3,2,0,
-				4,5,6, 4,6,7,
+				0,1,2, 0,2,3,
+				6,5,4, 7,6,4,
 
-			1,6,5, 1,2,6,
-			0,4,7, 7,3,0,
+				5,6,1, 6,2,1,
+				7,4,0, 0,3,7,
 
-			3,6,2, 3,7,6,
-			0,1,5, 0,5,4
+				2,6,3, 6,7,3,
+				5,1,0, 4,5,0
 			}
 		);
 		window->GetModelLoader().RegisterModel("cube", mesh);

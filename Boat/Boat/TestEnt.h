@@ -7,11 +7,11 @@ class TestEnt : public Entity
 {
 public:
 	TestEnt();
-	~TestEnt();
+
 	ModelComponent* model_comp;
+	ModelComponent* model_comp2;
+	ModelComponent* model_comp3;
 	CameraComponent* camera_comp;
-	Shader* shader;
-	Model* model;
 
 protected:
 	//virtual void LogicBegin() override;

@@ -25,6 +25,6 @@ public:
 
 	inline class Entity* GetParent() { return parent; }
 
-	Transform GetWorldTransform();
+	glm::mat4 GetTransformationMatrix(float lerp_factor);
 };
 

@@ -87,9 +87,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultShader.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -117,11 +114,17 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJLoader.cpp">
+      <Filter>Source Files\Visual</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +170,6 @@
     <ClInclude Include="Tickable.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="ModelComponentBase.h">
       <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
@@ -191,11 +191,17 @@
     <ClInclude Include="Mouse.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Header Files\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

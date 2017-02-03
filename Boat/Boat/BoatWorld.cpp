@@ -12,7 +12,7 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 	AddEntity(new TestEnt());
 
 	TestEnt* e = new TestEnt();
-	e->transform.location = glm::vec3(0, 3, 0);
+	e->transform.location = glm::vec3(0, -15, 0);
 	AddEntity(e);
 }
 

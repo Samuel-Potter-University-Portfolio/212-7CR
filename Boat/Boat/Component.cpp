@@ -2,9 +2,9 @@
 #include "Entity.h"
 
 
-Transform Component::GetWorldTransform() 
+glm::mat4 Component::GetTransformationMatrix(float lerp_factor)
 {
-	return parent ? parent->transform + transform : transform;
+	return (parent ? parent->transform.GetMatrix(lerp_factor) * transform.GetMatrix(lerp_factor) : transform.GetMatrix(lerp_factor));
 }
 
 void Component::LogicTick(float delta_time)
