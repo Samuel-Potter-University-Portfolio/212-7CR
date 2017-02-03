@@ -71,6 +71,7 @@ void Window::Launch()
 	SetVSync(true);
 
 	keyboard.Register(this);
+	mouse.Register(this);
 	g_game->SetWindowReady();
 	LaunchMainLoop();
 }
@@ -93,13 +94,15 @@ void Window::LaunchMainLoop()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwPollEvents();
+		mouse.Update();
+
 		//Tick logic
 		if(g_game->IsReady())
 			Tick(delta_time);
 
 		//Swap buffers i.e. Draw
 		glfwSwapBuffers(window);
-		glfwPollEvents();
 
 		//Calculate corrected delta time
 		float current_time = GetTime();

@@ -6,6 +6,7 @@
 
 #include "ModelLoader.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Window
 {
@@ -13,6 +14,7 @@ private:
 	GLFWwindow* window;
 	ModelLoader model_loader;
 	Keyboard keyboard;
+	Mouse mouse;
 
 	glm::ivec2 desired_resolution;
 
@@ -35,6 +37,7 @@ public:
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 	inline ModelLoader& GetModelLoader() { return model_loader; }
 	inline Keyboard& GetKeyboard() { return keyboard; }
+	inline Mouse& GetMouse() { return mouse; }
 
 	inline int GetWidth() { return width; }
 	inline int GetHeight() { return height; }

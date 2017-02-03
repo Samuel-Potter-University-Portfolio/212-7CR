@@ -135,6 +135,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TestEnt.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="ModelComponentBase.h" />
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="TestEnt.h" />
