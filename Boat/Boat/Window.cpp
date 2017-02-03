@@ -70,6 +70,7 @@ void Window::Launch()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	SetVSync(true);
 
+	keyboard.Register(this);
 	g_game->SetWindowReady();
 	LaunchMainLoop();
 }

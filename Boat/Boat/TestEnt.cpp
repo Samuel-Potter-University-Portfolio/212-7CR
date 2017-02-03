@@ -65,5 +65,18 @@ void TestEnt::LogicTick(float delta_time)
 {
 	__super::LogicTick(delta_time);
 
-	transform.rotation += glm::vec3(-10.0, 30.0, -20) * delta_time;
+	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
+
+	if (keyboard.GetKeyState(GLFW_KEY_W))
+		transform.rotation += glm::vec3(10.0, 0.0, 0.0) * delta_time * 10.0f;
+	if (keyboard.GetKeyState(GLFW_KEY_A))
+		transform.rotation += glm::vec3(0.0, 10.0, 0.0) * delta_time * 10.0f;
+	//if (keyboard.GetKeyState(GLFW_KEY_W))
+		//transform.rotation += glm::vec3(-10.0, 30.0, -20) * delta_time;
+}
+
+void TestEnt::WindowTick(float delta_time) 
+{
+	__super::WindowTick(delta_time);
+
 }

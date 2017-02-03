@@ -14,6 +14,7 @@ void DefaultShader::Start()
 	__super::Start();
 	glCullFace(GL_FRONT);
 }
+
 bool DefaultShader::Load() 
 {
 	if (!__super::Load())

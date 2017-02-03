@@ -5,12 +5,15 @@
 #include <vec2.hpp>
 
 #include "ModelLoader.h"
+#include "Keyboard.h"
 
 class Window
 {
 private:
 	GLFWwindow* window;
 	ModelLoader model_loader;
+	Keyboard keyboard;
+
 	glm::ivec2 desired_resolution;
 
 	//Variables to keep track of current tick rate (debug logging)
@@ -31,10 +34,12 @@ public:
 
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 	inline ModelLoader& GetModelLoader() { return model_loader; }
+	inline Keyboard& GetKeyboard() { return keyboard; }
 
 	inline int GetWidth() { return width; }
 	inline int GetHeight() { return height; }
 	inline float GetAspectRatio() { return aspect_ratio; }
+	inline GLFWwindow* GetGLFWwindow() { return window; }
 
 private:
 	void LaunchMainLoop();
