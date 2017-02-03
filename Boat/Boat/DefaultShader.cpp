@@ -9,6 +9,11 @@ const char* frag_source =
 ;
 
 
+void DefaultShader::Start() 
+{
+	__super::Start();
+	glCullFace(GL_FRONT);
+}
 bool DefaultShader::Load() 
 {
 	if (!__super::Load())
@@ -19,12 +24,12 @@ bool DefaultShader::Load()
 	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
 }
 
-void DefaultShader::Render(ModelComponentBase* component, float frame_time)
+void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
 {
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetWorldTransform().GetMatrix(frame_time)[0][0]);
-	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, &glm::mat4(1.0)[0][0]);
-	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, &glm::mat4(1.0)[0][0]);
-	__super::Render(component, frame_time);
+	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
+	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
+	__super::Render(camera, component, frame_time);
 }
 
 void DefaultShader::AttachShaders() 

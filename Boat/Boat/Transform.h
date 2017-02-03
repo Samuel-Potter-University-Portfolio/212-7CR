@@ -20,16 +20,16 @@ private:
 protected:
 	TransformType transform_type;
 
-	inline glm::vec3 GetLerpLocation(float lerp);
-	inline glm::vec3 GetLerpRotation(float lerp);
-	inline glm::vec3 GetLerpScale(float lerp);
-
 public:
 	Transform(const glm::vec3 location = glm::vec3(0, 0, 0), const glm::vec3 rotation = glm::vec3(0, 0, 0), const glm::vec3 scale = glm::vec3(1, 1, 1));
 
 	glm::vec3 location;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+
+	inline glm::vec3 GetLerpLocation(float lerp);
+	inline glm::vec3 GetLerpRotation(float lerp);
+	inline glm::vec3 GetLerpScale(float lerp);
 
 	void LogicUpdate();
 	glm::mat4& GetMatrix(float lerp_factor);

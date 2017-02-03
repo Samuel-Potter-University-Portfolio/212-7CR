@@ -3,12 +3,14 @@
 
 #include "Renderer.h"
 #include "Entity.h"
+#include "CameraComponent.h"
 
 class World
 {
 private:
 	Renderer* renderer;
 	std::vector<Entity*> entities;
+	CameraComponent* main_camera;
 
 	bool logic_begun = false;
 	bool window_begun = false;
@@ -37,5 +39,8 @@ public:
 
 	//Memory management control should be passed onto World
 	void AddEntity(Entity* entity);
+
+	inline CameraComponent* GetMainCamera() { return main_camera; }
+	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }
 };
 

@@ -1,11 +1,13 @@
 #include "Shader.h"
 #include "Logger.h"
+#include "CameraComponent.h"
 #include "ModelComponentBase.h"
 
 void Shader::Start() 
 {
 	glUseProgram(program_id);
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
 	glCullFace(GL_BACK);
 }
 
@@ -15,7 +17,7 @@ void Shader::Stop()
 	glUseProgram(0);
 }
 
-void Shader::Render(ModelComponentBase* component, float frame_time)
+void Shader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
 {
 	//Assume model has already been bound
 	glDrawElements(GL_TRIANGLES, component->GetModel()->GetIndexCount(), GL_UNSIGNED_INT, nullptr);

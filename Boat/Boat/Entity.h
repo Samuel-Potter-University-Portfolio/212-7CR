@@ -41,7 +41,7 @@ public:
 	{
 		for (Component* comp : components)
 		{
-			CompType* actual_comp = (CompType*)comp;
+			CompType* actual_comp = dynamic_cast<CompType*>(comp);
 			if (actual_comp)
 				return actual_comp;
 		}
@@ -55,7 +55,7 @@ public:
 
 		for (Component* comp : components)
 		{
-			CompType* actual_comp = (CompType*)comp;
+			CompType* actual_comp = dynamic_cast<CompType*>(comp);
 			if (actual_comp)
 				actual_comps.push_back(actual_comp);
 		}

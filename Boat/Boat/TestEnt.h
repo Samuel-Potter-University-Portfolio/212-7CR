@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "ModelComponent.h"
+#include "CameraComponent.h"
 
 class TestEnt : public Entity
 {
@@ -8,6 +9,7 @@ public:
 	TestEnt();
 	~TestEnt();
 	ModelComponent* model_comp;
+	CameraComponent* camera_comp;
 	Shader* shader;
 	Model* model;
 

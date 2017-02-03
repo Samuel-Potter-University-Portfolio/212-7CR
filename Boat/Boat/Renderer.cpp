@@ -50,10 +50,18 @@ void Renderer::CleanUp()
 {
 }
 
-void Renderer::Render() 
+void Renderer::Render(Window* window)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	CameraComponent* main_camera = g_game->GetWorld()->GetMainCamera();
 	float lerp_time = g_game->GetGameLogic()->GetNormalizedTickTime();
+
+
+	//Check camera is up to date 
+	if (main_camera && main_camera->GetAspectRatio() != window->GetAspectRatio())
+		main_camera->BuildProjectionMatrix(window);
+
 
 	//Check components to see if they have loaded
 	for (int i = 0; i < pending_loads.size(); i++)
@@ -88,7 +96,7 @@ void Renderer::Render()
 				continue;
 
 			shader->Start();
-			shader->Render(comp, lerp_time);
+			shader->Render(main_camera, comp, lerp_time);
 			shader->Stop();
 		}
 

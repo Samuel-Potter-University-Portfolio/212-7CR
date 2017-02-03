@@ -20,7 +20,7 @@ public:
 
 	void AddEntityToQueue(Entity* entity);
 
-	void Render();
+	void Render(class Window* window);
 	void CleanUp();
 };
 

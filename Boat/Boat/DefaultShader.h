@@ -1,5 +1,6 @@
 #pragma once
 #include "Shader.h"
+#include "CameraComponent.h"
 #include "ModelComponentBase.h"
 
 class DefaultShader : public Shader
@@ -13,8 +14,9 @@ public:
 	DefaultShader() : Shader("DefaultShader") {}
 
 protected:
+	virtual void Start() override;
 	virtual bool Load() override;
-	virtual void Render(ModelComponentBase* component, float frame_time) override;
+	virtual void Render(CameraComponent* camera, ModelComponentBase* component, float frame_time) override;
 	virtual void AttachShaders() override;
 };
 

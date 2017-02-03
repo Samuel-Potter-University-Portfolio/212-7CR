@@ -84,7 +84,7 @@ void World::WindowTick(Window* window, float delta_time)
 		entity->HandleWindowTick(delta_time);
 
 	if (renderer)
-		renderer->Render();
+		renderer->Render(window);
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -129,6 +129,14 @@ void World::AddEntity(Entity* entity)
 		return;
 
 	entities.push_back(entity);
+
+	if (!main_camera)
+	{
+		main_camera = entity->GetComponent<CameraComponent>();
+
+		if (main_camera)
+			LOG(Log, "Found Camera component to use as main");
+	}
 
 	if(renderer)
 		renderer->AddEntityToQueue(entity);

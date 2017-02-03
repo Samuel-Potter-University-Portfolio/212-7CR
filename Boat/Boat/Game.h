@@ -17,7 +17,6 @@ private:
 	Window* window;
 	GameLogic* game_logic;
 	World* world;
-	World* desired_world;
 
 	bool logic_ready = false;
 	bool window_ready = false;
