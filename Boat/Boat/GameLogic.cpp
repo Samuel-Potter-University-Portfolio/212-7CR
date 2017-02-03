@@ -8,7 +8,8 @@
 
 
 GameLogic::GameLogic()
-	: tick_rate(60)
+	: tick_rate(30), 
+	  total_sleep_time(1.0f/(float)(tick_rate))
 {
 }
 
@@ -36,11 +37,10 @@ inline float GetTime()
 
 void GameLogic::LaunchMainLoop()
 {
-	const float total_sleep_time = 1.0f / (float)(tick_rate);
 	float sleep_time = 0;
 	g_game->SetLogicReady();
 
-	float last_tick_time = GetTime();
+	last_tick_time = GetTime();
 	float delta_time = 0;
 
 	while (!g_game->IsClosedRequested())
@@ -62,15 +62,13 @@ void GameLogic::LaunchMainLoop()
 
 		//Sleep for desired tick_rate
 		sleep_time += total_sleep_time * 2.0f - delta_time;
-		
+
 		if (sleep_time > 0)
 		{
-			int actual_sleep_time = (int)(sleep_time);
-			std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time * 1000));
-			sleep_time -= actual_sleep_time;
+			int actual_sleep_time = (int)(sleep_time * 1000);
+			std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time));
+			sleep_time = 0.0f;
 		}
-		
-
 	}
 
 	//Ensure other threads have registered close request
@@ -100,4 +98,15 @@ void GameLogic::Tick(float delta_time)
 	World* world = g_game->GetWorld();
 	if (world)
 		world->LogicTick(this, delta_time);
+}
+
+float GameLogic::GetNormalizedTickTime() 
+{
+	float current_time = GetTime();
+
+	//Minute must have ticked over
+	if (current_time < last_tick_time)
+		current_time += 60.0f;
+
+	return 1.0f - (current_time - last_tick_time) / (total_sleep_time * 2.0f);
 }

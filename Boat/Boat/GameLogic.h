@@ -8,6 +8,9 @@ class GameLogic
 private:
 	std::thread* thread;
 	const int tick_rate;
+	const float total_sleep_time;
+
+	float last_tick_time;
 
 	//Variables to keep track of current tick rate (debug logging)
 	float second_counter = 0;
@@ -20,6 +23,7 @@ public:
 
 	void Launch();
 
+	float GetNormalizedTickTime();
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 
 private:

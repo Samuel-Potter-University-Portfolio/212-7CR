@@ -13,7 +13,6 @@ private:
 public:
 	virtual Shader* GetShader() = 0;
 	virtual Model* GetModel() = 0;
-	virtual Transform GetTransform() = 0;
 
 	inline const bool IsVisable() { return IsActive() && (parent ? parent->IsVisable() && is_visable : is_visable); }
 	inline void SetVisable(const bool visable) { is_visable = visable; }

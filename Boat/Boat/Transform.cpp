@@ -7,6 +7,10 @@
 #include <gtx\transform.hpp>
 
 
+#define PI 3.141592653589793f
+#define RAD_DEG(x) (x * PI/180.0f)
+
+
 Transform::Transform(const glm::vec3 location, const glm::vec3 rotation, const glm::vec3 scale)
 	: location(location), rotation(rotation), scale(scale),
 	  previous_location(location), previous_rotation(rotation), previous_scale(scale)
@@ -60,10 +64,26 @@ glm::mat4& Transform::GetMatrix(float lerp_factor)
 	matrix = glm::scale(matrix, GetLerpScale(lerp_factor));
 
 	glm::vec3 rotation = GetLerpRotation(lerp_factor);
-	matrix = glm::rotate(matrix, rotation.x, glm::vec3(1, 0, 0));
-	matrix = glm::rotate(matrix, rotation.y, glm::vec3(0, 1, 0));
-	matrix = glm::rotate(matrix, rotation.z, glm::vec3(0, 0, 1));
+	matrix = glm::rotate(matrix, RAD_DEG(rotation.x), glm::vec3(1, 0, 0));
+	matrix = glm::rotate(matrix, RAD_DEG(rotation.y), glm::vec3(0, 1, 0));
+	matrix = glm::rotate(matrix, RAD_DEG(rotation.z), glm::vec3(0, 0, 1));
 	matrix_built = true;
 
 	return matrix;
+}
+
+Transform Transform::operator+(Transform& other) 
+{
+	Transform trans
+	(
+		location + other.location,
+		rotation + other.rotation,
+		scale * other.scale
+	);
+
+	trans.previous_location = previous_location + other.previous_location;
+	trans.previous_rotation = previous_rotation + other.rotation;
+	trans.previous_scale = previous_scale * other.previous_scale;
+
+	return trans;
 }

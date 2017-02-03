@@ -11,6 +11,5 @@ public:
 
 	virtual Model* GetModel() override { return model; };
 	virtual Shader* GetShader() override { return shader; };
-	virtual Transform GetTransform() override { return Transform(); };
 };
 

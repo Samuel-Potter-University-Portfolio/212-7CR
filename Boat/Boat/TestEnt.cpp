@@ -42,3 +42,11 @@ void TestEnt::WindowDestroy()
 	__super::WindowDestroy();
 	delete shader;
 }
+
+void TestEnt::LogicTick(float delta_time) 
+{
+	__super::LogicTick(delta_time);
+
+	transform.rotation += glm::vec3(0.0, 0.0, -90) * delta_time;
+	//transform.location += glm::vec3(-0.2f, -0.1f, 0) * delta_time;
+}

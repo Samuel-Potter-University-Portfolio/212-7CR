@@ -54,6 +54,7 @@ void Entity::WindowBegin()
 void Entity::LogicTick(float delta_time) 
 {
 	__super::LogicTick(delta_time);
+	transform.LogicUpdate();
 
 	//Tick components
 	for (Component* component : components)

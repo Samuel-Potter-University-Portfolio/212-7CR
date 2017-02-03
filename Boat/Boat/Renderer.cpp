@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Game.h"
 #include "ModelComponentBase.h"
 #include "Logger.h"
 
@@ -51,6 +52,9 @@ void Renderer::CleanUp()
 
 void Renderer::Render() 
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	float lerp_time = g_game->GetGameLogic()->GetNormalizedTickTime();
+
 	//Check components to see if they have loaded
 	for (int i = 0; i < pending_loads.size(); i++)
 	{
@@ -84,7 +88,7 @@ void Renderer::Render()
 				continue;
 
 			shader->Start();
-			shader->Render(comp, 0.0f);
+			shader->Render(comp, lerp_time);
 			shader->Stop();
 		}
 

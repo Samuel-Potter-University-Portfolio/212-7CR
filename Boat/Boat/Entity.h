@@ -19,6 +19,8 @@ protected:
 	virtual void WindowTick(float delta_time) override;
 
 public:
+	Transform transform;
+
 	virtual ~Entity();
 
 	virtual void LogicDestroy();

@@ -34,6 +34,6 @@ public:
 	void LogicUpdate();
 	glm::mat4& GetMatrix(float lerp_factor);
 
-
+	Transform operator+(Transform& other);
 };
 
