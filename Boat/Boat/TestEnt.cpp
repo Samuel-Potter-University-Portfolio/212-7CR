@@ -20,10 +20,10 @@ TestEnt::TestEnt()
 void TestEnt::WindowBegin() 
 {
 	__super::WindowBegin();
-	model_comp->model = g_game->GetWindow()->GetModelLoader()["Resources/teapot.obj"];
+	model_comp->model = g_game->GetWindow()->GetModelLoader()["cube"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 
-	model_comp2->model = g_game->GetWindow()->GetModelLoader()["cube"];
+	model_comp2->model = g_game->GetWindow()->GetModelLoader()["quad"];
 	model_comp2->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 
 	model_comp3->transform.location = glm::vec3(1.0, 1.0, 0.0f);

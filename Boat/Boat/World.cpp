@@ -109,8 +109,14 @@ void World::LoadWindowResources(Window* window)
 			0.0, 0.0, 0.0,	0.0, 1.0, 0.0,
 			1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
 		},
-		{}, //TODO - UVs
-		{}, //TODO - Normals
+		{
+			0.0, 0.0, 0.0, 1.0,
+			1.0, 1.0, 1.0, 0.0
+		}, 
+		{
+			0.0, 0.0, 1.0, 0.0, 0.0, 1.0,
+			0.0, 0.0, 1.0, 0.0, 0.0, 1.0
+		}, 
 		{
 			0,1,2, 0,2,3,
 		}
@@ -131,10 +137,24 @@ void World::LoadWindowResources(Window* window)
 		for (float& f : verts)
 			f -= 0.5f;
 
+		const float r3 = sqrt(3);
+
 		ModelMesh mesh(
 			verts,
-			{}, //TODO - UVs
-			{}, //TODO - Normals
+			{
+				0.0, 0.0, 0.0, 1.0,
+				1.0, 1.0, 1.0, 0.0,
+
+				1.0, 1.0, 1.0, 0.0,
+				0.0, 0.0, 0.0, 1.0,
+			},
+			{
+				-r3, -r3, r3, -r3, r3, r3,
+				r3, r3, r3, r3, -r3, r3,
+
+				r3, r3, -r3, r3, -r3, -r3,
+				-r3, -r3, -r3, -r3, r3, -r3,
+			},
 			{
 				0,1,2, 0,2,3,
 				6,5,4, 7,6,4,

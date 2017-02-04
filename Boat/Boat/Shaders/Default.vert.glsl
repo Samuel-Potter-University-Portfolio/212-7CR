@@ -18,7 +18,7 @@ void main()
 	vec4 world_position = model_matrix * vec4(in_position, 1.0);
 	gl_Position = projection_matrix * view_matrix * world_position;
 
-	pass_colour = vec4(in_normal, 1.0);
+	pass_colour = vec4(in_uv, 1.0, 1.0);
 }
 
 )"
