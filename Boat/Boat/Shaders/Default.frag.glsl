@@ -2,12 +2,16 @@ R"(
 #version 330
 
 in vec4 pass_colour;
+in vec2 pass_uvs;
+
+uniform sampler2D texture0;
 
 out vec4 out_colour;
 
 void main()
 {
-	out_colour = pass_colour;
+	vec3 tex_colour = texture(texture0, pass_uvs).rgb;
+	out_colour = vec4(tex_colour, 1.0);
 }
 
 )"

@@ -110,8 +110,8 @@ void World::LoadWindowResources(Window* window)
 			1.0, 1.0, 0.0,	1.0, 0.0, 0.0,
 		},
 		{
-			0.0, 0.0, 0.0, 1.0,
-			1.0, 1.0, 1.0, 0.0
+			1.0, 0.0, 1.0, 1.0,
+			0.0, 1.0, 0.0, 0.0
 		}, 
 		{
 			0.0, 0.0, 1.0, 0.0, 0.0, 1.0,
@@ -137,7 +137,7 @@ void World::LoadWindowResources(Window* window)
 		for (float& f : verts)
 			f -= 0.5f;
 
-		const float r3 = sqrt(3);
+		const float r3 = (float)sqrt(3);
 
 		ModelMesh mesh(
 			verts,

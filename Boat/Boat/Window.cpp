@@ -68,6 +68,8 @@ void Window::Launch()
 
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	SetVSync(true);
 
 	keyboard.Register(this);
@@ -154,6 +156,7 @@ void Window::CleanUp()
 {
 	model_loader.CleanUp();
 	shader_loader.CleanUp();
+	texture_loader.CleanUp();
 
 	//Clean up current world
 	World* world = g_game->GetWorld();

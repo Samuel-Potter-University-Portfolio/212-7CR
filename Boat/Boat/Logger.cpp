@@ -14,7 +14,8 @@ std::string TimeStamp()
 	gmtime_s(&date, &time_stamp);
 
 	char time_str[80];
-	strftime(time_str, 80, "[%d-%m-%Y][%H:%M:%S]", &date);
+	//[%d-%m-%Y %H:%M:%S]
+	strftime(time_str, 80, "[%H:%M:%S]", &date);
 
 	return time_str;
 }

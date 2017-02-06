@@ -33,7 +33,7 @@ Shader* ShaderLoader::operator[](const std::string key)
 
 void ShaderLoader::CleanUp()
 {
-	LOG(Log, "Cleaning up shaders");
+	LOG(Log, "Cleaning up shaders:");
 
 	GLuint current_vao;
 	for (auto it = shader_pool.begin(); it != shader_pool.end(); ++it)
@@ -42,6 +42,6 @@ void ShaderLoader::CleanUp()
 		shader->CleanUp();
 		delete shader;
 
-		LOG(Log, "Unloaded shader '%s'", it->first.c_str());
+		LOG(Log, "\t-Unloaded shader '%s'", it->first.c_str());
 	}
 }

@@ -6,6 +6,7 @@
 
 #include "ModelLoader.h"
 #include "ShaderLoader.h"
+#include "TextureLoader.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -16,6 +17,7 @@ private:
 
 	ModelLoader model_loader;
 	ShaderLoader shader_loader;
+	TextureLoader texture_loader;
 
 	Keyboard keyboard;
 	Mouse mouse;
@@ -41,6 +43,7 @@ public:
 
 	inline ModelLoader& GetModelLoader() { return model_loader; }
 	inline ShaderLoader& GetShaderLoader() { return shader_loader; }
+	inline TextureLoader& GetTextureLoader() { return texture_loader; }
 
 	inline Keyboard& GetKeyboard() { return keyboard; }
 	inline Mouse& GetMouse() { return mouse; }

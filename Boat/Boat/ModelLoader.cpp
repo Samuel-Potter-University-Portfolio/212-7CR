@@ -54,7 +54,7 @@ Model* ModelLoader::operator[](const std::string name)
 
 void ModelLoader::CleanUp() 
 {
-	LOG(Log, "Cleaning up models");
+	LOG(Log, "Cleaning up models:s");
 
 	GLuint current_vao;
 	for (auto it = model_pool.begin(); it != model_pool.end(); ++it)
@@ -64,7 +64,7 @@ void ModelLoader::CleanUp()
 		glDeleteVertexArrays(1, &current_vao);
 		delete model;
 
-		LOG(Log, "Unloaded model '%s'", it->first.c_str());
+		LOG(Log, "\t-Unloaded model '%s'", it->first.c_str());
 	}
 }
 

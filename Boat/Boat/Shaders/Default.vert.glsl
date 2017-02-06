@@ -11,6 +11,7 @@ uniform mat4 projection_matrix;
 
 
 out vec4 pass_colour;
+out vec2 pass_uvs;
 
 
 void main()
@@ -19,6 +20,7 @@ void main()
 	gl_Position = projection_matrix * view_matrix * world_position;
 
 	pass_colour = vec4(in_uv, 1.0, 1.0);
+	pass_uvs = in_uv;
 }
 
 )"

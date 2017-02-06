@@ -27,7 +27,7 @@ private:
 	Model* CreateModel(const ModelMesh& mesh);
 
 public:
-	float import_scale = 1.0f;
+	float import_scale = 0.4f;
 
 	void RegisterModel(const std::string name, const ModelMesh& mesh);
 	Model* operator[](const std::string name);

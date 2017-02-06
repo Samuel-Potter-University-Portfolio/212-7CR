@@ -1,5 +1,6 @@
 #include "DefaultShader.h"
 #include "Logger.h"
+#include "Game.h"
 
 const char* vert_source =
 #include "Shaders/Default.vert.glsl"
@@ -23,6 +24,8 @@ bool DefaultShader::Load()
 	uniform_model_matrix = glGetUniformLocation(GetProgramID(), "model_matrix");
 	uniform_view_matrix = glGetUniformLocation(GetProgramID(), "view_matrix");
 	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
+
+	test_texture = g_game->GetWindow()->GetTextureLoader()["Resources/test_text.png"];
 }
 
 void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
@@ -30,6 +33,9 @@ void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* componen
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix(frame_time)[0][0]);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
 	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
+	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, test_texture);
 	__super::Render(camera, component, frame_time);
 }
 
