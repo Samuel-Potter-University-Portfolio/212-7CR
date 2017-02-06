@@ -77,16 +77,12 @@ void Mouse::Update()
 
 void Mouse::Lock() 
 {
-	if (locked)
-		return;
 	glfwSetInputMode(glfw_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	locked = true;
 }
 
 void Mouse::Unlock() 
 {
-	if (!locked)
-		return;
 	glfwSetInputMode(glfw_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	locked = false;
 }

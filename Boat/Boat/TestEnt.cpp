@@ -8,7 +8,6 @@ TestEnt::TestEnt()
 	model_comp = new ModelComponent;
 	camera_comp = new CameraComponent;
 
-	camera_comp->transform.location = glm::vec3(0, 0, -30.0f);
 	AddComponent(model_comp);
 	AddComponent(camera_comp);
 }
@@ -31,26 +30,48 @@ void TestEnt::LogicTick(float delta_time)
 	__super::LogicTick(delta_time);
 
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
-	Mouse& mouse = g_game->GetWindow()->GetMouse();
+	const float speed = 10.0f;
+
+
+	if (keyboard.GetKeyState(GLFW_KEY_SPACE))
+		camera_comp->transform.location += glm::vec3(0, 1, 0) * delta_time * speed;
+	if (keyboard.GetKeyState(GLFW_KEY_LEFT_CONTROL))
+		camera_comp->transform.location -= glm::vec3(0, 1, 0) * delta_time * speed;
 
 	if (keyboard.GetKeyState(GLFW_KEY_W))
-		transform.rotation += glm::vec3(10.0, 0.0, 0.0) * delta_time * 10.0f;
-	if (keyboard.GetKeyState(GLFW_KEY_A))
-		transform.rotation += glm::vec3(0.0, 10.0, 0.0) * delta_time * 10.0f;
-	
+		camera_comp->transform.location += camera_comp->transform.GetForward() * delta_time * speed;
+	if (keyboard.GetKeyState(GLFW_KEY_S))
+		camera_comp->transform.location -= camera_comp->transform.GetForward() * delta_time * speed;
 
-	if (mouse.GetButtonState(GLFW_MOUSE_BUTTON_3))
-	{
-		mouse.Lock();
-		transform.rotation += glm::vec3(0.0, 1.0, 0.0) * delta_time * 2.0f * mouse.GetScaledVelocity().x;
-		transform.rotation += glm::vec3(1.0, 0.0, 0.0) * delta_time * 2.0f * mouse.GetScaledVelocity().y;
-	}
-	else
-		mouse.Unlock();
+	if (keyboard.GetKeyState(GLFW_KEY_D))
+		camera_comp->transform.location += camera_comp->transform.GetXZRight() * delta_time * speed;
+	if (keyboard.GetKeyState(GLFW_KEY_A))
+		camera_comp->transform.location -= camera_comp->transform.GetXZRight() * delta_time * speed;
+		
 }
 
 void TestEnt::WindowTick(float delta_time) 
 {
 	__super::WindowTick(delta_time);
+	Mouse& mouse = g_game->GetWindow()->GetMouse();
+	
+	if (mouse.GetButtonState(GLFW_MOUSE_BUTTON_LEFT))
+		mouse.Lock();
+
+	else if(mouse.GetButtonState(GLFW_MOUSE_BUTTON_RIGHT))
+		mouse.Unlock();
+
+
+	if (mouse.IsLocked())
+	{
+		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
+		camera_comp->transform.rotation += glm::vec3(2.0, 0.0, 0.0) * delta_time * mouse.GetScaledVelocity().y;
+
+		if (camera_comp->transform.rotation.x > 89.0f)
+			camera_comp->transform.rotation.x = 89.0f;
+
+		if (camera_comp->transform.rotation.x < -89.0f)
+			camera_comp->transform.rotation.x = -89.0f;
+	}
 
 }

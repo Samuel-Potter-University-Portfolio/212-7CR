@@ -54,7 +54,7 @@ Model* ModelLoader::operator[](const std::string name)
 
 void ModelLoader::CleanUp() 
 {
-	LOG(Log, "Cleaning up models:s");
+	LOG(Log, "Cleaning up models:");
 
 	GLuint current_vao;
 	for (auto it = model_pool.begin(); it != model_pool.end(); ++it)

@@ -87,3 +87,42 @@ Transform Transform::operator+(Transform& other)
 
 	return trans;
 }
+
+glm::vec3 Transform::GetForward()
+{
+	return glm::normalize(glm::vec3(
+		sin(RAD_DEG(rotation.y)),
+		tan(RAD_DEG(rotation.x)),
+		cos(RAD_DEG(rotation.y))
+		));
+}
+
+glm::vec3 Transform::GetXZForward()
+{
+	return glm::normalize(glm::vec3(
+		sin(RAD_DEG(rotation.y)),
+		0,
+		cos(RAD_DEG(rotation.y))
+		));
+}
+
+glm::vec3 Transform::GetRight() 
+{
+	return glm::normalize(
+		glm::cross(GetForward(), glm::vec3(0, 1, 0))
+		);
+}
+
+glm::vec3 Transform::GetXZRight() 
+{
+	glm::vec3 right = GetRight();
+	right.y = 0;
+	return glm::normalize(right);
+}
+
+glm::vec3 Transform::GetUp() 
+{
+	return glm::normalize(
+		glm::cross(GetForward(), -GetRight())
+		);
+}

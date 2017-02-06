@@ -35,5 +35,15 @@ public:
 	glm::mat4& GetMatrix(float lerp_factor);
 
 	Transform operator+(Transform& other);
+
+	glm::vec3 GetForward();
+	glm::vec3 GetXZForward();
+
+	glm::vec3 GetRight();
+	glm::vec3 GetXZRight();
+
+	glm::vec3 GetUp();
+
+
 };
 
