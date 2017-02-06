@@ -96,9 +96,6 @@
     <ClCompile Include="Tickable.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModelComponent.cpp">
-      <Filter>Source Files\Core\Components</Filter>
-    </ClCompile>
     <ClCompile Include="TestEnt.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>

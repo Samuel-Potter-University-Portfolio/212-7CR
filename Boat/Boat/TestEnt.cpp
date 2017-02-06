@@ -5,30 +5,20 @@
 
 TestEnt::TestEnt()
 {
-	model_comp = new ModelComponent(nullptr, nullptr);
-	model_comp2 = new ModelComponent(nullptr, nullptr);
-	model_comp3 = new ModelComponent(nullptr, nullptr);
+	model_comp = new ModelComponent;
 	camera_comp = new CameraComponent;
 
 	camera_comp->transform.location = glm::vec3(0, 0, -30.0f);
 	AddComponent(model_comp);
-	AddComponent(model_comp2);
-	AddComponent(model_comp3);
 	AddComponent(camera_comp);
 }
 
 void TestEnt::WindowBegin() 
 {
 	__super::WindowBegin();
-	model_comp->model = g_game->GetWindow()->GetModelLoader()["Resources/teapot.obj"];
+	model_comp->model = g_game->GetWindow()->GetModelLoader()["Resources/row_boat.obj"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
-
-	model_comp2->model = g_game->GetWindow()->GetModelLoader()["quad"];
-	model_comp2->shader = g_game->GetWindow()->GetShaderLoader()["default"];
-	
-	model_comp3->transform.location = glm::vec3(1.0, 1.0, 0.0f);
-	model_comp3->model = g_game->GetWindow()->GetModelLoader()["cube"];
-	model_comp3->shader = g_game->GetWindow()->GetShaderLoader()["default"];
+	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.jpg"]);
 }
 
 void TestEnt::WindowDestroy() 

@@ -8,7 +8,7 @@
 
 
 GameLogic::GameLogic()
-	: tick_rate(30), 
+	: tick_rate(60), 
 	  total_sleep_time(1.0f/(float)(tick_rate))
 {
 }

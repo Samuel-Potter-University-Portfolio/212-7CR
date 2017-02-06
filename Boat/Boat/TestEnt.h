@@ -9,8 +9,6 @@ public:
 	TestEnt();
 
 	ModelComponent* model_comp;
-	ModelComponent* model_comp2;
-	ModelComponent* model_comp3;
 	CameraComponent* camera_comp;
 
 protected:

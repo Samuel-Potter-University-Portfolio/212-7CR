@@ -24,8 +24,6 @@ bool DefaultShader::Load()
 	uniform_model_matrix = glGetUniformLocation(GetProgramID(), "model_matrix");
 	uniform_view_matrix = glGetUniformLocation(GetProgramID(), "view_matrix");
 	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
-
-	test_texture = g_game->GetWindow()->GetTextureLoader()["Resources/test_text.png"];
 }
 
 void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
@@ -35,7 +33,7 @@ void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* componen
 	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 	
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, test_texture);
+	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(0));
 	__super::Render(camera, component, frame_time);
 }
 
