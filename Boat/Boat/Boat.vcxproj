@@ -145,6 +145,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="WaterShader.cpp" />
     <ClCompile Include="WaterSurface.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="WaterShader.h" />
     <ClInclude Include="WaterSurface.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
@@ -185,6 +187,8 @@
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />
     <None Include="Shaders\Skybox.vert.glsl" />
+    <None Include="Shaders\Water.frag.glsl" />
+    <None Include="Shaders\Water.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

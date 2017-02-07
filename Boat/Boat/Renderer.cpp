@@ -50,7 +50,9 @@ void Renderer::CleanUp()
 {
 }
 
-void Renderer::Render(Window* window)
+#include "WaterSurface.h"
+
+void Renderer::Render(Window* window, Tags whitelist_tags, Tags blacklist_tags)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -87,9 +89,22 @@ void Renderer::Render(Window* window)
 		//Render all components of that model
 		for (ModelComponentBase* comp : components)
 		{
+			//Don't render if invisible
 			if (!comp || !comp->IsVisable())
 				continue;
 
+			//Only render if tags are valid
+			Entity* parent = comp->GetParent();
+			Tags tags = parent ? parent->GetTags() : E_TAG_NONE;
+
+			if (whitelist_tags != E_TAG_ALL && !(tags & whitelist_tags))
+				continue;
+
+			if (blacklist_tags != E_TAG_NONE && (tags & blacklist_tags))
+				continue;
+
+
+			//Load shader and render, if valid
 			Shader* shader = comp->GetShader();
 
 			if (!shader)

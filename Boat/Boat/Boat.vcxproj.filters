@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Core\Entities">
       <UniqueIdentifier>{7dcef7b9-ab37-4fd2-884d-b1e48ee34dcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Boat Game\Shaders">
+      <UniqueIdentifier>{5cfdff7e-2402-45a6-8b5e-a03a6b103aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Boat Game\Shaders">
+      <UniqueIdentifier>{5e4d3f20-3af0-4865-9076-e1a4e67ca136}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="SkyboxShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterShader.cpp">
+      <Filter>Source Files\Boat Game\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +239,9 @@
     <ClInclude Include="SkyboxShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="WaterShader.h">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
@@ -243,6 +255,12 @@
     </None>
     <None Include="Shaders\Skybox.vert.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Water.frag.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Water.vert.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

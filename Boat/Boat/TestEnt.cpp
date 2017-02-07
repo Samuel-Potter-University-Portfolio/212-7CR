@@ -5,6 +5,7 @@
 
 TestEnt::TestEnt()
 {
+	tags |= E_TAG_PLAYER;
 	model_comp = MakeComponent<ModelComponent>();
 	camera_comp = MakeComponent<CameraComponent>();
 }

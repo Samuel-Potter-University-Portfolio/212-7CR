@@ -5,6 +5,18 @@
 #include "Tickable.h"
 
 
+typedef unsigned int Tags;
+
+#define E_TAG_PLAYER	0x1
+#define E_TAG_PROP		0x2
+#define E_TAG_ENV		0x3
+#define E_TAG_SKYBOX	0x4
+
+#define E_TAG_LAST	E_TAG_SKYBOX
+
+#define E_TAG_NONE 0x0
+#define E_TAG_ALL (Tags)(-1)
+
 class Entity : public Tickable
 {
 private:
@@ -12,6 +24,8 @@ private:
 	bool is_visable = true;
 
 protected:
+	Tags tags = E_TAG_NONE;
+
 	virtual void LogicBegin() override;
 	virtual void WindowBegin() override;
 
@@ -29,6 +43,7 @@ public:
 	inline const bool IsVisable() { return is_visable; }
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
+	inline Tags GetTags() { return tags; }
 
 	/* Components */
 protected:

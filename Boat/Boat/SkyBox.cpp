@@ -4,6 +4,7 @@
 
 SkyBox::SkyBox()
 {
+	tags |= E_TAG_SKYBOX;
 	model_comp = MakeComponent<ModelComponent>();
 }
 
