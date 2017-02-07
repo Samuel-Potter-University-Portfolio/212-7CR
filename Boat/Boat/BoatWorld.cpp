@@ -1,5 +1,6 @@
 #include "BoatWorld.h"
 #include "TestEnt.h"
+#include "SkyBox.h"
 #include "WaterSurface.h"
 #include "Mesh.h"
 #include "Window.h"
@@ -12,6 +13,7 @@ BoatWorld::BoatWorld()
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
+	AddEntity(new SkyBox);
 	AddEntity(new WaterSurface);
 	AddEntity(new TestEnt);
 }
@@ -39,7 +41,7 @@ void BoatWorld::LoadWindowResources(Window* window)
 				const int n = x + resolution / 2;
 
 				verts.push_back(x * scale);//x
-				verts.push_back(0);//y
+				verts.push_back(n % 2 * i % 2);//y
 				verts.push_back(y * scale);//z
 
 				uvs.push_back(resolution - n);//x

@@ -1,11 +1,10 @@
 #include "DefaultShader.h"
-#include "Logger.h"
 #include "Game.h"
 
-const char* vert_source =
+const char* default_vert_source =
 #include "Shaders/Default.vert.glsl"
 ;
-const char* frag_source =
+const char* default_frag_source =
 #include "Shaders/Default.frag.glsl"
 ;
 
@@ -39,6 +38,6 @@ void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* componen
 
 void DefaultShader::AttachShaders() 
 {
-	glAttachShader(GetProgramID(), CreateShader(GL_VERTEX_SHADER, vert_source));
-	glAttachShader(GetProgramID(), CreateShader(GL_FRAGMENT_SHADER, frag_source));
+	glAttachShader(GetProgramID(), CreateShader(GL_VERTEX_SHADER, default_vert_source));
+	glAttachShader(GetProgramID(), CreateShader(GL_FRAGMENT_SHADER, default_frag_source));
 }

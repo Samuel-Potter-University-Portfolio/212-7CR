@@ -5,8 +5,7 @@
 
 WaterSurface::WaterSurface()
 {
-	model_comp = new ModelComponent;
-	AddComponent(model_comp);
+	model_comp = MakeComponent<ModelComponent>();
 }
 
 void WaterSurface::WindowBegin() 
@@ -15,5 +14,5 @@ void WaterSurface::WindowBegin()
 
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["water_surface"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
-	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/test_text.png"]);
+	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/test_text.jpg"]);
 }

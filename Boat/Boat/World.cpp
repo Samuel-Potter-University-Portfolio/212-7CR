@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Game.h"
 #include "DefaultShader.h"
+#include "SkyboxShader.h"
 #include "Logger.h"
 
 World::~World() 
@@ -168,9 +169,38 @@ void World::LoadWindowResources(Window* window)
 		);
 		window->GetModelLoader().RegisterModel("cube", mesh);
 	}
+	
+	//Skybox
+	{
+		const float size = 700.0f;
+
+		ModelMesh mesh(
+		{
+			-size, -size, -size,	-size, size, -size,
+			size, size, -size,	size, -size, -size,
+
+			-size, -size, size,	-size, size, size,
+			size, size, size,	size, -size, size
+		},
+		{}, //UVs Generated from position in shader
+		{}, //Normals not required
+		{
+			2,1,0, 3,2,0,
+			4,5,6, 4,6,7,
+
+			1,6,5, 1,2,6,
+			0,4,7, 7,3,0,
+
+			3,6,2, 3,7,6,
+			0,1,5, 0,5,4
+		}
+		);
+		window->GetModelLoader().RegisterModel("skybox", mesh);
+	}
 
 	//Load default shaders
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
+	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)

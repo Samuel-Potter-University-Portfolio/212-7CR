@@ -15,10 +15,12 @@ class TextureLoader
 {
 private:
 	std::map<std::string, TextureData> texture_pool;
+	std::map<std::string, TextureData> cube_map_pool;
 
 
 public:
 	GLuint operator[](std::string name);
+	GLuint GetCubeMap(std::string name);
 
 	void CleanUp();
 };

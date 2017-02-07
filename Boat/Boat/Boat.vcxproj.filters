@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Visual\Shaders">
       <UniqueIdentifier>{e09ce440-c22f-461b-8c7e-893b1c15b0e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Entities">
+      <UniqueIdentifier>{3aacaa44-5195-469c-a2f6-495159fbf6cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Entities">
+      <UniqueIdentifier>{7dcef7b9-ab37-4fd2-884d-b1e48ee34dcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,9 +92,6 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Core\Components</Filter>
@@ -129,6 +132,15 @@
     <ClCompile Include="WaterSurface.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Core\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files\Core\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -163,9 +175,6 @@
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Header Files\Core\Components</Filter>
@@ -212,12 +221,27 @@
     <ClInclude Include="WaterSurface.h">
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Core\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files\Core\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
     <None Include="Shaders\Default.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Skybox.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Skybox.vert.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
   </ItemGroup>

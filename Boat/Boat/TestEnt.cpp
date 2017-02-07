@@ -5,11 +5,8 @@
 
 TestEnt::TestEnt()
 {
-	model_comp = new ModelComponent;
-	camera_comp = new CameraComponent;
-
-	AddComponent(model_comp);
-	AddComponent(camera_comp);
+	model_comp = MakeComponent<ModelComponent>();
+	camera_comp = MakeComponent<CameraComponent>();
 }
 
 void TestEnt::WindowBegin() 

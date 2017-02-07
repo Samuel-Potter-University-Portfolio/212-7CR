@@ -139,6 +139,8 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SkyboxShader.cpp" />
     <ClCompile Include="TestEnt.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
@@ -168,6 +170,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SkyboxShader.h" />
     <ClInclude Include="TestEnt.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
@@ -179,6 +183,8 @@
   <ItemGroup>
     <None Include="Shaders\Default.frag.glsl" />
     <None Include="Shaders\Default.vert.glsl" />
+    <None Include="Shaders\Skybox.frag.glsl" />
+    <None Include="Shaders\Skybox.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

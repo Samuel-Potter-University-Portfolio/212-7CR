@@ -34,6 +34,14 @@ public:
 protected:
 	void AddComponent(Component* component);
 
+	template<typename CompType>
+	inline CompType* MakeComponent()
+	{
+		CompType* new_comp = new CompType;
+		AddComponent(new_comp);
+		return new_comp;
+	}
+
 public:
 	//Component fetching
 	template<typename CompType>
