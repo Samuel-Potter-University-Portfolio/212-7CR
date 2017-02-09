@@ -20,7 +20,7 @@ public:
 
 	void AddEntityToQueue(Entity* entity);
 
-	void Render(class Window* window, Tags whitelist_tags = E_TAG_ALL, Tags blacklist_tags = E_TAG_NONE);
+	void Render(float aspect_ratio = 1.0f, class CameraComponent* camera = nullptr, Tags whitelist_tags = E_TAG_ALL, Tags blacklist_tags = E_TAG_NONE);
 	void CleanUp();
 };
 

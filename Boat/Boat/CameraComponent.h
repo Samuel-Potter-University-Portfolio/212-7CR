@@ -14,7 +14,7 @@ public:
 
 	inline float GetAspectRatio() { return last_aspect_ratio; }
 
-	void BuildProjectionMatrix(class Window* window);
+	void BuildProjectionMatrix(float aspect_ratio);
 	glm::mat4 GetProjectionMatrix();
 	glm::mat4 GetViewMatrix(float lerp);
 };

@@ -11,7 +11,6 @@ uniform mat4 projection_matrix;
 
 
 out vec2 pass_uvs;
-out vec3 pass_normal;
 
 
 void main()
@@ -20,7 +19,6 @@ void main()
 	gl_Position = projection_matrix * view_matrix * world_position;
 
 	pass_uvs = in_uv;
-	pass_normal = in_normal;
 }
 
 )"

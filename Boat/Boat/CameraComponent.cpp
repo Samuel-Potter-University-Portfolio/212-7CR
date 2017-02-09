@@ -31,9 +31,12 @@ glm::mat4 CameraComponent::GetViewMatrix(float lerp)
 	);
 }
 
-void CameraComponent::BuildProjectionMatrix(Window* window) 
+void CameraComponent::BuildProjectionMatrix(float aspect_ratio)
 {
-	last_aspect_ratio = window->GetAspectRatio();
+	if (aspect_ratio == last_aspect_ratio)
+		return;
+
+	last_aspect_ratio = aspect_ratio;
 
 	projection_matrix = glm::perspective(
 		RAD_DEG(fov),

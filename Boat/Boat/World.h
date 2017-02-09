@@ -40,6 +40,8 @@ public:
 	//Memory management control should be passed onto World
 	void AddEntity(Entity* entity);
 
+	inline Renderer* GetRenderer() { return renderer; }
+
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }
 };

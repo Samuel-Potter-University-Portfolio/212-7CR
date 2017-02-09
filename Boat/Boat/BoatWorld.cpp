@@ -1,8 +1,12 @@
 #include "BoatWorld.h"
+
 #include "TestEnt.h"
+
 #include "SkyBox.h"
 #include "WaterSurface.h"
 #include "Mesh.h"
+#include "WaterShader.h"
+
 #include "Window.h"
 #include "Logger.h"
 
@@ -29,7 +33,7 @@ void BoatWorld::LoadWindowResources(Window* window)
 		std::vector<float> normals;
 		std::vector<int> indices;
 
-		const int resolution = 10;
+		const int resolution = 50;
 		const float scale = 5.0f;
 
 		for (int y = -resolution/2; y < resolution/2; y++)
@@ -41,7 +45,7 @@ void BoatWorld::LoadWindowResources(Window* window)
 				const int n = x + resolution / 2;
 
 				verts.push_back(x * scale);//x
-				verts.push_back(n % 2 * i % 2);//y
+				verts.push_back(0);//y
 				verts.push_back(y * scale);//z
 
 				uvs.push_back(resolution - n);//x
@@ -65,6 +69,9 @@ void BoatWorld::LoadWindowResources(Window* window)
 		}
 		window->GetModelLoader().RegisterModel("water_surface", ModelMesh(verts, uvs, normals, indices));
 	}
+
+	//Load shaders
+	window->GetShaderLoader().RegisterShader("water", new WaterShader);
 }
 
 void BoatWorld::UnloadLogicResources(GameLogic* game_logic) 

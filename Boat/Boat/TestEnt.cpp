@@ -15,7 +15,7 @@ void TestEnt::WindowBegin()
 	__super::WindowBegin();
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["Resources/row_boat.obj"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
-	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.jpg"]);
+	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.png"]);
 }
 
 void TestEnt::WindowDestroy() 

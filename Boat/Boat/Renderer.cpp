@@ -50,20 +50,18 @@ void Renderer::CleanUp()
 {
 }
 
-#include "WaterSurface.h"
-
-void Renderer::Render(Window* window, Tags whitelist_tags, Tags blacklist_tags)
+void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelist_tags, Tags blacklist_tags)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	CameraComponent* main_camera = g_game->GetWorld()->GetMainCamera();
+	//If camera is null, use main camera
+	if(!camera)
+		camera = g_game->GetWorld()->GetMainCamera();
+
 	float lerp_time = g_game->GetGameLogic()->GetNormalizedTickTime();
 
-
 	//Check camera is up to date 
-	if (main_camera && main_camera->GetAspectRatio() != window->GetAspectRatio())
-		main_camera->BuildProjectionMatrix(window);
-
+	camera->BuildProjectionMatrix(aspect_ratio);
 
 	//Check components to see if they have loaded
 	for (int i = 0; i < pending_loads.size(); i++)
@@ -111,7 +109,7 @@ void Renderer::Render(Window* window, Tags whitelist_tags, Tags blacklist_tags)
 				continue;
 
 			shader->Start();
-			shader->Render(main_camera, comp, lerp_time);
+			shader->Render(camera, comp, lerp_time);
 			shader->Stop();
 		}
 

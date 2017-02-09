@@ -125,6 +125,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Keyboard.h" />

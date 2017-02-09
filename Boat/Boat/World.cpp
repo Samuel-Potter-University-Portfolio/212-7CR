@@ -86,7 +86,7 @@ void World::WindowTick(Window* window, float delta_time)
 		entity->HandleWindowTick(delta_time);
 
 	if (renderer)
-		renderer->Render(window);
+		renderer->Render(window->GetAspectRatio());
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -232,6 +232,7 @@ void World::AddEntity(Entity* entity)
 		return;
 
 	entities.push_back(entity);
+	entity->SetWorld(this);
 
 	if (!main_camera || entity->GetTags() & E_TAG_PLAYER)
 	{

@@ -17,10 +17,12 @@ typedef unsigned int Tags;
 #define E_TAG_NONE 0x0
 #define E_TAG_ALL (Tags)(-1)
 
+
 class Entity : public Tickable
 {
 private:
 	std::vector<Component*> components;
+	class World* world;
 	bool is_visable = true;
 
 protected:
@@ -44,6 +46,10 @@ public:
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
 	inline Tags GetTags() { return tags; }
+	inline bool HasTag(Tags tag) { return tags | tag; }
+
+	inline World* GetWorld() { return world; }
+	inline void SetWorld(World* world) { this->world = world; }
 
 	/* Components */
 protected:

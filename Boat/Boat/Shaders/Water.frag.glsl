@@ -2,7 +2,6 @@ R"(
 #version 330
 
 in vec2 pass_uvs;
-in vec3 pass_normal;
 
 uniform sampler2D texture0;
 

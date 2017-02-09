@@ -150,6 +150,9 @@
     <ClCompile Include="WaterShader.cpp">
       <Filter>Source Files\Boat Game\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="WaterShader.h">
       <Filter>Header Files\Boat Game\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Header Files\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
