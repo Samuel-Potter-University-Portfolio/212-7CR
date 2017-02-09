@@ -27,6 +27,8 @@ public:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
+	void operator=(Transform& other);
+
 	inline glm::vec3 GetLerpLocation(float lerp);
 	inline glm::vec3 GetLerpRotation(float lerp);
 	inline glm::vec3 GetLerpScale(float lerp);

@@ -35,7 +35,7 @@ Model* ModelLoader::operator[](const std::string name)
 	if (model_pool.find(key) == model_pool.end())
 	{
 		//If can't find and path ends in '.obj', attempt to load file
-		if (name.compare(name.length() - 4, 4, ".obj") == 0)
+		if (name.length() >= 4 && name.compare(name.length() - 4, 4, ".obj") == 0)
 		{
 			ModelData meta_data;
 			meta_data.model = CreateModel(OBJLoader::Load(name, import_scale));

@@ -9,6 +9,8 @@ private:
 	const unsigned int width, height;
 	const float aspect_ratio;
 	GLuint fbo;
+	GLuint render_buffer;
+
 	GLuint texture_id;
 
 	bool cleaned_up;

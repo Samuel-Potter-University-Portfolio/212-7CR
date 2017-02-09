@@ -33,7 +33,13 @@ void WaterShader::Render(CameraComponent* camera, ModelComponentBase* component,
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(0));
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(1));
+
 	__super::Render(camera, component, frame_time);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void WaterShader::AttachShaders()

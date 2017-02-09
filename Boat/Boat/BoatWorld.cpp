@@ -3,6 +3,7 @@
 #include "TestEnt.h"
 
 #include "SkyBox.h"
+#include "BoxProp.h"
 #include "WaterSurface.h"
 #include "Mesh.h"
 #include "WaterShader.h"
@@ -20,6 +21,18 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 	AddEntity(new SkyBox);
 	AddEntity(new WaterSurface);
 	AddEntity(new TestEnt);
+
+
+	for (int x = -1; x <= 1; x++)
+			for (int z = -1; z <= 1; z++)
+			{	
+				if (!x && !z)
+					continue;
+
+				BoxProp* box = new BoxProp;
+				box->transform.location = glm::vec3(x, 0, z) * 75.0f;
+				AddEntity(box);
+			}
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

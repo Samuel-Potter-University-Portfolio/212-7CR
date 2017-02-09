@@ -10,15 +10,15 @@ uniform mat4 view_matrix;
 uniform mat4 projection_matrix;
 
 
-out vec2 pass_uvs;
+out vec4 clip_position;
 
 
 void main()
 {	
 	vec4 world_position = model_matrix * vec4(in_position, 1.0);
-	gl_Position = projection_matrix * view_matrix * world_position;
+	clip_position = projection_matrix * view_matrix * world_position;
 
-	pass_uvs = in_uv;
+	gl_Position = clip_position;
 }
 
 )"

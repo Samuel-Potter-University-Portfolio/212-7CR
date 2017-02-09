@@ -18,6 +18,27 @@ Transform::Transform(const glm::vec3 location, const glm::vec3 rotation, const g
 
 }
 
+
+void Transform::operator=(Transform& other) 
+{
+	location = other.location;
+	rotation = other.rotation;
+	scale = other.scale;
+
+	previous_location = other.previous_location;
+	previous_rotation = other.previous_rotation;
+	previous_scale = other.previous_scale;
+
+	transform_type = other.transform_type;
+
+	if (other.matrix_built)
+	{
+		matrix = other.matrix;
+		matrix_built = true;
+	}
+}
+
+
 void Transform::LogicUpdate() 
 {
 	if (matrix_built && transform_type == Static)

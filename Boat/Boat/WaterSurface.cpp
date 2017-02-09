@@ -4,14 +4,12 @@
 
 
 WaterSurface::WaterSurface()
-	: frame_buffer(512, 512)
+	: reflection_fbo(1024, 1024), refraction_fbo(1024, 1024)
 {
 	tags |= E_TAG_WATER;
 	model_comp = MakeComponent<ModelComponent>();
-	camera_comp = MakeComponent<CameraComponent>();
-
-	camera_comp->transform.location = glm::vec3(0, 10, 0);
-	camera_comp->transform.rotation = glm::vec3(90, 0, 0);
+	reflection_camera = MakeComponent<CameraComponent>();
+	refraction_camera = MakeComponent<CameraComponent>();
 }
 
 void WaterSurface::WindowBegin() 
@@ -21,29 +19,51 @@ void WaterSurface::WindowBegin()
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["water_surface"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["water"];
 
-	frame_buffer.Create();
-	model_comp->SetTextureUnit(0, frame_buffer.GetTextureID());
+	reflection_fbo.Create();
+	refraction_fbo.Create();
+	model_comp->SetTextureUnit(0, reflection_fbo.GetTextureID());
+	model_comp->SetTextureUnit(1, refraction_fbo.GetTextureID());
 }
 
 void WaterSurface::WindowDestroy() 
 {
 	__super::WindowDestroy();
-	frame_buffer.CleanUp();
+	reflection_fbo.CleanUp();
+	refraction_fbo.CleanUp();
+}
+
+void WaterSurface::LogicTick(float delta_time)
+{
+	CameraComponent* main_camera = GetWorld()->GetMainCamera();
+
+	reflection_camera->transform.location = main_camera->transform.location;
+	reflection_camera->transform.rotation = main_camera->transform.rotation;
+
+	refraction_camera->transform.location = main_camera->transform.location;
+	refraction_camera->transform.rotation = main_camera->transform.rotation;
+
+	reflection_camera->transform.location.y *= -1;
+	reflection_camera->transform.rotation.x *= -1;
+	__super::LogicTick(delta_time);
 }
 
 void WaterSurface::WindowTick(float delta_time) 
 {
 	__super::WindowTick(delta_time);
-
-	camera_comp->transform.rotation += glm::vec3(0, 45, 0) * delta_time;
-
+	
 	World* world = GetWorld();
 	Renderer* renderer = world ? world->GetRenderer() : nullptr;
 
 	if (!renderer)
 		return;
 
-	frame_buffer.Bind();
-	renderer->Render(frame_buffer.GetAspectRatio(), camera_comp, E_TAG_ALL, E_TAG_WATER);
-	frame_buffer.Unbind();
+	const float aspect_ratio = g_game->GetWindow()->GetAspectRatio();
+
+	reflection_fbo.Bind();
+	renderer->Render(aspect_ratio, reflection_camera, E_TAG_ALL, E_TAG_WATER);
+	reflection_fbo.Unbind();
+
+	refraction_fbo.Bind();
+	renderer->Render(aspect_ratio, refraction_camera, E_TAG_ALL, E_TAG_WATER);
+	refraction_fbo.Unbind();
 }

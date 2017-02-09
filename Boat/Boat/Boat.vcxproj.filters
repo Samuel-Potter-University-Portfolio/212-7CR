@@ -153,6 +153,9 @@
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="BoxProp.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="FrameBuffer.h">
       <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxProp.h">
+      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
