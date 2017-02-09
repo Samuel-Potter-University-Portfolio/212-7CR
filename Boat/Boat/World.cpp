@@ -234,7 +234,7 @@ void World::AddEntity(Entity* entity)
 	entities.push_back(entity);
 	entity->SetWorld(this);
 
-	if (!main_camera || entity->GetTags() & E_TAG_PLAYER)
+	if (!main_camera && entity->GetTags() & E_TAG_PLAYER)
 	{
 		main_camera = entity->GetComponent<CameraComponent>();
 

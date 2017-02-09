@@ -2,6 +2,9 @@ Planks.jpg:
 http://opengameart.org/content/50-free-textures-4-normalmaps?page=2
 http://opengameart.org/node/8051
 
+Sand.png:
+http://opengameart.org/content/generic-tileable-sand-texture
+
 Boat (Reference image not actual model):
 https://www.cgtrader.com/3d-models/watercraft/other/row-boat--2
 

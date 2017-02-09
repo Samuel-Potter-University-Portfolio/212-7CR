@@ -138,6 +138,7 @@
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="OceanFloor.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="OceanFloor.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />

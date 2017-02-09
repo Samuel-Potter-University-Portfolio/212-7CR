@@ -36,11 +36,14 @@ void WaterSurface::LogicTick(float delta_time)
 {
 	CameraComponent* main_camera = GetWorld()->GetMainCamera();
 
-	reflection_camera->transform.location = main_camera->transform.location;
-	reflection_camera->transform.rotation = main_camera->transform.rotation;
+	if (main_camera)
+	{
+		reflection_camera->transform.location = main_camera->transform.location;
+		reflection_camera->transform.rotation = main_camera->transform.rotation;
 
-	refraction_camera->transform.location = main_camera->transform.location;
-	refraction_camera->transform.rotation = main_camera->transform.rotation;
+		refraction_camera->transform.location = main_camera->transform.location;
+		refraction_camera->transform.rotation = main_camera->transform.rotation;
+	}
 
 	reflection_camera->transform.location.y *= -1;
 	reflection_camera->transform.rotation.x *= -1;

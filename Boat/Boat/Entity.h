@@ -46,7 +46,7 @@ public:
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
 	inline Tags GetTags() { return tags; }
-	inline bool HasTag(Tags tag) { return tags | tag; }
+	inline bool HasTag(Tags tag) { return (bool)(tags | tag); }
 
 	inline World* GetWorld() { return world; }
 	inline void SetWorld(World* world) { this->world = world; }

@@ -58,6 +58,10 @@ void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelis
 	if(!camera)
 		camera = g_game->GetWorld()->GetMainCamera();
 
+	//Don't render, if camera is still null
+	if (!camera)
+		return;
+
 	float lerp_time = g_game->GetGameLogic()->GetNormalizedTickTime();
 
 	//Check camera is up to date 

@@ -156,6 +156,9 @@
     <ClCompile Include="BoxProp.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="OceanFloor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="BoxProp.h">
       <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+    <ClInclude Include="OceanFloor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
