@@ -157,7 +157,7 @@
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
     <ClCompile Include="OceanFloor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,7 +258,7 @@
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
     <ClInclude Include="OceanFloor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

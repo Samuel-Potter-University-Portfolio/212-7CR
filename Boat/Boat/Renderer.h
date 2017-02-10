@@ -24,9 +24,11 @@ class Renderer
 private:
 	std::map<Model*, std::vector<ModelComponentBase*>> render_queue;
 	std::vector<ModelComponentBase*> pending_loads;
+	std::vector<RenderSettings> render_targets;
 	float tick_time;
 
 	void AddComponentToQueue(ModelComponentBase* model_comp);
+	void Render(RenderSettings& render_settings);
 
 public:
 	Renderer();
@@ -34,8 +36,9 @@ public:
 
 	void AddEntityToQueue(Entity* entity);
 
-	void Update();
-	void Render(RenderSettings& render_settings);
 	void CleanUp();
+
+	inline void AddRenderTarget(RenderSettings render_settings) { render_targets.push_back(render_settings); }
+	void FullRender();
 };
 

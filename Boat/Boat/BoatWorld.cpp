@@ -21,9 +21,9 @@ BoatWorld::BoatWorld()
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
+	AddEntity(new TestEnt);
 	AddEntity(new SkyBox);
 	AddEntity(new WaterSurface);
-	AddEntity(new TestEnt);
 	AddEntity(new OceanFloor);
 
 	for (int x = -1; x <= 1; x++)

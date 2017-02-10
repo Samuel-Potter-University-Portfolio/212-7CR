@@ -56,20 +56,10 @@ void WaterSurface::WindowTick(float delta_time)
 		reflection_camera->transform = main_camera->transform;
 		refraction_camera->transform = main_camera->transform;
 
-
-		glm::vec3 prev_location = reflection_camera->transform.GetLerpLocation(0.0f);
-		glm::vec3 curr_location = reflection_camera->transform.location;
-
-		prev_location.y *= -1;
-		curr_location.y *= -1;
-
-		reflection_camera->transform.location = prev_location;
-		reflection_camera->transform.rotation.x *= -1;
-
-		reflection_camera->transform.ForceUpdateLocation();
-		reflection_camera->transform.ForceUpdateRotation();
-
-		reflection_camera->transform.location = curr_location;
+		reflection_camera->transform.location.y *= -1.0f;
+		reflection_camera->transform.previous_location.y *= -1.0f;
+		reflection_camera->transform.rotation.x *= -1.0f;
+		reflection_camera->transform.previous_rotation.x *= -1.0f;
 	}
 
 	const float aspect_ratio = g_game->GetWindow()->GetAspectRatio();
@@ -82,7 +72,7 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.frame_buffer = &reflection_fbo;
 		render_settings.blacklist = E_TAG_WATER;
 
-		renderer->Render(render_settings);
+		renderer->AddRenderTarget(render_settings);
 	}
 
 	//Render refraction
@@ -93,6 +83,6 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.frame_buffer = &refraction_fbo;
 		render_settings.blacklist = E_TAG_WATER;
 
-		renderer->Render(render_settings);
+		renderer->AddRenderTarget(render_settings);
 	}
 }

@@ -47,9 +47,14 @@ void Renderer::AddComponentToQueue(ModelComponentBase* model_comp)
 		render_queue[model_comp->GetModel()].push_back(model_comp);
 }
 
-void Renderer::Update() 
+void Renderer::FullRender()
 {
 	tick_time = g_game->GetGameLogic()->GetNormalizedTickTime();
+
+	for (RenderSettings& render_settings : render_targets)
+		Render(render_settings);
+
+	render_targets.clear();
 }
 
 void Renderer::CleanUp() 

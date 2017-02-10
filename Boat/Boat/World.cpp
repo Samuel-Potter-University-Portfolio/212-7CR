@@ -80,21 +80,19 @@ void World::WindowTick(Window* window, float delta_time)
 	//Wait until both threads have been loaded
 	if (!HasLoaded())
 		return;
-
-	if (renderer)
-		renderer->Update();
-
+	
 	//Tick entities
 	for (Entity* entity : entities)
 		entity->HandleWindowTick(delta_time);
-
+	
 	if (renderer)
 	{
 		RenderSettings render_settings;
 		render_settings.aspect_ratio = window->GetAspectRatio();
 		render_settings.camera = main_camera;
 
-		renderer->Render(render_settings);
+		renderer->AddRenderTarget(render_settings);
+		renderer->FullRender();
 	}
 }
 

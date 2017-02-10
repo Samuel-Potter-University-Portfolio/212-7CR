@@ -13,15 +13,15 @@ private:
 	bool matrix_built;
 	glm::mat4 matrix;
 
-	glm::vec3 previous_location;
-	glm::vec3 previous_rotation;
-	glm::vec3 previous_scale;
-
 protected:
 	TransformType transform_type;
 
 public:
 	Transform(const glm::vec3 location = glm::vec3(0, 0, 0), const glm::vec3 rotation = glm::vec3(0, 0, 0), const glm::vec3 scale = glm::vec3(1, 1, 1));
+
+	glm::vec3 previous_location;
+	glm::vec3 previous_rotation;
+	glm::vec3 previous_scale;
 
 	glm::vec3 location;
 	glm::vec3 rotation;
