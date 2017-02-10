@@ -5,7 +5,7 @@
 
 
 WaterSurface::WaterSurface()
-	: reflection_fbo(1024, 1024), refraction_fbo(1024, 1024)
+	: reflection_fbo(1024, 1024), refraction_fbo(1024, 1024, true)
 {
 	tags |= E_TAG_WATER;
 	model_comp = MakeComponent<ModelComponent>();
@@ -33,6 +33,7 @@ void WaterSurface::WindowBegin()
 	refraction_fbo.Create();
 	model_comp->SetTextureUnit(0, reflection_fbo.GetTextureID());
 	model_comp->SetTextureUnit(1, refraction_fbo.GetTextureID());
+	model_comp->SetTextureUnit(2, refraction_fbo.GetDepthTextureID());
 }
 
 void WaterSurface::WindowDestroy() 

@@ -1,6 +1,5 @@
 #include "BoatWorld.h"
 #include <random>
-#include <time.h>
 
 #include "TestEnt.h"
 
@@ -24,7 +23,6 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 	World::LoadLogicResources(game_logic);
 	AddEntity(new TestEnt);
 	AddEntity(new SkyBox);
-	AddEntity(new WaterSurface);
 	AddEntity(new OceanFloor);
 
 	for (int x = -1; x <= 1; x++)
@@ -37,12 +35,14 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 				box->transform.location = glm::vec3(x, 0, z) * 75.0f;
 				AddEntity(box);
 			}
+
+	AddEntity(new WaterSurface);
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 
 {
 	World::LoadWindowResources(window);
-	srand(time(nullptr));
+	srand(0);
 
 	//Water model
 	{
@@ -52,8 +52,8 @@ void BoatWorld::LoadWindowResources(Window* window)
 		std::vector<int> indices;
 
 		const int resolution = 50;
-		const float scale = 5.0f;
-		const float uv_scale = 5.0f;
+		const float scale = 5000.0f;
+		const float uv_scale = 25.0f / scale;
 
 		for (int y = -resolution/2; y < resolution/2; y++)
 		{
@@ -96,8 +96,10 @@ void BoatWorld::LoadWindowResources(Window* window)
 		std::vector<float> normals;
 		std::vector<int> indices;
 
-		const int resolution = 10;
+		const int resolution = 50;
+		const int height = 20;
 		const float scale = 50.0f;
+		const float uv_scale = 25.0f / scale;
 
 		for (int y = -resolution / 2; y < resolution / 2; y++)
 		{
@@ -108,11 +110,11 @@ void BoatWorld::LoadWindowResources(Window* window)
 				const int n = x + resolution / 2;
 
 				verts.push_back(x * scale);//x
-				verts.push_back(rand() % 20 - 10);//y
+				verts.push_back(rand() % height - height / 2);//y
 				verts.push_back(y * scale);//z
 
-				uvs.push_back(resolution - n);//x
-				uvs.push_back(i);//y
+				uvs.push_back((resolution - n) / uv_scale);//x
+				uvs.push_back((i) / uv_scale);//y
 
 				normals.push_back(0);//x
 				normals.push_back(1);//y

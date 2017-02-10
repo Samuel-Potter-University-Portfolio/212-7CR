@@ -9,7 +9,7 @@ TestEnt::TestEnt()
 	model_comp = MakeComponent<ModelComponent>();
 	camera_comp = MakeComponent<CameraComponent>();
 
-	//transform.location = glm::vec3(0, -1.0f, 0);
+	transform.location = glm::vec3(0, -1.0f, 0);
 }
 
 void TestEnt::WindowBegin() 
@@ -28,8 +28,6 @@ void TestEnt::WindowDestroy()
 void TestEnt::LogicTick(float delta_time) 
 {
 	__super::LogicTick(delta_time);
-	transform.location += glm::vec3(0, -1.0f, 0) * delta_time / 10.0f;
-	camera_comp->transform.location -= glm::vec3(0, -1.0f, 0) * delta_time / 10.0f;
 
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
 	const float speed = 10.0f;
