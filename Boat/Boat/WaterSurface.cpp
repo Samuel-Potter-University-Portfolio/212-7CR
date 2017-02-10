@@ -1,5 +1,6 @@
 #include "WaterSurface.h"
 #include "Logger.h"
+#include "ClipShader.h"
 #include "Game.h"
 
 
@@ -18,6 +19,15 @@ void WaterSurface::WindowBegin()
 
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["water_surface"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["water"];
+
+	reflection_clip_shader = g_game->GetWindow()->GetShaderLoader()["reflection_clip"];
+	refraction_clip_shader = g_game->GetWindow()->GetShaderLoader()["refraction_clip"];
+
+	if ((ClipShader*)reflection_clip_shader)
+		((ClipShader*)reflection_clip_shader)->plane = glm::vec4(0.0, 1.0, 0.0, 0.0);
+
+	if ((ClipShader*)refraction_clip_shader)
+		((ClipShader*)refraction_clip_shader)->plane = glm::vec4(0.0, -1.0, 0.0, 0.0);
 
 	reflection_fbo.Create();
 	refraction_fbo.Create();
@@ -72,6 +82,9 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.frame_buffer = &reflection_fbo;
 		render_settings.blacklist = E_TAG_WATER;
 
+		render_settings.shader_override = reflection_clip_shader;
+		render_settings.shader_override_tags = E_TAG_ALL & ~E_TAG_SKYBOX;
+
 		renderer->AddRenderTarget(render_settings);
 	}
 
@@ -82,6 +95,9 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.camera = refraction_camera;
 		render_settings.frame_buffer = &refraction_fbo;
 		render_settings.blacklist = E_TAG_WATER;
+
+		render_settings.shader_override = refraction_clip_shader;
+		render_settings.shader_override_tags = E_TAG_ALL & ~E_TAG_SKYBOX;
 
 		renderer->AddRenderTarget(render_settings);
 	}

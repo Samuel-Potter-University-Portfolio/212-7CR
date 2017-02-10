@@ -97,10 +97,7 @@ void Renderer::Render(RenderSettings& render_settings)
 	bool is_shader_overridden = false;
 	
 	if (render_settings.shader_override)
-	{
-		render_settings.shader_override->Start();
-		is_shader_overridden = true;
-	}
+		is_shader_overridden = render_settings.shader_override_tags != E_TAG_NONE;
 
 
 	//Instanced rendering
@@ -131,9 +128,12 @@ void Renderer::Render(RenderSettings& render_settings)
 
 
 			//Render to override shader
-			if(is_shader_overridden)
+			if (is_shader_overridden && (tags & render_settings.shader_override_tags))
+			{
+				render_settings.shader_override->Start();
 				render_settings.shader_override->Render(camera, comp, tick_time);
-
+				render_settings.shader_override->Stop();
+			}
 
 			//Render to component shader
 			else
@@ -152,10 +152,7 @@ void Renderer::Render(RenderSettings& render_settings)
 
 		glBindVertexArray(0);
 	}
-
-	if (is_shader_overridden)
-		render_settings.shader_override->Stop();
-
+	
 	if (render_settings.frame_buffer)
 		render_settings.frame_buffer->Unbind();
 }

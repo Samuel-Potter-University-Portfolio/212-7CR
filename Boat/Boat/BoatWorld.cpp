@@ -10,6 +10,7 @@
 #include "WaterSurface.h"
 #include "Mesh.h"
 #include "WaterShader.h"
+#include "ClipShader.h"
 
 #include "Window.h"
 #include "Logger.h"
@@ -133,6 +134,8 @@ void BoatWorld::LoadWindowResources(Window* window)
 
 	//Load shaders
 	window->GetShaderLoader().RegisterShader("water", new WaterShader);
+	window->GetShaderLoader().RegisterShader("reflection_clip", new ClipShader);
+	window->GetShaderLoader().RegisterShader("refraction_clip", new ClipShader);
 }
 
 void BoatWorld::UnloadLogicResources(GameLogic* game_logic) 

@@ -15,6 +15,8 @@ struct RenderSettings
 	Tags blacklist = E_TAG_NONE;
 
 	class FrameBuffer* frame_buffer = nullptr;
+
+	Tags shader_override_tags = E_TAG_ALL;
 	class Shader* shader_override = nullptr;
 };
 

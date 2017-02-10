@@ -159,6 +159,9 @@
     <ClCompile Include="OceanFloor.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="ClipShader.cpp">
+      <Filter>Source Files\Boat Game\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -260,6 +263,9 @@
     <ClInclude Include="OceanFloor.h">
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
+    <ClInclude Include="ClipShader.h">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
@@ -278,6 +284,12 @@
       <Filter>Header Files\Boat Game\Shaders</Filter>
     </None>
     <None Include="Shaders\Water.vert.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Clip.frag.glsl">
+      <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Clip.vert.glsl">
       <Filter>Header Files\Boat Game\Shaders</Filter>
     </None>
   </ItemGroup>

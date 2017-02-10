@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Shader.h"
 #include "ModelComponent.h"
 #include "CameraComponent.h"
 #include "FrameBuffer.h"
@@ -11,6 +12,8 @@ class WaterSurface : public Entity
 {
 private:
 	ModelComponent* model_comp;
+	Shader* reflection_clip_shader;
+	Shader* refraction_clip_shader;
 
 	CameraComponent* reflection_camera;
 	CameraComponent* refraction_camera;
