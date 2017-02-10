@@ -11,6 +11,7 @@ uniform mat4 projection_matrix;
 
 
 out vec4 clip_position;
+out vec2 pass_uv;
 
 
 void main()
@@ -19,6 +20,7 @@ void main()
 	clip_position = projection_matrix * view_matrix * world_position;
 
 	gl_Position = clip_position;
+	pass_uv = in_uv;
 }
 
 )"

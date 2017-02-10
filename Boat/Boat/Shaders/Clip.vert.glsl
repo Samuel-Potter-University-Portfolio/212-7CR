@@ -22,7 +22,7 @@ void main()
 	vec4 world_position = model_matrix * vec4(in_position, 1.0);
 	gl_Position = projection_matrix * view_matrix * world_position;
 	gl_ClipDistance[0] = dot(world_position, cliping_plane); 
-	
+		
 	pass_uvs = in_uv;
 	pass_normal = in_normal;
 }

@@ -53,6 +53,7 @@ void BoatWorld::LoadWindowResources(Window* window)
 
 		const int resolution = 50;
 		const float scale = 5.0f;
+		const float uv_scale = 5.0f;
 
 		for (int y = -resolution/2; y < resolution/2; y++)
 		{
@@ -66,8 +67,8 @@ void BoatWorld::LoadWindowResources(Window* window)
 				verts.push_back(0);//y
 				verts.push_back(y * scale);//z
 
-				uvs.push_back(resolution - n);//x
-				uvs.push_back(i);//y
+				uvs.push_back((resolution - n)/ uv_scale);//x
+				uvs.push_back((i)/ uv_scale);//y
 
 				normals.push_back(0);//x
 				normals.push_back(1);//y

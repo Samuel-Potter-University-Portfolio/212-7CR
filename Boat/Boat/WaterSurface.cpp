@@ -24,10 +24,10 @@ void WaterSurface::WindowBegin()
 	refraction_clip_shader = g_game->GetWindow()->GetShaderLoader()["refraction_clip"];
 
 	if ((ClipShader*)reflection_clip_shader)
-		((ClipShader*)reflection_clip_shader)->plane = glm::vec4(0.0, 1.0, 0.0, 0.0);
+		((ClipShader*)reflection_clip_shader)->plane = glm::vec4(0.0, 1.0, 0.0, transform.location.y);
 
 	if ((ClipShader*)refraction_clip_shader)
-		((ClipShader*)refraction_clip_shader)->plane = glm::vec4(0.0, -1.0, 0.0, 0.0);
+		((ClipShader*)refraction_clip_shader)->plane = glm::vec4(0.0, -1.0, 0.0, -transform.location.y);
 
 	reflection_fbo.Create();
 	refraction_fbo.Create();
@@ -66,8 +66,22 @@ void WaterSurface::WindowTick(float delta_time)
 		reflection_camera->transform = main_camera->transform;
 		refraction_camera->transform = main_camera->transform;
 
+		//Ensure cameras are using world position
+		Entity* parent = main_camera->GetParent();
+		if (parent)
+		{
+			reflection_camera->transform.location += parent->transform.location - transform.location;
+			refraction_camera->transform.location += parent->transform.location - transform.location;
+
+			reflection_camera->transform.previous_location += parent->transform.previous_location - transform.previous_location;
+			refraction_camera->transform.previous_location += parent->transform.previous_location - transform.previous_location;
+		}
+
 		reflection_camera->transform.location.y *= -1.0f;
 		reflection_camera->transform.previous_location.y *= -1.0f;
+		reflection_camera->transform.location.y += transform.location.y;
+		reflection_camera->transform.previous_location.y += transform.location.y;
+
 		reflection_camera->transform.rotation.x *= -1.0f;
 		reflection_camera->transform.previous_rotation.x *= -1.0f;
 	}
