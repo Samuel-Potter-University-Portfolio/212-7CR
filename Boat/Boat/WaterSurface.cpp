@@ -34,20 +34,8 @@ void WaterSurface::WindowDestroy()
 
 void WaterSurface::LogicTick(float delta_time)
 {
-	CameraComponent* main_camera = GetWorld()->GetMainCamera();
-
-	if (main_camera)
-	{
-		reflection_camera->transform.location = main_camera->transform.location;
-		reflection_camera->transform.rotation = main_camera->transform.rotation;
-
-		refraction_camera->transform.location = main_camera->transform.location;
-		refraction_camera->transform.rotation = main_camera->transform.rotation;
-	}
-
-	reflection_camera->transform.location.y *= -1;
-	reflection_camera->transform.rotation.x *= -1;
 	__super::LogicTick(delta_time);
+	
 }
 
 void WaterSurface::WindowTick(float delta_time) 
@@ -60,13 +48,51 @@ void WaterSurface::WindowTick(float delta_time)
 	if (!renderer)
 		return;
 
+	//Fix camera positions
+	CameraComponent* main_camera = GetWorld()->GetMainCamera();
+
+	if (main_camera)
+	{
+		reflection_camera->transform = main_camera->transform;
+		refraction_camera->transform = main_camera->transform;
+
+
+		glm::vec3 prev_location = reflection_camera->transform.GetLerpLocation(0.0f);
+		glm::vec3 curr_location = reflection_camera->transform.location;
+
+		prev_location.y *= -1;
+		curr_location.y *= -1;
+
+		reflection_camera->transform.location = prev_location;
+		reflection_camera->transform.rotation.x *= -1;
+
+		reflection_camera->transform.ForceUpdateLocation();
+		reflection_camera->transform.ForceUpdateRotation();
+
+		reflection_camera->transform.location = curr_location;
+	}
+
 	const float aspect_ratio = g_game->GetWindow()->GetAspectRatio();
 
-	reflection_fbo.Bind();
-	renderer->Render(aspect_ratio, reflection_camera, E_TAG_ALL, E_TAG_WATER);
-	reflection_fbo.Unbind();
+	//Render reflection
+	{
+		RenderSettings render_settings;
+		render_settings.aspect_ratio = aspect_ratio;
+		render_settings.camera = reflection_camera;
+		render_settings.frame_buffer = &reflection_fbo;
+		render_settings.blacklist = E_TAG_WATER;
 
-	refraction_fbo.Bind();
-	renderer->Render(aspect_ratio, refraction_camera, E_TAG_ALL, E_TAG_WATER);
-	refraction_fbo.Unbind();
+		renderer->Render(render_settings);
+	}
+
+	//Render refraction
+	{
+		RenderSettings render_settings;
+		render_settings.aspect_ratio = aspect_ratio;
+		render_settings.camera = refraction_camera;
+		render_settings.frame_buffer = &refraction_fbo;
+		render_settings.blacklist = E_TAG_WATER;
+
+		renderer->Render(render_settings);
+	}
 }

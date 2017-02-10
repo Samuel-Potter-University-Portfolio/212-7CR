@@ -6,11 +6,25 @@
 #include <map>
 
 
+struct RenderSettings 
+{
+	float aspect_ratio = 1.0f;
+	class CameraComponent* camera = nullptr;
+
+	Tags whitelist = E_TAG_ALL;
+	Tags blacklist = E_TAG_NONE;
+
+	class FrameBuffer* frame_buffer = nullptr;
+	class Shader* shader_override = nullptr;
+};
+
+
 class Renderer
 {
 private:
 	std::map<Model*, std::vector<ModelComponentBase*>> render_queue;
 	std::vector<ModelComponentBase*> pending_loads;
+	float tick_time;
 
 	void AddComponentToQueue(ModelComponentBase* model_comp);
 
@@ -20,7 +34,8 @@ public:
 
 	void AddEntityToQueue(Entity* entity);
 
-	void Render(float aspect_ratio = 1.0f, class CameraComponent* camera = nullptr, Tags whitelist_tags = E_TAG_ALL, Tags blacklist_tags = E_TAG_NONE);
+	void Update();
+	void Render(RenderSettings& render_settings);
 	void CleanUp();
 };
 

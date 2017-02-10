@@ -45,7 +45,6 @@ void TestEnt::LogicTick(float delta_time)
 		camera_comp->transform.location += camera_comp->transform.GetXZRight() * delta_time * speed;
 	if (keyboard.GetKeyState(GLFW_KEY_A))
 		camera_comp->transform.location -= camera_comp->transform.GetXZRight() * delta_time * speed;
-		
 }
 
 void TestEnt::WindowTick(float delta_time) 

@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Game.h"
 #include "ModelComponentBase.h"
+#include "FrameBuffer.h"
 #include "Logger.h"
 
 Renderer::Renderer()
@@ -46,15 +47,25 @@ void Renderer::AddComponentToQueue(ModelComponentBase* model_comp)
 		render_queue[model_comp->GetModel()].push_back(model_comp);
 }
 
+void Renderer::Update() 
+{
+	tick_time = g_game->GetGameLogic()->GetNormalizedTickTime();
+}
+
 void Renderer::CleanUp() 
 {
 }
 
-void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelist_tags, Tags blacklist_tags)
+void Renderer::Render(RenderSettings& render_settings)
 {
+	if (render_settings.frame_buffer)
+		render_settings.frame_buffer->Bind();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//If camera is null, use main camera
+	CameraComponent* camera = render_settings.camera;
+
 	if(!camera)
 		camera = g_game->GetWorld()->GetMainCamera();
 
@@ -62,10 +73,8 @@ void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelis
 	if (!camera)
 		return;
 
-	float lerp_time = g_game->GetGameLogic()->GetNormalizedTickTime();
-
 	//Check camera is up to date 
-	camera->BuildProjectionMatrix(aspect_ratio);
+	camera->BuildProjectionMatrix(render_settings.aspect_ratio);
 
 	//Check components to see if they have loaded
 	for (int i = 0; i < pending_loads.size(); i++)
@@ -78,6 +87,16 @@ void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelis
 			i--;
 		}
 	}
+
+	//Check for shader override
+	bool is_shader_overridden = false;
+	
+	if (render_settings.shader_override)
+	{
+		render_settings.shader_override->Start();
+		is_shader_overridden = true;
+	}
+
 
 	//Instanced rendering
 	for (auto it = render_queue.begin(); it != render_queue.end(); ++it)
@@ -99,24 +118,39 @@ void Renderer::Render(float aspect_ratio, CameraComponent* camera, Tags whitelis
 			Entity* parent = comp->GetParent();
 			Tags tags = parent ? parent->GetTags() : E_TAG_NONE;
 
-			if (whitelist_tags != E_TAG_ALL && !(tags & whitelist_tags))
+			if (render_settings.whitelist != E_TAG_ALL && !(tags & render_settings.whitelist))
 				continue;
 
-			if (blacklist_tags != E_TAG_NONE && (tags & blacklist_tags))
+			if (render_settings.blacklist != E_TAG_NONE && (tags & render_settings.blacklist))
 				continue;
 
 
-			//Load shader and render, if valid
-			Shader* shader = comp->GetShader();
+			//Render to override shader
+			if(is_shader_overridden)
+				render_settings.shader_override->Render(camera, comp, tick_time);
 
-			if (!shader)
-				continue;
 
-			shader->Start();
-			shader->Render(camera, comp, lerp_time);
-			shader->Stop();
+			//Render to component shader
+			else
+			{
+				//Load shader and render, if valid
+				Shader* shader = comp->GetShader();
+
+				if (!shader)
+					continue;
+
+				shader->Start();
+				shader->Render(camera, comp, tick_time);
+				shader->Stop();
+			}
 		}
 
 		glBindVertexArray(0);
 	}
+
+	if (is_shader_overridden)
+		render_settings.shader_override->Stop();
+
+	if (render_settings.frame_buffer)
+		render_settings.frame_buffer->Unbind();
 }

@@ -34,6 +34,10 @@ public:
 	inline glm::vec3 GetLerpScale(float lerp);
 
 	void LogicUpdate();
+	inline void ForceUpdateLocation() { previous_location = location; }
+	inline void ForceUpdateRotation() { previous_rotation = rotation; }
+	inline void ForceUpdateScale() { previous_scale = scale; }
+
 	glm::mat4& GetMatrix(float lerp_factor);
 
 	Transform operator+(Transform& other);
