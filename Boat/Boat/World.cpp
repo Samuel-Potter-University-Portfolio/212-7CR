@@ -31,7 +31,7 @@ void World::WindowBegin(Window* window)
 void World::LogicTick(GameLogic* game_logic, float delta_time)
 {
 	//Handle, if world if currently being destroyed
-	if(is_being_destroyed)
+	if (is_being_destroyed)
 	{
 		if (!logic_destroyed)
 		{
@@ -42,7 +42,7 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	}
 
 	//Handle world's first tick i.e. needs to be loaded in
-	if (!logic_begun) 
+	if (!logic_begun)
 	{
 		LogicBegin(game_logic);
 		return;
@@ -55,6 +55,10 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	//Tick entities
 	for (Entity* entity : entities)
 		entity->HandleLogicTick(delta_time);
+
+	//Tick physics
+	if (physics_scene)
+		physics_scene->Tick(delta_time);
 }
 
 void World::WindowTick(Window* window, float delta_time)
@@ -98,6 +102,7 @@ void World::WindowTick(Window* window, float delta_time)
 
 void World::LoadLogicResources(GameLogic* game_logic) 
 {
+	physics_scene = new PhysicsScene;
 }
 
 void World::LoadWindowResources(Window* window)
@@ -215,6 +220,13 @@ void World::UnloadLogicResources(GameLogic* game_logic)
 	for (Entity* entity : entities)
 		entity->LogicDestroy();
 
+	if (physics_scene)
+	{
+		physics_scene->CleanUp();
+		delete physics_scene;
+		physics_scene = nullptr;
+	}
+
 	logic_destroyed = true;
 }
 
@@ -251,4 +263,7 @@ void World::AddEntity(Entity* entity)
 
 	if(renderer)
 		renderer->AddEntityToQueue(entity);
+
+	if (physics_scene)
+		physics_scene->AddEntityToLevel(entity);
 }

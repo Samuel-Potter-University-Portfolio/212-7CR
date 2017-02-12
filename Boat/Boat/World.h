@@ -3,12 +3,14 @@
 
 #include "Renderer.h"
 #include "Entity.h"
+#include "PhysicsScene.h"
 #include "CameraComponent.h"
 
 class World
 {
 private:
 	Renderer* renderer;
+	PhysicsScene* physics_scene;
 	std::vector<Entity*> entities;
 	CameraComponent* main_camera;
 
@@ -41,6 +43,7 @@ public:
 	void AddEntity(Entity* entity);
 
 	inline Renderer* GetRenderer() { return renderer; }
+	inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }

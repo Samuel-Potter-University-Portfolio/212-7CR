@@ -120,6 +120,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseBodyComponent.cpp" />
+    <ClCompile Include="BaseColliderComponent.cpp" />
     <ClCompile Include="BoatWorld.cpp" />
     <ClCompile Include="BoxProp.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
@@ -140,6 +142,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="OceanFloor.cpp" />
+    <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
@@ -155,6 +158,8 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseBodyComponent.h" />
+    <ClInclude Include="BaseColliderComponent.h" />
     <ClInclude Include="BoatWorld.h" />
     <ClInclude Include="BoxProp.h" />
     <ClInclude Include="CameraComponent.h" />
@@ -176,6 +181,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="OceanFloor.h" />
+    <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />

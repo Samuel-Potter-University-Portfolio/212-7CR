@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Boat Game\Shaders">
       <UniqueIdentifier>{5e4d3f20-3af0-4865-9076-e1a4e67ca136}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{09cac388-8194-4680-a50d-e7a475b79c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{d08c5dc3-b915-467f-9aa5-2a2ea744327d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,6 +167,15 @@
     </ClCompile>
     <ClCompile Include="ClipShader.cpp">
       <Filter>Source Files\Boat Game\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseBodyComponent.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseColliderComponent.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +280,15 @@
     </ClInclude>
     <ClInclude Include="ClipShader.h">
       <Filter>Header Files\Boat Game\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseBodyComponent.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseColliderComponent.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
