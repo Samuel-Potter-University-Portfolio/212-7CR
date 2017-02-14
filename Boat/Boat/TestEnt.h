@@ -15,6 +15,8 @@ public:
 	SphereCollider* sphere_collider;
 	RigidBody* body;
 
+	float track = 90.0f;
+
 protected:
 	//virtual void LogicBegin() override;
 	virtual void WindowBegin() override;

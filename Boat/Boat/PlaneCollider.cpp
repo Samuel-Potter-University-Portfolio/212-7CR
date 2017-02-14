@@ -17,6 +17,7 @@ void PlaneCollider::ResolveCollision(BaseBodyComponent* attached_body, HitInfo& 
 
 			attached_body->GetCurrentVelocity() -= (hit_info.normal * (hit_info.distance)) * (1.0f + restitution);
 			attached_body->GetCurrentVelocity() *= 1.0f - friction;
+			attached_body->GetCurrentAngularVelocity() *= 1.0f - friction;
 		}
 	}
 }
