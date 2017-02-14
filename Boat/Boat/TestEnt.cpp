@@ -16,11 +16,15 @@ TestEnt::TestEnt()
 
 	transform.location = glm::vec3(0, 1.0f, 0);
 	model_comp->transform.rotation = glm::vec3(0, 180.0f, 0);
+	model_comp->transform.location = glm::vec3(0, 1.3f, 0);
+	model_comp->SetVisable(true);
+
 	camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
 	//camera_comp->transform.location = glm::vec3(0, 1.7f, -10.3f);
+	camera_comp->transform.location += model_comp->transform.location;
 
-	sphere_collider->transform.location = glm::vec3(0, -0.8f, 0);
-	sphere_collider->SetRadius(3.3f);
+	sphere_collider->transform.location = glm::vec3(0, 0, 0);
+	sphere_collider->SetRadius(3.8f);
 	model_comp_test->transform.scale *= sphere_collider->GetRadius();
 	model_comp_test->transform.location = sphere_collider->transform.location;
 	model_comp_test->SetVisable(false);

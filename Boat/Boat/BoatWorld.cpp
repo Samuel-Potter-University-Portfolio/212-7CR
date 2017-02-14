@@ -10,6 +10,7 @@
 #include "Mesh.h"
 #include "WaterShader.h"
 #include "ClipShader.h"
+#include "BeachBall.h"
 
 #include "Window.h"
 #include "Logger.h"
@@ -37,6 +38,42 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 			}
 
 	AddEntity(new WaterSurface);
+
+	//Ball tower
+	{
+		BeachBall* ball = new BeachBall;
+		ball->transform.location = glm::vec3(0, 54, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(-2, 50, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(2, 50, 50);
+		AddEntity(ball);
+
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(-4, 46, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(0, 46, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(4, 46, 50);
+		AddEntity(ball);
+
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(-6, 42, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(-2, 42, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(2, 42, 50);
+		AddEntity(ball);
+		ball = new BeachBall;
+		ball->transform.location = glm::vec3(6, 42, 50);
+		AddEntity(ball);
+	}
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

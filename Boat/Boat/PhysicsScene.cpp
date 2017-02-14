@@ -5,6 +5,7 @@
 
 PhysicsScene::PhysicsScene()
 {
+	settings.metre_scale = 0.01f;
 }
 
 void PhysicsScene::Tick(float delta_time) 

@@ -120,8 +120,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABoxCollider.cpp" />
     <ClCompile Include="BaseBodyComponent.cpp" />
     <ClCompile Include="BaseColliderComponent.cpp" />
+    <ClCompile Include="BeachBall.cpp" />
     <ClCompile Include="BoatWorld.cpp" />
     <ClCompile Include="BoxProp.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
@@ -162,8 +164,10 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABoxCollider.h" />
     <ClInclude Include="BaseBodyComponent.h" />
     <ClInclude Include="BaseColliderComponent.h" />
+    <ClInclude Include="BeachBall.h" />
     <ClInclude Include="BoatWorld.h" />
     <ClInclude Include="BoxProp.h" />
     <ClInclude Include="CameraComponent.h" />

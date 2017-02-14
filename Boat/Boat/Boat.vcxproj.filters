@@ -189,6 +189,12 @@
     <ClCompile Include="SoftPlaneCollider.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="AABoxCollider.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BeachBall.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -312,6 +318,12 @@
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="SoftPlaneCollider.h">
+      <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AABoxCollider.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BeachBall.h">
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
