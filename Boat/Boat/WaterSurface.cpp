@@ -1,6 +1,7 @@
 #include "WaterSurface.h"
 #include "Logger.h"
 #include "ClipShader.h"
+#include "PlaneCollider.h"
 #include "Game.h"
 
 
@@ -11,6 +12,7 @@ WaterSurface::WaterSurface()
 	model_comp = MakeComponent<ModelComponent>();
 	reflection_camera = MakeComponent<CameraComponent>();
 	refraction_camera = MakeComponent<CameraComponent>();
+	MakeComponent<PlaneCollider>();
 }
 
 void WaterSurface::WindowBegin() 

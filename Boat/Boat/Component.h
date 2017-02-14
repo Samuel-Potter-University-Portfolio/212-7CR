@@ -11,12 +11,18 @@ private:
 protected:
 	class Entity* parent;
 
+protected:
+	//virtual void LogicBegin();
+	//virtual void WindowBegin();
+
+	virtual void LogicTick(float delta_time) override;
+	//virtual void WindowTick(float delta_time);
+
 public:
 	Transform transform;
 
 	virtual void LogicDestroy() {};
 	virtual void WindowDestroy() {};
-	virtual void LogicTick(float delta_time) override;
 
 	void SetParent(class Entity* parent) { this->parent = parent; }
 

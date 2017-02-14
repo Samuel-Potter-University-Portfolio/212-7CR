@@ -4,7 +4,7 @@
 void RigidBody::PhysicsTick(float delta_time) 
 {
 	if (physics_scene)
-		velocity += physics_scene->GetSettings().gravity * delta_time;
+		AddAcceleration(physics_scene->GetSettings().gravity);
 
 	__super::PhysicsTick(delta_time);
 }

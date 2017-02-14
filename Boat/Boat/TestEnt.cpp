@@ -8,10 +8,10 @@ TestEnt::TestEnt()
 	tags |= E_TAG_PLAYER;
 	model_comp = MakeComponent<ModelComponent>();
 	camera_comp = MakeComponent<CameraComponent>();
-	sphere_collider = MakeComponent<SphereColliderComponent>();
+	sphere_collider = MakeComponent<SphereCollider>();
 	body = MakeComponent<RigidBody>();
 
-	transform.location = glm::vec3(0, -1.0f, 0);
+	transform.location = glm::vec3(0, 10.0f, 0);
 	camera_comp->transform.location = glm::vec3(0, 3.0f, -3.0f);
 }
 
@@ -34,24 +34,22 @@ void TestEnt::LogicTick(float delta_time)
 	__super::LogicTick(delta_time);
 	
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
-	const float speed = 100.0f;
-
+	const float speed = 10.0f;
 
 	if (keyboard.GetKeyState(GLFW_KEY_SPACE))
-		body->velocity.y = delta_time * speed * 10.0f;
+		body->GetCurrentVelocity().y = 0.1f;
 	if (keyboard.GetKeyState(GLFW_KEY_LEFT_CONTROL))
-		body->velocity -= glm::vec3(0, 1, 0) * delta_time * speed;
+		body->AddAcceleration(camera_comp->transform.GetUp() * -speed);
 
 	if (keyboard.GetKeyState(GLFW_KEY_W))
-		body->velocity += camera_comp->transform.GetXZForward() * delta_time * speed;
+		body->AddAcceleration(camera_comp->transform.GetXZForward() * speed);
 	if (keyboard.GetKeyState(GLFW_KEY_S))
-		body->velocity -= camera_comp->transform.GetXZForward() * delta_time * speed;
+		body->AddAcceleration(camera_comp->transform.GetXZForward() * -speed);
 
 	if (keyboard.GetKeyState(GLFW_KEY_D))
-		body->velocity += camera_comp->transform.GetXZRight() * delta_time * speed;
+		body->AddAcceleration(camera_comp->transform.GetXZRight() * speed);
 	if (keyboard.GetKeyState(GLFW_KEY_A))
-		body->velocity -= camera_comp->transform.GetXZRight() * delta_time * speed;
-	
+		body->AddAcceleration(camera_comp->transform.GetXZRight() * -speed);
 }
 
 void TestEnt::WindowTick(float delta_time) 

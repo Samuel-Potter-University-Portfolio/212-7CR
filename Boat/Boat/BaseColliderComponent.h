@@ -7,6 +7,7 @@ struct HitInfo
 {
 	glm::vec3 location;
 	glm::vec3 normal;
+	float distance;
 };
 
 
@@ -15,6 +16,8 @@ class BaseColliderComponent : public Component
 protected:
 	class BaseBodyComponent* attached_body;
 	float bounding_radius;
+
+	virtual void ResolveCollision(BaseBodyComponent* attached_body, HitInfo& hit_info) = 0;
 
 public:
 
@@ -25,9 +28,9 @@ public:
 	inline glm::vec3 GetWorldLocation() { return (parent ? parent->transform.location + transform.location : transform.location); }
 
 	/* Broad phase calculated using bounding radii */
-	virtual bool DoesBroadPhaseCollide(BaseColliderComponent* collider);
-	virtual bool DoesNarrowPhaseCollide(BaseColliderComponent* collider, HitInfo& hit_info) = 0;
+	virtual bool DoesBroadPhaseCollide(BaseColliderComponent* collider, glm::vec3 velocity);
+	virtual bool DoesNarrowPhaseCollide(BaseColliderComponent* collider, glm::vec3 velocity, HitInfo& hit_info) = 0;
 
-	virtual bool ResolveCollisions(BaseBodyComponent* attached_body, HitInfo& hit_info);
+	bool HandleCollision(BaseBodyComponent* attached_body, glm::vec3& velocity, HitInfo& hit_info);
 };
 

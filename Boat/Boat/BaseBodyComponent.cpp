@@ -16,10 +16,23 @@ void BaseBodyComponent::SetAttachedCollider(BaseColliderComponent* collider)
 
 void BaseBodyComponent::PhysicsTick(float delta_time) 
 {
-	float scale = 1.0f;
+	const float scale = physics_scene ? physics_scene->GetSettings().metre_scale : 1.0f;
+	frame_velocity += current_acceleration * delta_time * scale;
+	current_acceleration = glm::vec3(0);
 
 	if (physics_scene)
-		scale = physics_scene->GetSettings().metre_scale;
+	{
+		const float scale = physics_scene->GetSettings().metre_scale;
 
-	parent->transform.location += velocity * delta_time * scale;
+		for (BaseColliderComponent* collider : physics_scene->GetColliders())
+		{
+			if (collider != GetAttachedCollider())
+			{
+				HitInfo hit;
+				collider->HandleCollision(this, frame_velocity, hit);
+			}
+		}
+	}
+
+	parent->transform.location += frame_velocity;
 }

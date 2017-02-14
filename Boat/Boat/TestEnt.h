@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "ModelComponent.h"
 #include "CameraComponent.h"
-#include "SphereColliderComponent.h"
+#include "SphereCollider.h"
 #include "RigidBody.h"
 
 class TestEnt : public Entity
@@ -12,7 +12,7 @@ public:
 
 	ModelComponent* model_comp;
 	CameraComponent* camera_comp;
-	SphereColliderComponent* sphere_collider;
+	SphereCollider* sphere_collider;
 	RigidBody* body;
 
 protected:
