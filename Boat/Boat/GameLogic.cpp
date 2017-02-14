@@ -8,7 +8,7 @@
 
 
 GameLogic::GameLogic()
-	: tick_rate(60), 
+	: tick_rate(30), 
 	  total_sleep_time(1.0f/(float)(tick_rate))
 {
 }
@@ -108,5 +108,12 @@ float GameLogic::GetNormalizedTickTime()
 	if (current_time < last_tick_time)
 		current_time += 60.0f;
 
-	return 1.0f - (current_time - last_tick_time) / (total_sleep_time * 2.0f);
+	const float value = 1.0f - (current_time - last_tick_time) / (total_sleep_time * 2.0f);
+
+	if (value < 0.0f)
+		return 0.0f;
+	if (value > 1.0f)
+		return 1.0f;
+	else
+		return value;
 }

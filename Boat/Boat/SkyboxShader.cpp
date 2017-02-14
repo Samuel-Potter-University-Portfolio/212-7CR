@@ -28,7 +28,7 @@ bool SkyboxShader::Load()
 
 void SkyboxShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
 {
-	glm::vec3 camera_loc = camera ? camera->transform.GetLerpLocation(frame_time) : glm::vec3(0);
+	glm::vec3 camera_loc = camera ? camera->GetWorldLocation(frame_time) : glm::vec3(0);
 
 	glUniform3f(uniform_camera_position, camera_loc.x, camera_loc.y, camera_loc.z);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);

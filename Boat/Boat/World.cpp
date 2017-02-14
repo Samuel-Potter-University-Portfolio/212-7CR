@@ -103,6 +103,7 @@ void World::WindowTick(Window* window, float delta_time)
 void World::LoadLogicResources(GameLogic* game_logic) 
 {
 	physics_scene = new PhysicsScene;
+	physics_scene->Link(this);
 }
 
 void World::LoadWindowResources(Window* window)

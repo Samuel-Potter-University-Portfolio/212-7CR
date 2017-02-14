@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "ModelComponent.h"
 #include "CameraComponent.h"
+#include "SphereColliderComponent.h"
+#include "RigidBody.h"
 
 class TestEnt : public Entity
 {
@@ -10,6 +12,8 @@ public:
 
 	ModelComponent* model_comp;
 	CameraComponent* camera_comp;
+	SphereColliderComponent* sphere_collider;
+	RigidBody* body;
 
 protected:
 	//virtual void LogicBegin() override;

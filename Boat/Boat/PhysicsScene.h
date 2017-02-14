@@ -2,12 +2,14 @@
 #include "Entity.h"
 #include "BaseBodyComponent.h"
 #include "BaseColliderComponent.h"
+
 #include <vector>
+#include <vec3.hpp>
 
 struct PhysicsSettings
 {
-	float gravity = 9.8f;
-	float metre_scale = 1.0f;
+	glm::vec3 gravity = glm::vec3(0.0f, -9.8f, 0.0f);
+	float metre_scale = 0.1f;
 };
 
 
@@ -21,6 +23,7 @@ private:
 public:
 	PhysicsScene();
 
+	void Link(class World* world);
 	void Tick(float delta_time);
 
 	inline PhysicsSettings& GetSettings() { return settings; }

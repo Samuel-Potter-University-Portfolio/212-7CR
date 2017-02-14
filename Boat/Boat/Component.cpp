@@ -12,3 +12,13 @@ void Component::LogicTick(float delta_time)
 	__super::LogicTick(delta_time);
 	transform.LogicUpdate();
 }
+
+glm::vec3 Component::GetWorldLocation()
+{
+	return parent ? parent->transform.location + transform.location : transform.location;
+}
+
+glm::vec3 Component::GetWorldLocation(float lerp) 
+{
+	return parent ? parent->transform.GetLerpLocation(lerp) + transform.GetLerpLocation(lerp) : transform.GetLerpLocation(lerp);
+}

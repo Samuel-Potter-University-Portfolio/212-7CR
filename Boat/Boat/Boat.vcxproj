@@ -144,10 +144,12 @@
     <ClCompile Include="OceanFloor.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SkyboxShader.cpp" />
+    <ClCompile Include="SphereColliderComponent.cpp" />
     <ClCompile Include="TestEnt.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
@@ -183,10 +185,12 @@
     <ClInclude Include="OceanFloor.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SkyboxShader.h" />
+    <ClInclude Include="SphereColliderComponent.h" />
     <ClInclude Include="TestEnt.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
