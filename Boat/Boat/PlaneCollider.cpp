@@ -12,7 +12,11 @@ void PlaneCollider::ResolveCollision(BaseBodyComponent* attached_body, HitInfo& 
 		SphereCollider* sphere = (SphereCollider*)collider;
 		if (sphere)
 		{
-			attached_body->GetCurrentVelocity() -= hit_info.normal * (hit_info.distance);
+			const float restitution = (properties.restitution + sphere->GetProperties().restitution) / 2.0f;
+			const float friction = properties.damping_friction_factor;
+
+			attached_body->GetCurrentVelocity() -= (hit_info.normal * (hit_info.distance)) * (1.0f + restitution);
+			attached_body->GetCurrentVelocity() *= 1.0f - friction;
 		}
 	}
 }

@@ -9,6 +9,8 @@ private:
 
 protected:
 	bool awake = true;
+	float velocity_damping_factor = 0.001f;
+
 	class PhysicsScene* physics_scene;
 	class BaseColliderComponent* collider;
 

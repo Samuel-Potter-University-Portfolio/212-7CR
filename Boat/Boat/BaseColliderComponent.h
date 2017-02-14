@@ -10,11 +10,18 @@ struct HitInfo
 	float distance;
 };
 
+struct PhysicalProperties 
+{
+	float restitution = 0.5f;
+	float damping_friction_factor = 0.0f;
+};
+
 
 class BaseColliderComponent : public Component
 {
 protected:
 	class BaseBodyComponent* attached_body;
+	PhysicalProperties properties;
 	float bounding_radius;
 
 	virtual void ResolveCollision(BaseBodyComponent* attached_body, HitInfo& hit_info) = 0;
@@ -26,6 +33,7 @@ public:
 	
 	inline float GetBoundingRadius() { return bounding_radius; }
 	inline glm::vec3 GetWorldLocation() { return (parent ? parent->transform.location + transform.location : transform.location); }
+	inline PhysicalProperties& GetProperties() { return properties; }
 
 	/* Broad phase calculated using bounding radii */
 	virtual bool DoesBroadPhaseCollide(BaseColliderComponent* collider, glm::vec3 velocity);
