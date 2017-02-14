@@ -66,19 +66,16 @@ void WaterSurface::WindowTick(float delta_time)
 
 	if (main_camera)
 	{
-		reflection_camera->transform = main_camera->transform;
-		refraction_camera->transform = main_camera->transform;
+		reflection_camera->transform.location = main_camera->GetWorldLocation() - transform.location;
+		refraction_camera->transform.location = main_camera->GetWorldLocation() - transform.location;
+		reflection_camera->transform.previous_location = main_camera->GetWorldLocation(0.0f) - transform.previous_location;
+		refraction_camera->transform.previous_location = main_camera->GetWorldLocation(0.0f) - transform.previous_location;
 
-		//Ensure cameras are using world position
-		Entity* parent = main_camera->GetParent();
-		if (parent)
-		{
-			reflection_camera->transform.location += parent->transform.location - transform.location;
-			refraction_camera->transform.location += parent->transform.location - transform.location;
+		reflection_camera->transform.rotation = main_camera->GetWorldRotation();
+		refraction_camera->transform.rotation = main_camera->GetWorldRotation();
+		reflection_camera->transform.previous_rotation = main_camera->GetWorldRotation(0.0f);
+		refraction_camera->transform.previous_rotation = main_camera->GetWorldRotation(0.0f);
 
-			reflection_camera->transform.previous_location += parent->transform.previous_location - transform.previous_location;
-			refraction_camera->transform.previous_location += parent->transform.previous_location - transform.previous_location;
-		}
 
 		reflection_camera->transform.location.y *= -1.0f;
 		reflection_camera->transform.previous_location.y *= -1.0f;

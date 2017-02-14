@@ -11,11 +11,12 @@ public:
 	TestEnt();
 
 	ModelComponent* model_comp;
+	ModelComponent* model_comp_test;
 	CameraComponent* camera_comp;
 	SphereCollider* sphere_collider;
 	RigidBody* body;
 
-	float track = 90.0f;
+	float track = 0.0f;
 
 protected:
 	//virtual void LogicBegin() override;

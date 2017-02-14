@@ -35,5 +35,11 @@ public:
 
 	glm::vec3 GetWorldLocation();
 	glm::vec3 GetWorldLocation(float lerp);
+
+	glm::vec3 GetWorldRotation();
+	glm::vec3 GetWorldRotation(float lerp);
+
+	glm::vec3 GetWorldScale();
+	glm::vec3 GetWorldScale(float lerp);
 };
 

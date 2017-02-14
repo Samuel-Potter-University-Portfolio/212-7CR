@@ -15,8 +15,8 @@
 
 glm::mat4 CameraComponent::GetViewMatrix(float lerp)
 {
-	const glm::vec3 rotation = transform.rotation;
-	glm::vec3 eyes = transform.GetLerpLocation(lerp) + (parent ? parent->transform.GetLerpLocation(lerp) : glm::vec3(0.0));
+	const glm::vec3 rotation = parent ? parent->transform.GetLerpRotation(lerp) + transform.rotation : transform.rotation;
+	glm::vec3 eyes = GetWorldLocation(lerp);
 
 	glm::vec3 look_at = eyes + glm::vec3(
 		sin(RAD_DEG(rotation.y)),
