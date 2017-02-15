@@ -39,13 +39,44 @@ public:
 	virtual void UnloadLogicResources(class GameLogic* game_logic);
 	virtual void UnloadWindowResources(class Window* window);
 
-	//Memory management control should be passed onto World
-	void AddEntity(Entity* entity);
 
 	inline Renderer* GetRenderer() { return renderer; }
 	inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }
+
+
+//Entity control
+public:
+	//Memory management control should be passed onto World
+	void AddEntity(Entity* entity);
+
+	//Component fetching
+	template<typename EntType>
+	EntType* GetFirstEntity()
+	{
+		for (Entity* ent : entities)
+		{
+			Entity* actual_ent = dynamic_cast<Entity*>(ent);
+			if (actual_ent)
+				return actual_ent;
+		}
+		return nullptr;
+	}
+
+	template<typename EntType>
+	std::vector<EntType*> GetAllEntities()
+	{
+		std::vector<EntType*> actual_ents;
+
+		for (Entity* ent : entities)
+		{
+			EntType* actual_ent = dynamic_cast<EntType*>(ent);
+			if (actual_ent)
+				actual_ents.push_back(actual_ent);
+		}
+		return actual_ents;
+	}
 };
 
