@@ -54,7 +54,7 @@ void PlayerBoat::LogicTick(float delta_time)
 
 	//Bobbing/Swaying
 	body->AddAcceleration(transform.GetUp() * cosf(track) * 5.0f);
-	body->AddAngularAcceleration(transform.GetForward() * cosf(track) * 15.0f);
+	body->AddAngularAcceleration(transform.GetXZForward() * cosf(track) * 15.0f);
 
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
 	const float speed = 10.0f;

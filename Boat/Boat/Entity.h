@@ -43,7 +43,7 @@ public:
 	virtual void LogicDestroy();
 	virtual void WindowDestroy();
 
-	inline const bool IsVisable() { return is_visable; }
+	inline const bool IsVisable() { return is_visable && IsActive(); }
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
 	inline Tags GetTags() { return tags; }

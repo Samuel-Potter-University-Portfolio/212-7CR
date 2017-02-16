@@ -29,15 +29,12 @@ void PlayerEntry::WindowBegin()
 void PlayerEntry::LogicTick(float delta_time) 
 {
 	__super::LogicTick(delta_time);
-
-	if (!IsVisable())
-		return;
-
+	
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
 
 	if (keyboard.GetKeyState(GLFW_KEY_ENTER))
 	{
-		SetVisable(false);
+		SetActive(false);
 
 		PlayerBoat* player_boat = new PlayerBoat;
 		GetWorld()->AddEntity(player_boat);
@@ -49,9 +46,6 @@ void PlayerEntry::WindowTick(float delta_time)
 {
 	__super::WindowTick(delta_time);
 
-	if (!IsVisable())
-		return;
-	
 	Mouse& mouse = g_game->GetWindow()->GetMouse();
 
 	if (mouse.GetButtonState(GLFW_MOUSE_BUTTON_LEFT))

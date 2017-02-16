@@ -4,8 +4,9 @@
 class Tickable
 {
 private:
-	bool logic_begun = false;
-	bool window_begun = false;
+	bool logic_begun;
+	bool window_begun;
+	bool active;
 
 protected:
 	virtual void LogicBegin() {}
@@ -15,6 +16,8 @@ protected:
 	virtual void WindowTick(float delta_time) {}
 
 public:
+	Tickable();
+
 	void ForceLogicBegin();
 	void ForceWindowBegin();
 
@@ -26,5 +29,8 @@ public:
 	inline const bool HasWindowBegun() { return window_begun; }
 	inline const bool HasBegun() { return logic_begun && window_begun; }
 	inline const bool HasPartiallyBegun() { return logic_begun || window_begun; }
+
+	inline void SetActive(const bool on) { active = on; }
+	inline const bool IsActive() { return active; }
 };
 
