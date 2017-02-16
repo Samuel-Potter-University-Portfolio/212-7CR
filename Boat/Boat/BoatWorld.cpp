@@ -2,6 +2,7 @@
 #include <random>
 
 #include "PlayerBoat.h"
+#include "PlayerEntry.h"
 
 #include "SkyBox.h"
 #include "BoxProp.h"
@@ -22,7 +23,6 @@ BoatWorld::BoatWorld()
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
-	AddEntity(new PlayerBoat);
 	AddEntity(new SkyBox);
 	AddEntity(new OceanFloor);
 
@@ -74,6 +74,7 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 		ball->transform.location = glm::vec3(6, 42, 50);
 		AddEntity(ball);
 	}
+	AddEntity(new PlayerEntry);
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

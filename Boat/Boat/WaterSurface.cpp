@@ -94,7 +94,7 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.aspect_ratio = aspect_ratio;
 		render_settings.camera = reflection_camera;
 		render_settings.frame_buffer = &reflection_fbo;
-		render_settings.blacklist = E_TAG_WATER;
+		render_settings.blacklist = E_TAG_WATER | E_TAG_UI;
 
 		render_settings.shader_override = reflection_clip_shader;
 		render_settings.shader_override_tags = E_TAG_ALL & ~E_TAG_SKYBOX;
@@ -108,7 +108,7 @@ void WaterSurface::WindowTick(float delta_time)
 		render_settings.aspect_ratio = aspect_ratio;
 		render_settings.camera = refraction_camera;
 		render_settings.frame_buffer = &refraction_fbo;
-		render_settings.blacklist = E_TAG_WATER;
+		render_settings.blacklist = E_TAG_WATER | E_TAG_UI;
 
 		render_settings.shader_override = refraction_clip_shader;
 		render_settings.shader_override_tags = E_TAG_ALL & ~E_TAG_SKYBOX;

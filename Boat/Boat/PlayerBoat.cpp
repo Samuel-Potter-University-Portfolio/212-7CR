@@ -37,7 +37,6 @@ void PlayerBoat::WindowBegin()
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.png"]);
 
-
 	model_comp_test->model = g_game->GetWindow()->GetModelLoader()["Resources/unit_sphere.obj"];
 	model_comp_test->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 	model_comp_test->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.png"]);

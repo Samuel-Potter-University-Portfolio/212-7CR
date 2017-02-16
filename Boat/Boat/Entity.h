@@ -9,10 +9,11 @@ typedef unsigned int Tags;
 
 #define E_TAG_PLAYER	0x1
 #define E_TAG_PROP		0x2
-#define E_TAG_ENV		0x3
-#define E_TAG_SKYBOX	0x4
+#define E_TAG_ENV		0x4
+#define E_TAG_SKYBOX	0x8
+#define E_TAG_UI		0x10
 
-#define E_TAG_LAST	E_TAG_SKYBOX
+#define E_TAG_LAST	E_TAG_UI
 
 #define E_TAG_NONE 0x0
 #define E_TAG_ALL (Tags)(-1)

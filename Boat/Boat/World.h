@@ -11,11 +11,15 @@ class World
 private:
 	Renderer* renderer;
 	PhysicsScene* physics_scene;
+
 	std::vector<Entity*> entities;
+	std::vector<Entity*> new_entities;
 	CameraComponent* main_camera;
 
 	bool logic_begun = false;
 	bool window_begun = false;
+
+	bool in_logic_tick = false;
 
 	bool is_being_destroyed = false;
 	bool logic_destroyed = false;

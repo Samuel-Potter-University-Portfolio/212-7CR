@@ -195,6 +195,12 @@
     <ClCompile Include="PlayerBoat.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="UIShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEntry.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -326,6 +332,12 @@
     <ClInclude Include="PlayerBoat.h">
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
+    <ClInclude Include="UIShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEntry.h">
+      <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
@@ -351,6 +363,12 @@
     </None>
     <None Include="Shaders\Clip.vert.glsl">
       <Filter>Header Files\Boat Game\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

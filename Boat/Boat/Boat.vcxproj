@@ -146,6 +146,7 @@
     <ClCompile Include="OceanFloor.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
+    <ClCompile Include="PlayerEntry.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UIShader.cpp" />
     <ClCompile Include="WaterShader.cpp" />
     <ClCompile Include="WaterSurface.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -191,6 +193,7 @@
     <ClInclude Include="OceanFloor.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PlaneCollider.h" />
+    <ClInclude Include="PlayerEntry.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Shader.h" />
@@ -203,6 +206,7 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UIShader.h" />
     <ClInclude Include="WaterShader.h" />
     <ClInclude Include="WaterSurface.h" />
     <ClInclude Include="Window.h" />
@@ -215,6 +219,8 @@
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />
     <None Include="Shaders\Skybox.vert.glsl" />
+    <None Include="Shaders\UI.frag.glsl" />
+    <None Include="Shaders\UI.vert.glsl" />
     <None Include="Shaders\Water.frag.glsl" />
     <None Include="Shaders\Water.vert.glsl" />
   </ItemGroup>

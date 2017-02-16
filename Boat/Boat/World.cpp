@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Game.h"
 #include "DefaultShader.h"
+#include "UIShader.h"
 #include "SkyboxShader.h"
 #include "Logger.h"
 
@@ -30,6 +31,8 @@ void World::WindowBegin(Window* window)
 
 void World::LogicTick(GameLogic* game_logic, float delta_time)
 {
+	in_logic_tick = true;
+
 	//Handle, if world if currently being destroyed
 	if (is_being_destroyed)
 	{
@@ -59,6 +62,8 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	//Tick physics
 	if (physics_scene)
 		physics_scene->Tick(delta_time);
+
+	in_logic_tick = false;
 }
 
 void World::WindowTick(Window* window, float delta_time)
@@ -85,6 +90,31 @@ void World::WindowTick(Window* window, float delta_time)
 	if (!HasLoaded())
 		return;
 	
+	//Try and load new entitites
+	if (!in_logic_tick)
+	{
+		for (Entity* entity : new_entities)
+		{
+			entities.push_back(entity);
+			entity->SetWorld(this);
+
+			if (!main_camera && entity->GetTags() & E_TAG_PLAYER)
+			{
+				main_camera = entity->GetComponent<CameraComponent>();
+
+				if (main_camera)
+					LOG(Log, "Found Camera component to use as main");
+			}
+
+			if (renderer)
+				renderer->AddEntityToQueue(entity);
+
+			if (physics_scene)
+				physics_scene->AddEntityToLevel(entity);
+		}
+		new_entities.clear();		
+	}
+
 	//Tick entities
 	for (Entity* entity : entities)
 		entity->HandleWindowTick(delta_time);
@@ -126,16 +156,35 @@ void World::LoadWindowResources(Window* window)
 		{
 			1.0, 0.0, 1.0, 1.0,
 			0.0, 1.0, 0.0, 0.0
-		}, 
+		},
 		{
 			0.0, 0.0, 1.0, 0.0, 0.0, 1.0,
 			0.0, 0.0, 1.0, 0.0, 0.0, 1.0
-		}, 
+		},
 		{
 			0,1,2, 0,2,3,
 		}
 		);
 		window->GetModelLoader().RegisterModel("quad", mesh);
+	}	
+	
+	//UI - Quad
+	{
+		ModelMesh mesh(
+		{
+			-50.0, -50.0, 0.0,	-50.0, 50.0, 0.0,
+			50.0, 50.0, 0.0,	50.0, -50.0, 0.0,
+		},
+		{
+			0.0, 0.0, 0.0, 1.0,
+			1.0, 1.0, 1.0, 0.0
+		},
+		{},
+		{
+			2,1,0, 3,2,0,
+		}
+		);
+		window->GetModelLoader().RegisterModel("ui_quad", mesh);
 	}
 
 	//Cube
@@ -214,6 +263,7 @@ void World::LoadWindowResources(Window* window)
 	//Load default shaders
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
+	window->GetShaderLoader().RegisterShader("ui", new UIShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)
@@ -250,6 +300,12 @@ void World::AddEntity(Entity* entity)
 {
 	if (!entity)
 		return;
+
+	if (in_logic_tick)
+	{
+		new_entities.push_back(entity);
+		return;
+	}
 
 	entities.push_back(entity);
 	entity->SetWorld(this);
