@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{d08c5dc3-b915-467f-9aa5-2a2ea744327d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Visual\Resources">
+      <UniqueIdentifier>{81fb553e-e4c2-465b-96b0-c1765b8b478c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Resources">
+      <UniqueIdentifier>{0beefd1f-5d6c-41da-9b6a-83a461d9ca66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,12 +95,6 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Core\Maths</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelLoader.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files\Visual</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Core</Filter>
@@ -128,15 +128,6 @@
     </ClCompile>
     <ClCompile Include="DefaultShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderLoader.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="OBJLoader.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Visual</Filter>
     </ClCompile>
     <ClCompile Include="WaterSurface.cpp">
       <Filter>Source Files\Boat Game</Filter>
@@ -201,6 +192,27 @@
     <ClCompile Include="PlayerEntry.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun.cpp">
+      <Filter>Source Files\Core\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLightComponent.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -220,12 +232,6 @@
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\Core\Maths</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelLoader.h">
-      <Filter>Header Files\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files\Visual</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files\Core</Filter>
@@ -263,17 +269,8 @@
     <ClInclude Include="DefaultShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderLoader.h">
-      <Filter>Header Files\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJLoader.h">
-      <Filter>Header Files\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files\Visual</Filter>
     </ClInclude>
     <ClInclude Include="WaterSurface.h">
       <Filter>Header Files\Boat Game</Filter>
@@ -337,6 +334,27 @@
     </ClInclude>
     <ClInclude Include="PlayerEntry.h">
       <Filter>Header Files\Boat Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
+      <Filter>Header Files\Core\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLightComponent.h">
+      <Filter>Header Files\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,9 @@ private:
 	GLuint uniform_view_matrix;
 	GLuint uniform_projection_matrix;
 
+	GLuint uniform_sun_direction;
+	GLuint uniform_sun_colour;
+
 protected:
 	virtual void Start() override;
 	virtual bool Load() override;

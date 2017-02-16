@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "PhysicsScene.h"
 #include "CameraComponent.h"
+#include "DirectionalLightComponent.h"
 
 class World
 {
@@ -14,7 +15,11 @@ private:
 
 	std::vector<Entity*> entities;
 	std::vector<Entity*> new_entities;
+	
+	void InternalAddEntity(Entity* entity);
+
 	CameraComponent* main_camera;
+	DirectionalLightComponent* sun_light;
 
 	bool logic_begun = false;
 	bool window_begun = false;
@@ -49,6 +54,9 @@ public:
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }
+
+	inline DirectionalLightComponent* GetSunLight() { return sun_light; }
+	inline void SetSunLight(DirectionalLightComponent* sun) { sun_light = sun; }
 
 
 //Entity control

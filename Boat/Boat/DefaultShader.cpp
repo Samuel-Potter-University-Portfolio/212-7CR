@@ -23,10 +23,21 @@ bool DefaultShader::Load()
 	uniform_model_matrix = glGetUniformLocation(GetProgramID(), "model_matrix");
 	uniform_view_matrix = glGetUniformLocation(GetProgramID(), "view_matrix");
 	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
+
+	uniform_sun_direction = glGetUniformLocation(GetProgramID(), "sun_direction");
+	uniform_sun_colour = glGetUniformLocation(GetProgramID(), "sun_colour");
 }
 
 void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
 {
+	DirectionalLightComponent* sun = g_game->GetWorld()->GetSunLight();
+
+	const glm::vec3 sun_direction = sun ? sun->GetDirection() : glm::vec3(0);
+	const glm::vec3 sun_colour = sun ? sun->colour : glm::vec3(0);
+
+	glUniform3f(uniform_sun_direction, sun_direction.x, sun_direction.y, sun_direction.z);
+	glUniform3f(uniform_sun_colour, sun_colour.x, sun_colour.y, sun_colour.z);
+
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix(frame_time)[0][0]);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
 	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);

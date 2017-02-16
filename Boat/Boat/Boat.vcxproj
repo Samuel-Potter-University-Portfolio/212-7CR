@@ -130,6 +130,7 @@
     <ClCompile Include="ClipShader.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
+    <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="SoftPlaneCollider.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="PlayerBoat.cpp" />
+    <ClCompile Include="Sun.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -176,6 +178,7 @@
     <ClInclude Include="ClipShader.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="DirectionalLightComponent.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Game.h" />
@@ -203,6 +206,7 @@
     <ClInclude Include="SoftPlaneCollider.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="PlayerBoat.h" />
+    <ClInclude Include="Sun.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />

@@ -20,7 +20,7 @@ void main()
 	gl_Position = projection_matrix * view_matrix * world_position;
 
 	pass_uvs = in_uv;
-	pass_normal = in_normal;
+	pass_normal = (model_matrix * vec4(in_normal, 0.0)).rgb;
 }
 
 )"

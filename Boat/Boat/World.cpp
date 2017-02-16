@@ -94,24 +94,8 @@ void World::WindowTick(Window* window, float delta_time)
 	if (!in_logic_tick)
 	{
 		for (Entity* entity : new_entities)
-		{
-			entities.push_back(entity);
-			entity->SetWorld(this);
+			InternalAddEntity(entity);
 
-			if (!main_camera && entity->GetTags() & E_TAG_PLAYER)
-			{
-				main_camera = entity->GetComponent<CameraComponent>();
-
-				if (main_camera)
-					LOG(Log, "Found Camera component to use as main");
-			}
-
-			if (renderer)
-				renderer->AddEntityToQueue(entity);
-
-			if (physics_scene)
-				physics_scene->AddEntityToLevel(entity);
-		}
 		new_entities.clear();		
 	}
 
@@ -302,11 +286,13 @@ void World::AddEntity(Entity* entity)
 		return;
 
 	if (in_logic_tick)
-	{
 		new_entities.push_back(entity);
-		return;
-	}
+	else
+		InternalAddEntity(entity);
+}
 
+void World::InternalAddEntity(Entity* entity) 
+{
 	entities.push_back(entity);
 	entity->SetWorld(this);
 
@@ -318,7 +304,15 @@ void World::AddEntity(Entity* entity)
 			LOG(Log, "Found Camera component to use as main");
 	}
 
-	if(renderer)
+	if (!sun_light)
+	{
+		sun_light = entity->GetComponent<DirectionalLightComponent>();
+
+		if (sun_light)
+			LOG(Log, "Found directional light component to use as sun");
+	}
+
+	if (renderer)
 		renderer->AddEntityToQueue(entity);
 
 	if (physics_scene)

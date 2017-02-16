@@ -5,6 +5,7 @@
 #include "PlayerEntry.h"
 
 #include "SkyBox.h"
+#include "Sun.h"
 #include "BoxProp.h"
 #include "OceanFloor.h"
 #include "WaterSurface.h"
@@ -23,6 +24,12 @@ BoatWorld::BoatWorld()
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
+
+	Sun* sun = new Sun;
+	sun->directional_light->SetDirection(glm::vec3(1, -1, 1));
+	AddEntity(sun);
+
+
 	AddEntity(new SkyBox);
 	AddEntity(new OceanFloor);
 

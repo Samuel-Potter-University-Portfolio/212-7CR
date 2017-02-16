@@ -11,6 +11,9 @@ private:
 	GLuint uniform_projection_matrix;
 	GLuint uniform_cliping_plane;
 
+	GLuint uniform_sun_direction;
+	GLuint uniform_sun_colour;
+
 protected:
 	virtual void Start() override;
 	virtual void Stop() override;

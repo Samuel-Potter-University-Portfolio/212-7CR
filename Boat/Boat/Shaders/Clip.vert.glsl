@@ -24,7 +24,7 @@ void main()
 	gl_ClipDistance[0] = dot(world_position, cliping_plane); 
 		
 	pass_uvs = in_uv;
-	pass_normal = in_normal;
+	pass_normal = (model_matrix * vec4(in_normal, 0.0)).rgb;
 }
 
 )"
