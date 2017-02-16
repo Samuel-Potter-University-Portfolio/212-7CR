@@ -5,10 +5,10 @@
 #include "SphereCollider.h"
 #include "RigidBody.h"
 
-class TestEnt : public Entity
+class PlayerBoat : public Entity
 {
 public:
-	TestEnt();
+	PlayerBoat();
 
 	ModelComponent* model_comp;
 	ModelComponent* model_comp_test;

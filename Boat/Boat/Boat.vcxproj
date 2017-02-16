@@ -154,7 +154,7 @@
     <ClCompile Include="SkyboxShader.cpp" />
     <ClCompile Include="SoftPlaneCollider.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="TestEnt.cpp" />
+    <ClCompile Include="PlayerBoat.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="SkyboxShader.h" />
     <ClInclude Include="SoftPlaneCollider.h" />
     <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="TestEnt.h" />
+    <ClInclude Include="PlayerBoat.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />

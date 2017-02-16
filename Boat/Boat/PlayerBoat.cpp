@@ -1,9 +1,9 @@
 #include "Game.h"
-#include "TestEnt.h"
+#include "PlayerBoat.h"
 #include "Logger.h"
 
 
-TestEnt::TestEnt()
+PlayerBoat::PlayerBoat()
 {
 	tags |= E_TAG_PLAYER;
 	model_comp = MakeComponent<ModelComponent>();
@@ -30,7 +30,7 @@ TestEnt::TestEnt()
 	model_comp_test->SetVisable(false);
 }
 
-void TestEnt::WindowBegin() 
+void PlayerBoat::WindowBegin() 
 {
 	__super::WindowBegin();
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["Resources/row_boat.obj"];
@@ -43,12 +43,12 @@ void TestEnt::WindowBegin()
 	model_comp_test->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.png"]);
 }
 
-void TestEnt::WindowDestroy() 
+void PlayerBoat::WindowDestroy() 
 {
 	__super::WindowDestroy();
 }
 
-void TestEnt::LogicTick(float delta_time) 
+void PlayerBoat::LogicTick(float delta_time) 
 {
 	__super::LogicTick(delta_time);
 	track += delta_time * 2.0f;
@@ -77,7 +77,7 @@ void TestEnt::LogicTick(float delta_time)
 		body->AddAngularAcceleration(transform.GetUp() * turn_speed);
 }
 
-void TestEnt::WindowTick(float delta_time) 
+void PlayerBoat::WindowTick(float delta_time) 
 {
 	__super::WindowTick(delta_time);
 	Mouse& mouse = g_game->GetWindow()->GetMouse();

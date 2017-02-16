@@ -1,7 +1,7 @@
 #include "BoatWorld.h"
 #include <random>
 
-#include "TestEnt.h"
+#include "PlayerBoat.h"
 
 #include "SkyBox.h"
 #include "BoxProp.h"
@@ -22,7 +22,7 @@ BoatWorld::BoatWorld()
 void BoatWorld::LoadLogicResources(GameLogic* game_logic) 
 {
 	World::LoadLogicResources(game_logic);
-	AddEntity(new TestEnt);
+	AddEntity(new PlayerBoat);
 	AddEntity(new SkyBox);
 	AddEntity(new OceanFloor);
 
