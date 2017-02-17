@@ -19,6 +19,9 @@ void SphereCollider::ResolveCollision(BaseBodyComponent* attached_body, HitInfo&
 		{
 			const float restitution = (properties.restitution + sphere->GetProperties().restitution) / 2.0f;
 			const float friction = properties.damping_friction_factor;
+			
+			if (hit_info.distance > -0.0001f)
+				hit_info.distance = -0.0001f;
 
 			const glm::vec3 correction = hit_info.normal *(hit_info.distance) * (1.0f + restitution);
 			attached_body->GetCurrentVelocity() += correction;
