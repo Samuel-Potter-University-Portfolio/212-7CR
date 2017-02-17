@@ -11,6 +11,7 @@ uniform mat4 projection_matrix;
 
 
 out vec2 pass_uvs;
+out vec3 pass_to_camera;
 out vec3 pass_normal;
 
 
@@ -19,7 +20,10 @@ void main()
 	vec4 world_position = model_matrix * vec4(in_position, 1.0);
 	gl_Position = projection_matrix * view_matrix * world_position;
 
+	vec3 camera_position = (inverse(view_matrix) * vec4(0,0,0,1)).xyz;
+
 	pass_uvs = in_uv;
+	pass_to_camera = camera_position - world_position.xyz;
 	pass_normal = (model_matrix * vec4(in_normal, 0.0)).rgb;
 }
 

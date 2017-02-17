@@ -1,4 +1,5 @@
 #include "ClipShader.h"
+#include "DefaultShader.h"
 #include "Game.h"
 
 const char* clip_vert_source =
@@ -34,6 +35,9 @@ bool ClipShader::Load()
 
 	uniform_sun_direction = glGetUniformLocation(GetProgramID(), "sun_direction");
 	uniform_sun_colour = glGetUniformLocation(GetProgramID(), "sun_colour");
+
+	uniform_shininess = glGetUniformLocation(GetProgramID(), "shininess");
+	uniform_roughness = glGetUniformLocation(GetProgramID(), "roughness");
 }
 
 void ClipShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
@@ -45,6 +49,9 @@ void ClipShader::Render(CameraComponent* camera, ModelComponentBase* component, 
 
 	glUniform3f(uniform_sun_direction, sun_direction.x, sun_direction.y, sun_direction.z);
 	glUniform3f(uniform_sun_colour, sun_colour.x, sun_colour.y, sun_colour.z);
+
+	glUniform1f(uniform_shininess, component->GetFloatUnit(SHADER_UNIT_SHININESS));
+	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNIT_ROUGHNESS));
 
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix(frame_time)[0][0]);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);

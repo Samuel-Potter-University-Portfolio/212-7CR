@@ -1,4 +1,5 @@
 #include "BeachBall.h"
+#include "DefaultShader.h"
 #include "Game.h"
 
 BeachBall::BeachBall()
@@ -14,6 +15,9 @@ BeachBall::BeachBall()
 	body = MakeComponent<RigidBody>();
 	body->velocity_damping_factor = 0.0001f;
 	sphere_collider->transform.location = glm::vec3(0, 0, 0);
+
+	model_comp->SetFloatUnit(SHADER_UNIT_SHININESS, 100.0f);
+	model_comp->SetFloatUnit(SHADER_UNIT_ROUGHNESS, 0.0f);
 }
 
 void BeachBall::WindowBegin()

@@ -14,6 +14,9 @@ private:
 	GLuint uniform_sun_direction;
 	GLuint uniform_sun_colour;
 
+	GLuint uniform_shininess;
+	GLuint uniform_roughness;
+
 protected:
 	virtual void Start() override;
 	virtual void Stop() override;
