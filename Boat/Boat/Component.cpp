@@ -64,10 +64,10 @@ glm::vec3 Component::GetWorldRotation(float lerp)
 
 glm::vec3 Component::GetWorldScale()
 {
-	return parent ? parent->transform.scale + transform.scale : transform.scale;
+	return parent ? parent->transform.scale * transform.scale : transform.scale;
 }
 
 glm::vec3 Component::GetWorldScale(float lerp)
 {
-	return parent ? parent->transform.GetLerpScale(lerp) + transform.GetLerpScale(lerp) : transform.GetLerpScale(lerp);
+	return parent ? parent->transform.GetLerpScale(lerp) * transform.GetLerpScale(lerp) : transform.GetLerpScale(lerp);
 }

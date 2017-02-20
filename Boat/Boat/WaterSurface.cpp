@@ -106,7 +106,7 @@ void WaterSurface::WindowTick(float delta_time)
 	{
 		RenderSettings render_settings;
 		render_settings.aspect_ratio = aspect_ratio;
-		render_settings.camera = refraction_camera;
+		//render_settings.camera = refraction_camera;
 		render_settings.frame_buffer = &refraction_fbo;
 		render_settings.blacklist = E_TAG_WATER | E_TAG_UI;
 

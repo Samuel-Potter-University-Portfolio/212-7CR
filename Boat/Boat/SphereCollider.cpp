@@ -17,24 +17,10 @@ void SphereCollider::ResolveCollision(BaseBodyComponent* attached_body, HitInfo&
 		SphereCollider* sphere = (SphereCollider*)collider;
 		if (sphere)
 		{
-			const float restitution = (properties.restitution + sphere->GetProperties().restitution) / 2.0f;
-			const float friction = properties.damping_friction_factor;
-			
 			if (hit_info.distance > -0.0001f)
 				hit_info.distance = -0.0001f;
 
-			const glm::vec3 correction = hit_info.normal *(hit_info.distance) * (1.0f + restitution);
-			attached_body->GetCurrentVelocity() += correction;
-			attached_body->GetCurrentVelocity() *= 1.0f - friction;
-			attached_body->GetCurrentAngularVelocity() *= 1.0f - friction;
-
-			//Attempt to exert force on this body
-			if (properties.restitution != 0.0f)
-			{
-				BaseBodyComponent* this_body = GetAttachedBody();
-				if(this_body)
-					this_body->GetCurrentVelocity() -= correction;
-			}
+			DefaultResolution(attached_body, hit_info);
 			return;
 		}
 	}

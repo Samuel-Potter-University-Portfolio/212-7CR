@@ -25,6 +25,7 @@ protected:
 	float bounding_radius;
 
 	virtual void ResolveCollision(BaseBodyComponent* attached_body, HitInfo& hit_info) = 0;
+	void DefaultResolution(BaseBodyComponent* attached_body, HitInfo& hit_info);
 
 public:
 

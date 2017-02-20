@@ -1,4 +1,5 @@
 #include "BoxProp.h"
+#include "AABoxCollider.h"
 #include "Game.h"
 
 
@@ -6,6 +7,7 @@ BoxProp::BoxProp()
 {
 	tags |= E_TAG_PROP;
 	model_comp = MakeComponent<ModelComponent>();
+	MakeComponent<AABoxCollider>();
 	transform.scale = glm::vec3(10, 10, 10);
 }
 

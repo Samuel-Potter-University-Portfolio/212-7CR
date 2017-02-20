@@ -12,7 +12,7 @@ PlayerBoat::PlayerBoat()
 	sphere_collider = MakeComponent<SphereCollider>();
 
 	body = MakeComponent<RigidBody>();
-	 body->angular_damping_factor = 0.03f;
+	body->angular_damping_factor = 0.03f;
 
 	transform.location = glm::vec3(0, 1.0f, 0);
 	model_comp->transform.rotation = glm::vec3(0, 180.0f, 0);
