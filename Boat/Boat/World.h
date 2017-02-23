@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <queue>
 
 #include "Renderer.h"
 #include "Entity.h"
@@ -14,7 +15,7 @@ private:
 	PhysicsScene* physics_scene;
 
 	std::vector<Entity*> entities;
-	std::vector<Entity*> new_entities;
+	std::queue<Entity*> new_entities;
 	
 	void InternalAddEntity(Entity* entity);
 

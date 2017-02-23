@@ -89,15 +89,18 @@ void World::WindowTick(Window* window, float delta_time)
 	//Wait until both threads have been loaded
 	if (!HasLoaded())
 		return;
-	
-	//Try and load new entitites
-	if (!in_logic_tick)
-	{
-		for (Entity* entity : new_entities)
-			InternalAddEntity(entity);
 
-		new_entities.clear();		
+	//Try and load new entitites
+	while (new_entities.size() != 0)
+	{
+		if (in_logic_tick)
+			break;
+
+		Entity* entity = new_entities.front();
+		InternalAddEntity(entity);
+		new_entities.pop();
 	}
+	
 
 	//Tick entities
 	for (Entity* entity : entities)
@@ -289,7 +292,7 @@ void World::AddEntity(Entity* entity)
 		return;
 
 	if (in_logic_tick)
-		new_entities.push_back(entity);
+		new_entities.push(entity);
 	else
 		InternalAddEntity(entity);
 }
