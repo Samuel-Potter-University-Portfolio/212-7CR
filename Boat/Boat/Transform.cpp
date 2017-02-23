@@ -82,12 +82,12 @@ glm::mat4& Transform::GetMatrix(float lerp_factor)
 	matrix = glm::mat4(1.0);
 
 	matrix = glm::translate(matrix, GetLerpLocation(lerp_factor));
-	matrix = glm::scale(matrix, GetLerpScale(lerp_factor));
 
 	glm::vec3 rotation = GetLerpRotation(lerp_factor);
 	matrix = glm::rotate(matrix, RAD_DEG(rotation.x), glm::vec3(1, 0, 0));
 	matrix = glm::rotate(matrix, RAD_DEG(rotation.y), glm::vec3(0, 1, 0));
 	matrix = glm::rotate(matrix, RAD_DEG(rotation.z), glm::vec3(0, 0, 1));
+	matrix = glm::scale(matrix, GetLerpScale(lerp_factor));
 	matrix_built = true;
 
 	return matrix;

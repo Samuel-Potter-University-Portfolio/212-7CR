@@ -29,9 +29,9 @@ public:
 
 	void operator=(Transform& other);
 
-	inline glm::vec3 GetLerpLocation(float lerp);
-	inline glm::vec3 GetLerpRotation(float lerp);
-	inline glm::vec3 GetLerpScale(float lerp);
+	glm::vec3 GetLerpLocation(float lerp);
+	glm::vec3 GetLerpRotation(float lerp);
+	glm::vec3 GetLerpScale(float lerp);
 
 	void LogicUpdate();
 	inline void ForceUpdateLocation() { previous_location = location; }
