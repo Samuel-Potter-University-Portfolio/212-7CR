@@ -9,6 +9,7 @@
 enum CameraMode 
 {
 	BoatCam,
+	TopDown,
 	ActionCam
 };
 

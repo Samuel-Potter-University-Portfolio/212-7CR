@@ -24,6 +24,9 @@ PlayerBoat::PlayerBoat()
 	model_comp->transform.location = glm::vec3(0, 1.3f, 0);
 	model_comp->SetVisable(true);
 
+	camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
+	camera_comp->transform.location += model_comp->transform.location;
+
 	sphere_collider->transform.location = glm::vec3(0, 0, 0);
 	sphere_collider->SetRadius(3.8f);
 	model_comp_test->transform.scale *= sphere_collider->GetRadius();
@@ -87,22 +90,37 @@ void PlayerBoat::LogicTick(float delta_time)
 		switch (camera_mode)
 		{
 		case BoatCam:
+			camera_mode = TopDown;
+			break;
+		case TopDown:
+			camera_comp->transform.rotation = glm::vec3(0, 0, 0);
 			camera_mode = ActionCam;
 			break;
 		case ActionCam:
 			camera_mode = BoatCam;
 			break;
 		};
+
+
+		//Set Camera position
+		if (camera_mode == BoatCam)
+		{
+			camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
+			camera_comp->transform.location += model_comp->transform.location;
+		}
+		if (camera_mode == TopDown)
+		{
+			camera_comp->transform.rotation = glm::vec3(-88.0f, 0, 0);
+		}
 	}
 	last_camera_button_state = current_state;
 
 
 	//Set Camera position
-	if (camera_mode == BoatCam)
+
+	if (camera_mode == TopDown)
 	{
-		camera_comp->SetParent(this);
-		camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
-		camera_comp->transform.location += model_comp->transform.location;
+		camera_comp->transform.location = transform.location + glm::vec3(0, 35.4f, 0);
 	}
 	if (camera_mode == ActionCam)
 	{
@@ -113,7 +131,6 @@ void PlayerBoat::LogicTick(float delta_time)
 		location.z = roundf(location.z);
 		location *= clamp;
 
-		camera_comp->SetParent(nullptr);
 		camera_comp->transform.location = glm::vec3(0, 10.4f, 0) + location;
 	}
 }
@@ -132,6 +149,7 @@ void PlayerBoat::WindowTick(float delta_time)
 
 	if (mouse.IsLocked() && camera_mode == BoatCam)
 	{
+		camera_comp->SetParent(this);
 		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
 		camera_comp->transform.rotation += glm::vec3(2.0, 0.0, 0.0) * delta_time * mouse.GetScaledVelocity().y;
 
@@ -141,9 +159,14 @@ void PlayerBoat::WindowTick(float delta_time)
 		if (camera_comp->transform.rotation.x < -89.0f)
 			camera_comp->transform.rotation.x = -89.0f;
 	}
-
+	if (mouse.IsLocked() && camera_mode == TopDown)
+	{
+		camera_comp->SetParent(nullptr);
+		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
+	}
 	if (camera_mode == ActionCam)
 	{
+		camera_comp->SetParent(nullptr);
 		glm::vec3 look_at = transform.location - camera_comp->transform.location;
 		camera_comp->transform.rotation.y = look_at.z != 0 ? DEG_RAD(atanf(look_at.x / look_at.z)) + (look_at.z >= 0.0f ? 1.0f : 180.0f) : 0.0f;
 	}
