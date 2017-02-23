@@ -2,10 +2,17 @@
 #include "Entity.h"
 #include "ModelComponent.h"
 
-class BoxProp : public Entity
+enum BarrierDirection
+{
+	Horizontal,
+	Vertical
+};
+
+
+class FloatBarrier : public Entity
 {
 public:
-	BoxProp();
+	FloatBarrier(BarrierDirection direction);
 	ModelComponent* model_comp;
 
 protected:

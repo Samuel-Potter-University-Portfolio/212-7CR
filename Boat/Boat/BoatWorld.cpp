@@ -6,7 +6,7 @@
 
 #include "SkyBox.h"
 #include "Sun.h"
-#include "BoxProp.h"
+#include "FloatBarrier.h"
 #include "OceanFloor.h"
 #include "WaterSurface.h"
 #include "Mesh.h"
@@ -33,20 +33,32 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 	AddEntity(new SkyBox);
 	AddEntity(new OceanFloor);
 
-	for (int x = -1; x <= 1; x++)
-			for (int z = -1; z <= 1; z++)
-			{	
-				if (!x && !z)
-					continue;
+	//Build track
+#define ADD_SEGMENT(x,z, direction) { FloatBarrier* box = new FloatBarrier(direction); box->transform.location = glm::vec3(x, 0, z) * 22.0f; AddEntity(box); }
+#define ADD_BALL(x,z) { BeachBall* ball = new BeachBall; ball->transform.location = glm::vec3(x, 5.0f/22.0f, z) * 22.0f; AddEntity(ball); }
 
-				BoxProp* box = new BoxProp;
-				box->transform.location = glm::vec3(x, 0, z) * 75.0f;
-				AddEntity(box);
-			}
+	//Initial stretch
+	for (int i = -5; i < 5; i++)
+	{
+		ADD_SEGMENT(1, i, Vertical);
+		ADD_SEGMENT(-1, i, Vertical);
+	}
+
+	//Corner
+	ADD_SEGMENT(1, 5, Vertical);
+	ADD_SEGMENT(1, 6, Vertical);
+	ADD_SEGMENT(1, 6, Horizontal);
+	ADD_SEGMENT(0, 6, Horizontal);
+	ADD_SEGMENT(1, 6, Horizontal);
+	//ADD_SEGMENT(-1, i, Vertical);
+
+	ADD_BALL(0,1)
+
 
 	AddEntity(new WaterSurface);
 
 	//Ball tower
+	/*
 	{
 		BeachBall* ball = new BeachBall;
 		ball->transform.location = glm::vec3(0, 54, 50);
@@ -81,6 +93,7 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 		ball->transform.location = glm::vec3(6, 42, 50);
 		AddEntity(ball);
 	}
+	*/
 	AddEntity(new PlayerEntry);
 }
 
@@ -142,7 +155,45 @@ void BoatWorld::LoadWindowResources(Window* window)
 		std::vector<int> indices;
 
 		const int resolution = 50;
-		const int height = 20;
+		const int deviation = 5;
+
+		float heights[resolution * 2][resolution * 2]{ {0} };
+
+		heights[24][23] = 31 + rand() % deviation;
+		heights[24][24] = 31 + rand() % deviation;
+		heights[24][25] = 31 + rand() % deviation;
+		heights[24][26] = 31 + rand() % deviation;
+		heights[24][27] = 31 + rand() % deviation;
+
+		heights[23][23] = 31 + rand() % deviation;
+		heights[23][24] = 31 + rand() % deviation;
+		heights[23][25] = 31 + rand() % deviation;
+		heights[23][26] = 31 + rand() % deviation;
+		heights[23][27] = 31 + rand() % deviation;
+
+
+		heights[25][22] = 25;
+		heights[24][22] = 25;
+		heights[23][22] = 25;
+		heights[22][22] = 25;
+
+		heights[25][28] = 25;
+		heights[24][28] = 25;
+		heights[23][28] = 25;
+		heights[22][28] = 25;
+
+		heights[25][23] = 25;
+		heights[25][24] = 25;
+		heights[25][25] = 25;
+		heights[25][26] = 25;
+		heights[25][27] = 25;
+
+		heights[22][23] = 25;
+		heights[22][24] = 25;
+		heights[22][25] = 25;
+		heights[22][26] = 25;
+		heights[22][27] = 25;
+
 		const float scale = 50.0f;
 		const float uv_scale = 25.0f / scale;
 
@@ -155,15 +206,15 @@ void BoatWorld::LoadWindowResources(Window* window)
 				const int n = x + resolution / 2;
 
 				verts.push_back(x * scale);//x
-				verts.push_back(rand() % height - height / 2);//y
+				verts.push_back(heights[n][i]);//y
 				verts.push_back(y * scale);//z
 
 				uvs.push_back((resolution - n) / uv_scale);//x
 				uvs.push_back((i) / uv_scale);//y
 
-				normals.push_back(0);//x
-				normals.push_back(1);//y
-				normals.push_back(0);//z
+				normals.push_back(x * scale);//x
+				normals.push_back(heights[n][i]);//y
+				normals.push_back(y * scale);//z
 
 				if (i != 0 && n != resolution - 1)
 				{

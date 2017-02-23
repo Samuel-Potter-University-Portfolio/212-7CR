@@ -147,9 +147,6 @@
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="BoxProp.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="OceanFloor.cpp">
       <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
@@ -212,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="DirectionalLightComponent.cpp">
       <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatBarrier.cpp">
+      <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +290,6 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="BoxProp.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="OceanFloor.h">
       <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
@@ -355,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="DirectionalLightComponent.h">
       <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatBarrier.h">
+      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

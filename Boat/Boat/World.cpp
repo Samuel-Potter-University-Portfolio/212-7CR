@@ -181,10 +181,19 @@ void World::LoadWindowResources(Window* window)
 			1.0, 1.0, 1.0,	1.0, 0.0, 1.0,
 		};
 
-		for (float& f : verts)
-			f -= 0.5f;
-
 		const float r3 = (float)sqrt(3);
+		std::vector<float> normals;
+
+		for (float& f : verts)
+		{
+			if (f == 0.0f)
+				normals.push_back(r3);
+			else
+				normals.push_back(-r3);
+
+			f -= 0.5f;
+		}
+
 
 		ModelMesh mesh(
 			verts,
@@ -195,13 +204,7 @@ void World::LoadWindowResources(Window* window)
 				1.0, 1.0, 1.0, 0.0,
 				0.0, 0.0, 0.0, 1.0,
 			},
-			{
-				-r3, -r3, r3, -r3, r3, r3,
-				r3, r3, r3, r3, -r3, r3,
-
-				r3, r3, -r3, r3, -r3, -r3,
-				-r3, -r3, -r3, -r3, r3, -r3,
-			},
+			normals,
 			{
 				0,1,2, 0,2,3,
 				6,5,4, 7,6,4,

@@ -125,7 +125,7 @@
     <ClCompile Include="BaseColliderComponent.cpp" />
     <ClCompile Include="BeachBall.cpp" />
     <ClCompile Include="BoatWorld.cpp" />
-    <ClCompile Include="BoxProp.cpp" />
+    <ClCompile Include="FloatBarrier.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="ClipShader.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="BaseColliderComponent.h" />
     <ClInclude Include="BeachBall.h" />
     <ClInclude Include="BoatWorld.h" />
-    <ClInclude Include="BoxProp.h" />
+    <ClInclude Include="FloatBarrier.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="ClipShader.h" />
     <ClInclude Include="Component.h" />

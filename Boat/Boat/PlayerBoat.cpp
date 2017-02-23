@@ -54,11 +54,11 @@ void PlayerBoat::LogicTick(float delta_time)
 
 	//Bobbing/Swaying
 	body->AddAcceleration(transform.GetUp() * cosf(track) * 5.0f);
-	body->AddAngularAcceleration(transform.GetXZForward() * cosf(track) * 15.0f);
+	body->AddAngularAcceleration(transform.GetForward() * cosf(track) * 15.0f);
 
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
-	const float speed = 10.0f;
-	const float turn_speed = 100.0f;
+	const float speed = 15.0f;
+	const float turn_speed = 200.0f;
 
 	if (keyboard.GetKeyState(GLFW_KEY_SPACE))
 		body->GetCurrentVelocity().y = 0.1f;
@@ -71,9 +71,9 @@ void PlayerBoat::LogicTick(float delta_time)
 		body->AddAcceleration(transform.GetXZForward() * -speed);
 
 	if (keyboard.GetKeyState(GLFW_KEY_D))
-		body->AddAngularAcceleration(transform.GetUp() * -turn_speed);
+		body->AddAngularAcceleration(glm::vec3(0, 1, 0) * -turn_speed);
 	if (keyboard.GetKeyState(GLFW_KEY_A))
-		body->AddAngularAcceleration(transform.GetUp() * turn_speed);
+		body->AddAngularAcceleration(glm::vec3(0, 1, 0) * turn_speed);
 }
 
 void PlayerBoat::WindowTick(float delta_time) 

@@ -11,7 +11,7 @@ void SoftPlaneCollider::ResolveCollision(BaseBodyComponent* attached_body, HitIn
 		SphereCollider* sphere = (SphereCollider*)collider;
 		if (sphere)
 		{
-			const float friction = 0.02f;
+			const float friction = 0.008f;
 
 			attached_body->GetCurrentVelocity() -= (hit_info.normal * (hit_info.distance + sphere->GetRadius() * 1.5f)/100.0f );
 			attached_body->GetCurrentVelocity() *= 1.0f - friction;

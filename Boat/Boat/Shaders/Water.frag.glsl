@@ -7,7 +7,7 @@ in vec3 pass_normal;
 in vec2 pass_uv;
 
 const float wave_strength = 0.04f;
-const float reflectivity = 2;
+const float reflectivity = 1;
 
 uniform float camera_near_plane;
 uniform float camera_far_plane;
@@ -68,7 +68,7 @@ void main()
 	
 	//Fade between refraction texture to give soft edges
 	out_colour = mix(texture(refraction_texture, normal_device_space), water_colour, clamp(water_depth/1.5, 0.0, 1.0));
-	//out_colour.a = water_depth; //Alt. fade between background
+	out_colour.a = water_depth; //Alt. fade between background
 }
 
 )"
