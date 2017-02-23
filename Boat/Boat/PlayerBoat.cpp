@@ -117,7 +117,6 @@ void PlayerBoat::LogicTick(float delta_time)
 
 
 	//Set Camera position
-
 	if (camera_mode == TopDown)
 	{
 		camera_comp->transform.location = transform.location + glm::vec3(0, 35.4f, 0);

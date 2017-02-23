@@ -38,22 +38,63 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 #define ADD_BALL(x,z) { BeachBall* ball = new BeachBall; ball->transform.location = glm::vec3(x, 5.0f/22.0f, z) * 22.0f; AddEntity(ball); }
 
 	//Initial stretch
-	for (int i = -5; i < 5; i++)
+	for (int i = -1; i < 6; i++)
 	{
 		ADD_SEGMENT(1, i, Vertical);
 		ADD_SEGMENT(-1, i, Vertical);
 	}
+	ADD_SEGMENT(1, -1, Horizontal);
+	ADD_SEGMENT(0, -1, Horizontal);
+	ADD_SEGMENT(-1, -1, Horizontal);
 
 	//Corner
-	ADD_SEGMENT(1, 5, Vertical);
 	ADD_SEGMENT(1, 6, Vertical);
-	ADD_SEGMENT(1, 6, Horizontal);
-	ADD_SEGMENT(0, 6, Horizontal);
-	ADD_SEGMENT(1, 6, Horizontal);
-	//ADD_SEGMENT(-1, i, Vertical);
+	ADD_SEGMENT(1, 7, Vertical);
+	ADD_SEGMENT(1, 7, Horizontal);
+	ADD_SEGMENT(0, 7, Horizontal);
+	ADD_SEGMENT(1, 7, Horizontal);
+	
+	//Next stretch
+	for (int i = 1; i < 6; i++)
+	{
+		ADD_SEGMENT(-i, 7, Horizontal);
+		ADD_SEGMENT(-i, 5, Horizontal);
+	}
 
-	ADD_BALL(0,1)
+	//Next Corner
+	ADD_SEGMENT(-6, 7, Horizontal);
+	ADD_SEGMENT(-7, 7, Horizontal);
+	ADD_SEGMENT(-7, 7, Vertical);
+	ADD_SEGMENT(-7, 6, Vertical);
 
+	//Final stretch
+	for (int i = 5; i > -6; i--)
+	{
+		ADD_SEGMENT(-7, i, Vertical);
+		ADD_SEGMENT(-5, i, Vertical);
+	}
+	ADD_SEGMENT(-7, -5, Horizontal);
+	ADD_SEGMENT(-5, -5, Horizontal);
+	
+	
+	//Add balls
+	for (int i = -4; i < 2; i ++) 
+	{
+		if (i % 2 == 0)
+		{
+			ADD_BALL(-6.0f, i* 0.5f);
+			ADD_BALL(0.5f - 6.0f, i* 0.5f);
+			ADD_BALL(-0.5f - 6.0f, i * 0.5f);
+		}
+		else 
+		{
+			ADD_BALL(0.25f - 6.0f, i* 0.5f);
+			ADD_BALL(0.75f - 6.0f, i* 0.5f);
+			ADD_BALL(-0.25f - 6.0f, i* 0.5f);
+			ADD_BALL(-0.75f - 6.0f, i* 0.5f);
+
+		}
+	}
 
 	AddEntity(new WaterSurface);
 
@@ -172,27 +213,27 @@ void BoatWorld::LoadWindowResources(Window* window)
 		heights[23][27] = 31 + rand() % deviation;
 
 
-		heights[25][22] = 25;
-		heights[24][22] = 25;
-		heights[23][22] = 25;
-		heights[22][22] = 25;
+		heights[25][22] = 15;
+		heights[24][22] = 15;
+		heights[23][22] = 15;
+		heights[22][22] = 15;
 
-		heights[25][28] = 25;
-		heights[24][28] = 25;
-		heights[23][28] = 25;
-		heights[22][28] = 25;
+		heights[25][28] = 15;
+		heights[24][28] = 15;
+		heights[23][28] = 15;
+		heights[22][28] = 15;
 
-		heights[25][23] = 25;
-		heights[25][24] = 25;
-		heights[25][25] = 25;
-		heights[25][26] = 25;
-		heights[25][27] = 25;
+		heights[25][23] = 15;
+		heights[25][24] = 15;
+		heights[25][25] = 15;
+		heights[25][26] = 15;
+		heights[25][27] = 15;
 
-		heights[22][23] = 25;
-		heights[22][24] = 25;
-		heights[22][25] = 25;
-		heights[22][26] = 25;
-		heights[22][27] = 25;
+		heights[22][23] = 15;
+		heights[22][24] = 15;
+		heights[22][25] = 15;
+		heights[22][26] = 15;
+		heights[22][27] = 15;
 
 		const float scale = 50.0f;
 		const float uv_scale = 25.0f / scale;
