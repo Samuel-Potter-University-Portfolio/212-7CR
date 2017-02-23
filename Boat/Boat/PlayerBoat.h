@@ -5,10 +5,21 @@
 #include "SphereCollider.h"
 #include "RigidBody.h"
 
+
+enum CameraMode 
+{
+	BoatCam,
+	ActionCam
+};
+
+
 class PlayerBoat : public Entity
 {
 public:
 	PlayerBoat();
+
+	CameraMode camera_mode;
+	bool last_camera_button_state;
 
 	ModelComponent* model_comp;
 	ModelComponent* model_comp_test;

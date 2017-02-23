@@ -1,9 +1,14 @@
 #include "Game.h"
 #include "PlayerBoat.h"
+#include <math.h>
 #include "Logger.h"
 
 
+#define PI 3.141592653589793f
+#define DEG_RAD(x) (x * 180.f/PI)
+
 PlayerBoat::PlayerBoat()
+	: camera_mode(BoatCam)
 {
 	tags |= E_TAG_PLAYER;
 	model_comp = MakeComponent<ModelComponent>();
@@ -18,10 +23,6 @@ PlayerBoat::PlayerBoat()
 	model_comp->transform.rotation = glm::vec3(0, 180.0f, 0);
 	model_comp->transform.location = glm::vec3(0, 1.3f, 0);
 	model_comp->SetVisable(true);
-
-	camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
-	//camera_comp->transform.location = glm::vec3(0, 1.7f, -10.3f);
-	camera_comp->transform.location += model_comp->transform.location;
 
 	sphere_collider->transform.location = glm::vec3(0, 0, 0);
 	sphere_collider->SetRadius(3.8f);
@@ -56,6 +57,7 @@ void PlayerBoat::LogicTick(float delta_time)
 	body->AddAcceleration(transform.GetUp() * cosf(track) * 5.0f);
 	body->AddAngularAcceleration(transform.GetForward() * cosf(track) * 15.0f);
 
+	//Input
 	Keyboard& keyboard = g_game->GetWindow()->GetKeyboard();
 	const float speed = 15.0f;
 	const float turn_speed = 200.0f;
@@ -74,6 +76,46 @@ void PlayerBoat::LogicTick(float delta_time)
 		body->AddAngularAcceleration(glm::vec3(0, 1, 0) * -turn_speed);
 	if (keyboard.GetKeyState(GLFW_KEY_A))
 		body->AddAngularAcceleration(glm::vec3(0, 1, 0) * turn_speed);
+
+
+	//Change camera mode
+	const bool current_state = keyboard.GetKeyState(GLFW_KEY_V);
+
+	//Button pressed (And released)
+	if (current_state != last_camera_button_state && last_camera_button_state)
+	{
+		switch (camera_mode)
+		{
+		case BoatCam:
+			camera_mode = ActionCam;
+			break;
+		case ActionCam:
+			camera_mode = BoatCam;
+			break;
+		};
+	}
+	last_camera_button_state = current_state;
+
+
+	//Set Camera position
+	if (camera_mode == BoatCam)
+	{
+		camera_comp->SetParent(this);
+		camera_comp->transform.location = glm::vec3(0, 3.4f, -1.3f);
+		camera_comp->transform.location += model_comp->transform.location;
+	}
+	if (camera_mode == ActionCam)
+	{
+		const float clamp = 100.0f;
+		glm::vec3 location = transform.location / clamp;
+		location.x = roundf(location.x);
+		location.y = 0;
+		location.z = roundf(location.z);
+		location *= clamp;
+
+		camera_comp->SetParent(nullptr);
+		camera_comp->transform.location = glm::vec3(0, 10.4f, 0) + location;
+	}
 }
 
 void PlayerBoat::WindowTick(float delta_time) 
@@ -88,7 +130,7 @@ void PlayerBoat::WindowTick(float delta_time)
 		mouse.Unlock();
 
 
-	if (mouse.IsLocked())
+	if (mouse.IsLocked() && camera_mode == BoatCam)
 	{
 		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
 		camera_comp->transform.rotation += glm::vec3(2.0, 0.0, 0.0) * delta_time * mouse.GetScaledVelocity().y;
@@ -98,6 +140,12 @@ void PlayerBoat::WindowTick(float delta_time)
 
 		if (camera_comp->transform.rotation.x < -89.0f)
 			camera_comp->transform.rotation.x = -89.0f;
+	}
+
+	if (camera_mode == ActionCam)
+	{
+		glm::vec3 look_at = transform.location - camera_comp->transform.location;
+		camera_comp->transform.rotation.y = look_at.z != 0 ? DEG_RAD(atanf(look_at.x / look_at.z)) + (look_at.z >= 0.0f ? 1.0f : 180.0f) : 0.0f;
 	}
 
 }
