@@ -20,11 +20,25 @@ struct RenderSettings
 	class Shader* shader_override = nullptr;
 };
 
+struct ShaderModel 
+{
+	Model* model;
+	Shader* shader;
+
+	inline bool operator==(const ShaderModel& other) const
+	{
+		return other.model == model && other.shader == shader;
+	}
+	inline bool operator<(const ShaderModel& other) const
+	{
+		return other.model < model;
+	}
+};
 
 class Renderer
 {
 private:
-	std::map<Model*, std::vector<ModelComponentBase*>> render_queue;
+	std::map<ShaderModel, std::vector<ModelComponentBase*>> render_queue;
 	std::vector<ModelComponentBase*> pending_loads;
 	std::vector<RenderSettings> render_targets;
 	float tick_time;

@@ -7,7 +7,7 @@ in vec3 pass_normal;
 in vec2 pass_uv;
 
 const float wave_strength = 0.04f;
-const float reflectivity = 1;
+const float reflectivity = 1.3;
 
 uniform float camera_near_plane;
 uniform float camera_far_plane;

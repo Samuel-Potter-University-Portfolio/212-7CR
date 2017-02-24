@@ -6,7 +6,7 @@
 
 
 WaterSurface::WaterSurface()
-	: reflection_fbo(1024, 1024), refraction_fbo(1024, 1024, true)
+	: reflection_fbo(1024, 1024), refraction_fbo(512, 512, true)
 {
 	tags |= E_TAG_WATER;
 	model_comp = MakeComponent<ModelComponent>();

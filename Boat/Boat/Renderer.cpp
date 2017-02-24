@@ -26,7 +26,7 @@ void Renderer::AddEntityToQueue(Entity* entity)
 			continue;
 
 		//Temporarily store component, if waiting on model load
-		if (!model_comp->GetModel())
+		if (!model_comp->GetModel() || !model_comp->GetShader())
 		{
 			pending_loads.push_back(model_comp);
 			continue;
@@ -38,13 +38,17 @@ void Renderer::AddEntityToQueue(Entity* entity)
 
 void Renderer::AddComponentToQueue(ModelComponentBase* model_comp) 
 {
+	ShaderModel model_meta;
+	model_meta.model = model_comp->GetModel();
+	model_meta.shader = model_comp->GetShader();
+
 	//Doesn't contain queue so make one
-	if (render_queue.find(model_comp->GetModel()) == render_queue.end())
-		render_queue[model_comp->GetModel()] = { model_comp };
+	if (render_queue.find(model_meta) == render_queue.end())
+		render_queue[model_meta] = { model_comp };
 
 	//Add to existing queue
 	else
-		render_queue[model_comp->GetModel()].push_back(model_comp);
+		render_queue[model_meta].push_back(model_comp);
 }
 
 void Renderer::FullRender()
@@ -68,10 +72,11 @@ void Renderer::Render(RenderSettings& render_settings)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
 	//If camera is null, use main camera
 	CameraComponent* camera = render_settings.camera;
 
-	if(!camera)
+	if (!camera)
 		camera = g_game->GetWorld()->GetMainCamera();
 
 	//Don't render, if camera is still null
@@ -81,11 +86,12 @@ void Renderer::Render(RenderSettings& render_settings)
 	//Check camera is up to date 
 	camera->BuildProjectionMatrix(render_settings.aspect_ratio);
 
+
 	//Check components to see if they have loaded
 	for (int i = 0; i < pending_loads.size(); i++)
 	{
-		//Model has now loaded
-		if (pending_loads[i]->GetModel())
+		//Model and Shader has now loaded
+		if (pending_loads[i]->GetModel() && pending_loads[i]->GetShader())
 		{
 			AddComponentToQueue(pending_loads[i]);
 			pending_loads.erase(pending_loads.begin() + i);
@@ -93,9 +99,10 @@ void Renderer::Render(RenderSettings& render_settings)
 		}
 	}
 
+
 	//Check for shader override
 	bool is_shader_overridden = false;
-	
+
 	if (render_settings.shader_override)
 		is_shader_overridden = render_settings.shader_override_tags != E_TAG_NONE;
 
@@ -103,13 +110,21 @@ void Renderer::Render(RenderSettings& render_settings)
 	//Instanced rendering
 	for (auto it = render_queue.begin(); it != render_queue.end(); ++it)
 	{
-		Model* model = it->first;
+		const ShaderModel model_meta = it->first;
 		std::vector<ModelComponentBase*>& components = it->second;
 
-		glBindVertexArray(model->GetVAO());
+		//Bind model and shader
+		glBindVertexArray(model_meta.model->GetVAO());
+		Shader* current_shader;
+
+		if (!is_shader_overridden || true)
+			current_shader = model_meta.shader;
+		else
+			current_shader = render_settings.shader_override;
+		current_shader->Start();
 
 
-		//Render all components of that model
+		//Render all components of that model + shader pair
 		for (ModelComponentBase* comp : components)
 		{
 			//Don't render if invisible
@@ -127,32 +142,33 @@ void Renderer::Render(RenderSettings& render_settings)
 				continue;
 
 
-			//Render to override shader
-			if (is_shader_overridden && (tags & render_settings.shader_override_tags))
+			//If should be overridden when active
+			if (is_shader_overridden)
 			{
-				render_settings.shader_override->Start();
-				render_settings.shader_override->Render(camera, comp, tick_time);
-				render_settings.shader_override->Stop();
+				const bool use_override = (tags & render_settings.shader_override_tags);
+
+				//Make sure current shader is shader override
+				if (use_override && current_shader != render_settings.shader_override)
+				{
+					current_shader = render_settings.shader_override;
+					current_shader->Start();
+				}
+
+				//Make sure current shader is default shader
+				else if (!use_override && current_shader != model_meta.shader)
+				{
+					current_shader = model_meta.shader;
+					current_shader->Start();
+				}
 			}
 
-			//Render to component shader
-			else
-			{
-				//Load shader and render, if valid
-				Shader* shader = comp->GetShader();
-
-				if (!shader)
-					continue;
-
-				shader->Start();
-				shader->Render(camera, comp, tick_time);
-				shader->Stop();
-			}
+			current_shader->Render(camera, comp, tick_time);
 		}
 
+		current_shader->Stop();
 		glBindVertexArray(0);
 	}
-	
+
 	if (render_settings.frame_buffer)
 		render_settings.frame_buffer->Unbind();
 }

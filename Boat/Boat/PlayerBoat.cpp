@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "PlayerBoat.h"
 #include <math.h>
+#include <sstream>
 #include "Logger.h"
 
 
@@ -137,6 +138,17 @@ void PlayerBoat::LogicTick(float delta_time)
 void PlayerBoat::WindowTick(float delta_time) 
 {
 	__super::WindowTick(delta_time);
+
+	//Log fps
+	GLFWwindow* window = g_game->GetWindow()->GetGLFWwindow();
+	const int fps = g_game->GetWindow()->GetCurrentTickRate();
+	const int ups = g_game->GetGameLogic()->GetCurrentTickRate();
+
+	std::stringstream str_stream;
+	str_stream << "Boat [FPS:" << fps << " UPS:" << ups << "]";
+	glfwSetWindowTitle(window, str_stream.str().c_str());
+
+
 	Mouse& mouse = g_game->GetWindow()->GetMouse();
 	
 	if (mouse.GetButtonState(GLFW_MOUSE_BUTTON_LEFT))

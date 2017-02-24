@@ -11,3 +11,6 @@ https://www.cgtrader.com/3d-models/watercraft/other/row-boat--2
 Skybox:
 http://www.custommapmakers.org/skyboxes.php
 https://93i.de/p/free-skybox-texture-set/
+
+Float:
+http://opengameart.org/node/7583
