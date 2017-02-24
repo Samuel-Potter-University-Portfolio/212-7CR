@@ -54,15 +54,15 @@ void PlayerBoat::WindowBegin()
 	fps_text->shader = g_game->GetWindow()->GetShaderLoader()["bitmap"];
 	fps_text->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/arial_ascii_bitmap.bmp"]);
 	fps_text->transform.location = glm::vec3(-0.96f, 0.96f, 0);
-	fps_text->transform.scale *= 0.5f;
+	fps_text->transform.scale *= 0.35f;
 	fps_text->text = "FPS";
 	fps_text->colour = glm::vec3(0, 1, 0);
 
 	speed_text->model = g_game->GetWindow()->GetModelLoader()["ui_quad"];
 	speed_text->shader = g_game->GetWindow()->GetShaderLoader()["bitmap"];
 	speed_text->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/arial_ascii_bitmap.bmp"]);
-	speed_text->transform.location = glm::vec3(-0.96f, -0.96f, 0);
-	speed_text->transform.scale *= 0.5f;
+	speed_text->transform.location = glm::vec3(-0.96f, -0.94f, 0);
+	speed_text->transform.scale *= 0.7f;
 	speed_text->text = "SPEED";
 	speed_text->colour = glm::vec3(0, 0, 0);
 }
@@ -166,6 +166,35 @@ void PlayerBoat::WindowTick(float delta_time)
 
 		std::stringstream str_stream;
 		str_stream << "FPS:" << fps << "\nUPS:" << ups;
+
+
+		str_stream << "\nControls:";
+		str_stream << "\nMovement: WASD";
+		switch (camera_mode)
+		{
+		case(BoatCam) :
+			str_stream << " & Mouse";
+			break;
+		case(TopDown) :
+			str_stream << " & Mouse";
+			break;
+		};
+		str_stream << "\nCamera Mode: V (";
+		switch (camera_mode) 
+		{
+		case(BoatCam) :
+			str_stream << "Boat";
+			break;
+		case(ActionCam) :
+			str_stream << "Action";
+			break;
+		case(TopDown) :
+			str_stream << "Bird's Eye";
+			break;
+		};
+		str_stream << ")";
+
+
 		fps_text->text = str_stream.str();
 	}
 
@@ -187,7 +216,7 @@ void PlayerBoat::WindowTick(float delta_time)
 	else if(mouse.GetButtonState(GLFW_MOUSE_BUTTON_RIGHT))
 		mouse.Unlock();
 
-	const glm::vec2 mouse_input = mouse.GetVelocity()* 10.0f;
+	const glm::vec2 mouse_input = mouse.GetVelocity()* 20.0f;
 
 	if (mouse.IsLocked() && camera_mode == BoatCam)
 	{
