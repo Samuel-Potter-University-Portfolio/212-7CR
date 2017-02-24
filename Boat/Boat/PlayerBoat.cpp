@@ -14,8 +14,12 @@ PlayerBoat::PlayerBoat()
 	tags |= E_TAG_PLAYER;
 	model_comp = MakeComponent<ModelComponent>();
 	model_comp_test = MakeComponent<ModelComponent>();
+
 	camera_comp = MakeComponent<CameraComponent>();
 	sphere_collider = MakeComponent<SphereCollider>();
+
+	fps_text = MakeComponent<TextComponent>();
+	speed_text = MakeComponent<TextComponent>();
 
 	body = MakeComponent<RigidBody>();
 	body->angular_damping_factor = 0.03f;
@@ -45,6 +49,22 @@ void PlayerBoat::WindowBegin()
 	model_comp_test->model = g_game->GetWindow()->GetModelLoader()["Resources/unit_sphere.obj"];
 	model_comp_test->shader = g_game->GetWindow()->GetShaderLoader()["default"];
 	model_comp_test->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/planks.png"]);
+
+	fps_text->model = g_game->GetWindow()->GetModelLoader()["ui_quad"];
+	fps_text->shader = g_game->GetWindow()->GetShaderLoader()["bitmap"];
+	fps_text->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/arial_ascii_bitmap.bmp"]);
+	fps_text->transform.location = glm::vec3(-0.96f, 0.96f, 0);
+	fps_text->transform.scale *= 0.5f;
+	fps_text->text = "FPS";
+	fps_text->colour = glm::vec3(0, 1, 0);
+
+	speed_text->model = g_game->GetWindow()->GetModelLoader()["ui_quad"];
+	speed_text->shader = g_game->GetWindow()->GetShaderLoader()["bitmap"];
+	speed_text->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader()["Resources/arial_ascii_bitmap.bmp"]);
+	speed_text->transform.location = glm::vec3(-0.96f, -0.96f, 0);
+	speed_text->transform.scale *= 0.5f;
+	speed_text->text = "SPEED";
+	speed_text->colour = glm::vec3(0, 0, 0);
 }
 
 void PlayerBoat::WindowDestroy() 
@@ -139,15 +159,25 @@ void PlayerBoat::WindowTick(float delta_time)
 {
 	__super::WindowTick(delta_time);
 
-	//Log fps
-	GLFWwindow* window = g_game->GetWindow()->GetGLFWwindow();
-	const int fps = g_game->GetWindow()->GetCurrentTickRate();
-	const int ups = g_game->GetGameLogic()->GetCurrentTickRate();
+	//Track fps
+	{
+		const int fps = g_game->GetWindow()->GetCurrentTickRate();
+		const int ups = g_game->GetGameLogic()->GetCurrentTickRate();
 
-	std::stringstream str_stream;
-	str_stream << "Boat [FPS:" << fps << " UPS:" << ups << "]";
-	glfwSetWindowTitle(window, str_stream.str().c_str());
+		std::stringstream str_stream;
+		str_stream << "FPS:" << fps << "\nUPS:" << ups;
+		fps_text->text = str_stream.str();
+	}
 
+	//Track speed
+	{
+		glm::vec3 velocity = body->GetCurrentVelocity();
+		const int speed = sqrtf(velocity.x * velocity.x + velocity.z * velocity.z) * 1000.0f;
+
+		std::stringstream str_stream;
+		str_stream << "Speed: " << speed;
+		speed_text->text = str_stream.str();
+	}
 
 	Mouse& mouse = g_game->GetWindow()->GetMouse();
 	
@@ -157,12 +187,13 @@ void PlayerBoat::WindowTick(float delta_time)
 	else if(mouse.GetButtonState(GLFW_MOUSE_BUTTON_RIGHT))
 		mouse.Unlock();
 
+	const glm::vec2 mouse_input = mouse.GetVelocity()* 10.0f;
 
 	if (mouse.IsLocked() && camera_mode == BoatCam)
 	{
 		camera_comp->SetParent(this);
-		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
-		camera_comp->transform.rotation += glm::vec3(2.0, 0.0, 0.0) * delta_time * mouse.GetScaledVelocity().y;
+		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * mouse_input.x;
+		camera_comp->transform.rotation += glm::vec3(2.0, 0.0, 0.0) * mouse_input.y;
 
 		if (camera_comp->transform.rotation.x > 89.0f)
 			camera_comp->transform.rotation.x = 89.0f;
@@ -173,7 +204,7 @@ void PlayerBoat::WindowTick(float delta_time)
 	if (mouse.IsLocked() && camera_mode == TopDown)
 	{
 		camera_comp->SetParent(nullptr);
-		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * delta_time * mouse.GetScaledVelocity().x;
+		camera_comp->transform.rotation += glm::vec3(0.0, -2.0, 0.0) * mouse_input.x;
 	}
 	if (camera_mode == ActionCam)
 	{

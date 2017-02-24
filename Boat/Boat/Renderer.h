@@ -29,9 +29,9 @@ struct ShaderModel
 	{
 		return other.model == model && other.shader == shader;
 	}
-	inline bool operator<(const ShaderModel& other) const
+	inline bool operator<(const ShaderModel& other) const 
 	{
-		return other.model < model;
+		return this < &other;
 	}
 };
 

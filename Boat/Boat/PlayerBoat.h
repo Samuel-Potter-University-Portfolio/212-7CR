@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "ModelComponent.h"
+#include "TextComponent.h"
 #include "CameraComponent.h"
 #include "SphereCollider.h"
 #include "RigidBody.h"
@@ -21,6 +22,9 @@ public:
 
 	CameraMode camera_mode;
 	bool last_camera_button_state;
+
+	TextComponent* fps_text;
+	TextComponent* speed_text;
 
 	ModelComponent* model_comp;
 	ModelComponent* model_comp_test;

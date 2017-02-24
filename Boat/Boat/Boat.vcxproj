@@ -124,6 +124,7 @@
     <ClCompile Include="BaseBodyComponent.cpp" />
     <ClCompile Include="BaseColliderComponent.cpp" />
     <ClCompile Include="BeachBall.cpp" />
+    <ClCompile Include="BitmapShader.cpp" />
     <ClCompile Include="BoatWorld.cpp" />
     <ClCompile Include="FloatBarrier.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="BaseBodyComponent.h" />
     <ClInclude Include="BaseColliderComponent.h" />
     <ClInclude Include="BeachBall.h" />
+    <ClInclude Include="BitmapShader.h" />
     <ClInclude Include="BoatWorld.h" />
     <ClInclude Include="FloatBarrier.h" />
     <ClInclude Include="CameraComponent.h" />
@@ -207,6 +209,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="PlayerBoat.h" />
     <ClInclude Include="Sun.h" />
+    <ClInclude Include="TextComponent.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
@@ -217,6 +220,8 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\Bitmap.frag.glsl" />
+    <None Include="Shaders\Bitmap.vert.glsl" />
     <None Include="Shaders\Clip.frag.glsl" />
     <None Include="Shaders\Clip.vert.glsl" />
     <None Include="Shaders\Default.frag.glsl" />

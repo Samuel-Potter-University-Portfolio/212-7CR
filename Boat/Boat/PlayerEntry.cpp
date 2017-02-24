@@ -2,6 +2,7 @@
 #include "PlayerBoat.h"
 #include "Game.h"
 
+
 PlayerEntry::PlayerEntry()
 {
 	tags |= E_TAG_PLAYER | E_TAG_UI;

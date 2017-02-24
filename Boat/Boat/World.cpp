@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "DefaultShader.h"
 #include "UIShader.h"
+#include "BitmapShader.h"
 #include "SkyboxShader.h"
 #include "Logger.h"
 
@@ -254,6 +255,7 @@ void World::LoadWindowResources(Window* window)
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
 	window->GetShaderLoader().RegisterShader("ui", new UIShader);
+	window->GetShaderLoader().RegisterShader("bitmap", new BitmapShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)

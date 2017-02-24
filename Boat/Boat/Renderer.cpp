@@ -2,13 +2,14 @@
 #include "Game.h"
 #include "ModelComponentBase.h"
 #include "FrameBuffer.h"
+#include "TextComponent.h"
 #include "Logger.h"
+
 
 Renderer::Renderer()
 {
 	LOG(Log, "Instanced Renderer constructed");
 }
-
 
 Renderer::~Renderer()
 {
@@ -141,6 +142,13 @@ void Renderer::Render(RenderSettings& render_settings)
 			if (render_settings.blacklist != E_TAG_NONE && (tags & render_settings.blacklist))
 				continue;
 
+			//TODO - Remove; TEMP don't render text to overriden shader
+			if (is_shader_overridden)
+			{
+				TextComponent* text = dynamic_cast<TextComponent*>(comp);
+				if(text)
+					continue;
+			}
 
 			//If should be overridden when active
 			if (is_shader_overridden)
