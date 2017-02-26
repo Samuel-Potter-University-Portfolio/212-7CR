@@ -13,6 +13,7 @@
 #include "WaterShader.h"
 #include "ClipShader.h"
 #include "BeachBall.h"
+#include "CrossingLine.h"
 
 #include "Window.h"
 #include "Logger.h"
@@ -75,7 +76,21 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 	}
 	ADD_SEGMENT(-7, -5, Horizontal);
 	ADD_SEGMENT(-5, -5, Horizontal);
-	
+
+	//Start line
+	{
+		CrossingLine* line = new CrossingLine(Start);
+		line->transform.location = glm::vec3(0, 0, 1) * 22.0f;
+		line->transform.scale = glm::vec3(4.35f, 2.5f, 4.35f);
+		AddEntity(line);
+	}
+	//Finish line
+	{
+		CrossingLine* line = new CrossingLine(Finish);
+		line->transform.location = glm::vec3(-6, 0, -5) * 22.0f;
+		line->transform.scale = glm::vec3(4.35f, 2.5f, 4.35f);
+		AddEntity(line);
+	}
 	
 	//Add balls
 	for (int i = -4; i < 2; i ++) 
@@ -98,44 +113,9 @@ void BoatWorld::LoadLogicResources(GameLogic* game_logic)
 
 	AddEntity(new WaterSurface);
 
-	//Ball tower
-	/*
-	{
-		BeachBall* ball = new BeachBall;
-		ball->transform.location = glm::vec3(0, 54, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(-2, 50, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(2, 50, 50);
-		AddEntity(ball);
-
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(-4, 46, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(0, 46, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(4, 46, 50);
-		AddEntity(ball);
-
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(-6, 42, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(-2, 42, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(2, 42, 50);
-		AddEntity(ball);
-		ball = new BeachBall;
-		ball->transform.location = glm::vec3(6, 42, 50);
-		AddEntity(ball);
-	}
-	*/
-	AddEntity(new PlayerEntry);
+	PlayerEntry* entry = new PlayerEntry;
+	entry->transform.location = glm::vec3(-60, 0, 20);
+	AddEntity(entry);
 }
 
 void BoatWorld::LoadWindowResources(Window* window) 

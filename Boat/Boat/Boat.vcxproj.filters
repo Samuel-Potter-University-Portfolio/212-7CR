@@ -216,6 +216,9 @@
     <ClCompile Include="BitmapShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="CrossingLine.cpp">
+      <Filter>Source Files\Boat Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossingLine.h">
+      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

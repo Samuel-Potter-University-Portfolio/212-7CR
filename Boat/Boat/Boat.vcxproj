@@ -126,6 +126,7 @@
     <ClCompile Include="BeachBall.cpp" />
     <ClCompile Include="BitmapShader.cpp" />
     <ClCompile Include="BoatWorld.cpp" />
+    <ClCompile Include="CrossingLine.cpp" />
     <ClCompile Include="FloatBarrier.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="ClipShader.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="BeachBall.h" />
     <ClInclude Include="BitmapShader.h" />
     <ClInclude Include="BoatWorld.h" />
+    <ClInclude Include="CrossingLine.h" />
     <ClInclude Include="FloatBarrier.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="ClipShader.h" />
