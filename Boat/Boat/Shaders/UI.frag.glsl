@@ -11,7 +11,7 @@ void main()
 {
 	out_colour = texture(texture0, pass_uvs);
 
-	if(out_colour.w < 1.0f)
+	if(out_colour.w < 0.5f)
 		discard;
 }
 

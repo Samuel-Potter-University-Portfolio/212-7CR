@@ -194,6 +194,11 @@ void PlayerBoat::WindowTick(float delta_time)
 		};
 		str_stream << ")";
 
+		Mouse& mouse = g_game->GetWindow()->GetMouse();
+		if(mouse.IsLocked())
+			str_stream << "\nRelease Mouse: RMB";
+		else
+			str_stream << "\nGrab Mouse: LMB";
 
 		fps_text->text = str_stream.str();
 	}
