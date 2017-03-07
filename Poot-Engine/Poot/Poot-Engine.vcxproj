@@ -22,6 +22,7 @@
     <ProjectGuid>{D0A65C48-6A61-4870-9C7B-65D16E85694A}</ProjectGuid>
     <RootNamespace>Boat</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Poot-Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABoxCollider.h" />
+    <ClInclude Include="API.h" />
     <ClInclude Include="BaseBodyComponent.h" />
     <ClInclude Include="BaseColliderComponent.h" />
     <ClInclude Include="BeachBall.h" />
