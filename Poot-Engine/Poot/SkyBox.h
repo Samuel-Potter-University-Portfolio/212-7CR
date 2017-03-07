@@ -1,9 +1,10 @@
 #pragma once
+#include "API.h"
 #include "Entity.h"
 #include "ModelComponent.h"
 
 
-class SkyBox : public Entity
+class POOT_API SkyBox : public Entity
 {
 private:
 	ModelComponent* model_comp;

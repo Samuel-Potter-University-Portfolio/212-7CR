@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include "Component.h"
 #include "Entity.h"
 #include <vec3.hpp>
@@ -17,7 +18,7 @@ struct PhysicalProperties
 };
 
 
-class BaseColliderComponent : public Component
+class POOT_API BaseColliderComponent : public Component
 {
 protected:
 	class BaseBodyComponent* attached_body;

@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include "Entity.h"
 #include "BaseBodyComponent.h"
 #include "BaseColliderComponent.h"
@@ -13,7 +14,7 @@ struct PhysicsSettings
 };
 
 
-class PhysicsScene
+class POOT_API PhysicsScene
 {
 private:
 	std::vector<BaseColliderComponent*> colliders;

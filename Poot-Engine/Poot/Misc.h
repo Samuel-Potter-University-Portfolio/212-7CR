@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 
 namespace System
 {
-	float GetSysTimeSeconds();
-	float GetSysTimeMilli();
+	float POOT_API GetSysTimeSeconds();
+	float POOT_API GetSysTimeMilli();
 }

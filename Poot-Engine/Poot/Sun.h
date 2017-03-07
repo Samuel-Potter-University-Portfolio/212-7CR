@@ -1,8 +1,9 @@
 #pragma once
+#include "API.h"
 #include "Entity.h"
 #include "DirectionalLightComponent.h"
 
-class Sun : public Entity
+class POOT_API Sun : public Entity
 {
 public:
 	DirectionalLightComponent* directional_light;

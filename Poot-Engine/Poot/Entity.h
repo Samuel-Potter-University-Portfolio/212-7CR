@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <vector>
 #include "Transform.h"
 #include "Component.h"
@@ -7,19 +8,19 @@
 
 typedef unsigned int Tags;
 
-#define E_TAG_PLAYER	0x1
-#define E_TAG_PROP		0x2
-#define E_TAG_ENV		0x4
-#define E_TAG_SKYBOX	0x8
-#define E_TAG_UI		0x10
+#define E_TAG_PLAYER	(1<<0)
+#define E_TAG_PROP		(1<<1)
+#define E_TAG_ENV		(1<<2)
+#define E_TAG_SKYBOX	(1<<3)
+#define E_TAG_UI		(1<<4)
 
 #define E_TAG_LAST	E_TAG_UI
 
-#define E_TAG_NONE 0x0
+#define E_TAG_NONE 0
 #define E_TAG_ALL (Tags)(-1)
 
 
-class Entity : public Tickable
+class POOT_API Entity : public Tickable
 {
 private:
 	std::vector<Component*> components;

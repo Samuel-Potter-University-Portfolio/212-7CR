@@ -1,9 +1,9 @@
 #pragma once
-
+#include "API.h"
 #include <GL/glew.h>
 #include <GLFW\glfw3.h>
 
-class Keyboard
+class POOT_API Keyboard
 {
 private:
 	int key_states[GLFW_KEY_LAST + 1]{GLFW_RELEASE};

@@ -1,11 +1,11 @@
 #pragma once
-
+#include "API.h"
 #include <glm.hpp>
 #include <GL/glew.h>
 #include <GLFW\glfw3.h>
 
 
-class Mouse
+class POOT_API Mouse
 {
 private:
 	int button_states[GLFW_MOUSE_BUTTON_LAST + 1]{ GLFW_RELEASE };

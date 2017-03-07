@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "Component.h"
 
-class BaseBodyComponent : public Component
+class POOT_API BaseBodyComponent : public Component
 {
 private:
 	glm::vec3 frame_velocity; //Stored in relation to delta time

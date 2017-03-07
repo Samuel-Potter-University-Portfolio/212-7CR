@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "Shader.h"
 
-class BitmapShader : public Shader
+class POOT_API BitmapShader : public Shader
 {
 private:
 	GLuint uniform_location;

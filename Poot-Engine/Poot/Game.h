@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 
 #include <string>
 #include <vec2.hpp>
@@ -7,10 +8,10 @@
 #include "GameLogic.h"
 #include "World.h"
 
-extern class Game* g_game;
+extern POOT_API class Game* g_game;
 
 
-class Game
+class POOT_API Game
 {
 private:
 	std::string game_name;

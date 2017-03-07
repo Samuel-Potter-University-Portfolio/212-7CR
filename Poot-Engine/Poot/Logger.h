@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 
 #include <string>
 #include <sstream>
@@ -17,5 +18,5 @@ namespace Logger
 	};
 
 
-	void LogMessage(const Verbosity verbosity, const std::string message);
+	void POOT_API LogMessage(const Verbosity verbosity, const std::string message);
 }

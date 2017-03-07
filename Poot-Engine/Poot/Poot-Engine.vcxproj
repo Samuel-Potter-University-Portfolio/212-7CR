@@ -20,32 +20,32 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D0A65C48-6A61-4870-9C7B-65D16E85694A}</ProjectGuid>
-    <RootNamespace>Boat</RootNamespace>
+    <RootNamespace>Poot-Engine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>Poot-Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\Dependencies\FreeImage3170\x32;..\..\Dependencies\glew-2.0.0\include;..\..\Dependencies\glm-0.9.6.3\glm;..\..\Dependencies\glfw-3.2.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_POOT_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\..\Dependencies\FreeImage3170\x32;..\..\Dependencies\glew-2.0.0\lib\Release\Win32;..\..\Dependencies\glfw-3.2.bin.WIN32\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -88,6 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\Dependencies\glew-2.0.0\include;..\..\Dependencies\glfw-3.2.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_POOT_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,6 +100,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\Dependencies\FreeImage3170\x32;..\..\Dependencies\glew-2.0.0\include;..\..\Dependencies\glm-0.9.6.3\glm;..\..\Dependencies\glfw-3.2.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_POOT_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -114,6 +117,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\Dependencies\glew-2.0.0\include;..\..\Dependencies\glfw-3.2.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_POOT_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -124,13 +128,8 @@
     <ClCompile Include="AABoxCollider.cpp" />
     <ClCompile Include="BaseBodyComponent.cpp" />
     <ClCompile Include="BaseColliderComponent.cpp" />
-    <ClCompile Include="BeachBall.cpp" />
     <ClCompile Include="BitmapShader.cpp" />
-    <ClCompile Include="BoatWorld.cpp" />
-    <ClCompile Include="CrossingLine.cpp" />
-    <ClCompile Include="FloatBarrier.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
-    <ClCompile Include="ClipShader.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
@@ -140,33 +139,26 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
-    <ClCompile Include="OceanFloor.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
-    <ClCompile Include="PlayerEntry.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SkyboxShader.cpp" />
-    <ClCompile Include="SoftPlaneCollider.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="PlayerBoat.cpp" />
     <ClCompile Include="Sun.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIShader.cpp" />
-    <ClCompile Include="WaterShader.cpp" />
-    <ClCompile Include="WaterSurface.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -175,13 +167,8 @@
     <ClInclude Include="API.h" />
     <ClInclude Include="BaseBodyComponent.h" />
     <ClInclude Include="BaseColliderComponent.h" />
-    <ClInclude Include="BeachBall.h" />
     <ClInclude Include="BitmapShader.h" />
-    <ClInclude Include="BoatWorld.h" />
-    <ClInclude Include="CrossingLine.h" />
-    <ClInclude Include="FloatBarrier.h" />
     <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="ClipShader.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="DirectionalLightComponent.h" />
@@ -199,43 +186,33 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="OBJLoader.h" />
-    <ClInclude Include="OceanFloor.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PlaneCollider.h" />
-    <ClInclude Include="PlayerEntry.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SkyboxShader.h" />
-    <ClInclude Include="SoftPlaneCollider.h" />
     <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="PlayerBoat.h" />
     <ClInclude Include="Sun.h" />
     <ClInclude Include="TextComponent.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIShader.h" />
-    <ClInclude Include="WaterShader.h" />
-    <ClInclude Include="WaterSurface.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Bitmap.frag.glsl" />
     <None Include="Shaders\Bitmap.vert.glsl" />
-    <None Include="Shaders\Clip.frag.glsl" />
-    <None Include="Shaders\Clip.vert.glsl" />
     <None Include="Shaders\Default.frag.glsl" />
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />
     <None Include="Shaders\Skybox.vert.glsl" />
     <None Include="Shaders\UI.frag.glsl" />
     <None Include="Shaders\UI.vert.glsl" />
-    <None Include="Shaders\Water.frag.glsl" />
-    <None Include="Shaders\Water.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

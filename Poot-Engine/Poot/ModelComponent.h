@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "ModelComponentBase.h"
 
-class ModelComponent : public ModelComponentBase
+class POOT_API ModelComponent : public ModelComponentBase
 {
 public:
 	Model* model;

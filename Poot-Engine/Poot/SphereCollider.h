@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "BaseColliderComponent.h"
 
-class SphereCollider : public BaseColliderComponent
+class POOT_API SphereCollider : public BaseColliderComponent
 {
 protected:
 	virtual void ResolveCollision(BaseBodyComponent* attached_body, HitInfo& hit_info) override;

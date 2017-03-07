@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include "Shader.h"
 #include "CameraComponent.h"
 #include "ModelComponentBase.h"
@@ -6,7 +7,7 @@
 #define SHADER_UNIT_SHININESS 0
 #define SHADER_UNIT_ROUGHNESS 1
 
-class DefaultShader : public Shader
+class POOT_API DefaultShader : public Shader
 {
 private:
 	GLuint uniform_model_matrix;

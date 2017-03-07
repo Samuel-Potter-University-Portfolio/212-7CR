@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "Shader.h"
 
-class UIShader : public Shader
+class POOT_API UIShader : public Shader
 {
 private:
 	GLuint uniform_anchor;

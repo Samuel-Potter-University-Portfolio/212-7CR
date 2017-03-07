@@ -31,12 +31,6 @@
     <Filter Include="Header Files\Core\Maths">
       <UniqueIdentifier>{6737e24e-66d3-4aff-be92-109d1a2d6ec6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Boat Game">
-      <UniqueIdentifier>{e70cf894-95dc-4b6b-a6f6-e6029a248f12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Boat Game">
-      <UniqueIdentifier>{ea6e399f-d10a-4745-b780-d3e0501596e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Components">
       <UniqueIdentifier>{cb5b34f7-6b25-449b-8fb2-a9c2d782e223}</UniqueIdentifier>
     </Filter>
@@ -55,12 +49,6 @@
     <Filter Include="Header Files\Core\Entities">
       <UniqueIdentifier>{7dcef7b9-ab37-4fd2-884d-b1e48ee34dcb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Boat Game\Shaders">
-      <UniqueIdentifier>{5cfdff7e-2402-45a6-8b5e-a03a6b103aca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Boat Game\Shaders">
-      <UniqueIdentifier>{5e4d3f20-3af0-4865-9076-e1a4e67ca136}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Physics">
       <UniqueIdentifier>{09cac388-8194-4680-a50d-e7a475b79c0e}</UniqueIdentifier>
     </Filter>
@@ -75,9 +63,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -98,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="BoatWorld.cpp">
-      <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Visual</Filter>
@@ -129,9 +111,6 @@
     <ClCompile Include="DefaultShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="WaterSurface.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Core\Entities</Filter>
     </ClCompile>
@@ -141,17 +120,8 @@
     <ClCompile Include="SkyboxShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="WaterShader.cpp">
-      <Filter>Source Files\Boat Game\Shaders</Filter>
-    </ClCompile>
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Source Files\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="OceanFloor.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ClipShader.cpp">
-      <Filter>Source Files\Boat Game\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsScene.cpp">
       <Filter>Source Files\Physics</Filter>
@@ -171,23 +141,11 @@
     <ClCompile Include="PlaneCollider.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="SoftPlaneCollider.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="AABoxCollider.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="BeachBall.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBoat.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="UIShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerEntry.cpp">
-      <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Visual\Resources</Filter>
@@ -210,14 +168,8 @@
     <ClCompile Include="DirectionalLightComponent.cpp">
       <Filter>Source Files\Visual</Filter>
     </ClCompile>
-    <ClCompile Include="FloatBarrier.cpp">
-      <Filter>Source Files\Boat Game</Filter>
-    </ClCompile>
     <ClCompile Include="BitmapShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="CrossingLine.cpp">
-      <Filter>Source Files\Boat Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +193,6 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="BoatWorld.h">
-      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Visual</Filter>
@@ -278,9 +227,6 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="WaterSurface.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Core\Entities</Filter>
     </ClInclude>
@@ -290,17 +236,8 @@
     <ClInclude Include="SkyboxShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="WaterShader.h">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="FrameBuffer.h">
       <Filter>Header Files\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="OceanFloor.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ClipShader.h">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsScene.h">
       <Filter>Header Files\Physics</Filter>
@@ -320,23 +257,11 @@
     <ClInclude Include="PlaneCollider.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="SoftPlaneCollider.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="AABoxCollider.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="BeachBall.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBoat.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="UIShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerEntry.h">
-      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Visual\Resources</Filter>
@@ -359,17 +284,11 @@
     <ClInclude Include="DirectionalLightComponent.h">
       <Filter>Header Files\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="FloatBarrier.h">
-      <Filter>Header Files\Boat Game</Filter>
-    </ClInclude>
     <ClInclude Include="BitmapShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>Header Files\Core\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CrossingLine.h">
-      <Filter>Header Files\Boat Game</Filter>
     </ClInclude>
     <ClInclude Include="API.h">
       <Filter>Header Files</Filter>
@@ -387,18 +306,6 @@
     </None>
     <None Include="Shaders\Skybox.vert.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
-    </None>
-    <None Include="Shaders\Water.frag.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
-    </None>
-    <None Include="Shaders\Water.vert.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
-    </None>
-    <None Include="Shaders\Clip.frag.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
-    </None>
-    <None Include="Shaders\Clip.vert.glsl">
-      <Filter>Header Files\Boat Game\Shaders</Filter>
     </None>
     <None Include="Shaders\UI.frag.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>

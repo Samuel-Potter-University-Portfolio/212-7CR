@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "Component.h"
 
-class CameraComponent : public Component
+class POOT_API CameraComponent : public Component
 {
 private:
 	glm::mat4 projection_matrix;

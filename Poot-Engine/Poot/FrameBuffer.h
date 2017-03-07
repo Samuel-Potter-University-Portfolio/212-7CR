@@ -1,9 +1,9 @@
 #pragma once
-
+#include "API.h"
 #include <GL/glew.h>
 
 
-class FrameBuffer
+class POOT_API FrameBuffer
 {	
 private:
 	const unsigned int width, height;

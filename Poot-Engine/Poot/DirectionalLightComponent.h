@@ -1,8 +1,9 @@
 #pragma once
+#include "API.h"
 #include "Component.h"
 #include <vec3.hpp>
 
-class DirectionalLightComponent : public Component
+class POOT_API DirectionalLightComponent : public Component
 {
 private:
 	glm::vec3 direction;

@@ -1,8 +1,9 @@
 #pragma once
+#include "API.h"
 #include <GL/glew.h>
 
 
-class Model
+class POOT_API Model
 {
 private:
 	const GLuint vao;

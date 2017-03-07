@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include "Component.h"
 #include "Entity.h"
 #include "Model.h"
@@ -9,7 +10,7 @@
 #define MAX_MODEL_UNITS 16
 
 
-class ModelComponentBase : public Component
+class POOT_API ModelComponentBase : public Component
 {
 private:
 	bool is_visable = true;

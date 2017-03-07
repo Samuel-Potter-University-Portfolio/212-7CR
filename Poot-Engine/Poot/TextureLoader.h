@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <string>
 #include <map>
 #include <GL/glew.h>
@@ -11,7 +12,7 @@ struct TextureData
 };
 
 
-class TextureLoader
+class POOT_API TextureLoader
 {
 private:
 	std::map<std::string, TextureData> texture_pool;

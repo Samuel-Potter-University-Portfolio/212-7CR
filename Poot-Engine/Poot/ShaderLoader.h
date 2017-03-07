@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <map>
 #include <string>
 #include "Shader.h"
@@ -10,7 +11,7 @@ struct ShaderData
 };
 
 
-class ShaderLoader
+class POOT_API ShaderLoader
 {
 private:
 	std::map<std::string, ShaderData> shader_pool;

@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <vector>
 #include <queue>
 
@@ -8,7 +9,7 @@
 #include "CameraComponent.h"
 #include "DirectionalLightComponent.h"
 
-class World
+class POOT_API World
 {
 private:
 	Renderer* renderer;

@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 #include "Shader.h"
 
-class SkyboxShader : public Shader
+class POOT_API SkyboxShader : public Shader
 {
 private:
 	GLuint uniform_camera_position;

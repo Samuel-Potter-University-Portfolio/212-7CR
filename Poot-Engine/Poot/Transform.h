@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <vec3.hpp>
 #include <mat4x4.hpp>
 
@@ -7,7 +8,7 @@ enum TransformType
 	Dynamic, Static
 };
 
-class Transform
+class POOT_API Transform
 {
 private:
 	bool matrix_built;

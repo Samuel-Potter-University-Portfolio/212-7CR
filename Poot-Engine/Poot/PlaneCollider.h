@@ -1,8 +1,9 @@
 #pragma once
+#include "API.h"
 #include "BaseColliderComponent.h"
 #include "vec3.hpp"
 
-class PlaneCollider : public BaseColliderComponent
+class POOT_API PlaneCollider : public BaseColliderComponent
 {
 protected:
 	virtual void ResolveCollision(BaseBodyComponent* attached_body, HitInfo& hit_info) override;

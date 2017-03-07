@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include "Model.h"
 #include "Entity.h"
 #include "ModelComponentBase.h"
@@ -35,7 +36,7 @@ struct ShaderModel
 	}
 };
 
-class Renderer
+class POOT_API Renderer
 {
 private:
 	std::map<ShaderModel, std::vector<ModelComponentBase*>> render_queue;

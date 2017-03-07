@@ -1,9 +1,10 @@
 #pragma once
+#include "API.h"
 #include <string>
 #include <GL/glew.h>
 
 
-class Shader
+class POOT_API Shader
 {
 private:
 	GLuint program_id;

@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <vector>
 
 /**
@@ -9,7 +10,7 @@ Includes:
 -Raw vertices
 -Indices to form triangles
 */
-class Mesh
+class POOT_API Mesh
 {
 private:
 	std::vector<float> vertices;
@@ -32,7 +33,7 @@ Includes:
 -UVs
 -Normals
 */
-class ModelMesh : public Mesh
+class POOT_API ModelMesh : public Mesh
 {
 private:
 	std::vector<float> uvs;

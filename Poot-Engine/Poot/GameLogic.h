@@ -1,9 +1,10 @@
 #pragma once
+#include "API.h"
 
 #include <thread>
 
 
-class GameLogic
+class POOT_API GameLogic
 {
 private:
 	std::thread* thread;

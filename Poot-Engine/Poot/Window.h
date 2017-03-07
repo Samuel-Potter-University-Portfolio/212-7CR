@@ -1,5 +1,5 @@
 #pragma once
-
+#include "API.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <vec2.hpp>
@@ -10,7 +10,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 
-class Window
+class POOT_API Window
 {
 private:
 	GLFWwindow* window;

@@ -1,9 +1,10 @@
 #pragma once
+#include "API.h"
 #include "Tickable.h"
 #include "Transform.h"
 
 
-class Component : public Tickable
+class POOT_API Component : public Tickable
 {
 private:
 	bool active = true;

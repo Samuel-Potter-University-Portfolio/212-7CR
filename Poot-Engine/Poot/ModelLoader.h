@@ -1,4 +1,5 @@
 #pragma once
+#include "API.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -16,7 +17,7 @@ struct ModelData
 };
 
 
-class ModelLoader
+class POOT_API ModelLoader
 {
 private:
 	std::map<std::string, ModelData> model_pool;

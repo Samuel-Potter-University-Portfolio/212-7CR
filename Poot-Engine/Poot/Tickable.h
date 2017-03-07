@@ -1,7 +1,8 @@
 #pragma once
+#include "API.h"
 
 
-class Tickable
+class POOT_API Tickable
 {
 private:
 	bool logic_begun;
