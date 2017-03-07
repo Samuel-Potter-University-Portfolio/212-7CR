@@ -50,7 +50,5 @@ public:
 	glm::vec3 GetXZRight();
 
 	glm::vec3 GetUp();
-
-
 };
 
