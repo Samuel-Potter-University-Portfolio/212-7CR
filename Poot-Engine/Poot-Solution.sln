@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Poot-Engine", "Poot\Poot-Engine.vcxproj", "{D0A65C48-6A61-4870-9C7B-65D16E85694A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Poot-Engine", "Poot-Engine\Poot-Engine.vcxproj", "{D0A65C48-6A61-4870-9C7B-65D16E85694A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pool-Game", "Pool-Game\Pool-Game.vcxproj", "{59B39C13-325C-486C-A91E-4304191068D0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pool-Game", "Projects\Pool-Game\Pool-Game.vcxproj", "{59B39C13-325C-486C-A91E-4304191068D0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D0A65C48-6A61-4870-9C7B-65D16E85694A} = {D0A65C48-6A61-4870-9C7B-65D16E85694A}
 	EndProjectSection

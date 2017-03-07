@@ -1,0 +1,17 @@
+Planks.jpg:
+http://opengameart.org/content/50-free-textures-4-normalmaps?page=2
+http://opengameart.org/node/8051
+
+Sand.png:
+http://opengameart.org/content/generic-tileable-sand-texture
+
+Skybox:
+http://www.custommapmakers.org/skyboxes.php
+https://93i.de/p/free-skybox-texture-set/
+
+Float:
+http://opengameart.org/node/7583
+
+Font:
+http://www.lmnopc.com/bitmapfontbuilder/
+
