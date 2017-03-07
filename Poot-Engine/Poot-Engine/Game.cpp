@@ -9,17 +9,24 @@ class Game* g_game = nullptr;
 Game::Game(const std::string game_name, const glm::ivec2 desired_resolution, World* world)
 	: game_name(game_name), world(world)
 {
+	//Set default values
+	logic_ready = false;
+	window_ready = false;
+	closed_requested = false;
+
+	//Check that only one Game exists at one time
 	if (!g_game)
 		g_game = this;
 	else
 		LOG(Fatal, "Cannot setup two Game instances at a time");
 
 
-	if (!world)
+	if (world == nullptr)
 		LOG(Warning, "Initializing game with null world");
 
 
 	LOG(Log, "Setting up game '%s'", game_name.c_str());
+	LOG(Log, "Using Poot Engine %i.%i.%i", POOT_VERSION_MAJOR, POOT_VERSION_MINOR, POOT_VERSION_PATCH);
 	game_logic = new GameLogic;
 	window = new Window(desired_resolution);
 }

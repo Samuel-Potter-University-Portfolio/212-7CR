@@ -19,9 +19,9 @@ private:
 	GameLogic* game_logic;
 	World* world;
 
-	bool logic_ready = false;
-	bool window_ready = false;
-	bool closed_requested = false;
+	bool logic_ready;
+	bool window_ready;
+	bool closed_requested;
 
 public:
 	Game(const std::string game_name, const glm::ivec2 desired_resolution, World* world);

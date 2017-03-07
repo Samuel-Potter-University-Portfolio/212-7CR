@@ -171,6 +171,9 @@
     <ClCompile Include="BitmapShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="DebugPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -291,6 +294,9 @@
       <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
     <ClInclude Include="API.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

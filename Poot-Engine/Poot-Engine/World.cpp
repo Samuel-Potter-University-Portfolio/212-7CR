@@ -6,8 +6,26 @@
 #include "SkyboxShader.h"
 #include "Logger.h"
 
-World::~World() 
+World::World()
 {
+	renderer = nullptr;
+	physics_scene = nullptr;
+	main_camera = nullptr;
+	sun_light = nullptr;
+
+	logic_begun = false;
+	window_begun = false;
+
+	in_logic_tick = false;
+
+	is_being_destroyed = false;
+	logic_destroyed = false;
+	window_destroyed = false;
+}
+
+World::~World()
+{
+
 	for (Entity* entity : entities)
 		delete entity;
 }
@@ -191,9 +209,9 @@ void World::LoadWindowResources(Window* window)
 		for (float& f : verts)
 		{
 			if (f == 0.0f)
-				normals.push_back(r3);
-			else
 				normals.push_back(-r3);
+			else
+				normals.push_back(r3);
 
 			f -= 0.5f;
 		}

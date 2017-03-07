@@ -2,8 +2,10 @@
 
 
 Tickable::Tickable() 
-	: active(true)
 {
+	logic_begun = false;
+	window_begun = false;
+	active = true;
 }
 
 void Tickable::ForceLogicBegin() 

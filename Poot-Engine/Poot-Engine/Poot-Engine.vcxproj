@@ -131,6 +131,7 @@
     <ClCompile Include="BitmapShader.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DebugPlayer.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="BitmapShader.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DebugPlayer.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="DirectionalLightComponent.h" />
     <ClInclude Include="Entity.h" />

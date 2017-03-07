@@ -126,7 +126,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicBox.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PoolWorld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicBox.h" />
+    <ClInclude Include="PoolWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

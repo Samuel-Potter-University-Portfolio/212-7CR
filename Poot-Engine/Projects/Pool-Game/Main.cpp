@@ -1,10 +1,11 @@
-#include "Game.h"
-#include "Logger.h"
+#include <Game.h>
+#include <Logger.h>
 
+#include "PoolWorld.h"
 
 int main(int arg_c, char** arg_v)
 {
-	Game* game = new Game("Boat Game", glm::ivec2(640, 480), new World());
+	Game* game = new Game("Pool Game", glm::ivec2(640, 480), new PoolWorld());
 	game->Launch();
 	delete game;
 

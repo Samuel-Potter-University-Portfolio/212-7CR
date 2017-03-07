@@ -4,7 +4,7 @@
 
 int main(int arg_c, char** arg_v)
 {
-	Game* game = new Game("Boat Game", glm::ivec2(640, 480), new World());
+	Game* game = new Game("Game", glm::ivec2(640, 480), new World());
 	game->Launch();
 	delete game;
 

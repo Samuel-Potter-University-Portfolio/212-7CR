@@ -23,16 +23,17 @@ private:
 	CameraComponent* main_camera;
 	DirectionalLightComponent* sun_light;
 
-	bool logic_begun = false;
-	bool window_begun = false;
+	bool logic_begun;
+	bool window_begun;
 
-	bool in_logic_tick = false;
+	bool in_logic_tick;
 
-	bool is_being_destroyed = false;
-	bool logic_destroyed = false;
-	bool window_destroyed = false;
+	bool is_being_destroyed;
+	bool logic_destroyed;
+	bool window_destroyed;
 
 public:
+	World();
 	virtual ~World();
 
 	void LogicBegin(class GameLogic* game_logic);
