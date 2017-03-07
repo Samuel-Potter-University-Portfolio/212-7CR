@@ -1,15 +1,13 @@
 #include "World.h"
 #include "Game.h"
 #include "DefaultShader.h"
-#include "UIShader.h"
-#include "BitmapShader.h"
 #include "SkyboxShader.h"
 #include "Logger.h"
 
 World::World()
 {
 	renderer = nullptr;
-	physics_scene = nullptr;
+	//physics_scene = nullptr;
 	main_camera = nullptr;
 	sun_light = nullptr;
 
@@ -25,9 +23,15 @@ World::World()
 
 World::~World()
 {
+	while (new_objects.size() != 0)
+	{
+		GameObject* object = new_objects.front();
+		delete object;
+		new_objects.pop();
+	}
 
-	for (Entity* entity : entities)
-		delete entity;
+	for (GameObject* object : game_objects)
+		delete object;
 }
 
 void World::LogicBegin(GameLogic* game_logic) 
@@ -74,13 +78,13 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	if (!HasLoaded())
 		return;
 
-	//Tick entities
-	for (Entity* entity : entities)
-		entity->HandleLogicTick(delta_time);
+	//Tick objects
+	for (GameObject* object : game_objects)
+		object->HandleLogicTick(delta_time);
 
 	//Tick physics
-	if (physics_scene)
-		physics_scene->Tick(delta_time);
+	//if (physics_scene)
+	//	physics_scene->Tick(delta_time);
 
 	in_logic_tick = false;
 }
@@ -110,20 +114,20 @@ void World::WindowTick(Window* window, float delta_time)
 		return;
 
 	//Try and load new entitites
-	while (new_entities.size() != 0)
+	while (new_objects.size() != 0)
 	{
 		if (in_logic_tick)
 			break;
 
-		Entity* entity = new_entities.front();
-		InternalAddEntity(entity);
-		new_entities.pop();
+		GameObject* object = new_objects.front();
+		InternalSpawnObject(object);
+		new_objects.pop();
 	}
 	
 
 	//Tick entities
-	for (Entity* entity : entities)
-		entity->HandleWindowTick(delta_time);
+	for (GameObject* object : game_objects)
+		object->HandleWindowTick(delta_time);
 	
 	if (renderer)
 	{
@@ -138,18 +142,14 @@ void World::WindowTick(Window* window, float delta_time)
 
 void World::LoadLogicResources(GameLogic* game_logic) 
 {
-	physics_scene = new PhysicsScene;
-	physics_scene->Link(this);
+	//TODO - UPDATE
+	//physics_scene = new PhysicsScene;
+	//physics_scene->Link(this);
 }
 
 void World::LoadWindowResources(Window* window)
 {
 	renderer = new Renderer;
-
-	//Added already existing entities
-	for(Entity* entity : entities)
-		renderer->AddEntityToQueue(entity);
-
 
 	//Load default models
 	//Quad
@@ -272,30 +272,22 @@ void World::LoadWindowResources(Window* window)
 	//Load default shaders
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
-	window->GetShaderLoader().RegisterShader("ui", new UIShader);
-	window->GetShaderLoader().RegisterShader("bitmap", new BitmapShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)
 {
-	for (Entity* entity : entities)
-		entity->LogicDestroy();
-
-	if (physics_scene)
-	{
-		physics_scene->CleanUp();
-		delete physics_scene;
-		physics_scene = nullptr;
-	}
+	//if (physics_scene)
+	//{
+	//	physics_scene->CleanUp();
+	//	delete physics_scene;
+	//	physics_scene = nullptr;
+	//}
 
 	logic_destroyed = true;
 }
 
 void World::UnloadWindowResources(Window* window) 
 {
-	for (Entity* entity : entities)
-		entity->WindowDestroy();
-
 	if (renderer)
 	{
 		renderer->CleanUp();
@@ -306,41 +298,55 @@ void World::UnloadWindowResources(Window* window)
 	window_destroyed = true;
 }
 
-void World::AddEntity(Entity* entity) 
+void World::AddObject(GameObject* object)
 {
-	if (!entity)
+	if (!object)
 		return;
 
-	if (in_logic_tick)
-		new_entities.push(entity);
-	else
-		InternalAddEntity(entity);
+	new_objects.push(object);
 }
 
-void World::InternalAddEntity(Entity* entity) 
+void World::InternalSpawnObject(GameObject* object)
 {
-	entities.push_back(entity);
-	entity->SetWorld(this);
+	game_objects.push_back(object);
+	object->SetOwner(this);
 
-	if (!main_camera && entity->GetTags() & E_TAG_PLAYER)
+	for (Component* component : object->GetAllComponents())
+		if (component != nullptr)
+			InternalAddComponent(component);
+}
+
+void World::InternalAddComponent(Component* component) 
+{
+	//Check for camera
+	if(!main_camera && component->HasTag(OBJ_TAG_PLAYER))
 	{
-		main_camera = entity->GetComponent<CameraComponent>();
+		CameraComponent* camera = Cast<CameraComponent>(component);
 
-		if (main_camera)
-			LOG(Log, "Found Camera component to use as main");
+		if (camera)
+		{
+			LOG(Log, "Found player Camera to use as main");
+			main_camera = camera;
+		}
 	}
 
-	if (!sun_light)
+	//Check for sun
+	if(!sun_light)
 	{
-		sun_light = entity->GetComponent<DirectionalLightComponent>();
+		DirectionalLightComponent* sun = Cast<DirectionalLightComponent>(component);
 
-		if (sun_light)
-			LOG(Log, "Found directional light component to use as sun");
+		if (sun)
+		{
+			LOG(Log, "Found light to use as sun");
+			sun_light = sun;
+		}
 	}
 
 	if (renderer)
-		renderer->AddEntityToQueue(entity);
+		renderer->HandleNewComponent(component);
 
+	/*
 	if (physics_scene)
 		physics_scene->AddEntityToLevel(entity);
+	*/
 }

@@ -10,4 +10,12 @@
 #define POOT_VERSION_MINOR 0
 #define POOT_VERSION_PATCH 1
 
+
 #define Super __super
+
+
+template<class Type, class Class>
+inline Type* Cast(Class* object)
+{
+	return dynamic_cast<Type*>(object);
+}

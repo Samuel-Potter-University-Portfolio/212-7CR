@@ -1,7 +1,6 @@
 #pragma once
 #include "API.h"
 #include "Component.h"
-#include "Entity.h"
 #include "Model.h"
 #include "Shader.h"
 #include "Transform.h"
@@ -10,7 +9,7 @@
 #define MAX_MODEL_UNITS 16
 
 
-class POOT_API ModelComponentBase : public Component
+class POOT_API ModelComponentBase : public Component3D
 {
 private:
 	bool is_visable = true;
@@ -24,7 +23,7 @@ public:
 	virtual Shader* GetShader() = 0;
 	virtual Model* GetModel() = 0;
 
-	inline const bool IsVisable() { return IsActive() && (parent ? parent->IsVisable() && is_visable : is_visable); }
+	inline const bool IsVisable() { return IsActive() && is_visable; }
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
 	inline void SetTextureUnit(unsigned int i, GLuint texture_id) { if (i < MAX_MODEL_UNITS) textures[i] = texture_id; }

@@ -1,13 +1,15 @@
 #pragma once
 #include "API.h"
-#include "Entity.h"
+#include "GameObject.h"
 
-class POOT_API DebugPlayer : public Entity
+class POOT_API DebugPlayer : public GameObject3D
 {
 public:
 	DebugPlayer();
 
-	virtual void LogicTick(float delta_time) override;
-	virtual void WindowTick(float delta_time) override;
+protected:
+	//virtual void BuildComponents() override;
+
+	virtual void Tick(float delta_time) override;
 };
 

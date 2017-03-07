@@ -2,7 +2,7 @@
 #include "API.h"
 #include "Component.h"
 
-class POOT_API CameraComponent : public Component
+class POOT_API CameraComponent : public Component3D
 {
 private:
 	glm::mat4 projection_matrix;

@@ -1,8 +1,8 @@
 #pragma once
-#include <Entity.h>
+#include <GameObject.h>
 #include <ModelComponent.h>
 
-class BasicBox : public Entity
+class BasicBox : public GameObject3D
 {
 private:
 	ModelComponent* model;
@@ -10,6 +10,6 @@ private:
 public:
 	BasicBox();
 
-	virtual void WindowBegin() override;
+	virtual void BuildComponents() override;
 };
 

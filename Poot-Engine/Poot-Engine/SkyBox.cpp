@@ -4,14 +4,12 @@
 
 SkyBox::SkyBox()
 {
-	tags |= E_TAG_SKYBOX;
+	SetTags(OBJ_TAG_SKYBOX);
 	model_comp = MakeComponent<ModelComponent>();
 }
 
-
-void SkyBox::WindowBegin() 
+void SkyBox::BuildComponents()
 {
-	__super::WindowBegin();
 	model_comp->model = g_game->GetWindow()->GetModelLoader()["skybox"];
 	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["skybox"];
 	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader().GetCubeMap("Resources/Skybox/TropicalSunnyDay.png"));

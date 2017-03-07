@@ -4,8 +4,8 @@
 #include <queue>
 
 #include "Renderer.h"
-#include "Entity.h"
-#include "PhysicsScene.h"
+#include "GameObject.h"
+//TODO - UPDATE #include "PhysicsScene.h"
 #include "CameraComponent.h"
 #include "DirectionalLightComponent.h"
 
@@ -13,13 +13,11 @@ class POOT_API World
 {
 private:
 	Renderer* renderer;
-	PhysicsScene* physics_scene;
+	//TODO - UPDATE PhysicsScene* physics_scene;
 
-	std::vector<Entity*> entities;
-	std::queue<Entity*> new_entities;
+	std::vector<GameObject*> game_objects;
+	std::queue<GameObject*> new_objects;
 	
-	void InternalAddEntity(Entity* entity);
-
 	CameraComponent* main_camera;
 	DirectionalLightComponent* sun_light;
 
@@ -53,7 +51,7 @@ public:
 
 
 	inline Renderer* GetRenderer() { return renderer; }
-	inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
+	//TODO - UPDATE inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }
@@ -65,8 +63,13 @@ public:
 //Entity control
 public:
 	//Memory management control should be passed onto World
-	void AddEntity(Entity* entity);
+	void AddObject(GameObject* object);
 
+private:
+	void InternalSpawnObject(GameObject* object);
+	void InternalAddComponent(Component* component);
+
+	/*
 	//Component fetching
 	template<typename EntType>
 	EntType* GetFirstEntity()
@@ -93,5 +96,6 @@ public:
 		}
 		return actual_ents;
 	}
+	*/
 };
 

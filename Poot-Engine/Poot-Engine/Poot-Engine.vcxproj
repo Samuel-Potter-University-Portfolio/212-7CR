@@ -125,60 +125,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AABoxCollider.cpp" />
-    <ClCompile Include="BaseBodyComponent.cpp" />
-    <ClCompile Include="BaseColliderComponent.cpp" />
-    <ClCompile Include="BitmapShader.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DebugPlayer.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Local.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
-    <ClCompile Include="PhysicsScene.cpp" />
-    <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SkyboxShader.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sun.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="UIShader.cpp" />
+    <ClCompile Include="Transform2D.cpp" />
+    <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AABoxCollider.h" />
     <ClInclude Include="API.h" />
-    <ClInclude Include="BaseBodyComponent.h" />
-    <ClInclude Include="BaseColliderComponent.h" />
-    <ClInclude Include="BitmapShader.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugPlayer.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="DirectionalLightComponent.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Local.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Misc.h" />
@@ -187,34 +179,27 @@
     <ClInclude Include="ModelComponentBase.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="OBJLoader.h" />
-    <ClInclude Include="PhysicsScene.h" />
-    <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SkyboxShader.h" />
-    <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sun.h" />
-    <ClInclude Include="TextComponent.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="UIShader.h" />
+    <ClInclude Include="Transform2D.h" />
+    <ClInclude Include="UIElement.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Bitmap.frag.glsl" />
-    <None Include="Shaders\Bitmap.vert.glsl" />
     <None Include="Shaders\Default.frag.glsl" />
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />
     <None Include="Shaders\Skybox.vert.glsl" />
-    <None Include="Shaders\UI.frag.glsl" />
-    <None Include="Shaders\UI.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,11 +3,10 @@
 #include "Logger.h"
 
 DirectionalLightComponent::DirectionalLightComponent()
-	: direction(glm::vec3(0, -1, 0)),
-	colour(glm::vec3(1, 1, 1)),
-	intensity(1)
 {
-	
+	direction = glm::vec3(0, -1, 0);
+	colour = glm::vec3(1, 1, 1);
+	intensity = 1.0f;
 }
 
 void DirectionalLightComponent::SetDirection(glm::vec3 dir)

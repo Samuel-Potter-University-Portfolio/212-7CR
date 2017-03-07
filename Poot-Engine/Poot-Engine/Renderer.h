@@ -1,27 +1,27 @@
 #pragma once
 #include "API.h"
 #include "Model.h"
-#include "Entity.h"
 #include "ModelComponentBase.h"
 
 #include <map>
+#include <vector>
 
 
-struct RenderSettings 
+struct POOT_API RenderSettings
 {
 	float aspect_ratio = 1.0f;
 	class CameraComponent* camera = nullptr;
 
-	Tags whitelist = E_TAG_ALL;
-	Tags blacklist = E_TAG_NONE;
+	Tag whitelist = OBJ_TAG_ALL;
+	Tag blacklist = OBJ_TAG_NONE;
 
 	class FrameBuffer* frame_buffer = nullptr;
 
-	Tags shader_override_tags = E_TAG_ALL;
+	Tag shader_override_tags = OBJ_TAG_ALL;
 	class Shader* shader_override = nullptr;
 };
 
-struct ShaderModel 
+struct POOT_API ShaderModel
 {
 	Model* model;
 	Shader* shader;
@@ -51,7 +51,7 @@ public:
 	Renderer();
 	~Renderer();
 
-	void AddEntityToQueue(Entity* entity);
+	void HandleNewComponent(Component* component);
 
 	void CleanUp();
 

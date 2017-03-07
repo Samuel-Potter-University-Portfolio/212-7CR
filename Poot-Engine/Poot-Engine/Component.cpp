@@ -1,73 +1,56 @@
 #include "Component.h"
-#include "Entity.h"
-#include <gtx\rotate_vector.hpp>
+#include "GameObject.h"
 
-#define PI 3.141592653589793f
-#define RAD_DEG(x) (x * PI/180.0f)
 
-glm::mat4 Component::GetTransformationMatrix(float lerp_factor)
+Component::Component()
 {
-	return (parent ? parent->transform.GetMatrix(lerp_factor) * transform.GetMatrix(lerp_factor) : transform.GetMatrix(lerp_factor));
 }
 
-void Component::LogicTick(float delta_time)
+
+Component::~Component()
 {
-	__super::LogicTick(delta_time);
-	transform.LogicUpdate();
 }
 
-glm::vec3 Component::GetWorldLocation()
+void Component::WindowBegin() 
 {
-	if(!parent)
-		return transform.location;
-
-	const glm::vec3 local_location = transform.location;
-	const glm::vec3 parent_rotation = parent->transform.rotation;
-
-	glm::vec3 location = 
-		glm::rotateX(
-			glm::rotateY(
-				glm::rotateZ(local_location, RAD_DEG(parent_rotation.z)),
-			RAD_DEG(parent_rotation.y)),
-		RAD_DEG(parent_rotation.x));
-
-	return parent->transform.location + location;
+	Super::WindowBegin();
+	Begin();
 }
 
-glm::vec3 Component::GetWorldLocation(float lerp) 
+void Component::LogicTick(float delta_time) 
 {
-	if (!parent)
-		return transform.GetLerpLocation(lerp);
-
-	const glm::vec3 local_location = transform.GetLerpLocation(lerp);
-	const glm::vec3 parent_rotation = parent->transform.GetLerpRotation(lerp);
-
-	glm::vec3 location =
-		glm::rotateX(
-			glm::rotateY(
-				glm::rotateZ(local_location, RAD_DEG(parent_rotation.z)),
-			RAD_DEG(parent_rotation.y)),
-		RAD_DEG(parent_rotation.x));
-
-	return parent->transform.GetLerpLocation(lerp) + location;
+	Tick(delta_time);
+	Super::LogicTick(delta_time);
 }
 
-glm::vec3 Component::GetWorldRotation() 
+void Component3D::LogicTick(float delta_time)
 {
-	return parent ? parent->transform.rotation + transform.rotation : transform.rotation;
+	Super::LogicTick(delta_time);
+	local_transform.LogicUpdate();
 }
 
-glm::vec3 Component::GetWorldRotation(float lerp) 
+void Component2D::LogicTick(float delta_time)
 {
-	return parent ? parent->transform.GetLerpRotation(lerp) + transform.GetLerpRotation(lerp) : transform.GetLerpRotation(lerp);
+	Super::LogicTick(delta_time);
+	local_transform.LogicUpdate();
+}
+	
+void Component3D::SetOwner(Object* object) 
+{
+	Super::SetOwner(object);
+
+	GameObject3D* game_object = Cast<GameObject3D>(object);
+
+	if(game_object)
+		SetTransformParent(game_object);
 }
 
-glm::vec3 Component::GetWorldScale()
+void Component2D::SetOwner(Object* object)
 {
-	return parent ? parent->transform.scale * transform.scale : transform.scale;
-}
+	Super::SetOwner(object);
 
-glm::vec3 Component::GetWorldScale(float lerp)
-{
-	return parent ? parent->transform.GetLerpScale(lerp) * transform.GetLerpScale(lerp) : transform.GetLerpScale(lerp);
+	GameObject2D* game_object = Cast<GameObject2D>(object);
+
+	if (game_object)
+		SetTransformParent(game_object);
 }

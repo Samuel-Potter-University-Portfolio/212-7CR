@@ -1,10 +1,10 @@
 #pragma once
 #include "API.h"
-#include "Entity.h"
+#include "GameObject.h"
 #include "ModelComponent.h"
 
 
-class POOT_API SkyBox : public Entity
+class POOT_API SkyBox : public GameObject3D
 {
 private:
 	ModelComponent* model_comp;
@@ -13,6 +13,6 @@ public:
 	SkyBox();
 
 protected:
-	virtual void WindowBegin() override;
+	virtual void BuildComponents() override;
 };
 

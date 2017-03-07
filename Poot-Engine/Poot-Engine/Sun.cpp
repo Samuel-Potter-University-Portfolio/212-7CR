@@ -1,12 +1,11 @@
 #include "Sun.h"
+#include "Logger.h"
 
-
-
-Sun::Sun()
+Sun::Sun(const glm::vec3 direction, const glm::vec3 colour, const float intensity)
 {
-	tags |= E_TAG_ENV;
+	SetTags(OBJ_TAG_ENV);
 	directional_light = MakeComponent<DirectionalLightComponent>();
-	directional_light->colour = glm::vec3(1, 0.961f, 0.8f);
+	directional_light->SetDirection(direction);
+	directional_light->colour = colour;
+	directional_light->intensity = intensity;
 }
-
-

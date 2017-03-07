@@ -1,46 +1,46 @@
 #pragma once
 #include "API.h"
 #include "Tickable.h"
-#include "Transform.h"
+#include "Object.h"
+#include "Local.h"
 
-
-class POOT_API Component : public Tickable
+/*
+Basic component meant for attaching to game objects
+Every logic process should be called through the component's parent,
+including memory management
+*/
+class POOT_API Component : public Object
 {
-private:
-	bool active = true;
+public:
+	Component();
+	virtual ~Component();
 
 protected:
-	class Entity* parent;
-
-protected:
-	//virtual void LogicBegin();
-	//virtual void WindowBegin();
+	//virtual void LogicBegin() {}
+	virtual void WindowBegin() override;
 
 	virtual void LogicTick(float delta_time) override;
-	//virtual void WindowTick(float delta_time);
+	//virtual void WindowTick(float delta_time) {}
+
+	virtual void Begin() {}
+	virtual void Tick(float delta_time) {}
+};
+
+class POOT_API Component3D : public Local3D, public Component
+{
+protected:
+	virtual void LogicTick(float delta_time) override;
 
 public:
-	Transform transform;
+	virtual void SetOwner(Object* object) override;
+};
 
-	virtual void LogicDestroy() {};
-	virtual void WindowDestroy() {};
+class POOT_API Component2D : public Local2D, public Component
+{
+protected:
+	virtual void LogicTick(float delta_time) override;
 
-	void SetParent(class Entity* parent) { this->parent = parent; }
-
-	inline const bool IsActive() { return active; }
-	inline void SetActive(const bool active) { this->active = active; }
-
-	inline class Entity* GetParent() { return parent; }
-
-	glm::mat4 GetTransformationMatrix(float lerp_factor);
-
-	glm::vec3 GetWorldLocation();
-	glm::vec3 GetWorldLocation(float lerp);
-
-	glm::vec3 GetWorldRotation();
-	glm::vec3 GetWorldRotation(float lerp);
-
-	glm::vec3 GetWorldScale();
-	glm::vec3 GetWorldScale(float lerp);
+public:
+	virtual void SetOwner(Object* object) override;
 };
 

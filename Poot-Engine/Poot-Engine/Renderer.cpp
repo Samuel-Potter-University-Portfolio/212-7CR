@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "ModelComponentBase.h"
 #include "FrameBuffer.h"
-#include "TextComponent.h"
 #include "Logger.h"
 
 
@@ -16,25 +15,23 @@ Renderer::~Renderer()
 	LOG(Log, "Instanced Renderer destroyed");
 }
 
-void Renderer::AddEntityToQueue(Entity* entity) 
+
+void Renderer::HandleNewComponent(Component* component)
 {
-	std::vector<ModelComponentBase*> model_comps = entity->GetAllComponents<ModelComponentBase>();
-	
-	for (ModelComponentBase* model_comp: model_comps)
+	ModelComponentBase* model_comp = Cast<ModelComponentBase>(component);
+
+	// Ignore if invalid component
+	if (!model_comp)
+		return;
+
+	//Temporarily store component, if waiting on model load
+	if (!model_comp->GetModel() || !model_comp->GetShader())
 	{
-		//Ignore if invalid component
-		if (!model_comp)
-			continue;
-
-		//Temporarily store component, if waiting on model load
-		if (!model_comp->GetModel() || !model_comp->GetShader())
-		{
-			pending_loads.push_back(model_comp);
-			continue;
-		}
-
-		AddComponentToQueue(model_comp);
+		pending_loads.push_back(model_comp);
+		return;
 	}
+
+	AddComponentToQueue(model_comp);
 }
 
 void Renderer::AddComponentToQueue(ModelComponentBase* model_comp) 
@@ -105,7 +102,7 @@ void Renderer::Render(RenderSettings& render_settings)
 	bool is_shader_overridden = false;
 
 	if (render_settings.shader_override)
-		is_shader_overridden = render_settings.shader_override_tags != E_TAG_NONE;
+		is_shader_overridden = render_settings.shader_override_tags != OBJ_TAG_NONE;
 
 
 	//Instanced rendering
@@ -133,27 +130,16 @@ void Renderer::Render(RenderSettings& render_settings)
 				continue;
 
 			//Only render if tags are valid
-			Entity* parent = comp->GetParent();
-			Tags tags = parent ? parent->GetTags() : E_TAG_NONE;
-
-			if (render_settings.whitelist != E_TAG_ALL && !(tags & render_settings.whitelist))
+			if (render_settings.whitelist != OBJ_TAG_ALL && !comp->HasTag(render_settings.whitelist))
 				continue;
 
-			if (render_settings.blacklist != E_TAG_NONE && (tags & render_settings.blacklist))
+			if (render_settings.blacklist != OBJ_TAG_NONE && comp->HasTag(render_settings.blacklist))
 				continue;
-
-			//TODO - Remove; TEMP don't render text to overriden shader
-			if (is_shader_overridden)
-			{
-				TextComponent* text = dynamic_cast<TextComponent*>(comp);
-				if(text)
-					continue;
-			}
 
 			//If should be overridden when active
 			if (is_shader_overridden)
 			{
-				const bool use_override = (tags & render_settings.shader_override_tags);
+				const bool use_override = comp->HasTag(render_settings.shader_override_tags);
 
 				//Make sure current shader is shader override
 				if (use_override && current_shader != render_settings.shader_override)

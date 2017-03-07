@@ -9,7 +9,7 @@ uniform sampler2D texture0;
 uniform float shininess;
 uniform float roughness;
 
-const float minimum_brightness = 0.5;
+const float minimum_brightness = 0.2;
 uniform vec3 sun_direction;
 uniform vec3 sun_colour;
 
