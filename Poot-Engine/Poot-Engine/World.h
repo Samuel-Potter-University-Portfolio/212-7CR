@@ -60,7 +60,7 @@ public:
 	inline void SetSunLight(DirectionalLightComponent* sun) { sun_light = sun; }
 
 
-//Entity control
+//Object control
 public:
 	//Memory management control should be passed onto World
 	void AddObject(GameObject* object);
@@ -69,33 +69,46 @@ private:
 	void InternalSpawnObject(GameObject* object);
 	void InternalAddComponent(Component* component);
 
-	/*
-	//Component fetching
-	template<typename EntType>
-	EntType* GetFirstEntity()
+
+//Object fetching
+public:
+	inline const std::vector<GameObject*>& GetAllObjects() { return game_objects; };
+
+	inline const std::vector<GameObject*>& GetAllObjects(Tag tags = OBJ_TAG_ALL) 
 	{
-		for (Entity* ent : entities)
+		std::vector<GameObject*> objects;
+
+		for (GameObject* object : game_objects)
 		{
-			Entity* actual_ent = dynamic_cast<Entity*>(ent);
-			if (actual_ent)
-				return actual_ent;
+			if (object->HasTag(tags))
+				objects.push_back(object);
+		}
+		return objects;
+	};
+
+	template<typename Obj>
+	inline Obj* GetFirstObject(Tag tags = OBJ_TAG_ALL)
+	{
+		for (GameObject* object : game_objects)
+		{
+			Obj* actual_obj = Cast<Obj>(object);
+			if (actual_obj && object->HasTag(tags))
+				return actual_obj;
 		}
 		return nullptr;
 	}
-
-	template<typename EntType>
-	std::vector<EntType*> GetAllEntities()
+	template<typename Obj>
+	inline std::vector<Obj*> GetAllObjects(Tag tags = OBJ_TAG_ALL)
 	{
-		std::vector<EntType*> actual_ents;
+		std::vector<Obj*> objects;
 
-		for (Entity* ent : entities)
+		for (GameObject* object : game_objects)
 		{
-			EntType* actual_ent = dynamic_cast<EntType*>(ent);
-			if (actual_ent)
-				actual_ents.push_back(actual_ent);
+			Obj* actual_obj = Cast<Obj>(object);
+			if (actual_obj && object->HasTag(tags))
+				objects.push_back(actual_obj);
 		}
-		return actual_ents;
+		return objects;
 	}
-	*/
 };
 

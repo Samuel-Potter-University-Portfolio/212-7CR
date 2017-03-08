@@ -1,36 +1,50 @@
 #include "Keyboard.h"
 #include "Window.h"
+#include "InputComponent.h"
 #include "Logger.h"
 
 
-Keyboard* active_keyboard;
+Keyboard* main_keyboard = nullptr;
 
 
 void Keyboard::Register(Window* window)
 {
 	GLFWwindow* glfw_window = window->GetGLFWwindow();
-	
-	if (!active_keyboard)
-		active_keyboard = this;
 
-	else
+	if (!glfw_window)
 	{
-		LOG(Warning, "Cannot have 2 active keyboards at once")
+		LOG(Error, "Cannot setup mouse with invalid glfw window");
 		return;
 	}
 
-	glfwSetKeyCallback(glfw_window, 
-		[](GLFWwindow* window, int key, int scan_code, int action, int mods){
-			if (active_keyboard)
-				active_keyboard->OnKey(key, scan_code, action, mods);
+	if (main_keyboard)
+	{
+		LOG(Warning, "Cannot setup multiple keyboards at the same time");
+		return;
+	}
+
+	main_keyboard = this;
+
+	glfwSetKeyCallback(glfw_window,
+		[](GLFWwindow* window, int key, int scan_code, int action, int mods) 
+		{
+			main_keyboard->OnKey(key, action, mods, scan_code);
 		}
 	);
 
 	LOG(Log, "Keyboard setup");
 }
 
-void Keyboard::OnKey(int key, int scan_code, int action, int mods) 
+void Keyboard::HandleNewComponent(Component* component)
 {
-	if (key >= 0 && key <= GLFW_KEY_LAST)
-		key_states[key] = action;
+	InputComponent* input = Cast<InputComponent>(component);
+
+	if (input)
+		input_listeners.push_back(input);
+}
+
+void Keyboard::OnKey(int key, int action, int mods, int scan_code)
+{
+	for (InputComponent* listener : input_listeners)
+		listener->OnKey(key, action, mods, scan_code);
 }

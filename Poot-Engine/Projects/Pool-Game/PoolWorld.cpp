@@ -16,7 +16,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	Super::LoadLogicResources(game_logic);
 
 	AddObject(new DebugPlayer);
-	AddObject(new SkyBox);
+	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
 	LOG(Log, "C");

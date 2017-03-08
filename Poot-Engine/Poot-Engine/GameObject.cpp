@@ -1,5 +1,8 @@
 #include "GameObject.h"
 #include "Component.h"
+#include "Model.h"
+#include "Shader.h"
+#include "Game.h"
 #include "Logger.h"
 
 
@@ -68,6 +71,26 @@ void GameObject::AddComponent(Component* component)
 
 	component->SetOwner(this);
 	components.push_back(component);
+}
+
+Model* GameObject::LoadModelAsset(std::string key)
+{
+	return g_game->GetWindow()->GetModelLoader()[key];
+}
+
+Shader* GameObject::LoadShaderAsset(std::string key)
+{
+	return g_game->GetWindow()->GetShaderLoader()[key];
+}
+
+GLuint GameObject::LoadTextureAsset(std::string key)
+{
+	return g_game->GetWindow()->GetTextureLoader()[key];
+}
+
+GLuint GameObject::LoadCubeMapAsset(std::string key)
+{
+	return g_game->GetWindow()->GetTextureLoader().GetCubeMap(key);
 }
 
 void GameObject3D::SetOwner(Object* object)

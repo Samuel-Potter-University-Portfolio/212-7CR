@@ -97,7 +97,6 @@ void Window::LaunchMainLoop()
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
-		mouse.Update();
 
 		//Tick logic
 		if(g_game->IsReady())

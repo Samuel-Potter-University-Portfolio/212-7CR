@@ -1,19 +1,14 @@
 #pragma once
 #include "API.h"
 #include "Component.h"
-#include "Tickable.h"
+#include "GameObject.h"
 
-#include <vector>
 
-class POOT_API UIElement : public Tickable
+class POOT_API UIElement : public GameObject2D
 {
-private:
-	class World* world;
-	std::vector<Component*> components;
-	bool is_visable = true;
-
 public:
+	glm::vec2 anchor;
+
 	UIElement();
-	~UIElement();
 };
 

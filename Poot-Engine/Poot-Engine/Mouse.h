@@ -1,39 +1,33 @@
 #pragma once
 #include "API.h"
+
 #include <glm.hpp>
 #include <GL/glew.h>
 #include <GLFW\glfw3.h>
+#include <vector>
 
 
-class POOT_API Mouse
+class POOT_API Mouse 
 {
 private:
-	int button_states[GLFW_MOUSE_BUTTON_LAST + 1]{ GLFW_RELEASE };
-
 	class Window* window;
 	GLFWwindow* glfw_window;
 
-	glm::vec2 location;
-	glm::vec2 velocity;
-	glm::vec2 current_velocity;
-	bool locked = false;
+	bool is_locked;
+	glm::vec2 mouse_location;
+
+	std::vector<class InputComponent*> input_listeners;
 
 public:
-
 	void Register(class Window* window);
-	void Update();
+	void HandleNewComponent(class Component* component);
 
 	void OnMouseMove(float x, float y);
 	void OnButton(int button, int action, int mods);
 
 	void Lock();
 	void Unlock();
+	inline bool IsLocked() { return is_locked; }
 
-	inline bool IsLocked() { return locked; }
-	inline int GetButtonState(const int button) { return button_states[button]; }
-
-	inline glm::vec2 GetLocation() { return location; }
-	inline glm::vec2 GetVelocity() { return velocity; }
-	glm::vec2 GetScaledVelocity();
+	inline glm::vec2 GetLocation() { return mouse_location; }
 };
-

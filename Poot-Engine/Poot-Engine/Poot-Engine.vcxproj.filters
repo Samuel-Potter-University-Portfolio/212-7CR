@@ -171,6 +171,9 @@
     <ClCompile Include="Local.cpp">
       <Filter>Source Files\Core\Maths</Filter>
     </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="Local.h">
       <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,8 @@
 #include "Game.h"
 
 
-SkyBox::SkyBox()
+SkyBox::SkyBox(const std::string cube_map_key)
+	: cube_map_key(cube_map_key)
 {
 	SetTags(OBJ_TAG_SKYBOX);
 	model_comp = MakeComponent<ModelComponent>();
@@ -10,7 +11,7 @@ SkyBox::SkyBox()
 
 void SkyBox::BuildComponents()
 {
-	model_comp->model = g_game->GetWindow()->GetModelLoader()["skybox"];
-	model_comp->shader = g_game->GetWindow()->GetShaderLoader()["skybox"];
-	model_comp->SetTextureUnit(0, g_game->GetWindow()->GetTextureLoader().GetCubeMap("Resources/Skybox/TropicalSunnyDay.png"));
+	model_comp->model = LoadModelAsset("skybox");
+	model_comp->shader = LoadShaderAsset("skybox");
+	model_comp->SetTextureUnit(0, LoadCubeMapAsset(cube_map_key));
 }

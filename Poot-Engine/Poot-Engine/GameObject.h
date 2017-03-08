@@ -4,7 +4,9 @@
 #include "Component.h"
 #include "Local.h"
 
+#include <GL/glew.h>
 #include <vector>
+#include <string>
 
 
 /*
@@ -31,6 +33,11 @@ protected:
 
 	virtual void Begin() {}
 	virtual void Tick(float delta_time) {}
+
+	static class Model* LoadModelAsset(std::string key);
+	static class Shader* LoadShaderAsset(std::string key);
+	static GLuint LoadTextureAsset(std::string key);
+	static GLuint LoadCubeMapAsset(std::string key);
 
 public:
 	GameObject();

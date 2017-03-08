@@ -1,88 +1,97 @@
 #include "Mouse.h"
+#include "InputComponent.h"
 #include "Window.h"
 #include "Logger.h"
 
 
-Mouse* active_mouse;
+Mouse* main_mouse = nullptr;
 
 
-void Mouse::Register(Window* window) 
+void Mouse::Register(class Window* window)
 {
 	this->window = window;
 	glfw_window = window->GetGLFWwindow();
 
-	if (!active_mouse)
-		active_mouse = this;
-
-	else
+	if (!glfw_window)
 	{
-		LOG(Warning, "Cannot have 2 active mouses at once")
+		LOG(Error, "Cannot setup mouse with invalid glfw window");
 		return;
 	}
 
-	glfwSetCursorPosCallback(glfw_window, 
+	if (main_mouse)
+	{
+		LOG(Warning, "Cannot setup multiple mouses at the same time");
+		return;
+	}
+
+	main_mouse = this;
+	is_locked = false;
+
+	glfwSetCursorPosCallback(glfw_window,
 		[](GLFWwindow* window, double x, double y)
 		{
-			if (active_mouse)
-				active_mouse->OnMouseMove(x, y);
+			main_mouse->OnMouseMove(x, y);
 		}
 	);
 
 	glfwSetMouseButtonCallback(glfw_window,
 		[](GLFWwindow* window, int button, int action, int mods)
 		{
-			if (active_mouse)
-				active_mouse->OnButton(button, action, mods);
+			main_mouse->OnButton(button, action, mods);
 		}
 	);
 
 	LOG(Log, "Mouse setup");
 }
 
-void Mouse::OnButton(int button, int action, int mods) 
+void Mouse::HandleNewComponent(Component* component) 
 {
-	if (button >= 0 && button <= GLFW_KEY_LAST)
-		button_states[button] = action;
+	InputComponent* input = Cast<InputComponent>(component);
+
+	if (input)
+		input_listeners.push_back(input);
 }
 
 void Mouse::OnMouseMove(float x, float y) 
 {
-	float width = window->GetWidth();
-	float height = window->GetHeight();
+	if (is_locked)
+	{
+		float width = window->GetWidth();
+		float height = window->GetHeight();
+		width = (width != 0 ? width : 1.0f);
+		height = (height != 0 ? height : 1.0f);
 
-	width = width ? width : 1;
-	height = height ? height : 1;
+		x -= width / 2.0f;
+		y -= height / 2.0f;
 
-	location.x = (x / width - 0.5f) * 2.0f;
-	location.y = (0.5f - (y / height)) * 2.0f;
-	current_velocity += location;
 
-	if (locked)
 		glfwSetCursorPos(glfw_window,
 			width / 2.0f,
 			height / 2.0f
-	);
+		);
+	}
+
+	mouse_location.x = x;
+	mouse_location.y = y;
+
+	for (InputComponent* listener : input_listeners)
+		listener->OnMouseMove(x, y, is_locked);
 }
 
-glm::vec2 Mouse::GetScaledVelocity() 
-{ 
-	return velocity * glm::vec2(window->GetWidth(), window->GetHeight()); 
-}
-
-void Mouse::Update()
+void Mouse::OnButton(int button, int action, int mods) 
 {
-	velocity = current_velocity;
-	current_velocity *= 0.0f;
+	for (InputComponent* listener : input_listeners)
+		listener->OnKey(button, action, mods);
 }
 
 void Mouse::Lock() 
 {
+	is_locked = true;
 	glfwSetInputMode(glfw_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-	locked = true;
 }
 
 void Mouse::Unlock() 
 {
+	is_locked = false;
 	glfwSetInputMode(glfw_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	locked = false;
 }

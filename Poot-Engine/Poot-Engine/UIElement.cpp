@@ -4,9 +4,5 @@
 
 UIElement::UIElement()
 {
-}
-
-
-UIElement::~UIElement()
-{
+	anchor = glm::vec2(0);
 }

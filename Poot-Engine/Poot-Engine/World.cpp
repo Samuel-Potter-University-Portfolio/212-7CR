@@ -342,8 +342,12 @@ void World::InternalAddComponent(Component* component)
 		}
 	}
 
+	//Add to components
 	if (renderer)
 		renderer->HandleNewComponent(component);
+
+	g_game->GetWindow()->GetMouse().HandleNewComponent(component);
+	g_game->GetWindow()->GetKeyboard().HandleNewComponent(component);
 
 	/*
 	if (physics_scene)

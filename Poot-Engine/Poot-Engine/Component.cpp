@@ -4,6 +4,7 @@
 
 Component::Component()
 {
+	SetTags(OBJ_TAG_COMPONENT);
 }
 
 

@@ -1,17 +1,19 @@
 #pragma once
 #include "API.h"
+
 #include <GL/glew.h>
 #include <GLFW\glfw3.h>
+#include <vector>
+
 
 class POOT_API Keyboard
 {
 private:
-	int key_states[GLFW_KEY_LAST + 1]{GLFW_RELEASE};
+	std::vector<class InputComponent*> input_listeners;
 
 public:
 	void Register(class Window* window);
-	void OnKey(int key, int scan_code, int action, int mods);
+	void HandleNewComponent(class Component* component);
 
-	inline int GetKeyState(const int key) { return key_states[key]; }
+	void OnKey(int key, int action, int mods, int scan_code);
 };
-
