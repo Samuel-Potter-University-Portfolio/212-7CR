@@ -19,8 +19,6 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
-	LOG(Log, "C");
-	//sun->directional_light->SetDirection(glm::vec3(0, -1, 0));
 	AddObject(sun);
 
 

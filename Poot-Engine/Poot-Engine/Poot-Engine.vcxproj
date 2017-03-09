@@ -135,9 +135,11 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InstancedRenderer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Local.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="MasterRenderer.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -145,7 +147,6 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -171,9 +172,11 @@
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InstancedRenderer.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Local.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="MasterRenderer.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Model.h" />
@@ -183,7 +186,6 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OBJLoader.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="SkyBox.h" />

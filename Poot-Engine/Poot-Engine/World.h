@@ -3,7 +3,7 @@
 #include <vector>
 #include <queue>
 
-#include "Renderer.h"
+#include "MasterRenderer.h"
 #include "GameObject.h"
 //TODO - UPDATE #include "PhysicsScene.h"
 #include "CameraComponent.h"
@@ -12,7 +12,7 @@
 class POOT_API World
 {
 private:
-	Renderer* renderer;
+	MasterRenderer master_renderer;
 	//TODO - UPDATE PhysicsScene* physics_scene;
 
 	std::vector<GameObject*> game_objects;
@@ -50,7 +50,7 @@ public:
 	virtual void UnloadWindowResources(class Window* window);
 
 
-	inline Renderer* GetRenderer() { return renderer; }
+	inline MasterRenderer& GetMasterRenderer() { return master_renderer; }
 	//TODO - UPDATE inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }

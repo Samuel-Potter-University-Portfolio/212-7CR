@@ -96,9 +96,6 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
     <ClCompile Include="Tickable.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -174,6 +171,12 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="InstancedRenderer.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterRenderer.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -196,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files\Visual</Filter>
     </ClInclude>
     <ClInclude Include="Tickable.h">
       <Filter>Header Files\Core</Filter>
@@ -283,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="InputComponent.h">
       <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterRenderer.h">
+      <Filter>Header Files\Visual</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

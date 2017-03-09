@@ -6,7 +6,6 @@
 
 World::World()
 {
-	renderer = nullptr;
 	//physics_scene = nullptr;
 	main_camera = nullptr;
 	sun_light = nullptr;
@@ -129,15 +128,7 @@ void World::WindowTick(Window* window, float delta_time)
 	for (GameObject* object : game_objects)
 		object->HandleWindowTick(delta_time);
 	
-	if (renderer)
-	{
-		RenderSettings render_settings;
-		render_settings.aspect_ratio = window->GetAspectRatio();
-		render_settings.camera = main_camera;
-
-		renderer->AddRenderTarget(render_settings);
-		renderer->FullRender();
-	}
+	master_renderer.Render();
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -149,7 +140,7 @@ void World::LoadLogicResources(GameLogic* game_logic)
 
 void World::LoadWindowResources(Window* window)
 {
-	renderer = new Renderer;
+	master_renderer.Register(this);
 
 	//Load default models
 	//Quad
@@ -288,13 +279,7 @@ void World::UnloadLogicResources(GameLogic* game_logic)
 
 void World::UnloadWindowResources(Window* window) 
 {
-	if (renderer)
-	{
-		renderer->CleanUp();
-		delete renderer;
-		renderer = nullptr;
-	}
-
+	master_renderer.CleanUp();
 	window_destroyed = true;
 }
 
@@ -343,8 +328,7 @@ void World::InternalAddComponent(Component* component)
 	}
 
 	//Add to components
-	if (renderer)
-		renderer->HandleNewComponent(component);
+	master_renderer.HandleNewComponent(component);
 
 	g_game->GetWindow()->GetMouse().HandleNewComponent(component);
 	g_game->GetWindow()->GetKeyboard().HandleNewComponent(component);
