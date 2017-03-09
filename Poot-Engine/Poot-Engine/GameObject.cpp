@@ -48,17 +48,17 @@ void GameObject::WindowBegin()
 
 void GameObject::LogicTick(float delta_time)
 {
+	Super::LogicTick(delta_time);
 	Tick(delta_time);
 	for (Component* component : components)
 		component->HandleLogicTick(delta_time);
-	Super::LogicTick(delta_time);
 }
 
 void GameObject::WindowTick(float delta_time)
 {
+	Super::LogicTick(delta_time);
 	for (Component* component : components)
 		component->HandleWindowTick(delta_time);
-	Super::LogicTick(delta_time);
 }
 
 void GameObject::AddComponent(Component* component) 
@@ -105,14 +105,26 @@ void GameObject2D::SetOwner(Object* object)
 	SetTransformParent(Cast<Local2D>(object));
 }
 
+void GameObject3D::WindowBegin()
+{
+	Super::WindowBegin();
+	local_transform.LogicUpdate();
+}
+
 void GameObject3D::LogicTick(float delta_time)
 {
+	local_transform.LogicUpdate();
 	Super::LogicTick(delta_time);
+}
+
+void GameObject2D::WindowBegin()
+{
+	Super::WindowBegin();
 	local_transform.LogicUpdate();
 }
 
 void GameObject2D::LogicTick(float delta_time)
 {
-	Super::LogicTick(delta_time);
 	local_transform.LogicUpdate();
+	Super::LogicTick(delta_time);
 }

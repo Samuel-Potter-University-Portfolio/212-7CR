@@ -113,7 +113,9 @@ void InstancedRenderer::Render(RenderRequest& request)
 			current_shader->Render(camera, comp, tick_time);
 		}
 
-		current_shader->Stop();
 		glBindVertexArray(0);
 	}
+
+	if(current_shader)
+		current_shader->Stop();
 }

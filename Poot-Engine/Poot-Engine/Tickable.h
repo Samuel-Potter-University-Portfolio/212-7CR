@@ -5,9 +5,9 @@
 class POOT_API Tickable
 {
 private:
-	bool logic_begun;
-	bool window_begun;
-	bool active;
+	bool logic_begun = false;
+	bool window_begun = false;
+	bool active = true;
 
 protected:
 	virtual void LogicBegin() {}

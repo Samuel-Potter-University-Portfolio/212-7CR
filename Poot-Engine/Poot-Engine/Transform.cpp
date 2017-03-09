@@ -12,10 +12,14 @@
 
 
 Transform::Transform(const glm::vec3 location, const glm::vec3 rotation, const glm::vec3 scale)
-	: location(location), rotation(rotation), scale(scale),
-	  previous_location(location), previous_rotation(rotation), previous_scale(scale)
 {
+	this->location = location;
+	this->rotation = rotation;
+	this->scale = scale;
 
+	previous_location = location;
+	previous_rotation = rotation;
+	previous_scale = scale;
 }
 
 
@@ -61,8 +65,7 @@ glm::vec3 Transform::GetLerpLocation(float lerp)
 
 glm::vec3 Transform::GetLerpRotation(float lerp)
 {
-	return
-		glm::vec3(
+	return glm::vec3(
 			LerpAngle(previous_rotation.x, rotation.x, lerp),
 			LerpAngle(previous_rotation.y, rotation.y, lerp),
 			LerpAngle(previous_rotation.z, rotation.z, lerp)
@@ -89,7 +92,7 @@ glm::mat4& Transform::GetMatrix(float lerp_factor)
 	matrix = glm::rotate(matrix, RAD_DEG(rotation.z), glm::vec3(0, 0, 1));
 	matrix = glm::scale(matrix, GetLerpScale(lerp_factor));
 	matrix_built = true;
-
+	
 	return matrix;
 }
 

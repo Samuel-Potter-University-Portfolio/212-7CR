@@ -9,6 +9,9 @@ private:
 	float last_aspect_ratio = 0.0f;
 
 public:
+	bool use_latest_location = false;
+	bool use_latest_rotation = false;
+
 	float fov = 90.0f;
 	float near_plane = 0.1f;
 	float far_plane = 10000.0f;

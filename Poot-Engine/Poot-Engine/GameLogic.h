@@ -8,7 +8,7 @@ class POOT_API GameLogic
 {
 private:
 	std::thread* thread;
-	float last_tick_time;
+	float last_tick_end_time;
 
 	//Variables to keep track of current tick rate (debug logging)
 	float second_counter = 0;

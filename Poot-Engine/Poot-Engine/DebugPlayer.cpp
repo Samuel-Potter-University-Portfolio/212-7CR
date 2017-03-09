@@ -4,7 +4,8 @@
 DebugPlayer::DebugPlayer()
 {
 	SetTags(OBJ_TAG_PLAYER);
-	MakeComponent<CameraComponent>();
+	CameraComponent* camera = MakeComponent<CameraComponent>();
+	camera->use_latest_rotation = true;
 
 	input_component = MakeComponent<InputComponent>();
 }

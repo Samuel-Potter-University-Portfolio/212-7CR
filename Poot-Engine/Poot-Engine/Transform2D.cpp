@@ -50,22 +50,22 @@ void Transform2D::LogicUpdate()
 
 inline float LerpAngle(float a, float b, float lerp)
 {
-	return tan(atan(a) * lerp + atan(b) * (1.0f - lerp));
+	return tan(atan(a) * (1.0f - lerp) + atan(b) * lerp);
 }
 
 glm::vec2 Transform2D::GetLerpLocation(float lerp)
 {
-	return previous_location * lerp + location * (1.0f - lerp);
+	return previous_location * (1.0f - lerp) + location * lerp;
 }
 
 float Transform2D::GetLerpRotation(float lerp)
 {
-	return tan(atan(previous_rotation) * lerp + atan(rotation) * (1.0f - lerp));
+	return tan(atan(previous_rotation) * (1.0f - lerp) + atan(rotation) * lerp);
 }
 
 glm::vec2 Transform2D::GetLerpScale(float lerp)
 {
-	return previous_scale * lerp + scale * (1.0f - lerp);
+	return previous_scale * (1.0f - lerp) + scale * lerp;
 }
 
 glm::mat3& Transform2D::GetMatrix(float lerp_factor)

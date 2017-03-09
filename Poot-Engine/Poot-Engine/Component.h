@@ -29,6 +29,7 @@ protected:
 class POOT_API Component3D : public Local3D, public Component
 {
 protected:
+	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
 
 public:
@@ -38,6 +39,7 @@ public:
 class POOT_API Component2D : public Local2D, public Component
 {
 protected:
+	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
 
 public:

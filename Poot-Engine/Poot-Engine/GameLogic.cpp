@@ -32,43 +32,52 @@ void GameLogic::Launch()
 
 inline float GetTime()
 {
-	return System::GetSysTimeSeconds() + System::GetSysTimeMilli() / 1000.0f;
+	return glfwGetTime();
 }
 
 void GameLogic::LaunchMainLoop()
 {
 	g_game->SetLogicReady();
 
+	//Wait until ready
+	while (!g_game->IsReady())
+	{
+		int actual_sleep_time = (int)(total_sleep_time * 1000);
+		std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time));
+	}
+
+	last_tick_end_time = GetTime();
 	float delta_time = 0;
-	float desired_finish_time;
 	float sleep_time = 0;
 
 
 	while (!g_game->IsClosedRequested())
 	{
-		desired_finish_time = GetTime() + total_sleep_time;
+		float start_time = GetTime();
 
 		//Tick logic
-		if (g_game->IsReady())
-			Tick(delta_time);
+		Tick(delta_time);
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-
-		//Calculate corrected delta time
 		float current_time = GetTime();
-
-		delta_time = current_time - last_tick_time;
-		if (delta_time < 0.0f) //Minute ticked over
-			delta_time += 60.0f;
-		last_tick_time = current_time;
+		delta_time = current_time - last_tick_end_time;
+		last_tick_end_time = current_time;
 
 
-		sleep_time += desired_finish_time - current_time;
-		if (sleep_time > 0)
+		sleep_time += total_sleep_time - (current_time - start_time);
+		
+		if (sleep_time > 0.0f)
 		{
 			int actual_sleep_time = (int)(sleep_time * 1000);
+
+			float sleep_start = GetTime();
 			std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time));
-			sleep_time -= actual_sleep_time / 1000.0f;
+			sleep_time -= GetTime() - sleep_start;
+
+			if (sleep_time < 0)
+				sleep_time = 0.0f;
 		}
+
 	}
 
 	//Ensure other threads have registered close request
@@ -93,6 +102,7 @@ void GameLogic::Tick(float delta_time)
 		second_counter -= 1.0f;
 		ticks_last_second = ticks_this_second;
 		ticks_this_second = 0;
+		LOG(Log, "%i", ticks_last_second);
 	}
 
 	World* world = g_game->GetWorld();
@@ -103,17 +113,7 @@ void GameLogic::Tick(float delta_time)
 float GameLogic::GetNormalizedTickTime() 
 {
 	float current_time = GetTime();
+	const float next_tick_time = last_tick_end_time + total_sleep_time;
 
-	//Minute must have ticked over
-	if (current_time < last_tick_time)
-		current_time += 60.0f;
-
-	const float value = 1.0f - (current_time - last_tick_time) / (total_sleep_time * 2.0f);
-
-	if (value < 0.0f)
-		return 0.0f;
-	if (value > 1.0f)
-		return 1.0f;
-	else
-		return value;
+	return (next_tick_time - current_time) / (total_sleep_time);
 }

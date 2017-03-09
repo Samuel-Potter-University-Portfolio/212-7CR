@@ -20,20 +20,32 @@ void Component::WindowBegin()
 
 void Component::LogicTick(float delta_time) 
 {
-	Tick(delta_time);
 	Super::LogicTick(delta_time);
+	Tick(delta_time);
+}
+
+void Component3D::WindowBegin()
+{
+	Super::WindowBegin();
+	local_transform.LogicUpdate();
 }
 
 void Component3D::LogicTick(float delta_time)
 {
+	local_transform.LogicUpdate();
 	Super::LogicTick(delta_time);
+}
+
+void Component2D::WindowBegin()
+{
+	Super::WindowBegin();
 	local_transform.LogicUpdate();
 }
 
 void Component2D::LogicTick(float delta_time)
 {
-	Super::LogicTick(delta_time);
 	local_transform.LogicUpdate();
+	Super::LogicTick(delta_time);
 }
 	
 void Component3D::SetOwner(Object* object) 
