@@ -42,11 +42,21 @@ void Transform::operator=(Transform& other)
 	}
 }
 
+#define CLAMP_ROT(x) { \
+	while (x < -180.0f) \
+		x += 360.0f; \
+	while (x > 180.0f) \
+		x -= 360.0f; \
+} 
 
 void Transform::LogicUpdate() 
 {
 	if (matrix_built && transform_type == Static)
 		return;
+
+	CLAMP_ROT(rotation.x);
+	CLAMP_ROT(rotation.y);
+	CLAMP_ROT(rotation.z);
 
 	previous_location = location;
 	previous_rotation = rotation;

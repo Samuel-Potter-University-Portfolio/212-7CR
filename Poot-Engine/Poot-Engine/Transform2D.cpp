@@ -37,35 +37,38 @@ void Transform2D::operator=(Transform2D& other)
 	}
 }
 
+#define CLAMP_ROT(x) { \
+	while (x < -180.0f) \
+		x += 360.0f; \
+	while (x > 180.0f) \
+		x -= 360.0f; \
+} 
 
 void Transform2D::LogicUpdate()
 {
 	if (matrix_built && transform_type == Static)
 		return;
+	
+	CLAMP_ROT(rotation);
 
 	previous_location = location;
 	previous_rotation = rotation;
 	previous_scale = scale;
 }
 
-inline float LerpAngle(float a, float b, float lerp)
-{
-	return tan(atan(a) * (1.0f - lerp) + atan(b) * lerp);
-}
-
 glm::vec2 Transform2D::GetLerpLocation(float lerp)
 {
-	return previous_location * (1.0f - lerp) + location * lerp;
+	return previous_location * lerp + location * (1.0f - lerp);
 }
 
 float Transform2D::GetLerpRotation(float lerp)
 {
-	return tan(atan(previous_rotation) * (1.0f - lerp) + atan(rotation) * lerp);
+	return tan(atan(previous_rotation) * lerp + atan(rotation) * (1.0f - lerp));
 }
 
 glm::vec2 Transform2D::GetLerpScale(float lerp)
 {
-	return previous_scale * (1.0f - lerp) + scale * lerp;
+	return previous_scale * lerp + scale * (1.0f - lerp);
 }
 
 glm::mat3& Transform2D::GetMatrix(float lerp_factor)

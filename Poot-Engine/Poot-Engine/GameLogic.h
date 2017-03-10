@@ -18,6 +18,7 @@ private:
 public:
 	const int tick_rate;
 	const float total_sleep_time;
+	float last_sleep_time;
 
 	GameLogic();
 	~GameLogic();

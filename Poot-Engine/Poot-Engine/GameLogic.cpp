@@ -48,7 +48,7 @@ void GameLogic::LaunchMainLoop()
 
 	last_tick_end_time = GetTime();
 	float delta_time = 0;
-	float sleep_time = 0;
+	last_sleep_time = 0;
 
 
 	while (!g_game->IsClosedRequested())
@@ -64,20 +64,19 @@ void GameLogic::LaunchMainLoop()
 		last_tick_end_time = current_time;
 
 
-		sleep_time += total_sleep_time - (current_time - start_time);
+		last_sleep_time += total_sleep_time - (current_time - start_time);
 		
-		if (sleep_time > 0.0f)
+		if (last_sleep_time > 0.0f)
 		{
-			int actual_sleep_time = (int)(sleep_time * 1000);
+			int actual_sleep_time = (int)(last_sleep_time * 1000);
 
 			float sleep_start = GetTime();
 			std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time));
-			sleep_time -= GetTime() - sleep_start;
-
-			if (sleep_time < 0)
-				sleep_time = 0.0f;
+			last_sleep_time -= GetTime() - sleep_start;
 		}
 
+		if (last_sleep_time < 0)
+			last_sleep_time = 0.0f;
 	}
 
 	//Ensure other threads have registered close request
@@ -102,7 +101,6 @@ void GameLogic::Tick(float delta_time)
 		second_counter -= 1.0f;
 		ticks_last_second = ticks_this_second;
 		ticks_this_second = 0;
-		LOG(Log, "%i", ticks_last_second);
 	}
 
 	World* world = g_game->GetWorld();
@@ -113,7 +111,7 @@ void GameLogic::Tick(float delta_time)
 float GameLogic::GetNormalizedTickTime() 
 {
 	float current_time = GetTime();
-	const float next_tick_time = last_tick_end_time + total_sleep_time;
+	const float next_tick_time = last_tick_end_time + last_sleep_time;
 
 	return (next_tick_time - current_time) / (total_sleep_time);
 }
