@@ -16,6 +16,8 @@ private:
 	GLuint uniform_current_char;
 	GLuint uniform_letter_location;
 
+	void DrawLetter(const char& c, glm::vec2& letter_location, const int alignment);
+
 protected:
 	virtual void Start() override;
 	virtual void Stop() override;

@@ -6,6 +6,10 @@
 #include <string>
 
 
+enum TextAlignment 
+{
+	Left, Right
+};
 
 
 class POOT_API TextElement : public Element
@@ -13,6 +17,7 @@ class POOT_API TextElement : public Element
 public:
 	std::string font_sheet_key = "";
 	std::string text = "";
+	TextAlignment aligment = Left;
 
 	inline GLuint GetTextureID() { return character_sheet; }
 

@@ -32,10 +32,11 @@ DebugPanel::DebugPanel()
 		quad->colour = glm::vec4(1, 0, 1, 0.5f);
 
 		TextElement* text = canvas->MakeElement<TextElement>();
-		text->text = "This is a test!";
+		text->text = "This is a test!\nCyka Blyat\tRush B!";
 		text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
 		text->local_transform.scale *= 50;
 		text->anchor = glm::vec2(0, 0);
+		text->aligment = Right;
 		text->colour = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 }

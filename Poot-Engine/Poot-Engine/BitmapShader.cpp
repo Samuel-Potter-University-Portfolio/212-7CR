@@ -95,32 +95,59 @@ void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* comp
 	glBindTexture(GL_TEXTURE_2D, text->GetTextureID());
 
 	glm::vec2 letter_location(0);
-	for (char& c : text->text)
-	{
-		if (c == '\n')
-		{
-			letter_location.x = 0;
-			letter_location.y--;
-		}
-		else if (c == ' ')
-		{
-			letter_location.x++;
-		}
-		else if (c == '\t')
-		{
-			letter_location.x += 2;
-		}
-		else 
-		{
 
-			glUniform1i(uniform_current_char, (int)c);
-			glUniform2f(uniform_letter_location, letter_location.x, letter_location.y);
-			glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
-			letter_location.x++;
+	if(text->aligment == Left)
+	{
+		for (char& c : text->text)
+			DrawLetter(c, letter_location, 1);
+	}
+	else
+	{
+		std::string current_sentence = "";
+
+		for (char& c : text->text)
+		{
+			if (c == '\n')
+			{
+				for (auto it = current_sentence.rbegin(); it != current_sentence.rend(); ++it)
+					DrawLetter(*it, letter_location, -1);
+				current_sentence = "";
+				DrawLetter('\n', letter_location, -1);
+			}
+			else
+				current_sentence += c;
 		}
+
+		if(current_sentence.size() != 0)
+			for (auto it = current_sentence.rbegin(); it != current_sentence.rend(); ++it)
+				DrawLetter(*it, letter_location, -1);
 	}
 
 	glBindVertexArray(0);
+}
+
+void BitmapShader::DrawLetter(const char& c, glm::vec2& letter_location, const int alignment)
+{
+	if (c == '\n')
+	{
+		letter_location.x = 0;
+		letter_location.y -= 1.8f;
+	}
+	else if (c == ' ')
+	{
+		letter_location.x += alignment;
+	}
+	else if (c == '\t')
+	{
+		letter_location.x += 3 * alignment;
+	}
+	else
+	{
+		glUniform1i(uniform_current_char, (int)c);
+		glUniform2f(uniform_letter_location, letter_location.x, letter_location.y);
+		glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
+		letter_location.x+= alignment;
+	}
 }
 
 void BitmapShader::AttachShaders()
