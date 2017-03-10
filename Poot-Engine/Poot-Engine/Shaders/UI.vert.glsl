@@ -3,21 +3,24 @@ R"(
 
 layout(location = 0) in vec3 in_position;
 layout(location = 1) in vec2 in_uv;
-layout(location = 2) in vec3 in_normal;
 
-uniform mat4 model_matrix;
-uniform mat4 view_matrix;
-uniform mat4 projection_matrix;
-
+uniform mat3 model_matrix;
+uniform vec2 frame_size;
+uniform vec2 anchor;
 
 out vec2 pass_uvs;
-out vec3 pass_to_camera;
-out vec3 pass_normal;
 
 
 void main()
 {	
-	gl_Position = vec4(in_position/2.0, 1.0);
+	vec2 clip_step = 1.0 / frame_size;
+
+	vec3 clip_position = model_matrix * vec3(in_position.xy, 1);
+	clip_position.xy *= clip_step;
+	clip_position.xy += anchor;
+	gl_Position = vec4(clip_position, 1.0);
+	
+	pass_uvs = in_uv;
 }
 
 )"

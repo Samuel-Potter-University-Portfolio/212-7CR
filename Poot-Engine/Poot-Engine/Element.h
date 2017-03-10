@@ -7,7 +7,7 @@ class POOT_API Element : public Component2D
 {
 public:
 	int sorting_layer = 0;
-	glm::vec3 anchor;
+	glm::vec2 anchor;
 
 	virtual void Render(RenderRequest& request, float tick_time) = 0;
 };

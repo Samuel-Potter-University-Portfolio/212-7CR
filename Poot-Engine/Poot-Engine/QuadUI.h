@@ -9,10 +9,10 @@ class QuadUI : public Element
 {
 public:
 	std::string texture_key;
+	GLuint texture;
 
 protected:
 	Shader* shader;
-	GLuint texture;
 
 	virtual void Begin() override;
 	virtual void Render(RenderRequest& request, float delta_time);

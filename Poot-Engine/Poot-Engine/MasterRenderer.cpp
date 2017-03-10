@@ -47,9 +47,6 @@ void MasterRenderer::Render(RenderRequest& request)
 
 
 	//If camera is null, use main camera
-	float width = 1;
-	float height = 1;
-
 	if (!request.camera)
 		request.camera = world->GetMainCamera();
 
@@ -60,17 +57,22 @@ void MasterRenderer::Render(RenderRequest& request)
 	//Fetch desired render size
 	if (request.frame_buffer)
 	{
-		width = request.frame_buffer->GetWidth();
-		height = request.frame_buffer->GetHeight();
+		request.frame_width = request.frame_buffer->GetWidth();
+		request.frame_height = request.frame_buffer->GetHeight();
 	}
 	else
 	{
-		width = g_game->GetWindow()->GetWidth();
-		height = g_game->GetWindow()->GetHeight();
+		request.frame_width = g_game->GetWindow()->GetWidth();
+		request.frame_height = g_game->GetWindow()->GetHeight();
 	}
 
+	if (request.frame_width == 0.0f)
+		request.frame_width = 1.0f;
+	if (request.frame_height == 0.0f)
+		request.frame_height = 1.0f;
+
 	//Check camera is up to date 
-	request.camera->BuildProjectionMatrix(height != 0.0f ? width/height : 1.0f);
+	request.camera->BuildProjectionMatrix(request.frame_width/ request.frame_height);
 	
 	if (request.pre_render)
 		request.pre_render();

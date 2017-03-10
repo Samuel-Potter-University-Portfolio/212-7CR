@@ -13,7 +13,10 @@ DebugPlayer::DebugPlayer()
 
 	Canvas* canvas = MakeComponent<Canvas>();
 	QuadUI* quad = canvas->MakeElement<QuadUI>();
-	quad->texture_key = "Resources/planks.png";
+	quad->texture_key = "Resources/arial_ascii_bitmap.bmp";
+	quad->local_transform.scale *= 200;
+	quad->local_transform.location = glm::vec2(200, -200);
+	quad->anchor = glm::vec2(-1, 1);
 }
 
 void DebugPlayer::BuildComponents() 

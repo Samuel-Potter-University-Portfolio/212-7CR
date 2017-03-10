@@ -16,7 +16,9 @@ void UIShader::Start()
 	glUseProgram(GetProgramID());
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
-	glBindVertexArray(quad_model->GetVAO());
+
+	if(quad_model)
+		glBindVertexArray(quad_model->GetVAO());
 }
 
 void UIShader::Stop() 
@@ -33,14 +35,8 @@ bool UIShader::Load()
 		return false;
 
 	uniform_model_matrix = glGetUniformLocation(GetProgramID(), "model_matrix");
-	uniform_view_matrix = glGetUniformLocation(GetProgramID(), "view_matrix");
-	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
-
-	uniform_sun_direction = glGetUniformLocation(GetProgramID(), "sun_direction");
-	uniform_sun_colour = glGetUniformLocation(GetProgramID(), "sun_colour");
-
-	uniform_shininess = glGetUniformLocation(GetProgramID(), "shininess");
-	uniform_roughness = glGetUniformLocation(GetProgramID(), "roughness");
+	uniform_frame_size = glGetUniformLocation(GetProgramID(), "frame_size");
+	uniform_anchor = glGetUniformLocation(GetProgramID(), "anchor");
 
 	//Register UI Quad
 	{
@@ -66,36 +62,26 @@ bool UIShader::Load()
 
 void UIShader::AmbiguousRender(const RenderRequest& request, Component* component, float frame_time)
 {
+	if (!quad_model)
+		return;
+
 	QuadUI* quad = Cast<QuadUI>(component);
 	if (!quad)
 		return;
-
 	glBindVertexArray(quad_model->GetVAO());
-	glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
-}
-/*
-void UIShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
-{
-	DirectionalLightComponent* sun = g_game->GetWorld()->GetSunLight();
 
-	const glm::vec3 sun_direction = sun ? sun->GetDirection() : glm::vec3(0);
-	const glm::vec3 sun_colour = sun ? sun->colour : glm::vec3(0);
+	glUniform2f(uniform_frame_size, request.frame_width, request.frame_height);
+	glUniform2f(uniform_anchor, quad->anchor.x, quad->anchor.y);
+	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &quad->GetTransformationMatrix(frame_time)[0][0]);
 
-	glUniform3f(uniform_sun_direction, sun_direction.x, sun_direction.y, sun_direction.z);
-	glUniform3f(uniform_sun_colour, sun_colour.x, sun_colour.y, sun_colour.z);
-
-	glUniform1f(uniform_shininess, component->GetFloatUnit(SHADER_UNIT_SHININESS));
-	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNIT_ROUGHNESS));
-
-	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix(frame_time)[0][0]);
-	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
-	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(0));
-	__super::Render(camera, component, frame_time);
+	glBindTexture(GL_TEXTURE_2D, quad->texture);
+
+	glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
+	glBindVertexArray(0);
 }
-*/
+
 void UIShader::AttachShaders()
 {
 	glAttachShader(GetProgramID(), CreateShader(GL_VERTEX_SHADER, ui_vert_source));

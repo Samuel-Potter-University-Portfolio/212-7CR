@@ -8,14 +8,8 @@ private:
 	class Model* quad_model = nullptr;
 
 	GLuint uniform_model_matrix;
-	GLuint uniform_view_matrix;
-	GLuint uniform_projection_matrix;
-
-	GLuint uniform_sun_direction;
-	GLuint uniform_sun_colour;
-
-	GLuint uniform_shininess;
-	GLuint uniform_roughness;
+	GLuint uniform_frame_size;
+	GLuint uniform_anchor;
 
 protected:
 	virtual void Start() override;

@@ -15,6 +15,8 @@ struct POOT_API RenderRequest
 
 	class CameraComponent* camera = nullptr;
 	class FrameBuffer* frame_buffer = nullptr;
+	float frame_width = 1.0f;
+	float frame_height = 1.0f;
 
 	enum RenderMode
 	{
