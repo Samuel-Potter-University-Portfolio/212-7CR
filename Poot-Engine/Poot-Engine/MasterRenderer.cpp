@@ -31,6 +31,11 @@ void MasterRenderer::Render()
 		Render(request);
 }
 
+std::string MasterRenderer::GetStatusString()
+{
+	return instanced_renderer->GetStatusString();
+}
+
 void MasterRenderer::HandleNewComponent(Component* component)
 {
 	instanced_renderer->HandleNewComponent(component);

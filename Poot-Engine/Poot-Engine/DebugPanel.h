@@ -11,6 +11,7 @@ class POOT_API DebugPanel : public GameObject
 private:
 	InputComponent* input_component;
 	Canvas* main_canvas;
+	TextElement* stats_text;
 
 public:
 	DebugPanel();

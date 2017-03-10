@@ -1,6 +1,8 @@
 #include "DebugPanel.h"
 #include "QuadUI.h"
+#include "Game.h"
 
+#include <sstream>
 
 DebugPanel::DebugPanel()
 {
@@ -9,36 +11,60 @@ DebugPanel::DebugPanel()
 	input_component = MakeComponent<InputComponent>();
 
 	main_canvas = MakeComponent<Canvas>();
+	main_canvas->sorting_layer = 100000;
 
-	{
-		Canvas* canvas = main_canvas->MakeElement<Canvas>();
-		canvas->canvas_mode = Scaled;
-
-		QuadUI* quad = canvas->MakeElement<QuadUI>();
-		quad->texture_key = "Resources/Test_Image.png";
-		quad->local_transform.scale *= 200;
-		quad->local_transform.location = glm::vec2(200, -200);
-		quad->anchor = glm::vec2(-1, 1);
-	}
+	//Add water mark stuff
 	{
 		Canvas* canvas = main_canvas->MakeElement<Canvas>();
 		canvas->canvas_mode = PixelPerfect;
 
-		QuadUI* quad = canvas->MakeElement<QuadUI>();
-		quad->texture_key = "Resources/Test_Image.png";
-		quad->local_transform.scale *= 200;
-		quad->local_transform.location = glm::vec2(-200, 200);
-		quad->anchor = glm::vec2(1, -1);
-		quad->colour = glm::vec4(1, 0, 1, 0.5f);
+		//Poot engine label
+		{
+			std::stringstream message;
+			message << "Poot Engine " << POOT_VERSION_MAJOR << '.' << POOT_VERSION_MINOR << '.' << POOT_VERSION_PATCH << '\n';
+			message << "Built " << __DATE__ << " " << __TIME__ << '\n';
+#if _DEBUG
+			message << "Debug Build\n";
+#else
+			message << "Release Build\n";
+#endif
 
-		TextElement* text = canvas->MakeElement<TextElement>();
-		text->text = "This is a test!\nCyka Blyat\tRush B!";
-		text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
-		text->local_transform.scale *= 50;
-		text->anchor = glm::vec2(0, 0);
-		text->aligment = Right;
-		text->colour = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+			TextElement* text = canvas->MakeElement<TextElement>();
+			text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
+			text->text = message.str();
+			text->local_transform.scale *= 20;
+			text->local_transform.location = glm::vec2(-20, -20);
+			text->anchor = glm::vec2(1, 1);
+			text->aligment = Right;
+			text->colour = glm::vec4(2.0f, 2.0f, 2.0f, 1.0f);
+		}
 	}
+
+	//Add stats text
+	{
+		Canvas* canvas = main_canvas->MakeElement<Canvas>();
+		canvas->canvas_mode = Scaled;
+
+		//Poot engine label
+		{
+			stats_text = canvas->MakeElement<TextElement>();
+			stats_text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
+			stats_text->local_transform.scale *= 20;
+			stats_text->local_transform.location = glm::vec2(20, -20);
+			stats_text->anchor = glm::vec2(-1, 1);
+			stats_text->aligment = Left;
+			stats_text->colour = glm::vec4(2.0f, 2.0f, 2.0f, 1.0f);
+		}
+	}
+
+
+	/*
+	QuadUI* quad = canvas->MakeElement<QuadUI>();
+	quad->texture_key = "Resources/Test_Image.png";
+	quad->local_transform.scale *= 200;
+	quad->local_transform.location = glm::vec2(200, -200);
+	quad->anchor = glm::vec2(-1, 1);
+	*/
 }
 
 void DebugPanel::BuildComponents()
@@ -60,6 +86,14 @@ void DebugPanel::Tick(float delta_time)
 		return;
 
 	//Update values
+	std::stringstream message;
+	message << "[F1] to toggle debug menu\n";
+	message << "FPS: " << g_game->GetWindow()->GetCurrentTickRate() << '\n';
+	message << "UPS: " << g_game->GetGameLogic()->GetCurrentTickRate() << '\n';
+	message << "Objects: " << GetWorld()->GetAllObjects().size() << '\n';
+	message << "[MasterRenderer]\n" << GetWorld()->GetMasterRenderer().GetStatusString() << '\n';
+
+	stats_text->text = message.str();
 }
 
 void DebugPanel::OnTogglePanel(bool pressed) 

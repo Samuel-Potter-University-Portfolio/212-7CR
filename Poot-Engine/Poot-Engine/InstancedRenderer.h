@@ -6,6 +6,7 @@
 
 #include <map>
 #include <vector>
+#include <string>
 
 
 class POOT_API InstancedRenderer
@@ -35,5 +36,7 @@ private:
 public:
 	void HandleNewComponent(Component* component);
 	void Render(struct RenderRequest& request);
+
+	std::string GetStatusString();
 };
 

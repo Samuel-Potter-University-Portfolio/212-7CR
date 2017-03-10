@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <vector>
+#include <string>
 
 
 
@@ -45,6 +46,7 @@ private:
 public:
 	void Register(World* world);
 	void HandleNewComponent(Component* component);
+	std::string GetStatusString();
 
 	void Render();
 	void CleanUp();

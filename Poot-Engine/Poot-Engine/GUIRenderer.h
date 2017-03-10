@@ -3,6 +3,7 @@
 #include "Canvas.h"
 
 #include <vector>
+#include <string>
 
 class GUIRenderer
 {

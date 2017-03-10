@@ -74,7 +74,7 @@ private:
 public:
 	inline const std::vector<GameObject*>& GetAllObjects() { return game_objects; };
 
-	inline const std::vector<GameObject*>& GetAllObjects(Tag tags = OBJ_TAG_ALL) 
+	inline const std::vector<GameObject*>& GetAllObjects(Tag tags) 
 	{
 		std::vector<GameObject*> objects;
 

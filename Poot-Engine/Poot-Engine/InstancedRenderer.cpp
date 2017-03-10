@@ -2,6 +2,7 @@
 #include "ModelComponentBase.h"
 #include "Game.h"
 
+#include <sstream>
 
 
 void InstancedRenderer::HandleNewComponent(Component* component)
@@ -10,6 +11,21 @@ void InstancedRenderer::HandleNewComponent(Component* component)
 
 	if (model_comp)
 		pending_loads.push_back(model_comp);
+}
+
+std::string InstancedRenderer::GetStatusString()
+{
+	std::stringstream message;
+	message << "Pending Loads: " << pending_loads.size() << '\n';
+	message << "Batches: " << render_queue.size() << '\n';
+
+	int total = 0;
+
+	for (auto it = render_queue.begin(); it != render_queue.end(); ++it)
+		total += it->second.size();
+
+	message << "Total: " << total;
+	return message.str();
 }
 
 void InstancedRenderer::HandlePendingLoads() 

@@ -1,6 +1,7 @@
 #include "GUIRenderer.h"
 #include "Game.h"
 
+
 GUIRenderer::GUIRenderer()
 {
 	main_canvas.cleanup_children = false;

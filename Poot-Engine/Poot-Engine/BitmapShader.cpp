@@ -66,7 +66,7 @@ bool BitmapShader::Load()
 
 	quad_model = GameObject::LoadModelAsset("font_quad");
 }
-#include "Logger.h"
+
 void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* component, float frame_time)
 {
 	if (!quad_model)
@@ -95,17 +95,18 @@ void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* comp
 	glBindTexture(GL_TEXTURE_2D, text->GetTextureID());
 
 	glm::vec2 letter_location(0);
+	std::string message = text->text;
 
 	if(text->aligment == Left)
 	{
-		for (char& c : text->text)
+		for (char& c : message)
 			DrawLetter(c, letter_location, 1);
 	}
 	else
 	{
 		std::string current_sentence = "";
 
-		for (char& c : text->text)
+		for (char& c : message)
 		{
 			if (c == '\n')
 			{
@@ -128,6 +129,8 @@ void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* comp
 
 void BitmapShader::DrawLetter(const char& c, glm::vec2& letter_location, const int alignment)
 {
+	const float spacing = 1.0f;
+
 	if (c == '\n')
 	{
 		letter_location.x = 0;
@@ -135,18 +138,18 @@ void BitmapShader::DrawLetter(const char& c, glm::vec2& letter_location, const i
 	}
 	else if (c == ' ')
 	{
-		letter_location.x += alignment;
+		letter_location.x += alignment * spacing;
 	}
 	else if (c == '\t')
 	{
-		letter_location.x += 3 * alignment;
+		letter_location.x += 3 * alignment * spacing;
 	}
 	else
 	{
 		glUniform1i(uniform_current_char, (int)c);
 		glUniform2f(uniform_letter_location, letter_location.x, letter_location.y);
 		glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
-		letter_location.x+= alignment;
+		letter_location.x+= alignment * spacing;
 	}
 }
 
