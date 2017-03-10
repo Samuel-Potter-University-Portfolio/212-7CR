@@ -1,6 +1,5 @@
 #include "CameraComponent.h"
 #include "Game.h"
-#include "Logger.h"
 
 #include <math.h>
 #include <glm.hpp>
@@ -31,21 +30,36 @@ glm::mat4 CameraComponent::GetViewMatrix()
 	);
 }
 
-void CameraComponent::BuildProjectionMatrix(float aspect_ratio)
+void CameraComponent::BuildProjectionMatrix(float width, float height)
 {
+	const float aspect_ratio = width / height;
+
 	if (aspect_ratio == last_aspect_ratio)
 		return;
 
 	last_aspect_ratio = aspect_ratio;
 
-	projection_matrix = glm::perspective(
-		RAD_DEG(fov),
-		last_aspect_ratio,
-		near_plane,
-		far_plane
-	);
-
-	LOG(Log, "Built view matrix {fov:%i, aspect:%f, near:%i, far:%i}", (int)fov, last_aspect_ratio, (int)near_plane, (int)far_plane);
+	
+	if (projection == Perspective || false)
+	{
+		projection_matrix = glm::perspective(
+			RAD_DEG(fov),
+			aspect_ratio,
+			near_plane,
+			far_plane
+			);
+	}
+	else if (projection == Orthographic)
+	{
+		projection_matrix = glm::ortho(
+			-50.0f, //Left
+			50.0f,	//Right
+			-50.0f, //Bottom
+			50.0f,	//Top
+			-10.0f, //Back
+			100.0f	//Front
+		);
+	}
 }
 
 glm::mat4 CameraComponent::GetProjectionMatrix() 

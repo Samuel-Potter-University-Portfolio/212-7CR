@@ -13,9 +13,9 @@ DebugPanel::DebugPanel()
 	main_canvas = MakeComponent<Canvas>();
 	main_canvas->sorting_layer = 100000;
 
-	//Add water mark stuff
+	//Add water mark stuff (Separate from main canvas
 	{
-		Canvas* canvas = main_canvas->MakeElement<Canvas>();
+		Canvas* canvas = MakeComponent<Canvas>();
 		canvas->canvas_mode = PixelPerfect;
 
 		//Poot engine label

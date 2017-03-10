@@ -77,7 +77,7 @@ void MasterRenderer::Render(RenderRequest& request)
 		request.frame_height = 1.0f;
 
 	//Check camera is up to date 
-	request.camera->BuildProjectionMatrix(request.frame_width/ request.frame_height);
+	request.camera->BuildProjectionMatrix(request.frame_width, request.frame_height);
 	
 	if (request.pre_render)
 		request.pre_render();
