@@ -3,12 +3,15 @@
 #include "Component.h"
 #include "MasterRenderer.h"
 
+
 class POOT_API Element : public Component2D
 {
 public:
 	int sorting_layer = 0;
-	glm::vec2 anchor;
 	class Canvas* parent_canvas = nullptr;
+
+	glm::vec2 anchor = glm::vec2(0);
+	glm::vec4 colour = glm::vec4(1);
 
 	virtual void Render(RenderRequest& request, float tick_time) = 0;
 };

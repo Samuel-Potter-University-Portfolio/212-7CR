@@ -125,9 +125,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BitmapShader.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DebugPanel.cpp" />
     <ClCompile Include="DebugPlayer.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SkyboxShader.cpp" />
     <ClCompile Include="Sun.cpp" />
+    <ClCompile Include="TextElement.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -166,9 +169,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API.h" />
+    <ClInclude Include="BitmapShader.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DebugPanel.h" />
     <ClInclude Include="DebugPlayer.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="DirectionalLightComponent.h" />
@@ -199,6 +204,7 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SkyboxShader.h" />
     <ClInclude Include="Sun.h" />
+    <ClInclude Include="TextElement.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
@@ -208,6 +214,8 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\Bitmap_Font.frag.glsl" />
+    <None Include="Shaders\Bitmap_Font.vert.glsl" />
     <None Include="Shaders\Default.frag.glsl" />
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />

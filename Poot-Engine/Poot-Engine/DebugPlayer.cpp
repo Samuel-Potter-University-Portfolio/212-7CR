@@ -1,6 +1,4 @@
 #include "DebugPlayer.h"
-#include "Canvas.h"
-#include "QuadUI.h"
 #include "CameraComponent.h"
 
 DebugPlayer::DebugPlayer()
@@ -10,27 +8,6 @@ DebugPlayer::DebugPlayer()
 	camera->use_latest_rotation = true;
 
 	input_component = MakeComponent<InputComponent>();
-	
-	{
-		Canvas* canvas = MakeComponent<Canvas>();
-		canvas->canvas_mode = Scaled;
-
-		QuadUI* quad = canvas->MakeElement<QuadUI>();
-		quad->texture_key = "Resources/Test_Image.png";
-		quad->local_transform.scale *= 200;
-		quad->local_transform.location = glm::vec2(200, -200);
-		quad->anchor = glm::vec2(-1, 1);
-	}
-	{
-		Canvas* canvas = MakeComponent<Canvas>();
-		canvas->canvas_mode = PixelPerfect;
-
-		QuadUI* quad = canvas->MakeElement<QuadUI>();
-		quad->texture_key = "Resources/Test_Image.png";
-		quad->local_transform.scale *= 200;
-		quad->local_transform.location = glm::vec2(-200, 200);
-		quad->anchor = glm::vec2(1, -1);
-	}
 }
 
 void DebugPlayer::BuildComponents() 

@@ -195,6 +195,15 @@
     <ClCompile Include="UIShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugPanel.cpp">
+      <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -320,6 +329,15 @@
     <ClInclude Include="UIShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="TextElement.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPanel.h">
+      <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default.vert.glsl">
@@ -338,6 +356,12 @@
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
     <None Include="Shaders\UI.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Bitmap_Font.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Bitmap_Font.frag.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
   </ItemGroup>

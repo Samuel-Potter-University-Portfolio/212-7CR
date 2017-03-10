@@ -1,8 +1,12 @@
 #include "World.h"
 #include "Game.h"
+
 #include "DefaultShader.h"
 #include "UIShader.h"
 #include "SkyboxShader.h"
+#include "BitmapShader.h"
+#include "DebugPanel.h"
+
 #include "Logger.h"
 
 World::World()
@@ -36,6 +40,10 @@ World::~World()
 
 void World::LogicBegin(GameLogic* game_logic) 
 {
+#ifdef _DEBUG
+	AddObject(new DebugPanel);
+#endif
+
 	LoadLogicResources(game_logic);
 	logic_begun = true;
 	LOG(Log, "World logic ready");
@@ -246,6 +254,7 @@ void World::LoadWindowResources(Window* window)
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
 	window->GetShaderLoader().RegisterShader("ui_quad", new UIShader);
+	window->GetShaderLoader().RegisterShader("ui_bitmap_font", new BitmapShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)

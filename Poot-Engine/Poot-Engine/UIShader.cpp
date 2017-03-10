@@ -32,12 +32,13 @@ void UIShader::Stop()
 
 bool UIShader::Load()
 {
-	if (!__super::Load())
+	if (!Super::Load())
 		return false;
 
 	uniform_model_matrix = glGetUniformLocation(GetProgramID(), "model_matrix");
 	uniform_frame_size = glGetUniformLocation(GetProgramID(), "frame_size");
 	uniform_anchor = glGetUniformLocation(GetProgramID(), "anchor");
+	uniform_colour = glGetUniformLocation(GetProgramID(), "colour");
 
 	//Register UI Quad
 	{
@@ -81,11 +82,12 @@ void UIShader::AmbiguousRender(const RenderRequest& request, Component* componen
 
 
 	glUniform2f(uniform_anchor, quad->anchor.x, quad->anchor.y);
+	glUniform4f(uniform_colour, quad->colour.r, quad->colour.g, quad->colour.b, quad->colour.a);
 	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &quad->GetTransformationMatrix(frame_time)[0][0]);
 
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, quad->texture);
+	glBindTexture(GL_TEXTURE_2D, quad->GetTextureID());
 
 	glDrawElements(GL_TRIANGLES, quad_model->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 	glBindVertexArray(0);
