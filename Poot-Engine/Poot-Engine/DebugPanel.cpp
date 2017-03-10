@@ -90,8 +90,9 @@ void DebugPanel::Tick(float delta_time)
 	message << "[F1] to toggle debug menu\n";
 	message << "FPS: " << g_game->GetWindow()->GetCurrentTickRate() << '\n';
 	message << "UPS: " << g_game->GetGameLogic()->GetCurrentTickRate() << '\n';
+	message << "Time: " << (int)(glfwGetTime()) << '\n';
 	message << "Objects: " << GetWorld()->GetAllObjects().size() << '\n';
-	message << "[MasterRenderer]\n" << GetWorld()->GetMasterRenderer().GetStatusString() << '\n';
+	message << "\n[MasterRenderer]\n" << GetWorld()->GetMasterRenderer().GetStatusString() << '\n';
 
 	stats_text->text = message.str();
 }

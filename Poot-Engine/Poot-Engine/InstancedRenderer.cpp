@@ -16,15 +16,15 @@ void InstancedRenderer::HandleNewComponent(Component* component)
 std::string InstancedRenderer::GetStatusString()
 {
 	std::stringstream message;
-	message << "Pending Loads: " << pending_loads.size() << '\n';
+	message << "Pending: " << pending_loads.size() << '\n';
 	message << "Batches: " << render_queue.size() << '\n';
 
-	int total = 0;
+	unsigned int total = 0;
 
 	for (auto it = render_queue.begin(); it != render_queue.end(); ++it)
 		total += it->second.size();
 
-	message << "Total: " << total;
+	message << "Saved: " << (total - render_queue.size());
 	return message.str();
 }
 

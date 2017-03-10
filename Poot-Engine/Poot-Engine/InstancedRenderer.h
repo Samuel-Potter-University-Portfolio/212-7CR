@@ -23,7 +23,7 @@ private:
 		}
 		inline bool operator<(const ShaderModel& other) const
 		{
-			return this < &other;
+			return other.model->GetVAO() < model->GetVAO() && other.shader->GetProgramID() < shader->GetProgramID();
 		}
 	};
 
