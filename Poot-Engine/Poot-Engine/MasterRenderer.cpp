@@ -1,5 +1,6 @@
 #include "MasterRenderer.h"
 #include "InstancedRenderer.h"
+#include "GUIRenderer.h"
 
 #include "World.h"
 #include "FrameBuffer.h"
@@ -10,13 +11,22 @@ void MasterRenderer::Register(World* world)
 {
 	this->world = world;
 	instanced_renderer = new InstancedRenderer;
+	gui_renderer = new GUIRenderer;
 
-	//Add default requests
-	requests.push_back(RenderRequest());
+	//TEMP - Add default requests
+	RenderRequest world_request;
+	RenderRequest gui_request;
+	world_request.render_mode = RenderRequest::RenderMode::World;
+	gui_request.render_mode = RenderRequest::RenderMode::GUI;
+
+	requests.push_back(world_request);
+	requests.push_back(gui_request);
 }
 
 void MasterRenderer::Render()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	for (RenderRequest& request : requests)
 		Render(request);
 }
@@ -24,15 +34,16 @@ void MasterRenderer::Render()
 void MasterRenderer::HandleNewComponent(Component* component)
 {
 	instanced_renderer->HandleNewComponent(component);
+	gui_renderer->HandleNewComponent(component);
 }
 
 void MasterRenderer::Render(RenderRequest& request)
 {
 	if (request.frame_buffer)
+	{
 		request.frame_buffer->Bind();
-
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
 
 
 	//If camera is null, use main camera
@@ -64,10 +75,12 @@ void MasterRenderer::Render(RenderRequest& request)
 	if (request.pre_render)
 		request.pre_render();
 
+
 	if (request.render_mode == RenderRequest::RenderMode::World)
 		instanced_renderer->Render(request);
 	
-	//TODO Render GUI
+	if (request.render_mode == RenderRequest::RenderMode::GUI)
+		gui_renderer->Render(request);
 		
 
 	if (request.post_render)
@@ -81,4 +94,5 @@ void MasterRenderer::Render(RenderRequest& request)
 void MasterRenderer::CleanUp() 
 {
 	delete instanced_renderer;
+	delete gui_renderer;
 }

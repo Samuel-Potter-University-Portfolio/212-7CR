@@ -31,7 +31,7 @@ bool DefaultShader::Load()
 	uniform_roughness = glGetUniformLocation(GetProgramID(), "roughness");
 }
 
-void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* component, float frame_time)
+void DefaultShader::Render(const RenderRequest& request, ModelComponentBase* component, float frame_time)
 {
 	DirectionalLightComponent* sun = g_game->GetWorld()->GetSunLight();
 
@@ -45,12 +45,12 @@ void DefaultShader::Render(CameraComponent* camera, ModelComponentBase* componen
 	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNIT_ROUGHNESS));
 
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix(frame_time)[0][0]);
-	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, camera ? &camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
-	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, camera ? &camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
+	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
+	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(0));
-	__super::Render(camera, component, frame_time);
+	__super::Render(request, component, frame_time);
 }
 
 void DefaultShader::AttachShaders() 

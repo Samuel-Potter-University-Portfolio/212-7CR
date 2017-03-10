@@ -35,6 +35,7 @@ private:
 	class World* world = nullptr;
 
 	class InstancedRenderer* instanced_renderer = nullptr;
+	class GUIRenderer* gui_renderer = nullptr;
 
 	std::vector<RenderRequest> requests;
 	void Render(RenderRequest& request);

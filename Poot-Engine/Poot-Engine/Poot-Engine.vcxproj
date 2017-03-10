@@ -126,14 +126,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DebugPlayer.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
+    <ClCompile Include="Element.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GUIRenderer.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InstancedRenderer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="QuadUI.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -156,21 +160,24 @@
     <ClCompile Include="Tickable.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Transform2D.cpp" />
-    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIShader.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugPlayer.h" />
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="DirectionalLightComponent.h" />
+    <ClInclude Include="Element.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GUIRenderer.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InstancedRenderer.h" />
     <ClInclude Include="Keyboard.h" />
@@ -186,6 +193,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="QuadUI.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="SkyBox.h" />
@@ -195,7 +203,7 @@
     <ClInclude Include="Tickable.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Transform2D.h" />
-    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIShader.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
@@ -204,6 +212,8 @@
     <None Include="Shaders\Default.vert.glsl" />
     <None Include="Shaders\Skybox.frag.glsl" />
     <None Include="Shaders\Skybox.vert.glsl" />
+    <None Include="Shaders\UI.frag.glsl" />
+    <None Include="Shaders\UI.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

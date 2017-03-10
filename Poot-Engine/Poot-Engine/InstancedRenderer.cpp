@@ -54,7 +54,6 @@ void InstancedRenderer::Render(RenderRequest& request)
 	//Check for shader override
 	bool is_shader_overridden = false;
 	Shader* current_shader = nullptr;
-	CameraComponent* camera = request.camera;
 
 	if (request.shader_override)
 		is_shader_overridden = request.shader_override_tags != OBJ_TAG_NONE;
@@ -110,7 +109,7 @@ void InstancedRenderer::Render(RenderRequest& request)
 				}
 			}
 
-			current_shader->Render(camera, comp, tick_time);
+			current_shader->Render(request, comp, tick_time);
 		}
 
 		glBindVertexArray(0);

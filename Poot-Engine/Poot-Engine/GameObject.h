@@ -34,11 +34,6 @@ protected:
 	virtual void Begin() {}
 	virtual void Tick(float delta_time) {}
 
-	static class Model* LoadModelAsset(std::string key);
-	static class Shader* LoadShaderAsset(std::string key);
-	static GLuint LoadTextureAsset(std::string key);
-	static GLuint LoadCubeMapAsset(std::string key);
-
 public:
 	GameObject();
 	virtual ~GameObject();
@@ -47,6 +42,11 @@ public:
 
 	virtual void SetOwner(World* world);
 	virtual void SetOwner(Object* object) override;
+
+	static class Model* LoadModelAsset(std::string key);
+	static class Shader* LoadShaderAsset(std::string key);
+	static GLuint LoadTextureAsset(std::string key);
+	static GLuint LoadCubeMapAsset(std::string key);
 	
 	/* Components */
 private:

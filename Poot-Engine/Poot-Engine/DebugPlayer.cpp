@@ -1,4 +1,6 @@
 #include "DebugPlayer.h"
+#include "Canvas.h"
+#include "QuadUI.h"
 #include "CameraComponent.h"
 
 DebugPlayer::DebugPlayer()
@@ -8,6 +10,10 @@ DebugPlayer::DebugPlayer()
 	camera->use_latest_rotation = true;
 
 	input_component = MakeComponent<InputComponent>();
+
+	Canvas* canvas = MakeComponent<Canvas>();
+	QuadUI* quad = canvas->MakeElement<QuadUI>();
+	quad->texture_key = "Resources/planks.png";
 }
 
 void DebugPlayer::BuildComponents() 

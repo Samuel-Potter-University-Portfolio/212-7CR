@@ -23,7 +23,7 @@ public:
 	virtual Shader* GetShader() = 0;
 	virtual Model* GetModel() = 0;
 
-	inline const bool IsVisable() { return IsActive() && is_visable; }
+	inline const bool IsVisable() { return IsEnabled() && is_visable; }
 	inline void SetVisable(const bool visable) { is_visable = visable; }
 
 	inline void SetTextureUnit(unsigned int i, GLuint texture_id) { if (i < MAX_MODEL_UNITS) textures[i] = texture_id; }

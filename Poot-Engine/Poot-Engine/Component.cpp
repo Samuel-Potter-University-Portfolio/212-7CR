@@ -21,7 +21,9 @@ void Component::WindowBegin()
 void Component::LogicTick(float delta_time) 
 {
 	Super::LogicTick(delta_time);
-	Tick(delta_time);
+
+	if (IsEnabled())
+		Tick(delta_time);
 }
 
 void Component3D::WindowBegin()

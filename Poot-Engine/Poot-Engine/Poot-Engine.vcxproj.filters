@@ -73,6 +73,12 @@
     <Filter Include="Header Files\Defaults\Objects">
       <UniqueIdentifier>{32948f0b-509f-4491-8ce7-2d7a1f7197c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Visual\Rendering">
+      <UniqueIdentifier>{432e2c2f-3129-46da-bd60-f800da3ce022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Rendering">
+      <UniqueIdentifier>{fb47625e-5c7b-4981-b0dc-01430094b9d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -120,9 +126,6 @@
     <ClCompile Include="SkyboxShader.cpp">
       <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="FrameBuffer.cpp">
-      <Filter>Source Files\Visual</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Visual\Resources</Filter>
     </ClCompile>
@@ -143,9 +146,6 @@
     </ClCompile>
     <ClCompile Include="Transform2D.cpp">
       <Filter>Source Files\Core\Maths</Filter>
-    </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>Source Files\Visual\GUI</Filter>
     </ClCompile>
     <ClCompile Include="DebugPlayer.cpp">
       <Filter>Source Files\Defaults\Objects</Filter>
@@ -171,11 +171,29 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Element.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadUI.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
     <ClCompile Include="InstancedRenderer.cpp">
-      <Filter>Source Files\Visual</Filter>
+      <Filter>Source Files\Visual\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="MasterRenderer.cpp">
-      <Filter>Source Files\Visual</Filter>
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIRenderer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +248,6 @@
     <ClInclude Include="SkyboxShader.h">
       <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="FrameBuffer.h">
-      <Filter>Header Files\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Visual\Resources</Filter>
     </ClInclude>
@@ -256,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="Transform2D.h">
       <Filter>Header Files\Core\Maths</Filter>
-    </ClInclude>
-    <ClInclude Include="UIElement.h">
-      <Filter>Header Files\Visual\GUI</Filter>
     </ClInclude>
     <ClInclude Include="DebugPlayer.h">
       <Filter>Header Files\Defaults\Objects</Filter>
@@ -284,11 +296,29 @@
     <ClInclude Include="InputComponent.h">
       <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadUI.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="InstancedRenderer.h">
-      <Filter>Header Files\Visual</Filter>
+      <Filter>Header Files\Visual\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="MasterRenderer.h">
-      <Filter>Header Files\Visual</Filter>
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIRenderer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +332,12 @@
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
     <None Include="Shaders\Skybox.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.vert.glsl">
       <Filter>Header Files\Visual\Shaders</Filter>
     </None>
   </ItemGroup>

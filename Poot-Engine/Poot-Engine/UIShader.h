@@ -1,15 +1,12 @@
 #pragma once
 #include "API.h"
 #include "Shader.h"
-#include "CameraComponent.h"
-#include "ModelComponentBase.h"
 
-#define SHADER_UNIT_SHININESS 0
-#define SHADER_UNIT_ROUGHNESS 1
-
-class POOT_API DefaultShader : public Shader
+class POOT_API UIShader : public Shader
 {
 private:
+	class Model* quad_model = nullptr;
+
 	GLuint uniform_model_matrix;
 	GLuint uniform_view_matrix;
 	GLuint uniform_projection_matrix;
@@ -22,8 +19,9 @@ private:
 
 protected:
 	virtual void Start() override;
+	virtual void Stop() override;
 	virtual bool Load() override;
-	virtual void Render(const RenderRequest& request, ModelComponentBase* component, float frame_time) override;
+	virtual void AmbiguousRender(const RenderRequest& request, Component* component, float frame_time) override;
 	virtual void AttachShaders() override;
 };
 

@@ -49,7 +49,10 @@ void GameObject::WindowBegin()
 void GameObject::LogicTick(float delta_time)
 {
 	Super::LogicTick(delta_time);
-	Tick(delta_time);
+
+	if(IsEnabled())
+		Tick(delta_time);
+
 	for (Component* component : components)
 		component->HandleLogicTick(delta_time);
 }

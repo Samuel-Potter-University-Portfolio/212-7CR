@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Game.h"
 #include "DefaultShader.h"
+#include "UIShader.h"
 #include "SkyboxShader.h"
 #include "Logger.h"
 
@@ -164,25 +165,6 @@ void World::LoadWindowResources(Window* window)
 		);
 		window->GetModelLoader().RegisterModel("quad", mesh);
 	}	
-	
-	//UI - Quad
-	{
-		ModelMesh mesh(
-		{
-			-50.0, -50.0, 0.0,	-50.0, 50.0, 0.0,
-			50.0, 50.0, 0.0,	50.0, -50.0, 0.0,
-		},
-		{
-			0.0, 0.0, 0.0, 1.0,
-			1.0, 1.0, 1.0, 0.0
-		},
-		{},
-		{
-			2,1,0, 3,2,0,
-		}
-		);
-		window->GetModelLoader().RegisterModel("ui_quad", mesh);
-	}
 
 	//Cube
 	{
@@ -263,6 +245,7 @@ void World::LoadWindowResources(Window* window)
 	//Load default shaders
 	window->GetShaderLoader().RegisterShader("default", new DefaultShader);
 	window->GetShaderLoader().RegisterShader("skybox", new SkyboxShader);
+	window->GetShaderLoader().RegisterShader("ui_quad", new UIShader);
 }
 
 void World::UnloadLogicResources(GameLogic* game_logic)

@@ -1,5 +1,6 @@
 #pragma once
 #include "API.h"
+#include "MasterRenderer.h"
 #include <string>
 #include <GL/glew.h>
 
@@ -17,7 +18,8 @@ public:
 	virtual void CleanUp();
 
 	virtual void Start();
-	virtual void Render(class CameraComponent* camera, class ModelComponentBase* component, float frame_time);
+	virtual void AmbiguousRender(const RenderRequest& request, class Component* component, float frame_time);
+	virtual void Render(const RenderRequest& request, class ModelComponentBase* component, float frame_time);
 	virtual void Stop();
 
 	virtual bool Load();
