@@ -40,9 +40,7 @@ World::~World()
 
 void World::LogicBegin(GameLogic* game_logic) 
 {
-#ifdef _DEBUG
 	AddObject(new DebugPanel);
-#endif
 
 	LoadLogicResources(game_logic);
 	logic_begun = true;

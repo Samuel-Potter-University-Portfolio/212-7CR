@@ -32,12 +32,18 @@ private:
 	int width = 0;
 	int height = 0;
 	float aspect_ratio = 1.0f;
+	bool vsync = false;
+	bool fullscreen = false;
 
 public:
 	Window(const glm::ivec2 desired_resolution);
 
 	void Launch();
 	void SetVSync(const bool on);
+	void SetFullscreen(const bool on);
+
+	inline bool IsVSync() { return vsync; }
+	inline bool IsFullscreen() { return fullscreen; }
 
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 

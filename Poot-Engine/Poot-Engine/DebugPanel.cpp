@@ -12,6 +12,9 @@ DebugPanel::DebugPanel()
 
 	main_canvas = MakeComponent<Canvas>();
 	main_canvas->sorting_layer = 100000;
+#ifndef _DEBUG
+	main_canvas->SetActive(false);
+#endif
 
 	//Add water mark stuff (Separate from main canvas
 	{
@@ -23,7 +26,7 @@ DebugPanel::DebugPanel()
 			std::stringstream message;
 			message << "Poot Engine " << POOT_VERSION_MAJOR << '.' << POOT_VERSION_MINOR << '.' << POOT_VERSION_PATCH << '\n';
 			message << "Built " << __DATE__ << " " << __TIME__ << '\n';
-#if _DEBUG
+#ifdef _DEBUG
 			message << "Debug Build\n";
 #else
 			message << "Release Build\n";
@@ -71,10 +74,22 @@ void DebugPanel::BuildComponents()
 {
 	//Register toggle panel
 	{
-		InputEvent crouch_event;
-		crouch_event.AddInput(GLFW_KEY_F1);
-		crouch_event.func = [this](bool pressed) { OnTogglePanel(pressed); };
-		input_component->AddEvent(crouch_event);
+		InputEvent event;
+		event.AddInput(GLFW_KEY_F1);
+		event.func = [this](bool pressed) { OnTogglePanel(pressed); };
+		input_component->AddEvent(event);
+	}
+	//Register toggle panel
+	{
+		InputEvent event;
+		event.AddInput(GLFW_KEY_F11);
+		event.func = 
+			[](bool pressed) 
+			{ 
+				if (pressed)
+					g_game->GetWindow()->SetFullscreen(!g_game->GetWindow()->IsFullscreen());
+			};
+		input_component->AddEvent(event);
 	}
 }
 

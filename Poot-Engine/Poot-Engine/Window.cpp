@@ -71,6 +71,7 @@ void Window::Launch()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	SetVSync(true);
+	SetFullscreen(false);
 
 	keyboard.Register(this);
 	mouse.Register(this);
@@ -80,8 +81,51 @@ void Window::Launch()
 
 void Window::SetVSync(const bool on) 
 {
-	LOG(Log, "Vsync: %s", on ? "on" : "off");
 	glfwSwapInterval(on);
+	vsync = on;
+	LOG(Log, "VSync: %s", on ? "True" : "False");
+}
+
+void Window::SetFullscreen(const bool on) 
+{
+	GLFWmonitor* main_monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* video_mode = main_monitor ? glfwGetVideoMode(main_monitor) : nullptr;
+
+	int width = desired_resolution.x;
+	int height = desired_resolution.y;
+	int x = 100;
+	int y = 100;
+	int refresh_rate = (video_mode) ? video_mode->refreshRate : GLFW_DONT_CARE;
+
+	if (!on && video_mode)
+	{
+		x = (video_mode->width - width)/2;
+		y = (video_mode->height - height)/2;
+	}
+	else if (on && video_mode)
+	{
+		x = 0;
+		y = 0;
+		width = video_mode->width;
+		height = video_mode->height;
+	}
+
+	glfwSetWindowMonitor(
+		window, 
+		on ? main_monitor : nullptr,
+		x, 
+		y, 
+		width,
+		height,
+		refresh_rate
+	);
+
+	fullscreen = on;
+	LOG(Log, "Fullscreen: %s", on ? "True" : "False");
+	LOG(Log, "\t-Position\t(%i,%i)", x, y);
+	LOG(Log, "\t-Size\t(%i,%i)", width, height);
+	LOG(Log, "\t-Refresh-Rate\t%i", refresh_rate);
+
 }
 
 inline float GetTime()
