@@ -8,6 +8,7 @@ class POOT_API Element : public Component2D
 public:
 	int sorting_layer = 0;
 	glm::vec2 anchor;
+	class Canvas* parent_canvas = nullptr;
 
 	virtual void Render(RenderRequest& request, float tick_time) = 0;
 };

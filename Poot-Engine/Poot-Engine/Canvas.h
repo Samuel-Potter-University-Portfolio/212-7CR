@@ -6,6 +6,12 @@
 #include <vector>
 
 
+enum CanvasMode
+{
+	PixelPerfect,
+	Scaled
+};
+
 class POOT_API Canvas : public Element
 {
 private:
@@ -16,6 +22,7 @@ public:
 	Canvas();
 	virtual ~Canvas();
 	bool cleanup_children = true;
+	CanvasMode canvas_mode = PixelPerfect;
 
 	virtual void Render(RenderRequest& request, float tick_time);
 

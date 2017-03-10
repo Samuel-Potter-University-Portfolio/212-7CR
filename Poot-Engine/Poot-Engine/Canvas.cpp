@@ -47,6 +47,7 @@ void Canvas::AddElement(Element* element)
 	}
 
 	elements.push_back(current_element);
+	element->parent_canvas = this;
 }
 
 void Canvas::Render(RenderRequest& request, float tick_time)

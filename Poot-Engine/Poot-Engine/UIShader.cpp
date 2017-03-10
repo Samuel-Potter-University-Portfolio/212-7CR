@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "QuadUI.h"
+#include "Canvas.h"
 
 const char* ui_vert_source =
 #include "Shaders/UI.vert.glsl"
@@ -70,7 +71,15 @@ void UIShader::AmbiguousRender(const RenderRequest& request, Component* componen
 		return;
 	glBindVertexArray(quad_model->GetVAO());
 
-	glUniform2f(uniform_frame_size, request.frame_width, request.frame_height);
+	//Set frame size based on canvas mode
+	Canvas* canvas = quad->parent_canvas;
+	if (canvas && canvas->canvas_mode == Scaled)
+		glUniform2f(uniform_frame_size, 400.0f * request.frame_width / request.frame_height, 400.0f);
+
+	else
+		glUniform2f(uniform_frame_size, request.frame_width, request.frame_height);
+
+
 	glUniform2f(uniform_anchor, quad->anchor.x, quad->anchor.y);
 	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &quad->GetTransformationMatrix(frame_time)[0][0]);
 
