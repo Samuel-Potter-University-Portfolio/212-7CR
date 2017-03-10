@@ -26,6 +26,6 @@ protected:
 	GLuint character_sheet = 0;
 
 	virtual void Begin() override;
-	virtual void Render(RenderRequest& request, float delta_time);
+	virtual void Render(RenderRequest& request);
 };
 

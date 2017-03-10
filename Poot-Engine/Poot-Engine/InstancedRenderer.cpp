@@ -65,7 +65,6 @@ void InstancedRenderer::AddLoadedComponent(ModelComponentBase* model_comp)
 void InstancedRenderer::Render(RenderRequest& request) 
 {
 	HandlePendingLoads();
-	const float tick_time = g_game->GetGameLogic()->GetNormalizedTickTime();
 
 	//Check for shader override
 	bool is_shader_overridden = false;
@@ -125,7 +124,7 @@ void InstancedRenderer::Render(RenderRequest& request)
 				}
 			}
 
-			current_shader->Render(request, comp, tick_time);
+			current_shader->Render(request, comp);
 		}
 
 		glBindVertexArray(0);

@@ -22,6 +22,6 @@ protected:
 	virtual void Start() override;
 	virtual void Stop() override;
 	virtual bool Load() override;
-	virtual void AmbiguousRender(const RenderRequest& request, Component* component, float frame_time) override;
+	virtual void AmbiguousRender(const RenderRequest& request, Component* component) override;
 	virtual void AttachShaders() override;
 };

@@ -23,7 +23,7 @@ private:
 protected:
 	virtual void Start() override;
 	virtual bool Load() override;
-	virtual void Render(const RenderRequest& request, ModelComponentBase* component, float frame_time) override;
+	virtual void Render(const RenderRequest& request, ModelComponentBase* component) override;
 	virtual void AttachShaders() override;
 };
 

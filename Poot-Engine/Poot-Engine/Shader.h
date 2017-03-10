@@ -18,8 +18,8 @@ public:
 	virtual void CleanUp();
 
 	virtual void Start();
-	virtual void AmbiguousRender(const RenderRequest& request, class Component* component, float frame_time);
-	virtual void Render(const RenderRequest& request, class ModelComponentBase* component, float frame_time);
+	virtual void AmbiguousRender(const RenderRequest& request, class Component* component);
+	virtual void Render(const RenderRequest& request, class ModelComponentBase* component);
 	virtual void Stop();
 
 	virtual bool Load();

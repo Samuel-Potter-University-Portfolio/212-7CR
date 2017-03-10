@@ -62,7 +62,7 @@ bool UIShader::Load()
 	quad_model = GameObject::LoadModelAsset("ui_quad");
 }
 
-void UIShader::AmbiguousRender(const RenderRequest& request, Component* component, float frame_time)
+void UIShader::AmbiguousRender(const RenderRequest& request, Component* component)
 {
 	if (!quad_model)
 		return;
@@ -83,7 +83,7 @@ void UIShader::AmbiguousRender(const RenderRequest& request, Component* componen
 
 	glUniform2f(uniform_anchor, quad->anchor.x, quad->anchor.y);
 	glUniform4f(uniform_colour, quad->colour.r, quad->colour.g, quad->colour.b, quad->colour.a);
-	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &quad->GetTransformationMatrix(frame_time)[0][0]);
+	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &quad->GetTransformationMatrix()[0][0]);
 
 
 	glActiveTexture(GL_TEXTURE0);

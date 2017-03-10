@@ -12,12 +12,12 @@ void Local3D::SetTransformParent(Local3D* object)
 	transform_parent = object;
 }
 
-glm::mat4 Local3D::GetTransformationMatrix(float lerp_factor)
+glm::mat4 Local3D::GetTransformationMatrix()
 {
 	if (transform_parent)
-		return transform_parent->GetTransformationMatrix(lerp_factor) * local_transform.GetMatrix(lerp_factor);
+		return transform_parent->GetTransformationMatrix() * local_transform.GetMatrix(lerp_time);
 	else
-		return local_transform.GetMatrix(lerp_factor);
+		return local_transform.GetMatrix(lerp_time);
 }
 
 glm::vec3 Local3D::GetWorldLocation()
@@ -95,12 +95,12 @@ void Local2D::SetTransformParent(Local2D* object)
 	transform_parent = object;
 }
 
-glm::mat3 Local2D::GetTransformationMatrix(float lerp_factor)
+glm::mat3 Local2D::GetTransformationMatrix()
 {
 	if (transform_parent)
-		return transform_parent->GetTransformationMatrix(lerp_factor) * local_transform.GetMatrix(lerp_factor);
+		return transform_parent->GetTransformationMatrix() * local_transform.GetMatrix(lerp_time);
 	else
-		return local_transform.GetMatrix(lerp_factor);
+		return local_transform.GetMatrix(lerp_time);
 }
 
 glm::vec2 Local2D::GetWorldLocation()

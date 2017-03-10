@@ -17,7 +17,6 @@ void GUIRenderer::HandleNewComponent(Component* component)
 
 void GUIRenderer::Render(RenderRequest& request)
 {
-	const float tick_time = g_game->GetGameLogic()->GetNormalizedTickTime();
-	main_canvas.Render(request, tick_time);
+	main_canvas.Render(request);
 	glBindVertexArray(0);
 }

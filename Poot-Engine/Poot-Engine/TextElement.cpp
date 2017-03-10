@@ -8,12 +8,12 @@ void TextElement::Begin()
 	character_sheet = GameObject::LoadTextureAsset(font_sheet_key);
 }
 
-void TextElement::Render(RenderRequest& request, float delta_time)
+void TextElement::Render(RenderRequest& request)
 {
 	if (!shader)
 		return;
 
 	shader->Start();
-	shader->AmbiguousRender(request, this, delta_time);
+	shader->AmbiguousRender(request, this);
 	shader->Stop();
 }

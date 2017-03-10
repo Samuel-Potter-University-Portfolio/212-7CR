@@ -20,6 +20,6 @@ public:
 
 	void BuildProjectionMatrix(float aspect_ratio);
 	glm::mat4 GetProjectionMatrix();
-	glm::mat4 GetViewMatrix(float lerp);
+	glm::mat4 GetViewMatrix();
 };
 

@@ -18,14 +18,12 @@ private:
 public:
 	const int tick_rate;
 	const float total_sleep_time;
-	float last_sleep_time;
 
 	GameLogic();
 	~GameLogic();
 
 	void Launch();
 
-	float GetNormalizedTickTime();
 	inline int GetCurrentTickRate() { return ticks_last_second; }
 
 private:

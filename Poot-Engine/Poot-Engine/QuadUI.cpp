@@ -8,12 +8,12 @@ void QuadUI::Begin()
 	texture = GameObject::LoadTextureAsset(texture_key);
 }
 
-void QuadUI::Render(RenderRequest& request, float delta_time)
+void QuadUI::Render(RenderRequest& request)
 {
 	if (!shader)
 		return;
 
 	shader->Start();
-	shader->AmbiguousRender(request, this, delta_time);
+	shader->AmbiguousRender(request, this);
 	shader->Stop();
 }

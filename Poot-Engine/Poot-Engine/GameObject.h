@@ -101,6 +101,7 @@ public:
 protected:
 	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
+	virtual void WindowTick(float delta_time) override;
 };
 
 
@@ -111,5 +112,6 @@ public:
 protected:
 	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
+	virtual void WindowTick(float delta_time) override;
 };
 

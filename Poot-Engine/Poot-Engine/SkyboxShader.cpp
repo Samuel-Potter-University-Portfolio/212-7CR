@@ -12,13 +12,13 @@ const char* skybox_frag_source =
 
 void SkyboxShader::Start()
 {
-	__super::Start();
+	Super::Start();
 	glCullFace(GL_BACK);
 }
 
 bool SkyboxShader::Load()
 {
-	if (!__super::Load())
+	if (!Super::Load())
 		return false;
 
 	uniform_camera_position = glGetUniformLocation(GetProgramID(), "camera_position");
@@ -26,17 +26,17 @@ bool SkyboxShader::Load()
 	uniform_projection_matrix = glGetUniformLocation(GetProgramID(), "projection_matrix");
 }
 
-void SkyboxShader::Render(const RenderRequest& request, ModelComponentBase* component, float frame_time)
+void SkyboxShader::Render(const RenderRequest& request, ModelComponentBase* component)
 {
-	glm::vec3 camera_loc = request.camera ? request.camera->GetWorldLocation(frame_time) : glm::vec3(0);
+	glm::vec3 camera_loc = request.camera ? request.camera->GetWorldLocation() : glm::vec3(0);
 
 	glUniform3f(uniform_camera_position, camera_loc.x, camera_loc.y, camera_loc.z);
-	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetViewMatrix(frame_time)[0][0] : &glm::mat4(1.0)[0][0]);
+	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetViewMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, component->GetTextureUnit(0));
-	__super::Render(request, component, frame_time);
+	Super::Render(request, component);
 }
 
 void SkyboxShader::AttachShaders()

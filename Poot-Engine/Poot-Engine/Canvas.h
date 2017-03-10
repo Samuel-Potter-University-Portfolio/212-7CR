@@ -24,7 +24,7 @@ public:
 	bool cleanup_children = true;
 	CanvasMode canvas_mode = PixelPerfect;
 
-	virtual void Render(RenderRequest& request, float tick_time);
+	virtual void Render(RenderRequest& request);
 
 protected:
 	virtual void LogicTick(float delta_time) override;

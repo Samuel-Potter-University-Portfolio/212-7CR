@@ -67,7 +67,7 @@ bool BitmapShader::Load()
 	quad_model = GameObject::LoadModelAsset("font_quad");
 }
 
-void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* component, float frame_time)
+void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* component)
 {
 	if (!quad_model)
 		return;
@@ -88,7 +88,7 @@ void BitmapShader::AmbiguousRender(const RenderRequest& request, Component* comp
 
 	glUniform2f(uniform_anchor, text->anchor.x, text->anchor.y);
 	glUniform4f(uniform_colour, text->colour.r, text->colour.g, text->colour.b, text->colour.a);
-	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &text->GetTransformationMatrix(frame_time)[0][0]);
+	glUniformMatrix3fv(uniform_model_matrix, 1, GL_FALSE, &text->GetTransformationMatrix()[0][0]);
 
 
 	glActiveTexture(GL_TEXTURE0);

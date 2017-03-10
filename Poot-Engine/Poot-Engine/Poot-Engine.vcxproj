@@ -133,7 +133,6 @@
     <ClCompile Include="DebugPlayer.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
-    <ClCompile Include="Element.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />

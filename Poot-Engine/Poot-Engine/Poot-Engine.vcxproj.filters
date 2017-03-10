@@ -174,9 +174,6 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Source Files\Visual\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Element.cpp">
-      <Filter>Source Files\Visual\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="QuadUI.cpp">
       <Filter>Source Files\Visual\GUI</Filter>
     </ClCompile>

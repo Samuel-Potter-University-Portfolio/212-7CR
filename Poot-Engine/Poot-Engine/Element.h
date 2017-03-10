@@ -13,6 +13,6 @@ public:
 	glm::vec2 anchor = glm::vec2(0);
 	glm::vec4 colour = glm::vec4(1);
 
-	virtual void Render(RenderRequest& request, float tick_time) = 0;
+	virtual void Render(RenderRequest& request) = 0;
 };
 

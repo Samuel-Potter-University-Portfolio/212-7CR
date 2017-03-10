@@ -46,22 +46,22 @@ void GameLogic::LaunchMainLoop()
 		std::this_thread::sleep_for(std::chrono::milliseconds(actual_sleep_time));
 	}
 
-	last_tick_end_time = GetTime();
+	float last_update = GetTime();
 	float delta_time = 0;
-	last_sleep_time = 0;
+	float last_sleep_time = 0;
 
 
 	while (!g_game->IsClosedRequested())
 	{
 		float start_time = GetTime();
+		last_tick_end_time = start_time + total_sleep_time;
 
 		//Tick logic
 		Tick(delta_time);
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
 		float current_time = GetTime();
-		delta_time = current_time - last_tick_end_time;
-		last_tick_end_time = current_time;
+		delta_time = current_time - last_update;
+		last_update = current_time;
 
 
 		last_sleep_time += total_sleep_time - (current_time - start_time);
@@ -106,12 +106,4 @@ void GameLogic::Tick(float delta_time)
 	World* world = g_game->GetWorld();
 	if (world)
 		world->LogicTick(this, delta_time);
-}
-
-float GameLogic::GetNormalizedTickTime() 
-{
-	float current_time = GetTime();
-	const float next_tick_time = last_tick_end_time + last_sleep_time;
-
-	return (next_tick_time - current_time) / (total_sleep_time);
 }

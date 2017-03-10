@@ -17,12 +17,12 @@ void Shader::Stop()
 	glUseProgram(0);
 }
 
-void Shader::AmbiguousRender(const RenderRequest& request, class Component* component, float frame_time)
+void Shader::AmbiguousRender(const RenderRequest& request, class Component* component)
 {
 	//Too vague, so leave implementation to children
 }
 
-void Shader::Render(const RenderRequest& request, ModelComponentBase* component, float frame_time)
+void Shader::Render(const RenderRequest& request, ModelComponentBase* component)
 {
 	//Assume model has already been bound
 	glDrawElements(GL_TRIANGLES, component->GetModel()->GetIndexCount(), GL_UNSIGNED_INT, nullptr);

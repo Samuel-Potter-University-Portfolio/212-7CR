@@ -117,7 +117,16 @@ void GameObject3D::WindowBegin()
 void GameObject3D::LogicTick(float delta_time)
 {
 	local_transform.LogicUpdate();
+	lerp_time = 0.0f;
 	Super::LogicTick(delta_time);
+}
+
+void GameObject3D::WindowTick(float delta_time) 
+{
+	Super::WindowTick(delta_time);
+	lerp_time += delta_time;
+	if (lerp_time > 1.0f)
+		lerp_time = 1.0f;
 }
 
 void GameObject2D::WindowBegin()
@@ -129,5 +138,14 @@ void GameObject2D::WindowBegin()
 void GameObject2D::LogicTick(float delta_time)
 {
 	local_transform.LogicUpdate();
+	lerp_time = 0.0f;
 	Super::LogicTick(delta_time);
+}
+
+void GameObject2D::WindowTick(float delta_time)
+{
+	Super::WindowTick(delta_time);
+	lerp_time += delta_time;
+	if (lerp_time > 1.0f)
+		lerp_time = 1.0f;
 }

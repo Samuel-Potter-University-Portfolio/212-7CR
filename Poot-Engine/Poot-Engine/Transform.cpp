@@ -65,12 +65,12 @@ void Transform::LogicUpdate()
 
 inline float LerpAngle(float a, float b, float lerp)
 {
-	return tan(atan(a) * lerp + atan(b) * (1.0f - lerp));
+	return tan(atan(a) * (1.0f - lerp) + atan(b) * lerp);
 }
 
 glm::vec3 Transform::GetLerpLocation(float lerp) 
 {
-	return previous_location * lerp + location * (1.0f - lerp);
+	return previous_location * (1.0f - lerp) + location * lerp;
 }
 
 glm::vec3 Transform::GetLerpRotation(float lerp)
@@ -84,7 +84,7 @@ glm::vec3 Transform::GetLerpRotation(float lerp)
 
 glm::vec3 Transform::GetLerpScale(float lerp)
 {
-	return previous_scale * lerp + scale * (1.0f - lerp);
+	return previous_scale * (1.0f - lerp) + scale * lerp;
 }
 
 glm::mat4& Transform::GetMatrix(float lerp_factor) 

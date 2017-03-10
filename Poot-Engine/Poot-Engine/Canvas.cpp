@@ -50,11 +50,11 @@ void Canvas::AddElement(Element* element)
 	element->parent_canvas = this;
 }
 
-void Canvas::Render(RenderRequest& request, float tick_time)
+void Canvas::Render(RenderRequest& request)
 {
 	if (!IsEnabled())
 		return;
 
 	for (Element* element : elements)
-		element->Render(request, tick_time);
+		element->Render(request);
 }
