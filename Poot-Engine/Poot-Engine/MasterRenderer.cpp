@@ -1,6 +1,7 @@
 #include "MasterRenderer.h"
 #include "InstancedRenderer.h"
 #include "GUIRenderer.h"
+#include "Logger.h"
 
 #include "World.h"
 #include "FrameBuffer.h"
@@ -21,6 +22,8 @@ void MasterRenderer::Register(World* world)
 
 	requests.push_back(world_request);
 	requests.push_back(gui_request);
+
+	LOG(Log, "Registered Master Renderer");
 }
 
 void MasterRenderer::Render()
@@ -102,4 +105,5 @@ void MasterRenderer::CleanUp()
 {
 	delete instanced_renderer;
 	delete gui_renderer;
+	LOG(Log, "Cleaned up Master Renderer");
 }

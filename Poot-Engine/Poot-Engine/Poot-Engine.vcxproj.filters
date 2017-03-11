@@ -79,6 +79,12 @@
     <Filter Include="Source Files\Visual\Rendering">
       <UniqueIdentifier>{fb47625e-5c7b-4981-b0dc-01430094b9d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics\Colliders">
+      <UniqueIdentifier>{b2c60953-b753-4368-a1f3-1c4487325d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\Colliders">
+      <UniqueIdentifier>{b6da47f9-66bf-4bdc-9645-0cd93669c75f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -200,6 +206,15 @@
     </ClCompile>
     <ClCompile Include="DebugPanel.cpp">
       <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +349,15 @@
     </ClInclude>
     <ClInclude Include="DebugPanel.h">
       <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

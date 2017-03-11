@@ -2,7 +2,7 @@
 #include <Logger.h>
 #include <Sun.h>
 #include <SkyBox.h>
-#include <DebugPlayer.h>
+#include "PoolDebugPlayer.h"
 
 #include "BasicBox.h"
 
@@ -15,7 +15,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 {
 	Super::LoadLogicResources(game_logic);
 
-	AddObject(new DebugPlayer);
+	AddObject(new PoolDebugPlayer);
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));

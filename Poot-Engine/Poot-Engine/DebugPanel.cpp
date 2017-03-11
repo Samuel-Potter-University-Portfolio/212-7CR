@@ -108,6 +108,7 @@ void DebugPanel::Tick(float delta_time)
 	message << "Time: " << (int)(glfwGetTime()) << '\n';
 	message << "Objects: " << GetWorld()->GetAllObjects().size() << '\n';
 	message << "\n[MasterRenderer]\n" << GetWorld()->GetMasterRenderer().GetStatusString() << '\n';
+	message << "\n[PhysicsScene]\n" << GetWorld()->GetPhysicsScene().GetStatusString() << '\n';
 
 	stats_text->text = message.str();
 }

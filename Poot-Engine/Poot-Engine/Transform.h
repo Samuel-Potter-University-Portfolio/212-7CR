@@ -14,11 +14,9 @@ private:
 	bool matrix_built;
 	glm::mat4 matrix;
 
-protected:
-	TransformType transform_type = Dynamic;
-
 public:
 	Transform(const glm::vec3 location = glm::vec3(0, 0, 0), const glm::vec3 rotation = glm::vec3(0, 0, 0), const glm::vec3 scale = glm::vec3(1, 1, 1));
+	TransformType transform_type = Dynamic;
 
 	glm::vec3 previous_location;
 	glm::vec3 previous_rotation;

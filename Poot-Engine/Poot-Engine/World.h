@@ -5,7 +5,7 @@
 
 #include "MasterRenderer.h"
 #include "GameObject.h"
-//TODO - UPDATE #include "PhysicsScene.h"
+#include "PhysicsScene.h"
 #include "CameraComponent.h"
 #include "DirectionalLightComponent.h"
 
@@ -13,7 +13,7 @@ class POOT_API World
 {
 private:
 	MasterRenderer master_renderer;
-	//TODO - UPDATE PhysicsScene* physics_scene;
+	PhysicsScene physics_scene;
 
 	std::vector<GameObject*> game_objects;
 	std::queue<GameObject*> new_objects;
@@ -51,7 +51,7 @@ public:
 
 
 	inline MasterRenderer& GetMasterRenderer() { return master_renderer; }
-	//TODO - UPDATE inline PhysicsScene* GetPhysicsScene() { return physics_scene; }
+	inline PhysicsScene& GetPhysicsScene() { return physics_scene; }
 
 	inline CameraComponent* GetMainCamera() { return main_camera; }
 	inline void SetMainCamera(CameraComponent* camera) { main_camera = camera; }

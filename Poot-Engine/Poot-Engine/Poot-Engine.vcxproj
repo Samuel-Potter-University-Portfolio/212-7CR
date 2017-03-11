@@ -126,8 +126,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitmapShader.cpp" />
+    <ClCompile Include="Body.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DebugPanel.cpp" />
     <ClCompile Include="DebugPlayer.cpp" />
@@ -151,6 +153,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="QuadUI.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
@@ -169,8 +172,10 @@
   <ItemGroup>
     <ClInclude Include="API.h" />
     <ClInclude Include="BitmapShader.h" />
+    <ClInclude Include="Body.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugPanel.h" />
     <ClInclude Include="DebugPlayer.h" />
@@ -197,6 +202,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="QuadUI.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />

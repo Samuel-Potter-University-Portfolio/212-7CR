@@ -10,11 +10,9 @@ private:
 	bool matrix_built;
 	glm::mat3 matrix;
 
-protected:
-	TransformType transform_type = Dynamic;
-
 public:
 	Transform2D(const glm::vec2 location = glm::vec2(0, 0), const glm::vec2 scale = glm::vec2(1, 1), const float rotation = 0.0f);
+	TransformType transform_type = Dynamic;
 
 	glm::vec2 previous_location;
 	glm::vec2 previous_scale;

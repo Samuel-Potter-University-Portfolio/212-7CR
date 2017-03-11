@@ -14,7 +14,7 @@
 #define INPUT_KEY_LAST			GLFW_KEY_LAST
 
 
-struct InputAxis
+struct POOT_API InputAxis
 {
 private:
 	bool positive[INPUT_KEY_LAST + 1]{ false };
@@ -43,7 +43,7 @@ public:
 };
 
 
-struct InputEvent
+struct POOT_API InputEvent
 {
 private:
 	bool last_state = false;
@@ -64,7 +64,7 @@ public:
 };
 
 
-class InputComponent : public Component
+class POOT_API InputComponent : public Component
 {
 private:
 	std::vector<InputAxis> axes;

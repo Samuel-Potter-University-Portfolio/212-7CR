@@ -9,6 +9,7 @@
 
 #include "Logger.h"
 
+
 World::World()
 {
 	//physics_scene = nullptr;
@@ -89,8 +90,7 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 		object->HandleLogicTick(delta_time);
 
 	//Tick physics
-	//if (physics_scene)
-	//	physics_scene->Tick(delta_time);
+	physics_scene.PhysicsTick(delta_time);
 
 	in_logic_tick = false;
 }
@@ -140,9 +140,7 @@ void World::WindowTick(Window* window, float delta_time)
 
 void World::LoadLogicResources(GameLogic* game_logic) 
 {
-	//TODO - UPDATE
-	//physics_scene = new PhysicsScene;
-	//physics_scene->Link(this);
+	physics_scene.Register(this);
 }
 
 void World::LoadWindowResources(Window* window)
@@ -257,13 +255,7 @@ void World::LoadWindowResources(Window* window)
 
 void World::UnloadLogicResources(GameLogic* game_logic)
 {
-	//if (physics_scene)
-	//{
-	//	physics_scene->CleanUp();
-	//	delete physics_scene;
-	//	physics_scene = nullptr;
-	//}
-
+	physics_scene.CleanUp();
 	logic_destroyed = true;
 }
 
@@ -319,12 +311,8 @@ void World::InternalAddComponent(Component* component)
 
 	//Add to components
 	master_renderer.HandleNewComponent(component);
+	physics_scene.HandleNewComponent(component);
 
 	g_game->GetWindow()->GetMouse().HandleNewComponent(component);
 	g_game->GetWindow()->GetKeyboard().HandleNewComponent(component);
-
-	/*
-	if (physics_scene)
-		physics_scene->AddEntityToLevel(entity);
-	*/
 }
