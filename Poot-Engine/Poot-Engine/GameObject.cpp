@@ -118,13 +118,15 @@ void GameObject3D::LogicTick(float delta_time)
 {
 	local_transform.LogicUpdate();
 	lerp_time = 0.0f;
+	frame_timestep = delta_time != 0.0f ? delta_time : 1.0f;
+
 	Super::LogicTick(delta_time);
 }
 
 void GameObject3D::WindowTick(float delta_time) 
 {
 	Super::WindowTick(delta_time);
-	lerp_time += delta_time;
+	lerp_time += delta_time / frame_timestep;
 	if (lerp_time > 1.0f)
 		lerp_time = 1.0f;
 }
@@ -139,13 +141,15 @@ void GameObject2D::LogicTick(float delta_time)
 {
 	local_transform.LogicUpdate();
 	lerp_time = 0.0f;
+	frame_timestep = delta_time != 0.0f ? delta_time : 1.0f;
+
 	Super::LogicTick(delta_time);
 }
 
 void GameObject2D::WindowTick(float delta_time)
 {
 	Super::WindowTick(delta_time);
-	lerp_time += delta_time;
+	lerp_time += delta_time / frame_timestep;
 	if (lerp_time > 1.0f)
 		lerp_time = 1.0f;
 }

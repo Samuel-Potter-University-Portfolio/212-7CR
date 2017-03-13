@@ -99,6 +99,8 @@ class POOT_API GameObject3D : public GameObject, public Local3D
 public:
 	virtual void SetOwner(Object* object) override;
 protected:
+	float frame_timestep = 1.0f;
+
 	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
 	virtual void WindowTick(float delta_time) override;
@@ -110,6 +112,8 @@ class POOT_API GameObject2D : public GameObject, public Local2D
 public:
 	virtual void SetOwner(Object* object) override;
 protected:
+	float frame_timestep = 1.0f;
+
 	virtual void WindowBegin() override;
 	virtual void LogicTick(float delta_time) override;
 	virtual void WindowTick(float delta_time) override;
