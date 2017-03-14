@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "PhysicsScene.h"
 #include "Logger.h"
+#include <glm.hpp>
+#include <gtc\epsilon.hpp>
 
 #define CLAMP(x, min, max) (x < min ? min : x > max ? max : x)
 
@@ -65,6 +67,20 @@ void Body::UpdateTransform(float delta_time)
 
 	transform.location += velocity;
 	transform.rotation += angular_velocity;
+
+	if (!always_awake)
+	{
+		glm::bvec3 equal = glm::epsilonEqual(transform.location, transform.previous_location, 0.005f);
+
+		if (equal.x && equal.y && equal.z)
+			sleep_timer += delta_time;
+		else
+			sleep_timer = 0.0f;
+
+		if (sleep_timer >= sleep_wait_time)
+			awake = false;
+	}
+
 }
 
 void Body::ApplyFriction(const float friction) 

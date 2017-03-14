@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "GameObject.h"
 
+
 struct POOT_API HitInfo 
 {
 	glm::vec3 normal;
@@ -14,6 +15,13 @@ struct POOT_API HitInfo
 		other.normal = -normal;
 		return other;
 	}
+};
+
+
+struct POOT_API PhysicalProperties
+{
+	float friction = 0.0f;
+	float restitution = 0.0f;
 };
 
 
@@ -29,6 +37,7 @@ protected:
 public:
 	Collider();
 	GameObject3D* game_object;
+	PhysicalProperties properties;
 
 	virtual void Begin() override;
 	virtual void AddToScene(class PhysicsScene* physics_scene);

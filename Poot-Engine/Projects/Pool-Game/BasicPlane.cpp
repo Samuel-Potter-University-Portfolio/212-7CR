@@ -12,8 +12,9 @@ BasicPlane::BasicPlane()
 	model->local_transform.scale *= 100;
 	model->local_transform.location = glm::vec3(1, 0, 1) * -50.0f;
 
-	MakeComponent<PlaneCollider>();
-
+	PlaneCollider* plane = MakeComponent<PlaneCollider>();
+	plane->properties.friction = 0.01f;
+	plane->properties.restitution = 1.0f;
 	/*
 	Body* body = MakeComponent<Body>();
 	body->gravity_enabled = false;

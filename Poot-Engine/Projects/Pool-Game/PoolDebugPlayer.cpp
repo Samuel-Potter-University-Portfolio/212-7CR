@@ -11,7 +11,8 @@ PoolDebugPlayer::PoolDebugPlayer()
 
 	body = MakeComponent<Body>();
 	body->gravity_enabled = true;
-	body->drag = 0.1f;
+	body->always_awake = true;
+	body->drag = 0.05f;
 	input_component = MakeComponent<InputComponent>();
 
 	model_component = MakeComponent<ModelComponent>();
@@ -98,7 +99,7 @@ void PoolDebugPlayer::BuildComponents()
 
 void PoolDebugPlayer::OnForward(float amount)
 {
-	current_input += local_transform.GetForward() * amount;
+	current_input += local_transform.GetXZForward() * amount;
 }
 
 void PoolDebugPlayer::OnStrafe(float amount)
@@ -109,13 +110,14 @@ void PoolDebugPlayer::OnStrafe(float amount)
 void PoolDebugPlayer::OnJump(bool pressed)
 {
 	if (pressed)
-		upward_input += 1.0f;
+		body->ApplyForce(body->mass * 0.06f * glm::vec3(0, 1, 0));
+		//upward_input += 1.0f;
 }
 
 void PoolDebugPlayer::OnCrouch(bool pressed)
 {
-	if (pressed)
-		upward_input += -1.0f;
+	//if (pressed)
+	//	upward_input += -1.0f;
 }
 
 void PoolDebugPlayer::OnGrabMouse(bool pressed)

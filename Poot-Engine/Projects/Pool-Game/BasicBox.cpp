@@ -11,8 +11,9 @@ BasicBox::BasicBox()
 	Body* body = MakeComponent<Body>();
 	body->gravity_enabled = true;
 	body->start_awake = true;
-	body->mass = 3.0f;
-	body->drag = 0.1f;
+	body->always_awake = false;
+	body->mass = 1.0f;
+	body->drag = 0.01f;
 
 	SphereCollider* sphere = MakeComponent<SphereCollider>();
 	sphere->radius = 1.0f;

@@ -4,6 +4,10 @@
 #include <glm.hpp>
 
 
+#define PI 3.141592653589793f
+#define RAD_DEG(x) (x * PI/180.0f)
+
+
 Collider::Collider()
 {
 }
@@ -22,9 +26,12 @@ void Collider::AddToScene(PhysicsScene* physics_scene)
 void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 {
 	const glm::vec3 correction = hit_info.normal * -hit_info.distance;
+	const glm::vec3 start_velocity = body->velocity;
+
 	body->velocity += correction;
+	body->ApplyFriction(properties.friction);
 	//body->angular_velocity += xyz;
-	//body->ApplyFriction();
+
 
 	//Call appropriate functions
 	GameObject* body_parent = Cast<GameObject>(body->GetParent());
@@ -32,6 +39,7 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 		body_parent->OnCollide(this, hit_info);
 	if (game_object)
 		game_object->OnCollide(body->GetCollider(), -hit_info);
+
 
 	//Apply appropriate force
 	if (attached_body)

@@ -27,6 +27,7 @@ public:
 	float mass = 1.0f;
 	float drag = 0.0f;
 
+	float sleep_wait_time = 2.0f;
 	bool start_awake = true;
 	bool always_awake = false;
 	bool gravity_enabled = true;
@@ -39,7 +40,7 @@ public:
 	virtual void UpdateTransform(float delta_time);
 
 	inline bool IsAwake() { return awake && IsEnabled(); }
-	inline void Wakeup() { awake = true; }
+	inline void Wakeup() { awake = true; sleep_timer = 0.0f; }
 
 	inline Transform& GetTransform() { return use_parent_transform && transform_parent ? transform_parent->local_transform : local_transform; }
 	inline class Collider* GetCollider() { return collider; }
