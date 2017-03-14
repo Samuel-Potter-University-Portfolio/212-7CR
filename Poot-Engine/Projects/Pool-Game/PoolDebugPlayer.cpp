@@ -1,5 +1,6 @@
 #include "PoolDebugPlayer.h"
-#include "CameraComponent.h"
+#include <CameraComponent.h>
+#include <SphereCollider.h>
 
 
 PoolDebugPlayer::PoolDebugPlayer()
@@ -12,10 +13,22 @@ PoolDebugPlayer::PoolDebugPlayer()
 	body->gravity_enabled = false;
 	body->drag = 0.1f;
 	input_component = MakeComponent<InputComponent>();
+
+	model_component = MakeComponent<ModelComponent>();
+	SphereCollider* sphere = MakeComponent<SphereCollider>();
+	sphere->local_transform.location = glm::vec3(0,0,0);
+	sphere->radius = 1.0f;
+
+	model_component->local_transform.location = sphere->local_transform.location;
+	model_component->local_transform.scale *= sphere->radius;
 }
 
 void PoolDebugPlayer::BuildComponents()
 {
+	model_component->model = LoadModelAsset("Resources/unit_sphere.obj");
+	model_component->shader = LoadShaderAsset("default");
+	model_component->SetTextureUnit(0, LoadTextureAsset("Resources/planks.png"));
+
 	//Register forward movement
 	{
 		InputAxis axis;
@@ -140,7 +153,7 @@ void PoolDebugPlayer::Tick(float delta_time)
 	glm::vec3 input = glm::clamp(current_input, -1.0f, 1.0f);
 	current_input = glm::vec3(0);
 
-	const float speed = 100.0f * delta_time;
+	const float speed = 1.0f * delta_time;
 	body->velocity += input * speed + upward_input * speed * glm::vec3(0, 1, 0);
 	upward_input = 0.0f;
 }

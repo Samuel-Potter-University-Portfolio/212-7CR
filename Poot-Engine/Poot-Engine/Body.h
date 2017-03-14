@@ -6,6 +6,9 @@
 
 class POOT_API Body : public Component3D
 {
+private:
+	glm::vec3 raw_acceleration;
+
 protected:
 	glm::vec3 acceleration;
 	glm::vec3 angular_acceleration;

@@ -17,13 +17,18 @@ private:
 		Model* model;
 		Shader* shader;
 
+		inline int GetID() const
+		{
+			return model->GetVAO() * 1000000 + shader->GetProgramID();
+		}
+
 		inline bool operator==(const ShaderModel& other) const
 		{
 			return other.model == model && other.shader == shader;
 		}
 		inline bool operator<(const ShaderModel& other) const
 		{
-			return other.model->GetVAO() < model->GetVAO() && other.shader->GetProgramID() < shader->GetProgramID();
+			return GetID() < other.GetID();
 		}
 	};
 

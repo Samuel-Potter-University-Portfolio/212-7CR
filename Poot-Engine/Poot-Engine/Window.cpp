@@ -70,7 +70,7 @@ void Window::Launch()
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	SetVSync(true);
+	SetVSync(false);
 	SetFullscreen(false);
 
 	keyboard.Register(this);

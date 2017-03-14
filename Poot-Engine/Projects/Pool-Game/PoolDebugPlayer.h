@@ -2,12 +2,14 @@
 #include "API.h"
 #include <GameObject.h>
 #include <InputComponent.h>
+#include <ModelComponent.h>
 #include <Body.h>
 
 
 class PoolDebugPlayer : public GameObject3D
 {
 private:
+	ModelComponent* model_component;
 	InputComponent* input_component;
 	Body* body;
 	glm::vec3 current_input;

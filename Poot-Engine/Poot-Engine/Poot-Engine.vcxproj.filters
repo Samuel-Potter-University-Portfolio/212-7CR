@@ -216,6 +216,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Physics\Colliders</Filter>
     </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -357,6 +360,9 @@
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
       <Filter>Header Files\Physics\Colliders</Filter>
     </ClInclude>
   </ItemGroup>

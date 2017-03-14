@@ -13,6 +13,7 @@ struct WorldSettings
 {
 	glm::vec3 gravity = glm::vec3(0.0f, -9.8f, 0.0f);
 	float unit_scale = 0.01f;
+	int checks_per_tick = 3;
 };
 
 
@@ -24,6 +25,8 @@ private:
 
 	std::vector<Collider*> colliders;
 	std::vector<Body*> bodies;
+
+	std::vector<Collider*> check_buffer;
 
 public:
 	void Register(World* world);

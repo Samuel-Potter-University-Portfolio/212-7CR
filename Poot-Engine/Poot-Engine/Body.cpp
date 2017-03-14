@@ -14,7 +14,7 @@ void Body::Begin()
 	if (!collider)
 		LOG(Warning, "Body created but no attached collider found");
 
-	awake = start_awake;
+	awake = start_awake || always_awake;
 }
 
 void Body::AddToScene(PhysicsScene* physics_scene)
@@ -24,10 +24,19 @@ void Body::AddToScene(PhysicsScene* physics_scene)
 
 void Body::UpdateVelocity(float delta_time) 
 {
+	//Apply scaling
+	if (physics_scene)
+	{
+		WorldSettings& settings = physics_scene->GetWorldSettings();
+		delta_time *= settings.unit_scale;
+	}
+
 	//Apply acceleration
-	velocity += acceleration * delta_time;
+	velocity += acceleration * delta_time + raw_acceleration;
 	angular_velocity += angular_acceleration * delta_time;
+
 	acceleration = glm::vec3(0);
+	raw_acceleration = glm::vec3(0);
 	angular_acceleration = glm::vec3(0);
 
 	//Apply gravity
@@ -54,18 +63,8 @@ void Body::UpdateTransform(float delta_time)
 	//Update location
 	Transform& transform = GetTransform();
 
-	//Apply gravity
-	if (physics_scene)
-	{
-		WorldSettings& settings = physics_scene->GetWorldSettings();
-		transform.location += velocity * settings.unit_scale;
-		transform.rotation += angular_velocity * settings.unit_scale;
-	}
-	else
-	{
-		transform.location += velocity;
-		transform.rotation += angular_velocity;
-	}
+	transform.location += velocity;
+	transform.rotation += angular_velocity;
 }
 
 void Body::ApplyFriction(const float friction) 
@@ -76,6 +75,9 @@ void Body::ApplyFriction(const float friction)
 
 void Body::ApplyForce(const glm::vec3 force) 
 {
-	if(mass != 0.0f)
-		acceleration += force / mass;
+	if (mass != 0.0f)
+	{
+		Wakeup();
+		raw_acceleration += force / mass;
+	}
 }
