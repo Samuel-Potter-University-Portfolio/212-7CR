@@ -1,12 +1,19 @@
 #pragma once
 #include "API.h"
 #include "Component.h"
-
+#include "GameObject.h"
 
 struct POOT_API HitInfo 
 {
 	glm::vec3 normal;
 	float distance;
+
+	inline HitInfo operator-()
+	{
+		HitInfo other;
+		other.normal = -normal;
+		return other;
+	}
 };
 
 
@@ -21,6 +28,7 @@ protected:
 
 public:
 	Collider();
+	GameObject3D* game_object;
 
 	virtual void Begin() override;
 	virtual void AddToScene(class PhysicsScene* physics_scene);

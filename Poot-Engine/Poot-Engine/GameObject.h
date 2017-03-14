@@ -47,6 +47,8 @@ public:
 	static class Shader* LoadShaderAsset(std::string key);
 	static GLuint LoadTextureAsset(std::string key);
 	static GLuint LoadCubeMapAsset(std::string key);
+
+	virtual void OnCollide(class Collider* collider, struct HitInfo& hit_info) {}
 	
 	/* Components */
 private:

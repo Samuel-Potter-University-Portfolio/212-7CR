@@ -1,7 +1,6 @@
 #include "Collider.h"
 #include "PhysicsScene.h"
 #include "Body.h"
-#include "GameObject.h"
 #include <glm.hpp>
 
 
@@ -11,8 +10,8 @@ Collider::Collider()
 
 void Collider::Begin()
 {
-	GameObject* parent = Cast<GameObject>(GetParent());
-	attached_body = parent->GetComponent<Body>();
+	game_object = Cast<GameObject3D>(GetParent());
+	attached_body = game_object->GetComponent<Body>();
 }
 
 void Collider::AddToScene(PhysicsScene* physics_scene) 
@@ -27,6 +26,14 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 	//body->angular_velocity += xyz;
 	//body->ApplyFriction();
 
+	//Call appropriate functions
+	GameObject* body_parent = Cast<GameObject>(body->GetParent());
+	if (body_parent)
+		body_parent->OnCollide(this, hit_info);
+	if (game_object)
+		game_object->OnCollide(body->GetCollider(), -hit_info);
+
+	//Apply appropriate force
 	if (attached_body)
 		attached_body->ApplyForce(body->mass * -correction);
 }

@@ -34,4 +34,5 @@ protected:
 	virtual void BuildComponents() override;
 
 	virtual void Tick(float delta_time) override;
+	virtual void OnCollide(Collider* collider, HitInfo& hit_info) override;
 };

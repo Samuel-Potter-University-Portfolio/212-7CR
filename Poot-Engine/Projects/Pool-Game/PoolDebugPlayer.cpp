@@ -157,3 +157,9 @@ void PoolDebugPlayer::Tick(float delta_time)
 	body->velocity += input * speed + upward_input * speed * glm::vec3(0, 1, 0);
 	upward_input = 0.0f;
 }
+
+#include <Logger.h>
+void PoolDebugPlayer::OnCollide(Collider* collider, HitInfo& hit_info) 
+{
+	LOG(Log, "Hit");
+}
