@@ -10,7 +10,7 @@ PoolDebugPlayer::PoolDebugPlayer()
 	camera->use_latest_rotation = true;
 
 	body = MakeComponent<Body>();
-	body->gravity_enabled = false;
+	body->gravity_enabled = true;
 	body->drag = 0.1f;
 	input_component = MakeComponent<InputComponent>();
 
@@ -161,5 +161,5 @@ void PoolDebugPlayer::Tick(float delta_time)
 #include <Logger.h>
 void PoolDebugPlayer::OnCollide(Collider* collider, HitInfo& hit_info) 
 {
-	LOG(Log, "Hit");
+	//LOG(Log, "Hit");
 }

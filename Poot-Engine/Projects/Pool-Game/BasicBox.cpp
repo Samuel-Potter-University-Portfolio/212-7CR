@@ -9,8 +9,8 @@ BasicBox::BasicBox()
 	model = MakeComponent<ModelComponent>();
 
 	Body* body = MakeComponent<Body>();
-	body->gravity_enabled = false;
-	body->start_awake = false;
+	body->gravity_enabled = true;
+	body->start_awake = true;
 	body->mass = 3.0f;
 	body->drag = 0.1f;
 

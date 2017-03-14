@@ -154,6 +154,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
+    <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="QuadUI.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="PhysicsScene.h" />
+    <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="QuadUI.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
