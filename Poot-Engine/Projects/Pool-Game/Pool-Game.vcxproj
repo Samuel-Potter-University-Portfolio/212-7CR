@@ -130,12 +130,14 @@
     <ClCompile Include="BasicPlane.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PoolDebugPlayer.cpp" />
+    <ClCompile Include="PoolTable.cpp" />
     <ClCompile Include="PoolWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicBox.h" />
     <ClInclude Include="BasicPlane.h" />
     <ClInclude Include="PoolDebugPlayer.h" />
+    <ClInclude Include="PoolTable.h" />
     <ClInclude Include="PoolWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

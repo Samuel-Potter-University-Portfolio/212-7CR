@@ -5,18 +5,20 @@
 #include "PoolDebugPlayer.h"
 
 #include "BasicBox.h"
+#include "PoolTable.h"
 #include "BasicPlane.h"
+
 
 PoolWorld::PoolWorld()
 {
 }
-
 
 void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 {
 	Super::LoadLogicResources(game_logic);
 
 	AddObject(new PoolDebugPlayer);
+	AddObject(new PoolTable);
 	AddObject(new BasicPlane);
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
