@@ -25,12 +25,14 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
 	AddObject(sun);
 
+	return;
+
 	for (int x = -1; x <= 1; x++)
 		for (int y = -1; y <= 1; y++)
 			for (int z = -1; z <= 1; z++)
 			{
 				BasicBox* box = new BasicBox;
-				box->local_transform.location = glm::vec3(x, y, z + 3) * 5.0f;
+				box->local_transform.location = glm::vec3(x, y + 100.0f, z) * 5.0f;
 				AddObject(box);
 			}
 }

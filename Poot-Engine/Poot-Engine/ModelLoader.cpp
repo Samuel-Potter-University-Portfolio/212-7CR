@@ -84,7 +84,7 @@ Model* ModelLoader::CreateModel(const ModelMesh& mesh)
 	return model;
 }
 
-GLuint ModelLoader::StoreIndices(const std::vector<int> indices) 
+GLuint ModelLoader::StoreIndices(const std::vector<int>& indices) 
 {
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
@@ -103,7 +103,7 @@ GLuint ModelLoader::StoreIndices(const std::vector<int> indices)
 	return vbo;
 }
 
-GLuint ModelLoader::StoreData(const GLuint attribute_num, const int data_size, std::vector<float>& data, const GLenum vbo_type) 
+GLuint ModelLoader::StoreData(const GLuint attribute_num, const int data_size, const std::vector<float>& data, const GLenum vbo_type) 
 {
 	GLuint vbo;
 	glGenBuffers(1, &vbo);

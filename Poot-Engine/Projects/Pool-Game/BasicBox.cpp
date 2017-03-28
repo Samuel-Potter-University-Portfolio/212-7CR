@@ -16,7 +16,7 @@ BasicBox::BasicBox()
 	body->drag = 0.01f;
 
 	SphereCollider* sphere = MakeComponent<SphereCollider>();
-	sphere->radius = 1.0f;
+	sphere->radius = 0.5f;
 
 	model->local_transform.scale *= sphere->radius;
 }

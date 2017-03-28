@@ -53,7 +53,7 @@ bool PlaneCollider::DoesNarrowPhaseCollide(Collider* collider, glm::vec3 velocit
 			if (distance <= 0.0f)
 			{
 				hit_info.normal = normal;
-				hit_info.distance = distance;
+				hit_info.embedded_distance = distance;
 				return distance <= 0;
 			}
 		}

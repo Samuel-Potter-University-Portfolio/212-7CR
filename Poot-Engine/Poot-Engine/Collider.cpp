@@ -25,7 +25,7 @@ void Collider::AddToScene(PhysicsScene* physics_scene)
 
 void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 {
-	const glm::vec3 correction = hit_info.normal * -hit_info.distance;
+	const glm::vec3 correction = hit_info.normal * -hit_info.embedded_distance;
 	const glm::vec3 start_velocity = body->velocity;
 
 	body->velocity += correction;
@@ -38,8 +38,11 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 	if (body_parent)
 		body_parent->OnCollide(this, hit_info);
 	if (game_object)
-		game_object->OnCollide(body->GetCollider(), -hit_info);
-
+	{
+		HitInfo other_hit = hit_info;
+		other_hit.normal *= -1.0f;
+		game_object->OnCollide(body->GetCollider(), other_hit);
+	}
 
 	//Apply appropriate force
 	if (attached_body)

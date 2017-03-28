@@ -18,9 +18,10 @@ private:
 
 public:
 	Mesh(std::vector<float> vertices, std::vector<int> indices);
+	Mesh(const Mesh& other);
 
-	inline std::vector<float> GetRawVertices() const { return vertices; }
-	inline std::vector<int> GetRawIndices() const { return indices; }
+	inline const std::vector<float>& GetRawVertices() const { return vertices; }
+	inline const std::vector<int>& GetRawIndices() const { return indices; }
 };
 
 /**
@@ -41,8 +42,9 @@ private:
 
 public:
 	ModelMesh(std::vector<float> vertices, std::vector<float> uvs, std::vector<float> normals, std::vector<int> indices);
+	ModelMesh(const ModelMesh& other);
 
-	inline std::vector<float> GetRawUVs() const { return uvs; }
-	inline std::vector<float> GetRawNormals() const { return normals; }
+	inline const std::vector<float>& GetRawUVs() const { return uvs; }
+	inline const std::vector<float>& GetRawNormals() const { return normals; }
 
 };

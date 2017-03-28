@@ -34,7 +34,7 @@ bool SphereCollider::DoesNarrowPhaseCollide(Collider* collider, glm::vec3 veloci
 		{
 			//Broad phase uses bounding spheres, as must have already collided
 			hit_info.normal = glm::normalize((sphere->GetWorldLocation() + velocity) - GetWorldLocation());
-			hit_info.distance = glm::distance((sphere->GetWorldLocation() + velocity), GetWorldLocation()) - radius - sphere->radius;
+			hit_info.embedded_distance = glm::distance((sphere->GetWorldLocation() + velocity), GetWorldLocation()) - radius - sphere->radius;
 			return true;
 		}
 	}

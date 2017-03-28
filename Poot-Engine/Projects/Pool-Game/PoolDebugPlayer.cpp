@@ -6,8 +6,11 @@
 PoolDebugPlayer::PoolDebugPlayer()
 {
 	SetTags(OBJ_TAG_PLAYER);
+	local_transform.location = glm::vec3(0, 40, 0);
+
 	CameraComponent* camera = MakeComponent<CameraComponent>();
 	camera->use_latest_rotation = true;
+	camera->local_transform.location = glm::vec3(0, 0, -4);
 
 	body = MakeComponent<Body>();
 	body->gravity_enabled = true;

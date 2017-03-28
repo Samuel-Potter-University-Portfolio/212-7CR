@@ -22,8 +22,8 @@ class POOT_API ModelLoader
 private:
 	std::map<std::string, ModelData> model_pool;
 
-	static GLuint StoreIndices(const std::vector<int> indices);
-	static GLuint StoreData(const GLuint attribute_num, const int data_size, std::vector<float>& data, const GLenum vbo_type);
+	static GLuint StoreIndices(const std::vector<int>& indices);
+	static GLuint StoreData(const GLuint attribute_num, const int data_size, const std::vector<float>& data, const GLenum vbo_type);
 
 	Model* CreateModel(const ModelMesh& mesh);
 

@@ -7,14 +7,7 @@
 struct POOT_API HitInfo 
 {
 	glm::vec3 normal;
-	float distance;
-
-	inline HitInfo operator-()
-	{
-		HitInfo other;
-		other.normal = -normal;
-		return other;
-	}
+	float embedded_distance;
 };
 
 

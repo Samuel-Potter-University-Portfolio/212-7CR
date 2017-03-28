@@ -222,6 +222,12 @@
     <ClCompile Include="PlaneCollider.cpp">
       <Filter>Source Files\Physics\Colliders</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCollider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -369,6 +375,12 @@
       <Filter>Header Files\Physics\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="PlaneCollider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCollider.h">
       <Filter>Header Files\Physics\Colliders</Filter>
     </ClInclude>
   </ItemGroup>
