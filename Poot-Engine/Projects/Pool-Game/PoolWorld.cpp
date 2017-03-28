@@ -17,16 +17,14 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 {
 	Super::LoadLogicResources(game_logic);
 
-	AddObject(new PoolDebugPlayer);
 	AddObject(new PoolTable);
 	AddObject(new BasicPlane);
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
+	AddObject(new PoolDebugPlayer);
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
 	AddObject(sun);
-
-	return;
-
+	
 	for (int x = -1; x <= 1; x++)
 		for (int y = -1; y <= 1; y++)
 			for (int z = -1; z <= 1; z++)
