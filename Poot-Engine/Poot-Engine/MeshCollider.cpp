@@ -38,26 +38,6 @@ void MeshCollider::ResolveCollision(Body* body, HitInfo& hit_info)
 		{
 			DefaultResolution(body, hit_info);
 			return;
-
-			const glm::vec3 correction = hit_info.normal * -hit_info.embedded_distance;
-			const glm::vec3 start_velocity = body->velocity;
-
-			body->velocity += correction;
-			//body->velocity *= hit_info.distance;
-			body->ApplyFriction(properties.friction);
-
-
-			//Call appropriate functions
-			GameObject* body_parent = Cast<GameObject>(body->GetParent());
-			if (body_parent)
-				body_parent->OnCollide(this, hit_info);
-			if (game_object)
-			{
-				HitInfo other_hit = hit_info;
-				other_hit.normal *= -1.0f;
-				game_object->OnCollide(body->GetCollider(), other_hit);
-			}
-			return;
 		}
 	}
 }
@@ -74,7 +54,7 @@ bool MeshCollider::DoesNarrowPhaseCollide(Collider* collider, glm::vec3 velocity
 
 	return false;
 }
-#include "Logger.h"
+
 bool MeshCollider::DoesSphereCollide(SphereCollider* sphere, glm::vec3 velocity, HitInfo& hit_info)
 {
 	if (!mesh || sphere->radius == 0.0f)

@@ -7,8 +7,8 @@
 #endif
 
 #define POOT_VERSION_MAJOR 0
-#define POOT_VERSION_MINOR 0
-#define POOT_VERSION_PATCH 1
+#define POOT_VERSION_MINOR 1
+#define POOT_VERSION_PATCH 0
 
 
 #define Super __super
