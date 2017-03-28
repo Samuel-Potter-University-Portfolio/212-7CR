@@ -1,6 +1,8 @@
 #include "BasicBox.h"
 #include <Game.h>
-#include <SphereCollider.h>
+
+
+#define PI 3.141592653589793f
 
 
 BasicBox::BasicBox()
@@ -15,8 +17,8 @@ BasicBox::BasicBox()
 	body->mass = 1.0f;
 	body->drag = 0.01f;
 
-	SphereCollider* sphere = MakeComponent<SphereCollider>();
-	sphere->radius = 0.5f;
+	sphere = MakeComponent<SphereCollider>();
+	sphere->radius = 1.0f;
 
 	model->local_transform.scale *= sphere->radius;
 }
@@ -30,6 +32,8 @@ void BasicBox::BuildComponents()
 
 void BasicBox::Tick(float delta_time) 
 {
-	//local_transform.rotation += glm::vec3(10, 20, 30) * delta_time;
+	const float circumference = 2 * PI * sphere->radius;
+
+	model->local_transform.rotation = local_transform.location * 360.0f / circumference;
 	//local_transform.location += glm::vec3(0, 1, 0) * delta_time;
 }

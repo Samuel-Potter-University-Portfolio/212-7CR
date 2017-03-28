@@ -30,6 +30,11 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 
 	body->velocity += correction;
 	body->ApplyFriction(properties.friction);
+
+	//glm::vec3 reflection = glm::reflect(hit_info.normal, start_velocity);
+	//body->ApplyForce(body->mass * -correction);
+	//body->velocity += reflection * 0.0f;
+	//body->ApplyForce(0.1f * body->mass * correction);
 	//body->angular_velocity += xyz;
 
 

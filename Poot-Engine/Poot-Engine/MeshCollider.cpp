@@ -315,6 +315,7 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 			}
 		}
 
+
 		//Edges
 		//A - B
 		{

@@ -78,7 +78,7 @@ void PhysicsScene::PhysicsTick(float delta_time)
 						//Store closets narrow phase collisions
 						HitInfo hit_info;
 						if (collider->DoesNarrowPhaseCollide(player_collider, body->velocity, hit_info)
-							&& (closet_hit == nullptr || hit_info.embedded_distance < closet_hit_info.embedded_distance)
+							&& (closet_hit == nullptr || hit_info.embedded_distance > closet_hit_info.embedded_distance)
 							)
 						{
 							closet_hit = collider;
