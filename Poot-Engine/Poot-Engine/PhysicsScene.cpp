@@ -69,29 +69,22 @@ void PhysicsScene::PhysicsTick(float delta_time)
 				//Check required number of times
 				for (int i = 0; i < settings.checks_per_tick; i++)
 				{
-					HitInfo closet_hit_info;
-					Collider* closet_hit = nullptr;
+					bool hit_found = false;
 
 					//Check for narrow phase
 					for (Collider* collider : check_buffer)
 					{
 						//Store closets narrow phase collisions
 						HitInfo hit_info;
-						if (collider->DoesNarrowPhaseCollide(player_collider, body->velocity, hit_info)
-							&& (closet_hit == nullptr || hit_info.embedded_distance > closet_hit_info.embedded_distance)
-							)
+						if (collider->DoesNarrowPhaseCollide(player_collider, body->velocity, hit_info))
 						{
-							closet_hit = collider;
-							closet_hit_info = hit_info;
+							collider->ResolveCollision(body, hit_info);
+							hit_found = true;
 						}
 					}
 
-					//No hit found
-					if (!closet_hit)
+					if (!hit_found)
 						break;
-
-					//Resolve closest hit
-					closet_hit->ResolveCollision(body, closet_hit_info);
 				}
 			}
 

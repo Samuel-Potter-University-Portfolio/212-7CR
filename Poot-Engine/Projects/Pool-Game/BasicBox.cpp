@@ -1,5 +1,6 @@
 #include "BasicBox.h"
 #include <Game.h>
+#include <DefaultShader.h>
 
 
 #define PI 3.141592653589793f
@@ -21,13 +22,15 @@ BasicBox::BasicBox()
 	sphere->radius = 1.0f;
 
 	model->local_transform.scale *= sphere->radius;
+	model->SetFloatUnit(SHADER_UNIT_ROUGHNESS, 0.5f);
+	model->SetFloatUnit(SHADER_UNIT_SHININESS, 10.0f);
 }
 
 void BasicBox::BuildComponents()
 {
-	model->model = LoadModelAsset("Resources/unit_sphere.obj");//"Cube");
+	model->model = LoadModelAsset("ball");
 	model->shader = LoadShaderAsset("default");
-	model->SetTextureUnit(0, LoadTextureAsset("Resources/planks.png"));	
+	model->SetTextureUnit(0, LoadTextureAsset("Resources/ball_1.png"));	
 }
 
 void BasicBox::Tick(float delta_time) 

@@ -10,7 +10,7 @@ PoolDebugPlayer::PoolDebugPlayer()
 
 	CameraComponent* camera = MakeComponent<CameraComponent>();
 	camera->use_latest_rotation = true;
-	camera->local_transform.location = glm::vec3(0, 0, -4);
+	//camera->local_transform.location = glm::vec3(0, 0, -4);
 
 	body = MakeComponent<Body>();
 	body->gravity_enabled = true;
@@ -29,7 +29,7 @@ PoolDebugPlayer::PoolDebugPlayer()
 
 void PoolDebugPlayer::BuildComponents()
 {
-	model_component->model = LoadModelAsset("Resources/unit_sphere.obj");
+	model_component->model = LoadModelAsset("ball");
 	model_component->shader = LoadShaderAsset("default");
 	model_component->SetTextureUnit(0, LoadTextureAsset("Resources/planks.png"));
 
