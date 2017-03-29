@@ -1,11 +1,12 @@
 #include "BasicPlane.h"
+#include "PoolWorld.h"
 #include <PlaneCollider.h>
 
 
 BasicPlane::BasicPlane()
 {
-	SetTags(OBJ_TAG_ENV);
-	local_transform.location.y = -15;
+	SetTags(OBJ_TAG_ENV | POBJ_TAG_FLOOR);
+	local_transform.location.y = 0;
 
 	model = MakeComponent<ModelComponent>();
 	model->local_transform.rotation = glm::vec3(90, 0, 0);
@@ -15,18 +16,6 @@ BasicPlane::BasicPlane()
 	PlaneCollider* plane = MakeComponent<PlaneCollider>();
 	plane->properties.friction = 0.01f;
 	plane->properties.restitution = 1.0f;
-	/*
-	Body* body = MakeComponent<Body>();
-	body->gravity_enabled = false;
-	body->start_awake = false;
-	body->mass = 3.0f;
-	body->drag = 0.1f;
-
-	SphereCollider* sphere = MakeComponent<SphereCollider>();
-	sphere->radius = 1.0f;
-
-	model->local_transform.scale *= sphere->radius;
-	*/
 }
 
 

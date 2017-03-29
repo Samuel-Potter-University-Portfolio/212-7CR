@@ -81,7 +81,7 @@ void PhysicsScene::PhysicsTick(float delta_time)
 							collider->ResolveCollision(body, hit_info);
 							hit_found = true;
 						}
-					}
+					} 
 
 					if (!hit_found)
 						break;

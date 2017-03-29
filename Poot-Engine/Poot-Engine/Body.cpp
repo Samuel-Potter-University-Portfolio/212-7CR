@@ -70,7 +70,7 @@ void Body::UpdateTransform(float delta_time)
 
 	if (!always_awake)
 	{
-		glm::bvec3 equal = glm::epsilonEqual(transform.location, transform.previous_location, 0.05f);
+		glm::bvec3 equal = glm::epsilonEqual(transform.location, transform.previous_location, 0.005f);
 
 		if (equal.x && equal.y && equal.z)
 			sleep_timer += delta_time;

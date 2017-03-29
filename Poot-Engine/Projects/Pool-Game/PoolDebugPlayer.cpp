@@ -13,18 +13,18 @@ PoolDebugPlayer::PoolDebugPlayer()
 	//camera->local_transform.location = glm::vec3(0, 0, -4);
 
 	body = MakeComponent<Body>();
-	body->gravity_enabled = true;
+	body->gravity_enabled = false;
 	body->always_awake = true;
 	body->drag = 0.05f;
 	input_component = MakeComponent<InputComponent>();
 
 	model_component = MakeComponent<ModelComponent>();
-	SphereCollider* sphere = MakeComponent<SphereCollider>();
-	sphere->local_transform.location = glm::vec3(0,0,0);
-	sphere->radius = 1.0f;
+	//SphereCollider* sphere = MakeComponent<SphereCollider>();
+	//sphere->local_transform.location = glm::vec3(0,0,0);
+	//sphere->radius = 1.0f;
 
-	model_component->local_transform.location = sphere->local_transform.location;
-	model_component->local_transform.scale *= sphere->radius;
+	//model_component->local_transform.location = sphere->local_transform.location;
+	//model_component->local_transform.scale *= sphere->radius;
 }
 
 void PoolDebugPlayer::BuildComponents()
@@ -114,13 +114,12 @@ void PoolDebugPlayer::OnJump(bool pressed)
 {
 	if (pressed)
 		body->ApplyForce(body->mass * 0.06f * glm::vec3(0, 1, 0));
-		//upward_input += 1.0f;
 }
 
 void PoolDebugPlayer::OnCrouch(bool pressed)
 {
-	//if (pressed)
-	//	upward_input += -1.0f;
+	if (pressed)
+		body->ApplyForce(body->mass * 0.06f * glm::vec3(0, -1, 0));
 }
 
 void PoolDebugPlayer::OnGrabMouse(bool pressed)

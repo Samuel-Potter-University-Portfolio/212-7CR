@@ -21,9 +21,6 @@
     <ClCompile Include="PoolWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PoolDebugPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,12 +30,12 @@
     <ClCompile Include="PoolTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PoolBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PoolWorld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PoolDebugPlayer.h">
@@ -48,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PoolTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolBall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

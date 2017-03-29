@@ -65,7 +65,8 @@ void main()
 	if(total_reflectiveness != 0.0)
 	{
 		vec3 reflection_colour = texture(reflection_map, -pass_normal).rgb;
-		texture_colour = mix(texture_colour, reflection_colour, total_reflectiveness);
+		//texture_colour = mix(texture_colour, reflection_colour, total_reflectiveness);
+		texture_colour += reflection_colour * total_reflectiveness;
 	}
 
 	out_colour.rgb = texture_colour * GetDiffuseLighting() + GetSpecularLighting(rough_factor, shiny_factor);

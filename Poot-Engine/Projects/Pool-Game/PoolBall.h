@@ -3,14 +3,15 @@
 #include <ModelComponent.h>
 #include <SphereCollider.h>
 
-class BasicBox : public GameObject3D
+class PoolBall : public GameObject3D
 {
 private:
 	ModelComponent* model;
 	SphereCollider* sphere;
+	int number;
 
 public:
-	BasicBox();
+	PoolBall(int number);
 
 	virtual void BuildComponents() override;
 	virtual void Tick(float delta_time) override;

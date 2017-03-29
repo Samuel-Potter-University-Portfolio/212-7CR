@@ -1,12 +1,14 @@
-#include "BasicBox.h"
+#include "PoolBall.h"
 #include <Game.h>
 #include <DefaultShader.h>
+#include <sstream>
 
 
 #define PI 3.141592653589793f
 
 
-BasicBox::BasicBox()
+PoolBall::PoolBall(int number)
+	: number(number)
 {
 	SetTags(OBJ_TAG_PROP);
 	model = MakeComponent<ModelComponent>();
@@ -24,21 +26,29 @@ BasicBox::BasicBox()
 	model->local_transform.scale *= sphere->radius;
 	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.8f);
 	model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
-	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.7f);
+	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 1.0f);
 }
 
-void BasicBox::BuildComponents()
+void PoolBall::BuildComponents()
 {
 	model->model = LoadModelAsset("ball");
 	model->shader = LoadShaderAsset("default");
 
 	model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
-	model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/ball_stripe.png"));
-	model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/ball_stripe_phong.png"));
+
+	std::stringstream str_stream;
+	str_stream << "Resources/ball_" << number << ".png";
+	model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset(str_stream.str()));
+
+	if(number <= 8)
+		model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/ball_solid_phong.png"));
+	else
+		model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/ball_stripe_phong.png"));
+
 	model->SetTextureUnit(SHADER_UNITT_REFLECTION_CM, LoadCubeMapAsset("Resources/Skybox/TropicalSunnyDay.png"));
 }
 
-void BasicBox::Tick(float delta_time) 
+void PoolBall::Tick(float delta_time) 
 {
 	const float circumference = 2 * PI * sphere->radius;
 

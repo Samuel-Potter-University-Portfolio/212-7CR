@@ -5,7 +5,7 @@
 #include <Window.h>
 #include "PoolDebugPlayer.h"
 
-#include "BasicBox.h"
+#include "PoolBall.h"
 #include "PoolTable.h"
 #include "BasicPlane.h"
 
@@ -21,7 +21,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 {
 	Super::LoadLogicResources(game_logic);
 
-	//AddObject(new PoolTable);
+	AddObject(new PoolTable);
 	AddObject(new BasicPlane);
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
@@ -29,14 +29,34 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
 	AddObject(sun);
 	
-	for (int x = -1; x <= 1; x++)
-		for (int y = -1; y <= 1; y++)
-			for (int z = -1; z <= 1; z++)
-			{
-				BasicBox* box = new BasicBox;
-				box->local_transform.location = glm::vec3(x, y + 10.0f, z) * 5.0f;
-				AddObject(box);
-			}
+#define ADD_BALL(num, x, y) \
+	{ \
+		PoolBall* ball = new PoolBall(num); \
+		ball->local_transform.location = glm::vec3(x * 2.02f, 61.0f, 12.0f + y * 1.75f); \
+		AddObject(ball); \
+	}
+
+	ADD_BALL(1, 0, 0);
+
+	ADD_BALL(2, 0.5f, 1);
+	ADD_BALL(9, -0.5f, 1);
+
+	ADD_BALL(10, 1, 2);
+	ADD_BALL(8, 0, 2);
+	ADD_BALL(3, -1, 2);
+
+	ADD_BALL(12, 1.5f, 3);
+	ADD_BALL(5, 0.5f, 3);
+	ADD_BALL(11, -0.5f, 3);
+	ADD_BALL(4, -1.5f, 3);
+
+	ADD_BALL(15, 2, 4);
+	ADD_BALL(14, 1, 4);
+	ADD_BALL(7, 0, 4);
+	ADD_BALL(13, -1, 4);
+	ADD_BALL(6, -2, 4);
+
+	//ADD_BALL(8, 0, 1.65f * 2);
 }
 
 void PoolWorld::LoadWindowResources(Window* window)
@@ -67,7 +87,7 @@ void PoolWorld::LoadWindowResources(Window* window)
 				verts.push_back(cosf(theta));
 
 				//Cylindrical sphere uvs https://mft-dev.dk/uv-mapping-sphere/
-				uvs.push_back((l / (float)slices) * 2.0f);
+				uvs.push_back((l / (float)slices) * -2.0f);
 				uvs.push_back((s / (float)stacks));
 			}
 		}
