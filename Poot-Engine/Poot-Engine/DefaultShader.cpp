@@ -29,6 +29,7 @@ bool DefaultShader::Load()
 
 	uniform_shininess = glGetUniformLocation(GetProgramID(), "shininess");
 	uniform_roughness = glGetUniformLocation(GetProgramID(), "roughness");
+	uniform_reflectiveness = glGetUniformLocation(GetProgramID(), "reflectiveness");
 
 	uniform_using_phong_map = glGetUniformLocation(GetProgramID(), "using_phong_map");
 }
@@ -45,6 +46,14 @@ void DefaultShader::Render(const RenderRequest& request, ModelComponentBase* com
 
 	glUniform1f(uniform_shininess, component->GetFloatUnit(SHADER_UNITF_SHININESS));
 	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNITF_ROUGHNESS));
+	glUniform1f(uniform_reflectiveness, component->GetFloatUnit(SHADER_UNITF_REFLECTIVENESS));
+
+	//Bind cubemap, if reflective
+	if (component->GetFloatUnit(SHADER_UNITF_REFLECTIVENESS) != 0.0f)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, component->GetTextureUnit(SHADER_UNITT_REFLECTION_CM));
+	}
 
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix()[0][0]);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetViewMatrix()[0][0] : &glm::mat4(1.0)[0][0]);

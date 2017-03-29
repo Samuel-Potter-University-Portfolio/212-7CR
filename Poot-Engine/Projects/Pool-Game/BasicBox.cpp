@@ -22,8 +22,9 @@ BasicBox::BasicBox()
 	sphere->radius = 1.0f;
 
 	model->local_transform.scale *= sphere->radius;
-	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.5f);
-	model->SetFloatUnit(SHADER_UNITF_SHININESS, 10.0f);
+	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.8f);
+	model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
+	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.7f);
 }
 
 void BasicBox::BuildComponents()
@@ -34,6 +35,7 @@ void BasicBox::BuildComponents()
 	model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
 	model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/ball_stripe.png"));
 	model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/ball_stripe_phong.png"));
+	model->SetTextureUnit(SHADER_UNITT_REFLECTION_CM, LoadCubeMapAsset("Resources/Skybox/TropicalSunnyDay.png"));
 }
 
 void BasicBox::Tick(float delta_time) 
