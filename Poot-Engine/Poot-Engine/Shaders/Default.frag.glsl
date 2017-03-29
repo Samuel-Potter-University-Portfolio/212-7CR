@@ -1,13 +1,15 @@
 R"( 
-#version 330
+#version 420
 
 in vec2 pass_uvs;
 in vec3 pass_to_camera;
 in vec3 pass_normal;
 
-uniform sampler2D texture0;
+layout(binding = 0) uniform sampler2D texture0;
+layout(binding = 1) uniform sampler2D phong_map;
 uniform float shininess;
 uniform float roughness;
+uniform int using_phong_map;
 
 const float minimum_brightness = 0.2;
 uniform vec3 sun_direction;
@@ -36,14 +38,25 @@ vec3 GetSpecularLighting()
 	vec3 reflection_light = reflect(sun_direction, surface_normal);
 	float specular_factor = max(0.0, dot(reflection_light, to_camera));
 
-	return pow(specular_factor, shininess) * sun_colour * (1.0 - roughness);
+	
+	float rough_factor = 1.0f;
+	float shiny_factor = 1.0f;
+
+	if(using_phong_map != 0)
+	{
+		vec3 phong_map_colour = texture(phong_map, pass_uvs).rgb;
+		rough_factor = phong_map_colour.r;
+		shiny_factor = phong_map_colour.g;
+	}
+
+	return pow(specular_factor, shininess * shiny_factor) * sun_colour * (1.0 - roughness * rough_factor);
 }
 
 
 void main()
 {
 	vec3 texture_colour = texture(texture0, pass_uvs).rgb;
-
+	
 	out_colour.rgb = texture_colour * GetDiffuseLighting() + GetSpecularLighting();
 	out_colour.w = 1.0;
 }

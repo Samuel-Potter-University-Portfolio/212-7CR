@@ -29,6 +29,8 @@ bool DefaultShader::Load()
 
 	uniform_shininess = glGetUniformLocation(GetProgramID(), "shininess");
 	uniform_roughness = glGetUniformLocation(GetProgramID(), "roughness");
+
+	uniform_using_phong_map = glGetUniformLocation(GetProgramID(), "using_phong_map");
 }
 
 void DefaultShader::Render(const RenderRequest& request, ModelComponentBase* component)
@@ -41,15 +43,24 @@ void DefaultShader::Render(const RenderRequest& request, ModelComponentBase* com
 	glUniform3f(uniform_sun_direction, sun_direction.x, sun_direction.y, sun_direction.z);
 	glUniform3f(uniform_sun_colour, sun_colour.x, sun_colour.y, sun_colour.z);
 
-	glUniform1f(uniform_shininess, component->GetFloatUnit(SHADER_UNIT_SHININESS));
-	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNIT_ROUGHNESS));
+	glUniform1f(uniform_shininess, component->GetFloatUnit(SHADER_UNITF_SHININESS));
+	glUniform1f(uniform_roughness, component->GetFloatUnit(SHADER_UNITF_ROUGHNESS));
 
 	glUniformMatrix4fv(uniform_model_matrix, 1, GL_FALSE, &component->GetTransformationMatrix()[0][0]);
 	glUniformMatrix4fv(uniform_view_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetViewMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
 	glUniformMatrix4fv(uniform_projection_matrix, 1, GL_FALSE, request.camera ? &request.camera->GetProjectionMatrix()[0][0] : &glm::mat4(1.0)[0][0]);
-	
+
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(0));
+	glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(SHADER_UNITT_BASE_TEXTURE));
+
+	//Check for and bind phong map
+	if (component->GetIntUnit(SHADER_UNITI_USING_PHONG_MAP) != 0)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, component->GetTextureUnit(SHADER_UNITT_PHONG_MAP));
+	}
+	glUniform1i(uniform_using_phong_map, component->GetIntUnit(SHADER_UNITI_USING_PHONG_MAP));
+
 	Super::Render(request, component);
 }
 

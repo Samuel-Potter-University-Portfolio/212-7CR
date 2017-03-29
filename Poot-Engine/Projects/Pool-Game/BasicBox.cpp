@@ -22,15 +22,18 @@ BasicBox::BasicBox()
 	sphere->radius = 1.0f;
 
 	model->local_transform.scale *= sphere->radius;
-	model->SetFloatUnit(SHADER_UNIT_ROUGHNESS, 0.5f);
-	model->SetFloatUnit(SHADER_UNIT_SHININESS, 10.0f);
+	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.5f);
+	model->SetFloatUnit(SHADER_UNITF_SHININESS, 10.0f);
 }
 
 void BasicBox::BuildComponents()
 {
 	model->model = LoadModelAsset("ball");
 	model->shader = LoadShaderAsset("default");
-	model->SetTextureUnit(0, LoadTextureAsset("Resources/ball_1.png"));	
+
+	model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
+	model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/ball_stripe.png"));
+	model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/ball_stripe_phong.png"));
 }
 
 void BasicBox::Tick(float delta_time) 
