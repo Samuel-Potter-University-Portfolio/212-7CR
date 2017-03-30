@@ -34,7 +34,8 @@ void PoolBall::BuildComponents()
 	model->model = LoadModelAsset("ball");
 	model->shader = LoadShaderAsset("default");
 
-	model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
+	if(number != 0)
+		model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
 
 	std::stringstream str_stream;
 	str_stream << "Resources/ball_" << number << ".png";

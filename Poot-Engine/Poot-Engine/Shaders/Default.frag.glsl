@@ -60,11 +60,14 @@ void main()
 		reflection_factor = phong_map_colour.b;
 	}
 	
-	//Reflectivity
+	//Reflectivity http://antongerdelan.net/opengl/cubemaps.html
 	float total_reflectiveness = reflectiveness * reflection_factor;
 	if(total_reflectiveness != 0.0)
 	{
-		vec3 reflection_colour = texture(reflection_map, -pass_normal).rgb;
+		vec3 surface_normal = normalize(pass_normal);
+		vec3 to_camera = normalize(pass_to_camera);
+
+		vec3 reflection_colour = texture(reflection_map, reflect(to_camera, surface_normal)).rgb;
 		//texture_colour = mix(texture_colour, reflection_colour, total_reflectiveness);
 		texture_colour += reflection_colour * total_reflectiveness;
 	}

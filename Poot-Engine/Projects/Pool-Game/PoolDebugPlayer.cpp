@@ -9,7 +9,7 @@ PoolDebugPlayer::PoolDebugPlayer()
 	local_transform.location = glm::vec3(0, 40, 0);
 
 	CameraComponent* camera = MakeComponent<CameraComponent>();
-	camera->use_latest_rotation = true;
+	camera->use_latest_rotation = false;
 	//camera->local_transform.location = glm::vec3(0, 0, -4);
 
 	body = MakeComponent<Body>();
