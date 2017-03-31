@@ -31,7 +31,7 @@ vec3 GetDiffuseLighting()
 
 vec3 GetSpecularLighting(float rough_factor, float shiny_factor)
 {
-	if(shininess == 0 || 1.0 - roughness == 0)
+	if(shininess * shiny_factor == 0 || 1.0 - roughness * rough_factor == 0)
 		return vec3(0);
 
 	vec3 surface_normal = normalize(pass_normal);

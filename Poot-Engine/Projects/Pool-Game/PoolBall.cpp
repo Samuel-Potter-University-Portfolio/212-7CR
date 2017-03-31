@@ -15,7 +15,7 @@ PoolBall::PoolBall(int number)
 
 	Body* body = MakeComponent<Body>();
 	body->gravity_enabled = true;
-	body->start_awake = true;
+	body->start_awake = false;
 	body->always_awake = false;
 	body->mass = 1.0f;
 	body->drag = 0.01f;

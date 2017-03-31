@@ -32,7 +32,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 #define ADD_BALL(num, x, y) \
 	{ \
 		PoolBall* ball = new PoolBall(num); \
-		ball->local_transform.location = glm::vec3(x * 2.02f, 63.0f, 12.0f + y * 1.75f); \
+		ball->local_transform.location = glm::vec3(x * 2.02f, 38.0f, 12.0f + y * 1.75f); \
 		AddObject(ball); \
 	}
 
@@ -108,45 +108,6 @@ void PoolWorld::LoadWindowResources(Window* window)
 			normals.push_back(y / length);
 			normals.push_back(z / length);
 		}
-
-		/*
-		std::vector<float> uvs;
-
-		for (int i = 0; i < verts.size(); i += 3)
-		{
-			const float x = verts[i];
-			const float y = verts[i + 1];
-			const float z = verts[i + 2];
-
-			//Cylindrical sphere uvs https://mft-dev.dk/uv-mapping-sphere/
-			uvs.push_back((atan2f(x, z) / (2.0f * PI) + 0.5f) * 2.0f);
-			uvs.push_back(0.5f - asin(y)/PI);
-
-			//Cube projection for front and back face
-			if (fabsf(z) > fabsf(x) && fabsf(z) > fabsf(y)) //Z Face
-			{
-				//uvs.push_back(x + 0.5f);
-				//uvs.push_back(y + 0.5f);
-				uvs.push_back(0.0f);
-				uvs.push_back(0.0f);
-			}
-			else if (fabsf(x) > fabsf(y) && fabsf(x) > fabsf(z)) //X Face
-			{
-				//uvs.push_back(z > 0.0f ? 1.0f : 0.0f);
-				//uvs.push_back(y + 0.5f);
-
-				uvs.push_back(0.0f);
-				uvs.push_back(0.5f);
-			}
-			else //Y Face
-			{
-				//uvs.push_back(0.0f);
-				//uvs.push_back(y > 0.0f ? 1.0f : 0.0f);
-				uvs.push_back(0.0f);
-				uvs.push_back(1.0f);
-			}
-		}
-		*/
 
 		std::vector<int> indices;
 

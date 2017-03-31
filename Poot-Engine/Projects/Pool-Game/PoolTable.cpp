@@ -33,12 +33,12 @@ void PoolTable::BuildComponents()
 	surface_model->model = LoadModelAsset("Resources/table_surface.obj");
 	surface_model->shader = LoadShaderAsset("default");
 
-	surface_model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.65f);
-	surface_model->SetFloatUnit(SHADER_UNITF_SHININESS, 20.0f);
-	surface_model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.15f);
+	surface_model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.5f);
+	surface_model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
+	surface_model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.35f);
 
 	surface_model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
-	surface_model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/planks.png"));
-	surface_model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/planks.png"));
+	surface_model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/Table_UV_Map.png"));
+	surface_model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/Table_Phong_Map.png"));
 	surface_model->SetTextureUnit(SHADER_UNITT_REFLECTION_CM, LoadCubeMapAsset("Resources/Skybox/TropicalSunnyDay.png"));
 }

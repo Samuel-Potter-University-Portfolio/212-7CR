@@ -19,9 +19,9 @@ PoolDebugPlayer::PoolDebugPlayer()
 	input_component = MakeComponent<InputComponent>();
 
 	model_component = MakeComponent<ModelComponent>();
-	//SphereCollider* sphere = MakeComponent<SphereCollider>();
-	//sphere->local_transform.location = glm::vec3(0,0,0);
-	//sphere->radius = 1.0f;
+	SphereCollider* sphere = MakeComponent<SphereCollider>();
+	sphere->local_transform.location = glm::vec3(0,0,0);
+	sphere->radius = 1.0f;
 
 	//model_component->local_transform.location = sphere->local_transform.location;
 	//model_component->local_transform.scale *= sphere->radius;
