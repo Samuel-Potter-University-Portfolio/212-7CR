@@ -41,7 +41,7 @@ private:
 	class GUIRenderer* gui_renderer = nullptr;
 
 	std::vector<RenderRequest> requests;
-	void Render(RenderRequest& request);
+	void Render(RenderRequest request);
 
 public:
 	void Register(World* world);

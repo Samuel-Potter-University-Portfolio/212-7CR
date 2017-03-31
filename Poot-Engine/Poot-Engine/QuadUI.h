@@ -1,11 +1,12 @@
 #pragma once
+#include "API.h"
 #include "Element.h"
 #include "Model.h"
 #include "Shader.h"
 
 #include <string>
 
-class QuadUI : public Element
+class POOT_API QuadUI : public Element
 {
 public:
 	std::string texture_key = "";

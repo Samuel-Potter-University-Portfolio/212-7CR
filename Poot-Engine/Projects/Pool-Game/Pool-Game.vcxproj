@@ -130,6 +130,7 @@
     <ClCompile Include="BasicPlane.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PoolDebugPlayer.cpp" />
+    <ClCompile Include="PoolEntry.cpp" />
     <ClCompile Include="PoolPlayer.cpp" />
     <ClCompile Include="PoolTable.cpp" />
     <ClCompile Include="PoolWorld.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="PoolBall.h" />
     <ClInclude Include="BasicPlane.h" />
     <ClInclude Include="PoolDebugPlayer.h" />
+    <ClInclude Include="PoolEntry.h" />
     <ClInclude Include="PoolPlayer.h" />
     <ClInclude Include="PoolTable.h" />
     <ClInclude Include="PoolWorld.h" />

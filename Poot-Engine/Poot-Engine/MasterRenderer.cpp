@@ -45,15 +45,14 @@ void MasterRenderer::HandleNewComponent(Component* component)
 	gui_renderer->HandleNewComponent(component);
 }
 
-void MasterRenderer::Render(RenderRequest& request)
+void MasterRenderer::Render(RenderRequest request)
 {
 	if (request.frame_buffer)
 	{
 		request.frame_buffer->Bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
-
-
+	
 	//If camera is null, use main camera
 	if (!request.camera)
 		request.camera = world->GetMainCamera();
