@@ -32,7 +32,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 #define ADD_BALL(num, x, y) \
 	{ \
 		PoolBall* ball = new PoolBall(num); \
-		ball->local_transform.location = glm::vec3(x * 2.02f, 38.0f, 12.0f + y * 1.75f); \
+		ball->local_transform.location = glm::vec3(x * 2.02f, 20.0f, 12.0f + y * 1.75f); \
 		AddObject(ball); \
 	}
 

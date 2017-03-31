@@ -23,6 +23,7 @@ private:
 
 	bool logic_begun;
 	bool window_begun;
+	bool objects_loaded;
 
 	bool in_logic_tick;
 

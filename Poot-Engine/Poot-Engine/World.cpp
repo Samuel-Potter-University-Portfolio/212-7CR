@@ -18,6 +18,7 @@ World::World()
 
 	logic_begun = false;
 	window_begun = false;
+	objects_loaded = false;
 
 	in_logic_tick = false;
 
@@ -85,12 +86,15 @@ void World::LogicTick(GameLogic* game_logic, float delta_time)
 	if (!HasLoaded())
 		return;
 
-	//Tick objects
-	for (GameObject* object : game_objects)
-		object->HandleLogicTick(delta_time);
+	if (objects_loaded)
+	{
+		//Tick objects
+		for (GameObject* object : game_objects)
+			object->HandleLogicTick(delta_time);
 
-	//Tick physics
-	physics_scene.PhysicsTick(delta_time);
+		//Tick physics
+		physics_scene.PhysicsTick(delta_time);
+	}
 
 	in_logic_tick = false;
 }
@@ -130,12 +134,16 @@ void World::WindowTick(Window* window, float delta_time)
 		new_objects.pop();
 	}
 	
+	if (objects_loaded)
+	{
+		//Tick entities
+		for (GameObject* object : game_objects)
+			object->HandleWindowTick(delta_time);
 
-	//Tick entities
-	for (GameObject* object : game_objects)
-		object->HandleWindowTick(delta_time);
-	
-	master_renderer.Render();
+		master_renderer.Render();
+	}
+	else if (new_objects.size() == 0)
+		objects_loaded = true;
 }
 
 void World::LoadLogicResources(GameLogic* game_logic) 
@@ -281,6 +289,9 @@ void World::InternalSpawnObject(GameObject* object)
 	for (Component* component : object->GetAllComponents())
 		if (component != nullptr)
 			InternalAddComponent(component);
+
+	object->HandleLogicTick(0.0f);
+	object->HandleWindowTick(0.0f);
 }
 
 void World::InternalAddComponent(Component* component) 
