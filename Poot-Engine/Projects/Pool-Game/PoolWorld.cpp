@@ -4,6 +4,7 @@
 #include <SkyBox.h>
 #include <Window.h>
 #include "PoolDebugPlayer.h"
+#include "PoolPlayer.h"
 
 #include "PoolBall.h"
 #include "PoolTable.h"
@@ -25,40 +26,12 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	AddObject(new BasicPlane);
 	AddObject(new SkyBox("Resources/Skybox/TropicalSunnyDay.png"));
 
-	AddObject(new PoolDebugPlayer);
+	AddObject(new PoolPlayer);
 	Sun* sun = new Sun(glm::vec3(0, -1, 0));
 	AddObject(sun);
-	
-#define ADD_BALL(num, x, y) \
-	{ \
-		PoolBall* ball = new PoolBall(num); \
-		ball->local_transform.location = glm::vec3(x * 2.02f, 20.0f, 12.0f + y * 1.75f); \
-		AddObject(ball); \
-	}
 
-	ADD_BALL(0, 0, -17);
-
-	ADD_BALL(1, 0, 0);
-
-	ADD_BALL(2, 0.5f, 1);
-	ADD_BALL(9, -0.5f, 1);
-
-	ADD_BALL(10, 1, 2);
-	ADD_BALL(8, 0, 2);
-	ADD_BALL(3, -1, 2);
-
-	ADD_BALL(12, 1.5f, 3);
-	ADD_BALL(5, 0.5f, 3);
-	ADD_BALL(11, -0.5f, 3);
-	ADD_BALL(4, -1.5f, 3);
-
-	ADD_BALL(15, 2, 4);
-	ADD_BALL(14, 1, 4);
-	ADD_BALL(7, 0, 4);
-	ADD_BALL(13, -1, 4);
-	ADD_BALL(6, -2, 4);
-
-	//ADD_BALL(8, 0, 1.65f * 2);
+	for (int i = 0; i <= 15; i++)
+		AddObject(new PoolBall(i));
 }
 
 void PoolWorld::LoadWindowResources(Window* window)
@@ -69,7 +42,9 @@ void PoolWorld::LoadWindowResources(Window* window)
 	{
 		//Unit sphere
 		std::vector<float> verts;
+		std::vector<float> normals;
 		std::vector<float> uvs;
+		std::vector<int> indices;
 		const int stacks = 20;
 		const int slices = 20;
 
@@ -84,32 +59,24 @@ void PoolWorld::LoadWindowResources(Window* window)
 				float phi = l / (float)slices * PI * 2.0f;
 
 				//Spherical coordinates
-				verts.push_back(sinf(theta) * cosf(phi));
-				verts.push_back(sinf(theta) * sinf(phi));
-				verts.push_back(cosf(theta));
+				const float x = sinf(theta) * cosf(phi);
+				const float y = sinf(theta) * sinf(phi);
+				const float z = cosf(theta);
+
+				verts.push_back(x);
+				verts.push_back(y);
+				verts.push_back(z);
+
+				//Length is already 1
+				normals.push_back(x);
+				normals.push_back(y);
+				normals.push_back(z);
 
 				//Cylindrical sphere uvs https://mft-dev.dk/uv-mapping-sphere/
 				uvs.push_back((l / (float)slices) * -2.0f);
 				uvs.push_back((s / (float)stacks));
 			}
 		}
-
-
-		std::vector<float> normals;
-
-		for (int i = 0; i < verts.size(); i += 3)
-		{
-			const float x = verts[i];
-			const float y = verts[i + 1];
-			const float z = verts[i + 2];
-			const float length = 1.0f;//sqrtf(x*x + y*y + z*z); //With current setup, lenght is always 1 anyway
-
-			normals.push_back(x / length);
-			normals.push_back(y / length);
-			normals.push_back(z / length);
-		}
-
-		std::vector<int> indices;
 
 		for (int i = 0; i <= stacks; i++)
 		{

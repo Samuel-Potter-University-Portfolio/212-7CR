@@ -13,7 +13,7 @@ PoolBall::PoolBall(int number)
 	SetTags(OBJ_TAG_PROP);
 	model = MakeComponent<ModelComponent>();
 
-	Body* body = MakeComponent<Body>();
+	body = MakeComponent<Body>();
 	body->gravity_enabled = true;
 	body->start_awake = false;
 	body->always_awake = false;
@@ -27,6 +27,66 @@ PoolBall::PoolBall(int number)
 	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.8f);
 	model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
 	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 1.0f);
+
+#define BALL_LOC(x, y) local_transform.location = glm::vec3(x * 2.02f, 20.0f, 12.0f + y * 1.75f) 
+	
+
+	switch (number)
+	{
+	case 0:
+		BALL_LOC(0, -17);
+		break;
+
+	case 1:
+		BALL_LOC(0, 0);
+		break;
+
+	case 2:
+		BALL_LOC(0.5f, 1);
+		break;
+	case 9:
+		BALL_LOC(-0.5f, 1);
+		break;
+
+	case 10:
+		BALL_LOC(1, 2);
+		break;
+	case 8:
+		BALL_LOC(0, 2);
+		break;
+	case 3:
+		BALL_LOC(-1, 2);
+		break;
+
+	case 12:
+		BALL_LOC(1.5f, 3);
+		break;
+	case 5:
+		BALL_LOC(0.5f, 3);
+		break;
+	case 11:
+		BALL_LOC(-0.5f, 3);
+		break;
+	case 4:
+		BALL_LOC(-1.5f, 3);
+		break;
+
+	case 15:
+		BALL_LOC(2, 4);
+		break;
+	case 14:
+		BALL_LOC(1, 4);
+		break;
+	case 7:
+		BALL_LOC(0, 4);
+		break;
+	case 13:
+		BALL_LOC(-1, 4);
+		break;
+	case 6:
+		BALL_LOC(-2, 4);
+		break;
+	};
 }
 
 void PoolBall::BuildComponents()

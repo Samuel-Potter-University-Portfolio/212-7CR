@@ -14,7 +14,7 @@ PoolTable::PoolTable()
 	//surface_model->local_transform.scale = glm::vec3(1, 3, 1);
 	mesh_collider = MakeComponent<MeshCollider>();
 	mesh_collider->SetMesh(mesh);
-	mesh_collider->properties.friction = 0.0f;
+	mesh_collider->properties.friction = 0.03f;
 	mesh_collider->properties.restitution = 1.0f;
 	mesh_collider->local_transform.scale = surface_model->local_transform.scale;
 }

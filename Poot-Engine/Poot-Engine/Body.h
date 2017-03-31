@@ -27,7 +27,7 @@ public:
 	float mass = 1.0f;
 	float drag = 0.0f;
 
-	float sleep_wait_time = 2.0f;
+	float sleep_wait_time = 1.0f;
 	bool start_awake = true;
 	bool always_awake = false;
 	bool gravity_enabled = true;
