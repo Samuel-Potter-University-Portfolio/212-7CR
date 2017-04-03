@@ -2,6 +2,7 @@
 #include <GameObject.h>
 #include <InputComponent.h>
 #include <CameraComponent.h>
+#include <ModelComponent.h>
 #include <Body.h>
 #include <vector>
 
@@ -13,6 +14,7 @@ class PoolPlayer : public GameObject3D
 private:
 	CameraComponent* camera;
 	InputComponent* input_component;
+	ModelComponent* model;
 
 	PoolBall* cue_ball = nullptr;
 	Body* cue_ball_body = nullptr;

@@ -1,5 +1,6 @@
 #include "PoolPlayer.h"
 #include <World.h>
+#include <DefaultShader.h>
 
 
 #define CLAMP(x, min, max) (x > max ? max : x < min ? min : x)
@@ -10,7 +11,14 @@ PoolPlayer::PoolPlayer()
 	SetTags(OBJ_TAG_PLAYER);
 
 	camera = MakeComponent<CameraComponent>();
+	camera->local_transform.location = glm::vec3(0, 20, 17);
 	input_component = MakeComponent<InputComponent>();
+
+	model = MakeComponent<ModelComponent>();
+	model->SetIntUnit(SHADER_UNITI_USING_PHONG_MAP, 1);
+	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.8f);
+	model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
+	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.25f);
 }
 
 PoolPlayer::~PoolPlayer()
@@ -50,6 +58,14 @@ void PoolPlayer::BuildComponents()
 		side_axis.func = [this](float a) { OnLookSideways(a); };
 		input_component->AddAxis(side_axis);
 	}
+
+	model->model = LoadModelAsset("cue");
+	model->shader = LoadShaderAsset("default");
+	model->SetTextureUnit(SHADER_UNITT_BASE_TEXTURE, LoadTextureAsset("Resources/cue.png"));
+	model->SetTextureUnit(SHADER_UNITT_PHONG_MAP, LoadTextureAsset("Resources/cue_phong.png"));
+	model->SetTextureUnit(SHADER_UNITT_REFLECTION_CM, LoadCubeMapAsset("Resources/Skybox/TropicalSunnyDay.png"));
+
+	FinishWatching();
 }
 
 void PoolPlayer::OnHit(bool pressed) 
@@ -93,6 +109,10 @@ void PoolPlayer::FinishWatching()
 	camera->local_transform.location -= GetWorldLocation();
 	camera->local_transform.rotation.x = 0.0f;
 	camera->SetTransformParent(this);
+
+	model->local_transform.location = glm::vec3(0, 0, -1);
+	model->local_transform.rotation = glm::vec3(10.0f, 0, 0);
+	model->SetTransformParent(this);
 }
 
 void PoolPlayer::Shoot(float power) 
@@ -102,6 +122,10 @@ void PoolPlayer::Shoot(float power)
 
 	camera->local_transform.location = camera->GetWorldLocation();
 	camera->SetTransformParent(nullptr);
+
+	model->local_transform.location = model->GetWorldLocation();
+	model->local_transform.rotation = glm::vec3(10.0f, local_transform.rotation.y, 0);
+	model->SetTransformParent(nullptr);
 }
 
 void PoolPlayer::Tick(float delta_time) 
@@ -138,7 +162,7 @@ void PoolPlayer::Tick(float delta_time)
 	glm::vec3 desired_position;
 
 	if (currrent_mode == Shooting)
-		desired_position = glm::vec3(0, 5, -10);
+		desired_position = glm::vec3(0, 5, -15);
 
 	else
 	{

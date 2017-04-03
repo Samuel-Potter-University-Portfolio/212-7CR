@@ -105,6 +105,91 @@ void PoolWorld::LoadWindowResources(Window* window)
 		//TODO - Optimize mesh
 		window->GetModelLoader().RegisterModel("ball", mesh);
 	}
+
+	//Cue
+	{
+		//Unit sphere
+		std::vector<float> verts;
+		std::vector<float> normals;
+		std::vector<float> uvs;
+		std::vector<int> indices;
+		const int length = 20;
+		const int resolution = 10;
+		const float front_radius = 0.25f;
+		const float back_radius = 0.4f;
+
+		//Back
+		for (int i = 0; i <= resolution; i++)
+		{
+			float theta = i / (float)resolution * PI * 2.0f;
+
+			const float x = cosf(theta);
+			const float y = sinf(theta);
+
+			verts.push_back(x * back_radius);
+			verts.push_back(y * back_radius);
+			verts.push_back(-length);
+
+			normals.push_back(x);
+			normals.push_back(y);
+			normals.push_back(-0.01f);
+
+			uvs.push_back((i / (float)resolution));
+			uvs.push_back(0);
+		}
+
+		//Front
+		for (int i = 0; i <= resolution; i++)
+		{
+			float theta = i / (float)resolution * PI * 2.0f;
+
+			const float x = cosf(theta);
+			const float y = sinf(theta);
+
+			verts.push_back(x * front_radius);
+			verts.push_back(y * front_radius);
+			verts.push_back(0.0f);
+
+			normals.push_back(x);
+			normals.push_back(y);
+			normals.push_back(0.01f);
+
+			uvs.push_back((i / (float)resolution));
+			uvs.push_back(1);
+		}
+
+		for (int i = 0; i < resolution; i++)
+		{
+			//Cylinder
+			indices.push_back(i);
+			indices.push_back(i + 1);
+			indices.push_back(resolution + i);
+
+			indices.push_back(resolution + i);
+			indices.push_back(i + 1);
+			indices.push_back(resolution + i + 1);
+
+			//Back face
+			indices.push_back(resolution - 1);
+			indices.push_back(i + 1);
+			indices.push_back(i);
+
+			//Front face
+			indices.push_back(resolution + resolution - 1);
+			indices.push_back(resolution + i);
+			indices.push_back(resolution + i + 1);
+
+		}
+
+		ModelMesh mesh(
+			verts,
+			uvs,
+			normals,
+			indices
+		);
+		//TODO - Optimize mesh
+		window->GetModelLoader().RegisterModel("cue", mesh);
+	}
 }
 
 void PoolWorld::UnloadLogicResources(GameLogic* game_logic)
