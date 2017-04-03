@@ -6,6 +6,9 @@
 #include <Body.h>
 #include <vector>
 
+#include <Canvas.h>
+#include <TextElement.h>
+
 #include "PoolBall.h"
 
 
@@ -16,6 +19,9 @@ private:
 	InputComponent* input_component;
 	ModelComponent* model;
 
+	Canvas* main_canvas;
+	TextElement* force_text;
+
 	PoolBall* cue_ball = nullptr;
 	Body* cue_ball_body = nullptr;
 	std::vector<PoolBall*> pool_balls;
@@ -25,6 +31,9 @@ private:
 		Shooting,
 		Watching
 	} currrent_mode = Shooting;
+	bool is_shooting = false;
+	float shot_power = 0.0f;
+	float shot_timer = 0.0f;
 
 public:
 	PoolPlayer();
@@ -42,7 +51,7 @@ protected:
 
 	virtual void Tick(float delta_time) override;
 
-	void Shoot(float power);
+	void Shoot();
 	void FinishWatching();
 	bool AreBallsStill();
 };

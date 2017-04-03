@@ -4,7 +4,6 @@
 #include <QuadUI.h>
 
 
-
 PoolEntry::PoolEntry()
 {
 	SetTags(OBJ_TAG_PLAYER);

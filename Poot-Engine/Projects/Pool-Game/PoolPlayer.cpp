@@ -3,6 +3,9 @@
 #include <DefaultShader.h>
 
 
+#include <sstream>
+
+
 #define CLAMP(x, min, max) (x > max ? max : x < min ? min : x)
 
 
@@ -19,6 +22,21 @@ PoolPlayer::PoolPlayer()
 	model->SetFloatUnit(SHADER_UNITF_ROUGHNESS, 0.8f);
 	model->SetFloatUnit(SHADER_UNITF_SHININESS, 50.0f);
 	model->SetFloatUnit(SHADER_UNITF_REFLECTIVENESS, 0.25f);
+
+	{
+		main_canvas = MakeComponent<Canvas>();
+		main_canvas->canvas_mode = Scaled;
+
+		{
+			force_text = main_canvas->MakeElement<TextElement>();
+			force_text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
+			force_text->local_transform.scale *= 50;
+			force_text->local_transform.location = glm::vec2(30, 30);
+			force_text->anchor = glm::vec2(-1, -1);
+			force_text->aligment = Left;
+			force_text->colour = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		}
+	}
 }
 
 PoolPlayer::~PoolPlayer()
@@ -46,6 +64,7 @@ void PoolPlayer::BuildComponents()
 		InputEvent event;
 		event.AddInput(GLFW_MOUSE_BUTTON_LEFT);
 		event.AddInput(GLFW_KEY_SPACE);
+		event.is_spammable = false;
 		event.func = [this](bool pressed) { OnHit(pressed); };
 		input_component->AddEvent(event);
 	}
@@ -70,11 +89,14 @@ void PoolPlayer::BuildComponents()
 
 void PoolPlayer::OnHit(bool pressed) 
 {
-	if (!cue_ball_body)
+	if (!cue_ball_body || currrent_mode != Shooting)
 		return;
+	
+	if (pressed)
+		is_shooting = true;
 
-	if (pressed && currrent_mode == Shooting)
-		Shoot(1.0f);
+	if (!pressed && is_shooting)
+		Shoot();
 }
 
 void PoolPlayer::OnGrabMouse(bool pressed)
@@ -115,9 +137,13 @@ void PoolPlayer::FinishWatching()
 	model->SetTransformParent(this);
 }
 
-void PoolPlayer::Shoot(float power) 
+void PoolPlayer::Shoot() 
 {
-	cue_ball_body->ApplyForce(local_transform.GetForward() * power);
+	const float min_power = 0.5f;
+	const float max_power = 5.0f;
+	const float actual_power = min_power * (1.0f - shot_power) + max_power * shot_power;
+
+	cue_ball_body->ApplyForce(local_transform.GetForward() * actual_power);
 	currrent_mode = Watching;
 
 	camera->local_transform.location = camera->GetWorldLocation();
@@ -126,6 +152,11 @@ void PoolPlayer::Shoot(float power)
 	model->local_transform.location = model->GetWorldLocation();
 	model->local_transform.rotation = glm::vec3(10.0f, local_transform.rotation.y, 0);
 	model->SetTransformParent(nullptr);
+
+	is_shooting = false;
+	shot_power = 0.0f;
+	shot_timer = 0.0f;
+	force_text->text = "";
 }
 
 void PoolPlayer::Tick(float delta_time) 
@@ -155,6 +186,53 @@ void PoolPlayer::Tick(float delta_time)
 
 	if (currrent_mode == Watching && AreBallsStill())
 		FinishWatching();
+
+	//Power anim
+	if (is_shooting)
+	{
+		shot_power = sinf(shot_timer) * 0.5f + 0.5f;
+		const int shot_percent = shot_power * 100;
+
+		std::stringstream message;
+		message << shot_percent << '%';
+		force_text->text = message.str();
+
+		const glm::vec4 RED = glm::vec4(1, 0, 0, 1);
+		const glm::vec4 YLW = glm::vec4(1, 1, 0, 1);
+		const glm::vec4 GRN = glm::vec4(0, 1, 0, 1);
+
+		if (shot_power < 0.10f)
+			force_text->colour = RED;
+
+		//0.1 - 0.3
+		else if (shot_power < 0.30f)
+		{
+			const float start = 0.1f;
+			const float end = 0.3f;
+			const float v = (shot_power - start)/(end - start);
+
+			force_text->colour = RED * (1.0f - v) + YLW * v;
+		}
+
+		else if (shot_power < 0.5f)
+			force_text->colour = YLW;
+
+		//0.5 - 0.8
+		else if (shot_power < 0.8f)
+		{
+			const float start = 0.5f;
+			const float end = 0.8f;
+			const float v = (shot_power - start) / (end - start);
+
+			force_text->colour = YLW * (1.0f - v) + GRN * v;
+		}
+
+		else
+			force_text->colour = GRN;
+
+		shot_timer += delta_time;
+	}
+
 
 
 	//Camera transitions
