@@ -58,7 +58,7 @@ void PoolPlayer::BuildComponents()
 		release_event.AddInput(GLFW_KEY_ESCAPE);
 		release_event.func = [this](bool pressed) { OnReleaseMouse(pressed); };
 		input_component->AddEvent(release_event);
-	} 
+	}
 	//Register mouse hit
 	{
 		InputEvent event;
@@ -68,10 +68,20 @@ void PoolPlayer::BuildComponents()
 		event.func = [this](bool pressed) { OnHit(pressed); };
 		input_component->AddEvent(event);
 	}
+	//Register camera change
+	{
+		InputEvent event;
+		event.AddInput(GLFW_KEY_V);
+		event.is_spammable = false;
+		event.func = [this](bool pressed) { OnChangeCameraMode(pressed); };
+		input_component->AddEvent(event);
+	}
 	//Register mouse look 
 	{
 		InputAxis side_axis;
 		side_axis.AddNegative(GLFW_MOUSE_LOCATION_X);
+		side_axis.AddPositive(GLFW_KEY_LEFT);
+		side_axis.AddNegative(GLFW_KEY_RIGHT);
 		side_axis.decay = 1.0f;
 		side_axis.mouse_sensitivity = 0.08f;
 		side_axis.func = [this](float a) { OnLookSideways(a); };
@@ -89,7 +99,7 @@ void PoolPlayer::BuildComponents()
 
 void PoolPlayer::OnHit(bool pressed) 
 {
-	if (!cue_ball_body || currrent_mode != Shooting)
+	if (!cue_ball_body || !AreBallsStill())
 		return;
 	
 	if (pressed)
@@ -113,7 +123,7 @@ void PoolPlayer::OnReleaseMouse(bool pressed)
 
 void PoolPlayer::OnLookSideways(float amount)
 {
-	local_transform.rotation += glm::vec3(0, amount, 0);
+	local_transform.rotation += glm::vec3(0, amount, 0) * (currrent_mode == Watching ? -1.0f : 1.0f);
 }
 
 bool PoolPlayer::AreBallsStill() 
@@ -125,39 +135,58 @@ bool PoolPlayer::AreBallsStill()
 	return true;
 }
 
+void PoolPlayer::OnChangeCameraMode(bool pressed) 
+{
+	if (pressed)
+	{
+		if (currrent_mode == Shooting)
+		{
+			camera->local_transform.location = camera->GetWorldLocation();
+			camera->SetTransformParent(nullptr);
+
+			currrent_mode = Watching;
+		}
+		else if (currrent_mode == Watching)
+		{
+			camera->local_transform.location -= GetWorldLocation();
+			camera->local_transform.rotation.x = 0.0f;
+			camera->SetTransformParent(this);
+
+			currrent_mode = Shooting;
+		}
+	}
+}
+
 void PoolPlayer::FinishWatching() 
 {
-	currrent_mode = Shooting;
-	camera->local_transform.location -= GetWorldLocation();
-	camera->local_transform.rotation.x = 0.0f;
-	camera->SetTransformParent(this);
-
+	//Attach cue model
 	model->local_transform.location = glm::vec3(0, 0, -1);
 	model->local_transform.rotation = glm::vec3(10.0f, 0, 0);
 	model->SetTransformParent(this);
+
+	shot_in_progress = false;
 }
 
 void PoolPlayer::Shoot() 
 {
-	const float min_power = 0.5f;
-	const float max_power = 5.0f;
-	const float actual_power = min_power * (1.0f - shot_power) + max_power * shot_power;
-
-	cue_ball_body->ApplyForce(local_transform.GetForward() * actual_power);
-	currrent_mode = Watching;
-
-	camera->local_transform.location = camera->GetWorldLocation();
-	camera->SetTransformParent(nullptr);
-
+	//Detach cue model
 	model->local_transform.location = glm::vec3(0, 0, -1);
 	model->local_transform.location = model->GetWorldLocation();
 	model->local_transform.rotation = glm::vec3(10.0f, local_transform.rotation.y, 0);
 	model->SetTransformParent(nullptr);
 
+	//Apply force
+	const float min_power = 0.5f;
+	const float max_power = 5.0f;
+	const float actual_power = min_power * (1.0f - shot_power) + max_power * shot_power;
+	cue_ball_body->ApplyForce(local_transform.GetForward() * actual_power);
+
+	//Reset tracking vars
 	is_shooting = false;
 	shot_power = 0.0f;
 	shot_timer = 0.0f;
 	force_text->text = "";
+	shot_in_progress = true;
 }
 
 void PoolPlayer::Tick(float delta_time) 
@@ -185,7 +214,7 @@ void PoolPlayer::Tick(float delta_time)
 	}
 	
 
-	if (currrent_mode == Watching && AreBallsStill())
+	if (shot_in_progress && AreBallsStill())
 		FinishWatching();
 
 	//Power anim

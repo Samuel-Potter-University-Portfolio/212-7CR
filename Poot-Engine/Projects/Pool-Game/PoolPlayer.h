@@ -35,6 +35,8 @@ private:
 	float shot_power = 0.0f;
 	float shot_timer = 0.0f;
 
+	bool shot_in_progress = false;
+
 public:
 	PoolPlayer();
 	~PoolPlayer();
@@ -45,6 +47,7 @@ protected:
 	void OnLookSideways(float amount);
 
 	void OnHit(bool pressed);
+	void OnChangeCameraMode(bool pressed);
 
 	void OnGrabMouse(bool pressed);
 	void OnReleaseMouse(bool pressed);
