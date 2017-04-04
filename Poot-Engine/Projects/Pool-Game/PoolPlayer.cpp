@@ -36,6 +36,20 @@ PoolPlayer::PoolPlayer()
 			force_text->aligment = Left;
 			force_text->colour = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
 		}
+
+		{
+			Canvas* sub_canvas = main_canvas->MakeElement<Canvas>();
+			sub_canvas->canvas_mode = Scaled;
+
+			console_text = sub_canvas->MakeElement<TextElement>();
+			console_text->font_sheet_key = "Resources/arial_ascii_bitmap.bmp";
+			console_text->local_transform.scale *= 20;
+			console_text->text = "0\n1\n2\n3\n4\n5\n6\n8\n9";
+			console_text->local_transform.location = glm::vec2(-20, 350);
+			console_text->anchor = glm::vec2(1, -1);
+			console_text->aligment = Right;
+			console_text->colour = glm::vec4(0.8f, 1.0f, 0.8f, 1.0f);
+		}
 	}
 }
 
@@ -45,10 +59,14 @@ PoolPlayer::~PoolPlayer()
 
 void PoolPlayer::BuildComponents()
 {
+	Print("~Controls~");
+	Print("Toggle Debug View: (F1)");
+	Print("Toggle fullscreen: (F11)");
+
 	//Register mouse grab
 	{
 		InputEvent grab_event;
-		grab_event.AddInput(GLFW_MOUSE_BUTTON_RIGHT);
+		grab_event.AddInput(GLFW_KEY_G);
 		grab_event.AddInput(GLFW_MOUSE_BUTTON_MIDDLE);
 		grab_event.func = [this](bool pressed) { OnGrabMouse(pressed); };
 		input_component->AddEvent(grab_event);
@@ -58,6 +76,9 @@ void PoolPlayer::BuildComponents()
 		release_event.AddInput(GLFW_KEY_ESCAPE);
 		release_event.func = [this](bool pressed) { OnReleaseMouse(pressed); };
 		input_component->AddEvent(release_event);
+
+		Print("Grab Mouse: (G/MMB)");
+		Print("Release Mouse: (RMB/ESC)");
 	}
 	//Register mouse hit
 	{
@@ -67,6 +88,7 @@ void PoolPlayer::BuildComponents()
 		event.is_spammable = false;
 		event.func = [this](bool pressed) { OnHit(pressed); };
 		input_component->AddEvent(event);
+		Print("Shoot ball: (LMB/Space)");
 	}
 	//Register camera change
 	{
@@ -75,6 +97,7 @@ void PoolPlayer::BuildComponents()
 		event.is_spammable = false;
 		event.func = [this](bool pressed) { OnChangeCameraMode(pressed); };
 		input_component->AddEvent(event);
+		Print("Camera Mode:	(V)");
 	}
 	//Register mouse look 
 	{
@@ -86,6 +109,7 @@ void PoolPlayer::BuildComponents()
 		side_axis.mouse_sensitivity = 0.08f;
 		side_axis.func = [this](float a) { OnLookSideways(a); };
 		input_component->AddAxis(side_axis);
+		Print("Aim Cue: (Move Mouse/Left/Right)");
 	}
 
 	model->model = LoadModelAsset("cue");
@@ -133,6 +157,20 @@ bool PoolPlayer::AreBallsStill()
 			return false;
 
 	return true;
+}
+
+void PoolPlayer::Print(std::string message)
+{
+	for (int i = 1; i < CONSOLE_BUFFER_SIZE; i++)
+		console_buffer[CONSOLE_BUFFER_SIZE - i] = console_buffer[CONSOLE_BUFFER_SIZE - i - 1];
+	console_buffer[0] = message;
+
+	std::stringstream str_stream;
+
+	for (int i = CONSOLE_BUFFER_SIZE - 1; i >= 0; i--)
+		str_stream << console_buffer[i] << '\n';
+
+	console_text->text = str_stream.str();
 }
 
 void PoolPlayer::OnChangeCameraMode(bool pressed) 

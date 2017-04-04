@@ -12,6 +12,8 @@
 #include "PoolBall.h"
 
 
+#define CONSOLE_BUFFER_SIZE  10
+
 class PoolPlayer : public GameObject3D
 {
 private:
@@ -20,7 +22,11 @@ private:
 	ModelComponent* model;
 
 	Canvas* main_canvas;
+
 	TextElement* force_text;
+
+	std::string console_buffer[CONSOLE_BUFFER_SIZE];
+	TextElement* console_text;
 
 	PoolBall* cue_ball = nullptr;
 	Body* cue_ball_body = nullptr;
@@ -53,6 +59,8 @@ protected:
 	void OnReleaseMouse(bool pressed);
 
 	virtual void Tick(float delta_time) override;
+
+	void Print(std::string message);
 
 	void Shoot();
 	void FinishWatching();
