@@ -11,6 +11,7 @@ private:
 	SphereCollider* sphere;
 	Body* body;
 	int number;
+	bool potted = false;
 
 public:
 	PoolBall(int number);
@@ -20,5 +21,9 @@ public:
 
 	inline int GetNumber() { return number; }
 	inline bool IsStill() { return !body->IsAwake(); }
+
+	virtual void OnCollide(class Collider* collider, struct HitInfo& hit_info) override;
+
+	void Reset();
 };
 

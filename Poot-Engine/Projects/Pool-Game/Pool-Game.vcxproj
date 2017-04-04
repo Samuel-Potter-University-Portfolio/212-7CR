@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Pocket.cpp" />
     <ClCompile Include="PoolBall.cpp" />
     <ClCompile Include="BasicPlane.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="PoolWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Pocket.h" />
     <ClInclude Include="PoolBall.h" />
     <ClInclude Include="BasicPlane.h" />
     <ClInclude Include="PoolDebugPlayer.h" />

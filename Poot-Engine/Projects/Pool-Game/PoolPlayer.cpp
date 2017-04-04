@@ -324,3 +324,25 @@ void PoolPlayer::Tick(float delta_time)
 
 	camera->local_transform.location = camera->local_transform.location * (1.0f - transition_power) + desired_position * transition_power;
 }
+
+void PoolPlayer::OnPotted(PoolBall* ball) 
+{
+	const int number = ball->GetNumber();
+
+	if (number == 0)
+	{
+		ball->Reset();
+		Print("Potted Cue ball");
+		return;
+	}
+
+	std::stringstream str_stream;
+	str_stream << "Potted " << (number < 8 ? " Solid " : number == 8 ? " Ball Ball " : " Stripe ") << number;
+	Print(str_stream.str());
+	ball->SetActive(false);
+}
+
+void PoolPlayer::OnFloored(PoolBall* ball) 
+{
+	ball->Reset();
+}

@@ -65,5 +65,9 @@ protected:
 	void Shoot();
 	void FinishWatching();
 	bool AreBallsStill();
+
+public:
+	void OnPotted(PoolBall* ball);
+	void OnFloored(PoolBall* ball);
 };
 

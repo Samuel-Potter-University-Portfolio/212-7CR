@@ -9,6 +9,7 @@
 #include "PoolBall.h"
 #include "PoolTable.h"
 #include "BasicPlane.h"
+#include "Pocket.h"
 
 
 #define PI 3.141592653589793f
@@ -32,6 +33,36 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 
 	for (int i = 0; i <= 15; i++)
 		AddObject(new PoolBall(i));
+
+	//Add pockets
+	const int pocket_height = 16.0f;
+	{
+		Pocket* left_pocket = new Pocket;
+		left_pocket->local_transform.location = glm::vec3(12.5f, pocket_height, 0);
+		AddObject(left_pocket);
+
+		Pocket* right_pocket = new Pocket;
+		right_pocket->local_transform.location = glm::vec3(-12.5f, pocket_height, 0);
+		AddObject(right_pocket);
+	}
+	{
+		Pocket* left_pocket = new Pocket;
+		left_pocket->local_transform.location = glm::vec3(12.5f, pocket_height, 27.0f);
+		AddObject(left_pocket);
+
+		Pocket* right_pocket = new Pocket;
+		right_pocket->local_transform.location = glm::vec3(-12.5f, pocket_height, 27.0f);
+		AddObject(right_pocket);
+	}
+	{
+		Pocket* left_pocket = new Pocket;
+		left_pocket->local_transform.location = glm::vec3(12.5f, pocket_height, -27.0f);
+		AddObject(left_pocket);
+
+		Pocket* right_pocket = new Pocket;
+		right_pocket->local_transform.location = glm::vec3(-12.5f, pocket_height, -27.0f);
+		AddObject(right_pocket);
+	}
 }
 
 void PoolWorld::LoadWindowResources(Window* window)
