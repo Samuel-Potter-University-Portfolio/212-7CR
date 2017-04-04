@@ -149,6 +149,7 @@ void PoolPlayer::Shoot()
 	camera->local_transform.location = camera->GetWorldLocation();
 	camera->SetTransformParent(nullptr);
 
+	model->local_transform.location = glm::vec3(0, 0, -1);
 	model->local_transform.location = model->GetWorldLocation();
 	model->local_transform.rotation = glm::vec3(10.0f, local_transform.rotation.y, 0);
 	model->SetTransformParent(nullptr);
@@ -190,47 +191,52 @@ void PoolPlayer::Tick(float delta_time)
 	//Power anim
 	if (is_shooting)
 	{
-		shot_power = sinf(shot_timer) * 0.5f + 0.5f;
-		const int shot_percent = shot_power * 100;
-
-		std::stringstream message;
-		message << shot_percent << '%';
-		force_text->text = message.str();
-
-		const glm::vec4 RED = glm::vec4(1, 0, 0, 1);
-		const glm::vec4 YLW = glm::vec4(1, 1, 0, 1);
-		const glm::vec4 GRN = glm::vec4(0, 1, 0, 1);
-
-		if (shot_power < 0.10f)
-			force_text->colour = RED;
-
-		//0.1 - 0.3
-		else if (shot_power < 0.30f)
-		{
-			const float start = 0.1f;
-			const float end = 0.3f;
-			const float v = (shot_power - start)/(end - start);
-
-			force_text->colour = RED * (1.0f - v) + YLW * v;
-		}
-
-		else if (shot_power < 0.5f)
-			force_text->colour = YLW;
-
-		//0.5 - 0.8
-		else if (shot_power < 0.8f)
-		{
-			const float start = 0.5f;
-			const float end = 0.8f;
-			const float v = (shot_power - start) / (end - start);
-
-			force_text->colour = YLW * (1.0f - v) + GRN * v;
-		}
-
-		else
-			force_text->colour = GRN;
-
+		shot_power = cosf(shot_timer) * -0.5f + 0.5f;
 		shot_timer += delta_time;
+
+		model->local_transform.location = glm::vec3(0, 0, -1.0f - 5.0f * shot_power);
+
+		//Text animation
+		{
+			const int shot_percent = shot_power * 100;
+
+			std::stringstream message;
+			message << shot_percent << '%';
+			force_text->text = message.str();
+
+			const glm::vec4 RED = glm::vec4(1, 0, 0, 1);
+			const glm::vec4 YLW = glm::vec4(1, 1, 0, 1);
+			const glm::vec4 GRN = glm::vec4(0, 1, 0, 1);
+
+			if (shot_power < 0.10f)
+				force_text->colour = RED;
+
+			//0.1 - 0.3
+			else if (shot_power < 0.30f)
+			{
+				const float start = 0.1f;
+				const float end = 0.3f;
+				const float v = (shot_power - start) / (end - start);
+
+				force_text->colour = RED * (1.0f - v) + YLW * v;
+			}
+
+			else if (shot_power < 0.5f)
+				force_text->colour = YLW;
+
+			//0.5 - 0.8
+			else if (shot_power < 0.8f)
+			{
+				const float start = 0.5f;
+				const float end = 0.8f;
+				const float v = (shot_power - start) / (end - start);
+
+				force_text->colour = YLW * (1.0f - v) + GRN * v;
+			}
+
+			else
+				force_text->colour = GRN;
+		}
 	}
 
 
