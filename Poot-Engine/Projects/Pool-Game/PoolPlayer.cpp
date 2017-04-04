@@ -99,6 +99,15 @@ void PoolPlayer::BuildComponents()
 		input_component->AddEvent(event);
 		Print("Camera Mode:	(V)");
 	}
+	//Reset
+	{
+		InputEvent event;
+		event.AddInput(GLFW_KEY_R);
+		event.is_spammable = false;
+		event.func = [this](bool pressed) { OnReset(pressed); };
+		input_component->AddEvent(event);
+		Print("Reset: (R)");
+	}
 	//Register mouse look 
 	{
 		InputAxis side_axis;
@@ -131,6 +140,13 @@ void PoolPlayer::OnHit(bool pressed)
 
 	if (!pressed && is_shooting)
 		Shoot();
+}
+
+void PoolPlayer::OnReset(bool pressed) 
+{
+	if (pressed)
+		for (PoolBall* ball : pool_balls)
+			ball->Reset();
 }
 
 void PoolPlayer::OnGrabMouse(bool pressed)

@@ -53,6 +53,7 @@ protected:
 	void OnLookSideways(float amount);
 
 	void OnHit(bool pressed);
+	void OnReset(bool pressed);
 	void OnChangeCameraMode(bool pressed);
 
 	void OnGrabMouse(bool pressed);
