@@ -97,7 +97,7 @@ void PoolPlayer::BuildComponents()
 		event.is_spammable = false;
 		event.func = [this](bool pressed) { OnChangeCameraMode(pressed); };
 		input_component->AddEvent(event);
-		Print("Camera Mode:	(V)");
+		Print("Camera Mode: (V)");
 	}
 	//Reset
 	{
@@ -230,7 +230,7 @@ void PoolPlayer::Shoot()
 	model->SetTransformParent(nullptr);
 
 	//Apply force
-	const float min_power = 0.5f;
+	const float min_power = 0.1f;
 	const float max_power = 5.0f;
 	const float actual_power = min_power * (1.0f - shot_power) + max_power * shot_power;
 	cue_ball_body->ApplyForce(local_transform.GetForward() * actual_power);
@@ -347,6 +347,7 @@ void PoolPlayer::OnPotted(PoolBall* ball)
 
 	if (number == 0)
 	{
+		ball->SetActive(false);
 		ball->Reset();
 		Print("Potted Cue ball");
 		return;

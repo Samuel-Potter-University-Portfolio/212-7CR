@@ -7,7 +7,7 @@ PoolTable::PoolTable()
 {
 	SetTags(OBJ_TAG_ENV | POBJ_TAG_TABLE);
 
-	mesh = new Mesh(OBJLoader::Load("Resources/table_surface.obj", 0.2f));
+	mesh = new Mesh(OBJLoader::Load("Resources/table_surface_collision.obj", 0.2f));
 
 	body_model = MakeComponent<ModelComponent>();
 	surface_model = MakeComponent<ModelComponent>();

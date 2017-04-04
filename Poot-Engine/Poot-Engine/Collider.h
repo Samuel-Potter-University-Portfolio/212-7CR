@@ -7,6 +7,7 @@
 struct POOT_API HitInfo 
 {
 	glm::vec3 normal;
+	glm::vec3 hit_location;
 	float embedded_distance;
 };
 

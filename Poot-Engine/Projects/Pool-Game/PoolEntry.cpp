@@ -1,5 +1,6 @@
 #include "PoolEntry.h"
 #include "PoolPlayer.h"
+#include "PoolDebugPlayer.h"
 #include <World.h>
 #include <QuadUI.h>
 
@@ -47,9 +48,16 @@ void PoolEntry::OnEnter(bool pressed)
 {
 	if (pressed)
 	{
+#ifdef _DEBUG
+		SetActive(false);
+		PoolDebugPlayer* player = new PoolDebugPlayer;
+		GetWorld()->AddObject(player);
+		GetWorld()->SetMainCamera(player->GetComponent<CameraComponent>());
+#else
 		SetActive(false);
 		PoolPlayer* player = new PoolPlayer;
 		GetWorld()->AddObject(player);
 		GetWorld()->SetMainCamera(player->GetComponent<CameraComponent>());
+#endif
 	}
 }

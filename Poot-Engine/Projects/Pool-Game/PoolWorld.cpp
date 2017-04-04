@@ -34,6 +34,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 	for (int i = 0; i <= 15; i++)
 		AddObject(new PoolBall(i));
 
+#ifndef _DEBUG
 	//Add pockets
 	const int pocket_height = 16.0f;
 	{
@@ -63,6 +64,7 @@ void PoolWorld::LoadLogicResources(GameLogic* game_logic)
 		right_pocket->local_transform.location = glm::vec3(-12.5f, pocket_height, -27.0f);
 		AddObject(right_pocket);
 	}
+#endif
 }
 
 void PoolWorld::LoadWindowResources(Window* window)

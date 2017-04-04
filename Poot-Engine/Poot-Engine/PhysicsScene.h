@@ -13,7 +13,7 @@ struct WorldSettings
 {
 	glm::vec3 gravity = glm::vec3(0.0f, -9.8f, 0.0f);
 	float unit_scale = 0.07f;
-	int checks_per_tick = 3;
+	int checks_per_tick = 6;
 };
 
 

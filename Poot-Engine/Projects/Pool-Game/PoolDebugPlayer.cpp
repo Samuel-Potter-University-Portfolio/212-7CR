@@ -13,7 +13,7 @@ PoolDebugPlayer::PoolDebugPlayer()
 	//camera->local_transform.location = glm::vec3(0, 0, -4);
 
 	body = MakeComponent<Body>();
-	body->gravity_enabled = false;
+	body->gravity_enabled = true;
 	body->always_awake = true;
 	body->drag = 0.05f;
 	input_component = MakeComponent<InputComponent>();
@@ -119,7 +119,7 @@ void PoolDebugPlayer::OnJump(bool pressed)
 void PoolDebugPlayer::OnCrouch(bool pressed)
 {
 	if (pressed)
-		body->ApplyForce(body->mass * 0.06f * glm::vec3(0, -1, 0));
+		body->ApplyForce(body->mass * 0.006f * glm::vec3(0, -1, 0));
 }
 
 void PoolDebugPlayer::OnGrabMouse(bool pressed)
@@ -157,7 +157,7 @@ void PoolDebugPlayer::Tick(float delta_time)
 	glm::vec3 input = glm::clamp(current_input, -1.0f, 1.0f);
 	current_input = glm::vec3(0);
 
-	const float speed = 1.0f * delta_time;
+	const float speed = 0.5f * delta_time;
 	body->velocity += input * speed + upward_input * speed * glm::vec3(0, 1, 0);
 	upward_input = 0.0f;
 }

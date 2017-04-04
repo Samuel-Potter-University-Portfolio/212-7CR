@@ -1,6 +1,7 @@
 #include "MeshCollider.h"
 #include "SphereCollider.h"
 #include "Body.h"
+#include "PhysicsScene.h"
 #include <glm.hpp>
 
 
@@ -37,6 +38,38 @@ void MeshCollider::ResolveCollision(Body* body, HitInfo& hit_info)
 		if (sphere)
 		{
 			DefaultResolution(body, hit_info);
+			//body->velocity *= 0.95f;
+			return;
+
+			const glm::vec3 correction = hit_info.normal * -hit_info.embedded_distance;
+			const glm::vec3 start_velocity = body->velocity;
+
+			body->velocity += correction;
+			body->ApplyFriction(properties.friction);
+
+			//glm::vec3 reflection = glm::reflect(hit_info.normal, start_velocity);
+			//body->ApplyForce(body->mass * -correction);
+			//body->velocity += reflection * 0.0f;
+			//body->ApplyForce(0.1f * body->mass * correction);
+			//body->angular_velocity += xyz;
+
+
+			//Call appropriate functions
+			GameObject* body_parent = Cast<GameObject>(body->GetParent());
+			if (body_parent)
+				body_parent->OnCollide(this, hit_info);
+			if (game_object)
+			{
+				HitInfo other_hit = hit_info;
+				other_hit.normal *= -1.0f;
+				game_object->OnCollide(body->GetCollider(), other_hit);
+			}
+
+			//Apply appropriate force
+			if (attached_body)
+				attached_body->ApplyForce(body->mass * -correction);
+
+
 			return;
 		}
 	}
@@ -120,7 +153,6 @@ bool MeshCollider::DoesSphereCollide(SphereCollider* sphere, glm::vec3 velocity,
 
 	if (!has_hit)
 		return false;
-
 	
 	const glm::vec3 location_at_hit = sphere_location + velocity * nearest_hit.time;
 	const glm::vec3 hit_normal = glm::normalize(location_at_hit - nearest_hit.hit_location);
@@ -131,7 +163,12 @@ bool MeshCollider::DoesSphereCollide(SphereCollider* sphere, glm::vec3 velocity,
 	
 	//Correct hit_info (Exit sphere space)
 	hit_info.embedded_distance = plane_distance * radius;
+	hit_info.hit_location = location_at_hit;
 	hit_info.normal = hit_normal;
+	
+	if (hit_info.embedded_distance >= 0.0f)
+		return false;
+
 	return true;
 }
 
@@ -139,7 +176,7 @@ bool MeshCollider::DoesSphereCollide(SphereCollider* sphere, glm::vec3 velocity,
 Finds the lowest root for Ax^2 + Bx + C = 0 that is in range [min_root, max_root]
 x = (-B +- sqrt(B^2 - 4AC))/2A
 */
-bool HasLowestRoot(float A, float B, float C, float min_root, float max_root, float& out)
+bool HasLowestRoot(float A, float B, float C, float max_root, float& out)
 {
 	const float determinant = B*B - 4.0f * A * C;
 
@@ -147,8 +184,8 @@ bool HasLowestRoot(float A, float B, float C, float min_root, float max_root, fl
 		return false;
 
 	const float sqrt_det = sqrtf(determinant);
-	float root_0 = (-B - sqrt_det) / (2 * A);
-	float root_1 = (-B + sqrt_det) / (2 * A);
+	float root_0 = (-B - sqrt_det) / (2.0f * A);
+	float root_1 = (-B + sqrt_det) / (2.0f * A);
 
 	//Put roots in size order
 	if (root_0 > root_1)
@@ -158,12 +195,12 @@ bool HasLowestRoot(float A, float B, float C, float min_root, float max_root, fl
 		root_1 = temp;
 	}
 
-	if (root_0 >= min_root && root_0 <= max_root)
+	if (root_0 > 0.0f && root_0 < max_root)
 	{
 		out = root_0;
 		return true;
 	}
-	if (root_1 >= min_root && root_1 <= max_root)
+	if (root_1 > 0.0f && root_1 < max_root)
 	{
 		out = root_1;
 		return true;
@@ -201,8 +238,8 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 	else 
 	{
 		//Calculate intersection times with plane
-		t0 = (1.0f - distance) / tri_normal_dot_velocity;
-		t1 = (-1.0f - distance) / tri_normal_dot_velocity;
+		t0 = (-1.0f - distance) / tri_normal_dot_velocity;
+		t1 = (1.0f - distance) / tri_normal_dot_velocity;
 	
 		//Make sure in order
 		if (t0 > t1)
@@ -213,7 +250,7 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 		}
 
 		//Check that at least 1 is in desired time range 0 to 1
-		if (t0 >= 1.0f || t1 <= 0.0f)
+		if (t0 > 1.0f || t1 < 0.0f)
 			return false;
 
 		t0 = CLAMP(t0, 0.0f, 1.0f);
@@ -241,7 +278,7 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 	}
 
 	//More complex checks
-	if (!collision_found)
+	if (!collision_found && !embedded)
 	{
 		float velocity_length_sqrd = glm::dot(velocity, velocity);
 
@@ -257,7 +294,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					velocity_length_sqrd,
 					2.0f * (glm::dot(velocity, location - point)),
 					glm::dot(to_point, to_point) - 1.0f,
-					0.0f,
 					t,
 					root
 				)
@@ -280,7 +316,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					velocity_length_sqrd,
 					2.0f * (glm::dot(velocity, location - point)),
 					glm::dot(to_point, to_point) - 1.0f,
-					0.0f,
 					t,
 					root
 				)
@@ -303,7 +338,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					velocity_length_sqrd,
 					2.0f * (glm::dot(velocity, location - point)),
 					glm::dot(to_point, to_point) - 1.0f,
-					0.0f,
 					t,
 					root
 				)
@@ -314,7 +348,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 				collision_point = point;
 			}
 		}
-
 
 		//Edges
 		//A - B
@@ -335,7 +368,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					edge_length_sqrd * -velocity_length_sqrd + edge_dot_velocity * edge_dot_velocity,
 					edge_length_sqrd * (2.0f * glm::dot(velocity, location)) - 2.0f * edge_dot_velocity * edge_dot_to_point,
 					edge_length_sqrd * (1.0f - glm::dot(to_point, to_point)) + edge_dot_to_point * edge_dot_to_point,
-					0.0f,
 					t,
 					root
 					)
@@ -371,7 +403,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					edge_length_sqrd * -velocity_length_sqrd + edge_dot_velocity * edge_dot_velocity,
 					edge_length_sqrd * (2.0f * glm::dot(velocity, location)) - 2.0f * edge_dot_velocity * edge_dot_to_point,
 					edge_length_sqrd * (1.0f - glm::dot(to_point, to_point)) + edge_dot_to_point * edge_dot_to_point,
-					0.0f,
 					t,
 					root
 					)
@@ -407,7 +438,6 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 					edge_length_sqrd * -velocity_length_sqrd + edge_dot_velocity * edge_dot_velocity,
 					edge_length_sqrd * (2.0f * glm::dot(velocity, location)) - 2.0f * edge_dot_velocity * edge_dot_to_point,
 					edge_length_sqrd * (1.0f - glm::dot(to_point, to_point)) + edge_dot_to_point * edge_dot_to_point,
-					0.0f,
 					t,
 					root
 					)
@@ -427,7 +457,7 @@ bool MeshCollider::DoesUnitSphereCollide(glm::vec3 location, glm::vec3 velocity,
 	}
 
 	if (collision_found) 
-	{
+	{		
 		triangle_hit.distance = glm::distance(location, collision_point);
 		triangle_hit.time = t;
 		triangle_hit.hit_location = collision_point;
