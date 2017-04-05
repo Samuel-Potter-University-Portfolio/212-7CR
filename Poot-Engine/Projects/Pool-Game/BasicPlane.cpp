@@ -15,7 +15,7 @@ BasicPlane::BasicPlane()
 
 	PlaneCollider* plane = MakeComponent<PlaneCollider>();
 	plane->properties.friction = 0.01f;
-	plane->properties.restitution = 1.0f;
+	plane->properties.restitution = 0.0f;
 }
 
 

@@ -17,6 +17,11 @@ protected:
 	float sleep_timer = 0.0f;
 	float current_friction = 0.0f;
 
+	float current_restitution = 0.0f;
+	glm::vec3 bounce_correction;
+	glm::vec3 last_desired_velocity;
+	glm::vec3 current_bounce_normal = glm::vec3(0);
+
 	class PhysicsScene* physics_scene = nullptr;
 	class Collider* collider = nullptr;
 
@@ -27,7 +32,7 @@ public:
 	float mass = 1.0f;
 	float drag = 0.0f;
 
-	float sleep_wait_time = 1.0f;
+	float sleep_wait_time = 0.5f;
 	bool start_awake = true;
 	bool always_awake = false;
 	bool gravity_enabled = true;
@@ -47,5 +52,8 @@ public:
 
 	void ApplyForce(const glm::vec3 force);
 	void ApplyFriction(const float friction);
+	void ApplyBounce(const glm::vec3 hit_normal, const float restitution, const glm::vec3 correction);
+
+	void ClearFrameProperties();
 };
 

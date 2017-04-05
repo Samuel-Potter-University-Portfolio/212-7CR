@@ -33,6 +33,7 @@ void Body::UpdateVelocity(float delta_time)
 		delta_time *= settings.unit_scale;
 	}
 
+
 	//Apply acceleration
 	velocity += acceleration * delta_time + raw_acceleration;
 	angular_velocity += angular_acceleration * delta_time;
@@ -41,12 +42,14 @@ void Body::UpdateVelocity(float delta_time)
 	raw_acceleration = glm::vec3(0);
 	angular_acceleration = glm::vec3(0);
 
+
 	//Apply gravity
 	if (gravity_enabled && physics_scene)
 	{
 		WorldSettings& settings = physics_scene->GetWorldSettings();
 		velocity += settings.gravity * delta_time;
 	}
+
 
 	//Apply friction
 	float total_friction = current_friction + drag;
@@ -58,6 +61,22 @@ void Body::UpdateVelocity(float delta_time)
 		angular_velocity *= 1.0f - total_friction;
 	}
 	current_friction = 0.0f;
+
+
+	//Apply bounce
+	current_restitution = CLAMP(current_restitution, 0.0f, 1.0f);
+
+	if (current_restitution != 0.0f && glm::length(bounce_correction) != 0.0f)
+	{
+		const glm::vec3 reflection = glm::reflect(glm::normalize(current_bounce_normal), bounce_correction);
+		raw_acceleration += glm::normalize(reflection) * glm::length(bounce_correction) * current_restitution;
+
+		current_bounce_normal = glm::vec3(0);
+		current_restitution = 0.0f;
+		bounce_correction = glm::vec3(0);
+	}
+
+	last_desired_velocity = velocity;
 }
 
 void Body::UpdateTransform(float delta_time) 
@@ -96,4 +115,24 @@ void Body::ApplyForce(const glm::vec3 force)
 		Wakeup();
 		raw_acceleration += force / mass;
 	}
+}
+
+void Body::ApplyBounce(const glm::vec3 hit_normal, const float restitution, const glm::vec3 correction)
+{
+	current_bounce_normal += hit_normal * restitution;
+	current_restitution += restitution;
+	bounce_correction += correction;
+	return;
+}
+
+void Body::ClearFrameProperties() 
+{
+	raw_acceleration = glm::vec3(0.0f);
+	acceleration = glm::vec3(0.0f);
+	angular_acceleration = glm::vec3(0.0f);
+
+	current_bounce_normal = glm::vec3(0.0f);
+	bounce_correction = glm::vec3(0.0f);
+	current_restitution = 0.0f;
+	current_friction = 0.0f;
 }

@@ -344,6 +344,7 @@ void PoolPlayer::Tick(float delta_time)
 void PoolPlayer::OnPotted(PoolBall* ball) 
 {
 	const int number = ball->GetNumber();
+	ball->GetComponent<Body>()->velocity = glm::vec3(0);
 
 	if (number == 0)
 	{
@@ -361,5 +362,6 @@ void PoolPlayer::OnPotted(PoolBall* ball)
 
 void PoolPlayer::OnFloored(PoolBall* ball) 
 {
+	ball->GetComponent<Body>()->velocity = glm::vec3(0);
 	ball->Reset();
 }

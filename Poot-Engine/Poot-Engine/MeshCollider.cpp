@@ -38,38 +38,6 @@ void MeshCollider::ResolveCollision(Body* body, HitInfo& hit_info)
 		if (sphere)
 		{
 			DefaultResolution(body, hit_info);
-			//body->velocity *= 0.95f;
-			return;
-
-			const glm::vec3 correction = hit_info.normal * -hit_info.embedded_distance;
-			const glm::vec3 start_velocity = body->velocity;
-
-			body->velocity += correction;
-			body->ApplyFriction(properties.friction);
-
-			//glm::vec3 reflection = glm::reflect(hit_info.normal, start_velocity);
-			//body->ApplyForce(body->mass * -correction);
-			//body->velocity += reflection * 0.0f;
-			//body->ApplyForce(0.1f * body->mass * correction);
-			//body->angular_velocity += xyz;
-
-
-			//Call appropriate functions
-			GameObject* body_parent = Cast<GameObject>(body->GetParent());
-			if (body_parent)
-				body_parent->OnCollide(this, hit_info);
-			if (game_object)
-			{
-				HitInfo other_hit = hit_info;
-				other_hit.normal *= -1.0f;
-				game_object->OnCollide(body->GetCollider(), other_hit);
-			}
-
-			//Apply appropriate force
-			if (attached_body)
-				attached_body->ApplyForce(body->mass * -correction);
-
-
 			return;
 		}
 	}

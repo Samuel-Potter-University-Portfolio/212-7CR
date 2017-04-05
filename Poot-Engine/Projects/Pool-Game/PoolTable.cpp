@@ -15,7 +15,7 @@ PoolTable::PoolTable()
 	mesh_collider = MakeComponent<MeshCollider>();
 	mesh_collider->SetMesh(mesh);
 	mesh_collider->properties.friction = 0.03f;
-	mesh_collider->properties.restitution = 1.0f;
+	mesh_collider->properties.restitution = 0.5f;
 	mesh_collider->local_transform.scale = surface_model->local_transform.scale;
 }
 

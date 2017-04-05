@@ -157,7 +157,7 @@ void PoolDebugPlayer::Tick(float delta_time)
 	glm::vec3 input = glm::clamp(current_input, -1.0f, 1.0f);
 	current_input = glm::vec3(0);
 
-	const float speed = 0.5f * delta_time;
+	const float speed = 1.0f * delta_time;
 	body->velocity += input * speed + upward_input * speed * glm::vec3(0, 1, 0);
 	upward_input = 0.0f;
 }

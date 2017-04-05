@@ -149,6 +149,7 @@ void PoolBall::OnCollide(Collider* collider, HitInfo& hit_info)
 void PoolBall::Reset() 
 {
 	body->velocity = glm::vec3(0);
+	body->ClearFrameProperties();
 	local_transform.location = GetBallLocation(number);
 	SetActive(true);
 	potted = false;

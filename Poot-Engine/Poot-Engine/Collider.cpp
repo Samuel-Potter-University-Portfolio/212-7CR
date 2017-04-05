@@ -30,14 +30,7 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 
 	body->velocity += correction;
 	body->ApplyFriction(properties.friction);
-
-	//glm::vec3 reflection = glm::reflect(hit_info.normal, start_velocity);
-	//body->ApplyForce(body->mass * -correction);
-	//body->velocity += reflection * 0.0f;
-	//body->ApplyForce(0.1f * body->mass * correction);
-	//body->angular_velocity += xyz;
-
-
+	
 	//Call appropriate functions
 	GameObject* body_parent = Cast<GameObject>(body->GetParent());
 	if (body_parent)
@@ -52,6 +45,10 @@ void Collider::DefaultResolution(Body* body, HitInfo& hit_info)
 	//Apply appropriate force
 	if (attached_body)
 		attached_body->ApplyForce(body->mass * -correction);
+
+	//Apply bounce on static colliders
+	else if (properties.restitution != 0.0f)
+		body->ApplyBounce(hit_info.normal, properties.restitution, correction);
 }
 
 bool Collider::DoesBroadPhaseCollide(Collider* collider, glm::vec3 velocity) 
