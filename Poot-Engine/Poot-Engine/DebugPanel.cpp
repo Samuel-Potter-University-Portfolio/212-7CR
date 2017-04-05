@@ -27,9 +27,9 @@ DebugPanel::DebugPanel()
 			message << "Poot Engine " << POOT_VERSION_MAJOR << '.' << POOT_VERSION_MINOR << '.' << POOT_VERSION_PATCH << '\n';
 			message << "Built " << __DATE__ << " " << __TIME__ << '\n';
 #ifdef _DEBUG
-			message << "Debug Build\n";
+			message << "Debug Compile\n";
 #else
-			message << "Release Build\n";
+			message << "Release Compile\n";
 #endif
 
 			TextElement* text = canvas->MakeElement<TextElement>();

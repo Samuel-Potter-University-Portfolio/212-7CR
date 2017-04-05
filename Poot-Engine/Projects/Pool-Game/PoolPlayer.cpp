@@ -230,7 +230,7 @@ void PoolPlayer::Shoot()
 	model->SetTransformParent(nullptr);
 
 	//Apply force
-	const float min_power = 0.1f;
+	const float min_power = 0.1f; 
 	const float max_power = 5.0f;
 	const float actual_power = min_power * (1.0f - shot_power) + max_power * shot_power;
 	cue_ball_body->ApplyForce(local_transform.GetForward() * actual_power);
@@ -287,12 +287,12 @@ void PoolPlayer::Tick(float delta_time)
 			message << shot_percent << '%';
 			force_text->text = message.str();
 
-			const glm::vec4 RED = glm::vec4(1, 0, 0, 1);
-			const glm::vec4 YLW = glm::vec4(1, 1, 0, 1);
-			const glm::vec4 GRN = glm::vec4(0, 1, 0, 1);
+			const glm::vec4 BEG = glm::vec4(1, 1, 0, 1);
+			const glm::vec4 MID = glm::vec4(0, 1, 0, 1);
+			const glm::vec4 END = glm::vec4(1, 0, 0, 1);
 
 			if (shot_power < 0.10f)
-				force_text->colour = RED;
+				force_text->colour = BEG;
 
 			//0.1 - 0.3
 			else if (shot_power < 0.30f)
@@ -301,11 +301,11 @@ void PoolPlayer::Tick(float delta_time)
 				const float end = 0.3f;
 				const float v = (shot_power - start) / (end - start);
 
-				force_text->colour = RED * (1.0f - v) + YLW * v;
+				force_text->colour = BEG * (1.0f - v) + MID * v;
 			}
 
 			else if (shot_power < 0.5f)
-				force_text->colour = YLW;
+				force_text->colour = MID;
 
 			//0.5 - 0.8
 			else if (shot_power < 0.8f)
@@ -314,11 +314,11 @@ void PoolPlayer::Tick(float delta_time)
 				const float end = 0.8f;
 				const float v = (shot_power - start) / (end - start);
 
-				force_text->colour = YLW * (1.0f - v) + GRN * v;
+				force_text->colour = MID * (1.0f - v) + END * v;
 			}
 
 			else
-				force_text->colour = GRN;
+				force_text->colour = END;
 		}
 	}
 
