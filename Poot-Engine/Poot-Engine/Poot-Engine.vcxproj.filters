@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{50e5510c-dd1d-459b-bfa8-acd9c39344d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{fa0c6d8d-64d1-4dea-8b65-6df6c167fb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual">
+      <UniqueIdentifier>{4fd7961b-ad3f-468e-a6e3-8b7946247ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual">
+      <UniqueIdentifier>{0c6b804e-af03-4da7-83e2-5bf1c3807b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Maths">
+      <UniqueIdentifier>{f963cd7c-c0b3-4506-bc57-3654eb924d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Maths">
+      <UniqueIdentifier>{6737e24e-66d3-4aff-be92-109d1a2d6ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Components">
+      <UniqueIdentifier>{cb5b34f7-6b25-449b-8fb2-a9c2d782e223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Components">
+      <UniqueIdentifier>{22bd9b9f-003e-482e-9e0f-1d38a126dcc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual\Shaders">
+      <UniqueIdentifier>{759989df-56f7-4bf9-ba41-03e299aa4a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Shaders">
+      <UniqueIdentifier>{e09ce440-c22f-461b-8c7e-893b1c15b0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{09cac388-8194-4680-a50d-e7a475b79c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{d08c5dc3-b915-467f-9aa5-2a2ea744327d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual\Resources">
+      <UniqueIdentifier>{81fb553e-e4c2-465b-96b0-c1765b8b478c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Resources">
+      <UniqueIdentifier>{0beefd1f-5d6c-41da-9b6a-83a461d9ca66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual\GUI">
+      <UniqueIdentifier>{1163dd7d-9569-4186-b155-2ae916009599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\GUI">
+      <UniqueIdentifier>{5b8ab3f2-0fd0-4814-8d40-633a31d4b326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Defaults">
+      <UniqueIdentifier>{50967068-773a-4c4f-a2c2-652c844f7a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Defaults\Objects">
+      <UniqueIdentifier>{e2ea949c-7666-4e06-a249-5d95777dcf00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Defaults">
+      <UniqueIdentifier>{458ab1f8-580d-4fbf-9d08-30a6a8a1a3ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Defaults\Objects">
+      <UniqueIdentifier>{32948f0b-509f-4491-8ce7-2d7a1f7197c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual\Rendering">
+      <UniqueIdentifier>{432e2c2f-3129-46da-bd60-f800da3ce022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual\Rendering">
+      <UniqueIdentifier>{fb47625e-5c7b-4981-b0dc-01430094b9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics\Colliders">
+      <UniqueIdentifier>{b2c60953-b753-4368-a1f3-1c4487325d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\Colliders">
+      <UniqueIdentifier>{b6da47f9-66bf-4bdc-9645-0cd93669c75f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Tickable.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJLoader.cpp">
+      <Filter>Source Files\Visual\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLightComponent.cpp">
+      <Filter>Source Files\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform2D.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugPlayer.cpp">
+      <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun.cpp">
+      <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Local.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadUI.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterRenderer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIRenderer.cpp">
+      <Filter>Source Files\Visual\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>Source Files\Visual\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapShader.cpp">
+      <Filter>Source Files\Visual\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugPanel.cpp">
+      <Filter>Source Files\Defaults\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneCollider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCollider.cpp">
+      <Filter>Source Files\Physics\Colliders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Tickable.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelComponentBase.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Header Files\Visual\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLightComponent.h">
+      <Filter>Header Files\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="API.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform2D.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPlayer.h">
+      <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
+      <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Local.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadUI.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterRenderer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIRenderer.h">
+      <Filter>Header Files\Visual\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="TextElement.h">
+      <Filter>Header Files\Visual\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapShader.h">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPanel.h">
+      <Filter>Header Files\Defaults\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneCollider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCollider.h">
+      <Filter>Header Files\Physics\Colliders</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Default.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Default.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Skybox.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Skybox.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\UI.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Bitmap_Font.vert.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Bitmap_Font.frag.glsl">
+      <Filter>Header Files\Visual\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
